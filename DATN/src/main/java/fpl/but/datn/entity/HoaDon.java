@@ -15,8 +15,10 @@ public class HoaDon {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String ma;
+    @ManyToOne
     private NguoiDung idNhanVien;
-    private NguoiDung idKhachHang;
+    @ManyToOne
+    private KhachHang idKhachHang;
     private BigDecimal tongTien;
     private BigDecimal tongTienGiam;
     private Date ngayTao;
