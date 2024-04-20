@@ -20,9 +20,11 @@ public class Voucher {
     private UUID id;
     private String ma;
     private String ten;
+    private String loaiGiamGia;
     private Date ngayBatDau;
     private Date ngayKetThuc;
-    private BigDecimal giamGia;
-    private String moTa;
+    private BigDecimal giamTriGiam;
+    private BigDecimal giaTriToiThieu;
+    private Integer soLuong;
     private boolean trangThai;
 }

@@ -20,6 +20,5 @@ public class GioHang {
     @OneToOne
     @JoinColumn(name = "id_khach_hang")
     private KhachHang idKhachHang;
-    private String moTa;
     private boolean trangThai;
 }

@@ -18,6 +18,7 @@ public class HoTro {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+    private String ma;
     private String tieuDe;
     private String noiDung;
     private Date ngayTao;

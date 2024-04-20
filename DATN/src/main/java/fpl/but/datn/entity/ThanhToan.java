@@ -5,7 +5,6 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.Deque;
 import java.util.UUID;
 
 @Getter
@@ -20,9 +19,12 @@ public class ThanhToan {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     @ManyToOne
-    @JoinColumn(name = "id_hinh_thuc")
-    private HinhThucThanhToan idHinhThucThanhToan;
-    private BigDecimal tongTien;
-    private Date ngayThanhToan;
+    @JoinColumn(name = "id_hoa_don")
+    private HoaDon idHoaDon;
+    @ManyToOne
+    @JoinColumn(name = "id_phuong_thuc")
+    private PhuongThucThanhToan idPhuongThucThanhToan;
+    private BigDecimal tienThanhToan;
+    private Date ngayTao;
     private boolean trangThai;
 }
