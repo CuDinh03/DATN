@@ -43,6 +43,7 @@ public class ChiTietSanPham {
     private Integer soLuong;
     private BigDecimal giaNhap;
     private BigDecimal giaBan;
+    @Column(name = "ngay_tao")
     private Date ngayNhap;
     private boolean trangThai;
 

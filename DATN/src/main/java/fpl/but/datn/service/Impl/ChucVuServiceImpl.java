@@ -2,7 +2,7 @@ package fpl.but.datn.service.Impl;
 
 import fpl.but.datn.entity.ChucVu;
 import fpl.but.datn.repository.ChucVuRepository;
-import fpl.but.datn.service.ChucVuService;
+import fpl.but.datn.service.IService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +11,11 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class ChucVuServiceImpl implements ChucVuService {
+public class ChucVuServiceImpl implements IService<ChucVu> {
 
     @Autowired
     private ChucVuRepository chucVuRepository;
+
     @Override
     public List<ChucVu> getAll() {
         return chucVuRepository.findAll();
@@ -48,7 +49,6 @@ public class ChucVuServiceImpl implements ChucVuService {
         }else {
             return false;
         }
-
     }
 
     @Override

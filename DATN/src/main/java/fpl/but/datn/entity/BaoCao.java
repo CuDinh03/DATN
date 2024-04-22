@@ -20,5 +20,5 @@ public class BaoCao {
     private String ma;
     private String ten;
     private String moTa;
-    private boolean tranThai;
+    private boolean trangThai;
 }
