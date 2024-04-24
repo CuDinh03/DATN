@@ -1,4 +1,3 @@
-
 package fpl.but.datn.entity;
 
 import jakarta.persistence.*;
@@ -12,13 +11,14 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "ChucVu")
-public class ChucVu {
+@Table(name = "GioHang")
+public class GioHang {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String ma;
-    private String ten;
-    private String moTa;
+    @OneToOne
+    @JoinColumn(name = "id_khach_hang")
+    private KhachHang idKhachHang;
     private boolean trangThai;
 }

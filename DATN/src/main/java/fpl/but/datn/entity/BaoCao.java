@@ -1,7 +1,7 @@
-
 package fpl.but.datn.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.UUID;
@@ -12,13 +12,13 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "ChucVu")
-public class ChucVu {
+@Table(name = "BaoCao")
+public class BaoCao {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String ma;
     private String ten;
     private String moTa;
-    private boolean trangThai;
+    private boolean tranThai;
 }

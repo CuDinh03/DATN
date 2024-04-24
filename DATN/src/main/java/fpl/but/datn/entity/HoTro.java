@@ -1,9 +1,9 @@
-
 package fpl.but.datn.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Entity
@@ -12,13 +12,15 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "ChucVu")
-public class ChucVu {
+@Table(name = "HoTro")
+public class HoTro {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String ma;
-    private String ten;
-    private String moTa;
+    private String tieuDe;
+    private String noiDung;
+    private Date ngayTao;
     private boolean trangThai;
 }

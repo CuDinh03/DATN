@@ -1,3 +1,4 @@
+
 package fpl.but.datn.entity;
 
 import jakarta.persistence.*;
