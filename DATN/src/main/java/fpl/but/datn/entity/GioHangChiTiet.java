@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.UUID;
 
@@ -15,29 +14,21 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "hoa_don")
-public class HoaDon {
+@Table(name = "gio_hang_chi_tiet")
+public class GioHangChiTiet {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     @Column(name = "ma")
     private String ma;
+    @OneToOne
+    @JoinColumn(name = "id_gio_hang")
+    private GioHang idGioHang;
     @ManyToOne
-    @JoinColumn(name = "id_khach_hang")
-    private KhachHang idKhachHang;
-    @ManyToOne
-    @JoinColumn(name = "id_nhan_vien")
-    private NguoiDung idNhanVien;
-    @ManyToOne
-    @JoinColumn(name = "id_voucher")
-    private Voucher idVoucher;
-    @Column(name = "tong_tien")
-
-    private BigDecimal tongTien;
-    @Column(name = "tong_tien_gian")
-    private BigDecimal tongTienGiam;
-    @Column(name = "ghi_chu")
-    private String ghiChu;
+    @JoinColumn(name = "id_san_pham")
+    private SanPham idSanPham;
+    @Column(name = "so_luong")
+    private Integer soLuong;
     @Column(name = "ngay_tao")
     private Date ngayTao;
     @Column(name = "ngay_sua")
