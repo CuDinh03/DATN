@@ -18,21 +18,21 @@ public class TaiKhoan {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    @Column(name = "ma")
+
     private String ma;
-    @Column(name = "ten_dang_nhap")
+
     private String tenDangNhap;
-    @Column(name = "mat_khau")
+
     private String matKhau;
 
     @ManyToOne
     @JoinColumn(name = "id_chuc_vu")
     private ChucVu chucVu;
-    @Column(name = "ngay_tao")
+
     private Date ngayTao;
-    @Column(name = "ngay_sua")
+
     private Date ngaySua;
-    @Column(name = "trang_thai")
+
     private boolean trangThai;
 
 }

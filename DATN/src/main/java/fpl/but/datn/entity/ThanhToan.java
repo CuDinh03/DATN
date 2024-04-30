@@ -25,12 +25,12 @@ public class ThanhToan {
     @ManyToOne
     @JoinColumn(name = "id_phuong_thuc")
     private PhuongThucThanhToan idPhuongThucThanhToan;
-    @Column(name = "tien_thanh_toan")
+
     private BigDecimal tienThanhToan;
-    @Column(name = "ngay_tao")
+
     private Date ngayTao;
-    @Column(name = "ngay_sua")
+
     private Date ngaySua;
-    @Column(name = "trang_thai")
+
     private boolean trangThai;
 }
