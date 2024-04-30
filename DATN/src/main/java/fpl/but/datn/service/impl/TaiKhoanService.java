@@ -21,6 +21,9 @@ public class TaiKhoanService {
     public TaiKhoan createAccount(TaiKhoan request){
         TaiKhoan taiKhoan = new TaiKhoan();
 
+        if (taiKhoanRepository.existsByTenDangNhap(request.getTenDangNhap()))
+            throw new RuntimeException("Ten dang nhap da ton tai.");
+
         taiKhoan.setMa(request.getMa());
         taiKhoan.setId(UUID.randomUUID());
 //        taiKhoan.setIdChucVu( new ChucVu(UUID.randomUUID(),"Quản lý", new Date(),new Date(), Boolean.TRUE));

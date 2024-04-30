@@ -8,4 +8,5 @@ import java.util.UUID;
 @Repository
 
 public interface TaiKhoanRepository extends JpaRepository<TaiKhoan, UUID> {
+    boolean existsByTenDangNhap(String tenDangNhap);
 }
