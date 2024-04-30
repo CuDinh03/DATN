@@ -19,33 +19,36 @@ public class UserController {
     @PostMapping
     TaiKhoan createAccount(@RequestBody TaiKhoanDto request) {
         if (request != null)
-           return taiKhoanService.createAccount(TranferDatas.convertToEntity(request));
+            return taiKhoanService.createAccount(TranferDatas.convertToEntity(request));
 
-    return null;
+        return null;
     }
 
     @GetMapping
-    List<TaiKhoanDto> getAccounts(){
+    List<TaiKhoanDto> getAccounts() {
         List<TaiKhoanDto> listDto = TranferDatas.convertListTaiKhoanToDto(taiKhoanService.getAllTaiKhoan());
-      return listDto;
+        return listDto;
     }
+
     @GetMapping("/{id}")
-    TaiKhoanDto getAccount(@PathVariable String id){
+    TaiKhoanDto getAccount(@PathVariable String id) {
         UUID idAccount = null;
-        if (id != null)  idAccount = UUID.fromString(id);
+        if (id != null) idAccount = UUID.fromString(id);
         TaiKhoanDto dto = TranferDatas.convertToDto(taiKhoanService.getTaiKhoan(idAccount));
         return dto;
     }
+
     @PutMapping("/{id}")
-    TaiKhoan updateAccount(@PathVariable String id, @RequestBody TaiKhoanDto request){
+    TaiKhoan updateAccount(@PathVariable String id, @RequestBody TaiKhoanDto request) {
         UUID idAccount = null;
-        if (id != null)  idAccount = UUID.fromString(id);
+        if (id != null) idAccount = UUID.fromString(id);
         if (request != null)
-            return taiKhoanService.updateTaiKhoan(idAccount,TranferDatas.convertToEntity(request));
+            return taiKhoanService.updateTaiKhoan(idAccount, TranferDatas.convertToEntity(request));
         return null;
     }
+
     @DeleteMapping("/{id}")
-    String deleteAccount(@PathVariable String id){
+    String deleteAccount(@PathVariable String id) {
         UUID idAccount = UUID.fromString(id);
         taiKhoanService.deleteTaiKhoan(idAccount);
         return "xoa thanh cong";
