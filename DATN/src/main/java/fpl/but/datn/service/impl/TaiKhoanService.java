@@ -1,10 +1,13 @@
 package fpl.but.datn.service.impl;
 
 import fpl.but.datn.dto.TaiKhoanDto;
+import fpl.but.datn.dto.request.AuthenticationRequest;
 import fpl.but.datn.entity.ChucVu;
 import fpl.but.datn.entity.TaiKhoan;
 import fpl.but.datn.repository.TaiKhoanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -56,6 +59,11 @@ public class TaiKhoanService {
 
     public void deleteTaiKhoan(UUID id){
         taiKhoanRepository.deleteById(id);
+    }
+    boolean authenticate(AuthenticationRequest request){
+        var taiKhoan = taiKhoanRepository.findByTenDangNhap(request.getUsername()).orElseThrow(()->  new RuntimeException("khong tim thay tk"));
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
+        return passwordEncoder.matches(request.getPassword(), taiKhoan.getMatKhau());
     }
 
 }

@@ -8,5 +8,6 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class AuthenticationRequest {
+public class AuthenticationResponse {
+    boolean authenticated; // true = dung u,p // ngc lai
 }
