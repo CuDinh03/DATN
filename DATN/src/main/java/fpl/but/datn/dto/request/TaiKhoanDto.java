@@ -1,13 +1,20 @@
 package fpl.but.datn.dto.request;
 
 import fpl.but.datn.entity.ChucVu;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.UUID;
 @Data
-
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class TaiKhoanDto {
     private UUID id;
 

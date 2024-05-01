@@ -6,6 +6,7 @@ import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jwt.JWTClaimsSet;
 import fpl.but.datn.dto.request.AuthenticationRequest;
 import fpl.but.datn.dto.response.AuthenticationResponse;
+import fpl.but.datn.entity.ChucVu;
 import fpl.but.datn.entity.TaiKhoan;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
@@ -30,6 +31,11 @@ public class TaiKhoanService {
     @Autowired
     private TaiKhoanRepository taiKhoanRepository;
 
+    @Autowired
+    private ChucVuService chucVuService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public TaiKhoan createAccount(TaiKhoan request) {
         TaiKhoan taiKhoan = new TaiKhoan();
 
@@ -39,8 +45,9 @@ public class TaiKhoanService {
         taiKhoan.setMa(request.getMa());
         taiKhoan.setId(UUID.randomUUID());
         taiKhoan.setTenDangNhap(request.getTenDangNhap());
-        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
+        ChucVu chucVu = chucVuService.getChucVu(UUID.fromString("9239b027-9ff9-47bc-8a10-080a82df45cd"));
 
+        taiKhoan.setIdChucVu(chucVu);
         taiKhoan.setMatKhau(passwordEncoder.encode(request.getMatKhau()));
         taiKhoan.setNgayTao(new Date());
         taiKhoan.setNgaySua(new Date());
