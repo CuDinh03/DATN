@@ -7,7 +7,8 @@ public enum ErrorCode {
     ACCOUNT_EXISTED(1002, "Tai khoan da ton tai"),
     USERNAME_INVALID(1003, "Ten dang nhap phai tu 6 den 10 ky tu"),
     PASSWORD_INVALID(1004, "Mat khau phai tu 8 den 16 ky tu"),
-    ACCOUNT_NOT_EXISTED(1005, "Khong tim thay tai khoan")
+    ACCOUNT_NOT_EXISTED(1005, "Khong tim thay tai khoan"),
+    UNAUTHENTICATED(1006, "UNAUTHENTICATED")
     ;
 
     ErrorCode(int code, String message) {

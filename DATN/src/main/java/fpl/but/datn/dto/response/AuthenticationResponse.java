@@ -9,5 +9,6 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class AuthenticationResponse {
+    String token;
     boolean authenticated; // true = dung u,p // ngc lai
 }

@@ -8,6 +8,7 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -18,7 +19,7 @@ import javax.crypto.spec.SecretKeySpec;
 @EnableWebSecurity
 public class SecurityConfig {
     // cac endpoint duoc phep truy cap khong can xac thuc
-    private final String[] PUBLIC_ENDPOINT = {
+    private final String[] PUBLIC_ENDPOINT = {"/auth/log-in", "/users",
             "/auth/token","auth/introspect"};
 
     @Value("${jwt.signerKey}")
@@ -31,7 +32,7 @@ public class SecurityConfig {
                 .anyRequest().authenticated());
 
         httpSecurity.oauth2ResourceServer(
-                oauth2 -> oauth2.jwt(jwtConfigurer -> jwtConfigurer.decoder())
+                oauth2 -> oauth2.jwt(jwtConfigurer -> jwtConfigurer.decoder(jwtDecoder()))
         );
 
         //huy cau hinh mac dinh bao ve endpoint cua security
@@ -42,8 +43,11 @@ public class SecurityConfig {
 
     @Bean
     JwtDecoder jwtDecoder(){
-        SecretKeySpec secretKeySpec = new SecretKeySpec(signerKey.getBytes(),"");
-        return NimbusJwtDecoder.withSecretKey();
+        SecretKeySpec secretKeySpec = new SecretKeySpec(signerKey.getBytes(),"HS512");
+        return NimbusJwtDecoder
+                .withSecretKey(secretKeySpec)
+                .macAlgorithm(MacAlgorithm.HS512)
+                .build();
     }
 
 
