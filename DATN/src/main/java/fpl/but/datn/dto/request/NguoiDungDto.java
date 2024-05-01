@@ -1,4 +1,4 @@
-package fpl.but.datn.dto;
+package fpl.but.datn.dto.request;
 
 import fpl.but.datn.entity.TaiKhoan;
 import lombok.Data;

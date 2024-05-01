@@ -1,6 +1,7 @@
-package fpl.but.datn.dto;
+package fpl.but.datn.dto.request;
 
 import fpl.but.datn.entity.ChucVu;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 import java.util.Date;
@@ -11,8 +12,9 @@ public class TaiKhoanDto {
     private UUID id;
 
     private String ma;
-
+    @Size(min = 6, max = 10, message = "USERNAME_INVALID")
     private String tenDangNhap;
+    @Size(min = 8, max = 16, message = "PASSWORD_INVALID")
     private String matKhau;
     private ChucVu idChucVu;
     private Date ngayTao;

@@ -1,9 +1,11 @@
 package fpl.but.datn.controller;
 
-import fpl.but.datn.dto.TaiKhoanDto;
+import fpl.but.datn.dto.request.TaiKhoanDto;
+import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.entity.TaiKhoan;
 import fpl.but.datn.service.impl.TaiKhoanService;
 import fpl.but.datn.tranferdata.TranferDatas;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,11 +19,12 @@ public class UserController {
     private TaiKhoanService taiKhoanService;
 
     @PostMapping
-    TaiKhoan createAccount(@RequestBody TaiKhoanDto request) {
+    ApiResponse<TaiKhoan> createAccount(@RequestBody @Valid TaiKhoanDto request) {
+        ApiResponse<TaiKhoan> apiResponse = new ApiResponse<>();
         if (request != null)
-            return taiKhoanService.createAccount(TranferDatas.convertToEntity(request));
+            apiResponse.setResult(taiKhoanService.createAccount(TranferDatas.convertToEntity(request)));
 
-        return null;
+    return apiResponse;
     }
 
     @GetMapping
