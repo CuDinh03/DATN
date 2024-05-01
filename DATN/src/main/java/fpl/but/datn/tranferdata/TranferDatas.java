@@ -1,7 +1,7 @@
 package fpl.but.datn.tranferdata;
 
-import fpl.but.datn.dto.ChucVuDto;
-import fpl.but.datn.dto.TaiKhoanDto;
+import fpl.but.datn.dto.request.ChucVuDto;
+import fpl.but.datn.dto.request.TaiKhoanDto;
 import fpl.but.datn.entity.ChucVu;
 import fpl.but.datn.entity.TaiKhoan;
 

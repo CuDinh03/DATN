@@ -1,8 +1,8 @@
 package fpl.but.datn.service.impl;
 
-import fpl.but.datn.dto.TaiKhoanDto;
-import fpl.but.datn.entity.ChucVu;
 import fpl.but.datn.entity.TaiKhoan;
+import fpl.but.datn.exception.AppException;
+import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.repository.TaiKhoanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,46 +18,42 @@ public class TaiKhoanService {
     @Autowired
     private TaiKhoanRepository taiKhoanRepository;
 
-    public TaiKhoan createAccount(TaiKhoan request){
+    public TaiKhoan createAccount(TaiKhoan request) {
         TaiKhoan taiKhoan = new TaiKhoan();
 
         if (taiKhoanRepository.existsByTenDangNhap(request.getTenDangNhap()))
-            throw new RuntimeException("Ten dang nhap da ton tai.");
+            throw new AppException(ErrorCode.ACCOUNT_EXISTED);
 
         taiKhoan.setMa(request.getMa());
         taiKhoan.setId(UUID.randomUUID());
-//        taiKhoan.setIdChucVu( new ChucVu(UUID.randomUUID(),"Quản lý", new Date(),new Date(), Boolean.TRUE));
-//        taiKhoan.setIdChucVu( request.getIdChucVu());
         taiKhoan.setTenDangNhap(request.getTenDangNhap());
         taiKhoan.setMatKhau(request.getMatKhau());
         taiKhoan.setNgayTao(new Date());
         taiKhoan.setNgaySua(new Date());
         taiKhoan.setTrangThai(request.getTrangThai());
 
-       return taiKhoanRepository.save(taiKhoan);
+        return taiKhoanRepository.save(taiKhoan);
     }
 
-    public List<TaiKhoan> getAllTaiKhoan(){
+    public List<TaiKhoan> getAllTaiKhoan() {
         return taiKhoanRepository.findAll();
     }
-    public TaiKhoan getTaiKhoan(UUID id){
+
+    public TaiKhoan getTaiKhoan(UUID id) {
         return taiKhoanRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Tai khoan khong tim thay") );
+                .orElseThrow(() -> new AppException(ErrorCode.ACCOUNT_NOT_EXISTED));
     }
-    public TaiKhoan updateTaiKhoan(UUID id, TaiKhoan request){
-            TaiKhoan taiKhoan = getTaiKhoan(id);
 
-
-//        taiKhoan.setIdChucVu( new ChucVu(UUID.randomUUID(),"Quản lý", new Date(),new Date(), Boolean.TRUE));
-//        taiKhoan.setIdChucVu( request.getIdChucVu());
+    public TaiKhoan updateTaiKhoan(UUID id, TaiKhoan request) {
+        TaiKhoan taiKhoan = getTaiKhoan(id);
         taiKhoan.setMatKhau(request.getMatKhau());
         taiKhoan.setNgaySua(new Date());
         taiKhoan.setTrangThai(request.getTrangThai());
 
-       return taiKhoanRepository.save(taiKhoan);
+        return taiKhoanRepository.save(taiKhoan);
     }
 
-    public void deleteTaiKhoan(UUID id){
+    public void deleteTaiKhoan(UUID id) {
         taiKhoanRepository.deleteById(id);
     }
 

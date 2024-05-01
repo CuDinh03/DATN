@@ -1,4 +1,4 @@
-package fpl.but.datn.dto;
+package fpl.but.datn.dto.request;
 
 import fpl.but.datn.entity.KhachHang;
 import fpl.but.datn.entity.NguoiDung;

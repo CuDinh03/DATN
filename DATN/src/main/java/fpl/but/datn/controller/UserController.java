@@ -1,6 +1,6 @@
 package fpl.but.datn.controller;
 
-import fpl.but.datn.dto.TaiKhoanDto;
+import fpl.but.datn.dto.request.TaiKhoanDto;
 import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.entity.TaiKhoan;
 import fpl.but.datn.service.impl.TaiKhoanService;
