@@ -1,4 +1,4 @@
-package fpl.but.datn.service.Impl;
+package fpl.but.datn.service.impl;
 
 import fpl.but.datn.entity.ChatLieu;
 import fpl.but.datn.repository.ChatLieuRepository;
@@ -29,9 +29,8 @@ public class ChatLieuServiceImpl implements IService<ChatLieu> {
         Optional<ChatLieu> optional = chatLieuRepository.findById(id);
         return optional.map(o -> {
             o.setMa(chatLieu.getMa());
-            o.setMoTa(chatLieu.getMoTa());
             o.setTen(chatLieu.getTen());
-            o.setTrangThai(chatLieu.isTrangThai());
+            o.setTrangThai(chatLieu.getTrangThai());
             return chatLieuRepository.save(o);
         }).orElse(null);
 

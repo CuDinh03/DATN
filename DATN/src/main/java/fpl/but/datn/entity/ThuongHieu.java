@@ -17,10 +17,9 @@ public class ThuongHieu {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    private String ma;
     private String ten;
-    private String moTa;
+    private String ma;
     private Date ngayTao;
     private Date ngaySua;
-    private boolean trangThai;
+    private Boolean trangThai;
 }
