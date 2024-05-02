@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
@@ -39,8 +38,9 @@ public class TaiKhoanService {
     public TaiKhoan createAccount(TaiKhoan request) {
         TaiKhoan taiKhoan = new TaiKhoan();
 
-        if (taiKhoanRepository.existsByTenDangNhap(request.getTenDangNhap()))
-            throw new AppException(ErrorCode.ACCOUNT_EXISTED);
+        if (taiKhoanRepository.existsByTenDangNhap(request.getTenDangNhap())){
+                        throw new AppException(ErrorCode.ACCOUNT_EXISTED);
+        }
 
         taiKhoan.setMa(request.getMa());
         taiKhoan.setId(UUID.randomUUID());
@@ -64,6 +64,7 @@ public class TaiKhoanService {
         return taiKhoanRepository.findById(id)
                 .orElseThrow(() -> new AppException(ErrorCode.ACCOUNT_NOT_EXISTED));
     }
+
 
     public TaiKhoan updateTaiKhoan(UUID id, TaiKhoan request) {
         TaiKhoan taiKhoan = getTaiKhoan(id);

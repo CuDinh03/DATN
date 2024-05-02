@@ -11,6 +11,8 @@ public enum ErrorCode {
     UNAUTHENTICATED(1006, "UNAUTHENTICATED"),
     NO_ACCOUNTS_FOUND(1007, "Không tìm thấy danh sách tài khoản nào"),
     ROLES_NOT_EXISTED(1008, "Không tìm thấy roles nào"),
+
+    NOT_ADD_CART(1009,"Khong them duoc vao gio hang")
     ;
 
     ErrorCode(int code, String message) {
