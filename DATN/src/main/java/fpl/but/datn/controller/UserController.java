@@ -3,10 +3,13 @@ package fpl.but.datn.controller;
 import fpl.but.datn.dto.request.TaiKhoanDto;
 import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.entity.TaiKhoan;
+import fpl.but.datn.exception.AppException;
+import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.service.impl.TaiKhoanService;
 import fpl.but.datn.tranferdata.TranferDatas;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +21,7 @@ public class UserController {
     @Autowired
     private TaiKhoanService taiKhoanService;
 
-    @PostMapping
+    @PostMapping("/create")
     ApiResponse<TaiKhoan> createAccount(@RequestBody @Valid TaiKhoanDto request) {
         ApiResponse<TaiKhoan> apiResponse = new ApiResponse<>();
         if (request != null)
@@ -27,18 +30,32 @@ public class UserController {
         return apiResponse;
     }
 
-    @GetMapping
-    List<TaiKhoanDto> getAccounts() {
+
+    @GetMapping("/all")
+    ApiResponse<List<TaiKhoanDto>> getAccounts() {
         List<TaiKhoanDto> listDto = TranferDatas.convertListTaiKhoanToDto(taiKhoanService.getAllTaiKhoan());
-        return listDto;
+        ApiResponse<List<TaiKhoanDto>> apiResponse = new ApiResponse<>();
+
+        if (!listDto.isEmpty()) {
+            apiResponse.setMessage("Lấy danh sách tài khoản thành công");
+            apiResponse.setResult(listDto);
+        } else {
+            throw new AppException(ErrorCode.NO_ACCOUNTS_FOUND);
+        }
+
+        return apiResponse;
     }
 
+
     @GetMapping("/{id}")
-    TaiKhoanDto getAccount(@PathVariable String id) {
+    ApiResponse<TaiKhoanDto> getAccount(@PathVariable String id) {
+        ApiResponse<TaiKhoanDto> apiResponse = new ApiResponse<>();
         UUID idAccount = null;
         if (id != null) idAccount = UUID.fromString(id);
         TaiKhoanDto dto = TranferDatas.convertToDto(taiKhoanService.getTaiKhoan(idAccount));
-        return dto;
+        apiResponse.setMessage("Lấy tài khoản thành công");
+        apiResponse.setResult(dto);
+        return apiResponse;
     }
 
     @PutMapping("/{id}")

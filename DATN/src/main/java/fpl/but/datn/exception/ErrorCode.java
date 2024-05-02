@@ -8,7 +8,11 @@ public enum ErrorCode {
     USERNAME_INVALID(1003, "Ten dang nhap phai tu 6 den 10 ky tu"),
     PASSWORD_INVALID(1004, "Mat khau phai tu 8 den 16 ky tu"),
     ACCOUNT_NOT_EXISTED(1005, "Khong tim thay tai khoan"),
-    UNAUTHENTICATED(1006, "UNAUTHENTICATED")
+    UNAUTHENTICATED(1006, "UNAUTHENTICATED"),
+    NO_ACCOUNTS_FOUND(1007, "Không tìm thấy danh sách tài khoản nào"),
+    ROLES_NOT_EXISTED(1008, "Không tìm thấy roles nào"),
+
+    NOT_ADD_CART(1009,"Khong them duoc vao gio hang")
     ;
 
     ErrorCode(int code, String message) {
