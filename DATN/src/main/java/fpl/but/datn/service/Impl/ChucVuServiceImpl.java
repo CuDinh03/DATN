@@ -30,10 +30,8 @@ public class ChucVuServiceImpl implements IService<ChucVu> {
     public ChucVu update(ChucVu chucVu, UUID id) {
         Optional<ChucVu> optional = chucVuRepository.findById(id);
         return optional.map(o -> {
-            o.setMa(chucVu.getMa());
-            o.setMoTa(chucVu.getMoTa());
             o.setTen(chucVu.getTen());
-            o.setTrangThai(chucVu.isTrangThai());
+            o.setTrangThai(chucVu.getTrangThai());
             return chucVuRepository.save(o);
         }).orElse(null);
 
