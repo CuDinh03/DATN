@@ -35,7 +35,7 @@ public class GioHangServiceImpl implements IService<GioHang> {
         return optional.map(o -> {
             o.setMa(gioHang.getMa());
             o.setIdKhachHang(gioHang.getIdKhachHang());
-            o.setTrangThai(gioHang.isTrangThai());
+            o.setTrangThai(gioHang.getTrangThai());
             return gioHangRepository.save(o);
         }).orElse(null);
 

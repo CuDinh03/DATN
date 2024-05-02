@@ -31,7 +31,7 @@ public class BaoCaoServiceImpl implements IService<BaoCao> {
             o.setMa(baoCao.getMa());
             o.setMoTa(baoCao.getMoTa());
             o.setTen(baoCao.getTen());
-            o.setTrangThai(baoCao.isTrangThai());
+            o.setTrangThai(baoCao.getTrangThai());
             return baoCaoRepository.save(o);
         }).orElse(null);
 

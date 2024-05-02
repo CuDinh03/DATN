@@ -32,7 +32,7 @@ public class DanhMucServiceImpl implements IService<DanhMuc> {
             o.setMa(danhMuc.getMa());
             o.setMoTa(danhMuc.getMoTa());
             o.setTen(danhMuc.getTen());
-            o.setTrangThai(danhMuc.isTrangThai());
+            o.setTrangThai(danhMuc.getTrangThai());
             return danhMucRepository.save(o);
         }).orElse(null);
 

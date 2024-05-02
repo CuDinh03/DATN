@@ -42,7 +42,7 @@ public class CTSanPhamService implements IService<ChiTietSanPham> {
             o.setGiaBan(ctSanPham.getGiaBan());
             o.setSoLuong(ctSanPham.getSoLuong());
             o.setNgayNhap(ctSanPham.getNgayNhap());
-            o.setTrangThai(ctSanPham.isTrangThai());
+            o.setTrangThai(ctSanPham.getTrangThai());
             return cTSanPhamRepository.save(o);
         }).orElse(null);
 
