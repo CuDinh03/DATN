@@ -21,5 +21,5 @@ public class PhuongThucThanhToan {
     private String ten;
     private Date ngayTao;
     private Date ngaySua;
-    private boolean trangThai;
+    private Boolean trangThai;
 }

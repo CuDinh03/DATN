@@ -23,5 +23,5 @@ public class GioHang {
     private KhachHang idKhachHang;
     private Date ngayTao;
     private Date ngaySua;
-    private boolean trangThai;
+    private Boolean trangThai;
 }

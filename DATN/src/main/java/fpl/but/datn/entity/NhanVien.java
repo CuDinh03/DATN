@@ -23,10 +23,10 @@ public class NhanVien {
     private TaiKhoan idTaiKhoan;
     private String email;
     private String sdt;
-    private boolean gioiTinh;
+    private Boolean gioiTinh;
     private Date ngaySinh;
     private String diaChi;
     private Date ngayTao;
     private Date ngaySua;
-    private boolean trangThai;
+    private Boolean trangThai;
 }

@@ -26,5 +26,5 @@ public class GioHangChiTiet {
     private Integer soLuong;
     private Date ngayTao;
     private Date ngaySua;
-    private boolean trangThai;
+    private Boolean trangThai;
 }
