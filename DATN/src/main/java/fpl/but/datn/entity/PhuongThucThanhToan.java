@@ -3,6 +3,7 @@ package fpl.but.datn.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Entity
@@ -18,5 +19,7 @@ public class PhuongThucThanhToan {
     private UUID id;
     private String ma;
     private String ten;
+    private Date ngayTao;
+    private Date ngaySua;
     private boolean trangThai;
 }

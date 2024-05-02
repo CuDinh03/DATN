@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Entity
@@ -20,5 +21,7 @@ public class BaoCao {
     private String ma;
     private String ten;
     private String moTa;
+    private Date ngayTao;
+    private Date ngaySua;
     private boolean trangThai;
 }

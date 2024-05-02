@@ -26,5 +26,7 @@ public class Voucher {
     private BigDecimal giamTriGiam;
     private BigDecimal giaTriToiThieu;
     private Integer soLuong;
+    private Date ngayTao;
+    private Date ngaySua;
     private boolean trangThai;
 }

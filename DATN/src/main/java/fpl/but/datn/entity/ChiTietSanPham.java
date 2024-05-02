@@ -45,6 +45,7 @@ public class ChiTietSanPham {
     private BigDecimal giaBan;
     @Column(name = "ngay_tao")
     private Date ngayNhap;
+    private Date ngaySua;
     private boolean trangThai;
 
 }

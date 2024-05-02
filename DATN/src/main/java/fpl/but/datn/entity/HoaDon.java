@@ -26,6 +26,7 @@ public class HoaDon {
     @JoinColumn(name = "id_nhan_vien")
     private NhanVien idNhanVien;
     private Date ngayMua;
-    private BigDecimal ngayTao;
+    private Date ngaySua;
+    private Date ngaytao;
     private boolean trangThai;
 }
