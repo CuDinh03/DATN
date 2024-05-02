@@ -17,7 +17,6 @@ import java.util.UUID;
 @Builder
 public class TaiKhoanDto {
     private UUID id;
-
     private String ma;
     @Size(min = 6, max = 10, message = "USERNAME_INVALID")
     private String tenDangNhap;

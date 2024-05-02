@@ -111,7 +111,7 @@ public class TaiKhoanService {
                 .expirationTime(new Date(
                         Instant.now().plus(1, ChronoUnit.HOURS).toEpochMilli()
                 ))
-                .claim("customClaim", "custom")
+                .claim("scope", "custom")
                 .build();
 
         Payload payload = new Payload(jwtClaimsSet.toJSONObject());

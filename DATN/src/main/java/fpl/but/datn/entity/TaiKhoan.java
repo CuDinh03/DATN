@@ -20,11 +20,8 @@ public class TaiKhoan {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-
     private UUID id;
-
     private String ma;
-
     private String tenDangNhap;
     private String matKhau;
     @ManyToOne
