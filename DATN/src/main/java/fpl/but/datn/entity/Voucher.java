@@ -36,6 +36,8 @@ public class Voucher {
     private BigDecimal giaTriToiThieu;
     @Column(name = "so_luong")
     private Integer soLuong;
+    private Date ngayTao;
+    private Date ngaySua;
     @Column(name = "trang_thai")
-    private boolean trangThai;
+    private Boolean trangThai;
 }

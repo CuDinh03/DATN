@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Getter
@@ -24,6 +25,8 @@ public class HoTro {
     private String tieuDe;
     @Column(name = "noi_dung")
     private String noiDung;
+    private Date ngayTao;
+    private Date ngaySua;
     @Column(name = "trang_thai")
     private boolean trangThai;
 

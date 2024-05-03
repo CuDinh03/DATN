@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.UUID;
 
 @Getter
@@ -32,6 +33,8 @@ public class HoaDonChiTiet {
     private Integer soLuong;
     @Column(name = "gia_ban")
     private BigDecimal giaBan;
+    private Date ngayTao;
+    private Date ngaySua;
     @Column(name = "trang_thai")
     private boolean trangThai;
 }

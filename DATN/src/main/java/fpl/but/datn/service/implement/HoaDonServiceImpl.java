@@ -1,4 +1,4 @@
-package fpl.but.datn.service.impl;
+package fpl.but.datn.service.implement;
 
 import fpl.but.datn.entity.HoaDon;
 import fpl.but.datn.repository.HoaDonRepository;

@@ -18,6 +18,7 @@ public class HoaDonDto {
     private BigDecimal tongTien;
     private BigDecimal tongTienGiam;
     private Date ngayTao;
+    private Date ngaySua;
     private UUID idVoucher;
     private String ghiChu;
     private Boolean trangThai;

@@ -1,4 +1,4 @@
-package fpl.but.datn.service.impl;
+package fpl.but.datn.service.implement;
 
 import fpl.but.datn.entity.HinhAnh;
 import fpl.but.datn.repository.HinhAnhRepository;
@@ -31,7 +31,7 @@ public class HinhAnhServiceImpl implements IService<HinhAnh> {
             o.setMa(hinhAnh.getMa());
             o.setMoTa(hinhAnh.getMoTa());
             o.setTen(hinhAnh.getTen());
-            o.setTrangThai(hinhAnh.isTrangThai());
+            o.setTrangThai(hinhAnh.getTrangThai());
             return hinhAnhRepository.save(o);
         }).orElse(null);
     }

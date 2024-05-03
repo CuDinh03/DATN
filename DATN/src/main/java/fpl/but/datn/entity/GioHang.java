@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Getter
@@ -23,6 +24,8 @@ public class GioHang {
     @OneToOne
     @JoinColumn(name = "id_khach_hang")
     private KhachHang idKhachHang;
+    private Date ngayTao;
+    private Date ngaySua;
     @Column(name = "trang_thai")
     private boolean trangThai;
 }

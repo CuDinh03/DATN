@@ -2,7 +2,6 @@ package fpl.but.datn.controller;
 
 import fpl.but.datn.entity.HinhAnh;
 import fpl.but.datn.service.IService;
-import fpl.but.datn.service.impl.HinhAnhServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

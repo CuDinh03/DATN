@@ -1,4 +1,4 @@
-package fpl.but.datn.service.impl;
+package fpl.but.datn.service.implement;
 
 import fpl.but.datn.entity.GioHangChiTiet;
 import fpl.but.datn.entity.HoaDonChiTiet;

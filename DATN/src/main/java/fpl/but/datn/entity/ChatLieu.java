@@ -1,32 +1,25 @@
 package fpl.but.datn.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 import java.util.UUID;
 
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "hinh_anh")
-public class HinhAnh {
+@Builder
+@Table(name = "chat_lieu")
+public class ChatLieu {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    @Column(name = "ma")
     private String ma;
-    @Column(name = "ten")
     private String ten;
-    @Column(name = "mo_ta")
-    private String moTa;
     private Date ngayTao;
     private Date ngaySua;
-    @Column(name = "trang_thai")
     private Boolean trangThai;
 }
