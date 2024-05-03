@@ -1,30 +1,19 @@
+package fpl.but.datn.dto.request;
 
-package fpl.but.datn.entity;
-
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import fpl.but.datn.entity.KhachHang;
+import fpl.but.datn.entity.NguoiDung;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.UUID;
-
-@Entity
-@Table
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-public class HoaDon {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+
+public class HoaDonDto {
+
     private UUID id;
     private String ma;
-    @ManyToOne
     private NguoiDung idNhanVien;
-    @ManyToOne
     private KhachHang idKhachHang;
     private BigDecimal tongTien;
     private BigDecimal tongTienGiam;

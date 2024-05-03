@@ -1,6 +1,5 @@
-package fpl.but.datn.service.Impl;
+package fpl.but.datn.service.impl;
 
-import fpl.but.datn.entity.SanPham;
 import fpl.but.datn.entity.TaiKhoan;
 import fpl.but.datn.repository.TaiKhoanRepository;
 import fpl.but.datn.service.InterfaceService;
@@ -37,8 +36,8 @@ public class TaiKhoanServiceImpl implements InterfaceService<TaiKhoan> {
             o.setMatKhau(taiKhoan.getMatKhau());
             o.setNgayTao(taiKhoan.getNgayTao());
             o.setNgaySua(taiKhoan.getNgaySua());
-            o.setChucVu(taiKhoan.getChucVu());
-            o.setTrangThai(taiKhoan.isTrangThai());
+            o.setIdChucVu(taiKhoan.getIdChucVu());
+            o.setTrangThai(taiKhoan.getTrangThai());
             return taiKhoanRepository.save(o);
         }).orElse(null);
     }

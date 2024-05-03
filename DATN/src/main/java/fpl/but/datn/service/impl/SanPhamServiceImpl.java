@@ -1,4 +1,4 @@
-package fpl.but.datn.service.Impl;
+package fpl.but.datn.service.impl;
 
 import fpl.but.datn.entity.SanPham;
 import fpl.but.datn.repository.SanPhamRepository;

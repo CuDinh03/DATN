@@ -1,6 +1,5 @@
-package fpl.but.datn.service.Impl;
+package fpl.but.datn.service.impl;
 
-import fpl.but.datn.entity.TaiKhoan;
 import fpl.but.datn.entity.ThuongHieu;
 import fpl.but.datn.repository.ThuongHieuRepository;
 import fpl.but.datn.service.InterfaceService;
