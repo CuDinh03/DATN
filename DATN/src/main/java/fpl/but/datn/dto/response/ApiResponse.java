@@ -2,11 +2,14 @@ package fpl.but.datn.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ApiResponse<T> {
     private int code = 1000;
     private String message;
     private T result;
+
+    private String url;
 
     public int getCode() {
         return code;
@@ -30,5 +33,13 @@ public class ApiResponse<T> {
 
     public void setResult(T result) {
         this.result = result;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

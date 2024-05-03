@@ -18,6 +18,12 @@ public class UserController {
     @Autowired
     private TaiKhoanService taiKhoanService;
 
+    @GetMapping("/view")
+    public String mainView(){
+
+        return "admin/index";
+    }
+
     @PostMapping
     ApiResponse<TaiKhoan> createAccount(@RequestBody @Valid TaiKhoanDto request) {
         ApiResponse<TaiKhoan> apiResponse = new ApiResponse<>();
