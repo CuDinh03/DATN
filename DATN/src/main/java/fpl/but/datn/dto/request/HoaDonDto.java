@@ -1,28 +1,24 @@
-package fpl.but.datn.entity;
+package fpl.but.datn.dto.request;
 
-import jakarta.persistence.*;
+import fpl.but.datn.entity.KhachHang;
+import fpl.but.datn.entity.NguoiDung;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.UUID;
-
-@Entity
-@Table
 @Data
-public class HoaDon {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+
+public class HoaDonDto {
+
     private UUID id;
     private String ma;
-    @ManyToOne
     private NguoiDung idNhanVien;
-    @ManyToOne
     private KhachHang idKhachHang;
     private BigDecimal tongTien;
     private BigDecimal tongTienGiam;
     private Date ngayTao;
     private UUID idVoucher;
     private String ghiChu;
-    private boolean trangThai;
+    private Boolean trangThai;
 }

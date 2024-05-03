@@ -1,7 +1,9 @@
-package fpl.but.datn.entity;
+package fpl.but.datn.dto.request;
 
-
-import jakarta.persistence.*;
+import fpl.but.datn.entity.ChucVu;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,22 +11,17 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.UUID;
-
-@Entity
-@Table
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class TaiKhoan {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+public class TaiKhoanDto {
     private UUID id;
     private String ma;
+    @Size(min = 6, max = 10, message = "USERNAME_INVALID")
     private String tenDangNhap;
+    @Size(min = 8, max = 16, message = "PASSWORD_INVALID")
     private String matKhau;
-    @ManyToOne
     private ChucVu idChucVu;
     private Date ngayTao;
     private Date ngaySua;
