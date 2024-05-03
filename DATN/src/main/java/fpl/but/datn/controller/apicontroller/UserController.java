@@ -1,4 +1,4 @@
-package fpl.but.datn.controller;
+package fpl.but.datn.controller.apicontroller;
 
 import fpl.but.datn.dto.TaiKhoanDto;
 import fpl.but.datn.dto.response.ApiResponse;
@@ -7,22 +7,18 @@ import fpl.but.datn.service.impl.TaiKhoanService;
 import fpl.but.datn.tranferdata.TranferDatas;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UserController {
     @Autowired
     private TaiKhoanService taiKhoanService;
 
-    @GetMapping("/view")
-    public String mainView(){
-
-        return "admin/index";
-    }
 
     @PostMapping
     ApiResponse<TaiKhoan> createAccount(@RequestBody @Valid TaiKhoanDto request) {
