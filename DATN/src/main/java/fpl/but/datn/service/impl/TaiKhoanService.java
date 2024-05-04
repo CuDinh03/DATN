@@ -6,6 +6,7 @@ import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jwt.JWTClaimsSet;
 import fpl.but.datn.dto.request.AuthenticationRequest;
 import fpl.but.datn.dto.response.AuthenticationResponse;
+import fpl.but.datn.dto.response.TaiKhoanResponse;
 import fpl.but.datn.entity.ChucVu;
 import fpl.but.datn.entity.TaiKhoan;
 import fpl.but.datn.exception.AppException;
@@ -14,14 +15,15 @@ import fpl.but.datn.repository.TaiKhoanRepository;
 import lombok.experimental.NonFinal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 
@@ -93,7 +95,7 @@ public class TaiKhoanService {
         if (!authenticated)
             throw new AppException(ErrorCode.UNAUTHENTICATED);
 
-        var token = generateToken(request.getTenDangNhap());
+        var token = generateToken(taiKhoan);
 
         return AuthenticationResponse.builder()
                 .token(token)
@@ -101,18 +103,18 @@ public class TaiKhoanService {
                 .build();
     }
 
-    private String generateToken(String username) {
+    private String generateToken(TaiKhoan taiKhoan) {
 
         JWSHeader header = new JWSHeader(JWSAlgorithm.HS512);
 
         JWTClaimsSet jwtClaimsSet = new JWTClaimsSet.Builder()
-                .subject(username)
+                .subject(taiKhoan.getTenDangNhap())
                 .issuer("adminCu")
                 .issueTime(new Date())
                 .expirationTime(new Date(
                         Instant.now().plus(1, ChronoUnit.HOURS).toEpochMilli()
                 ))
-                .claim("scope", "custom")
+                .claim("scope", buildScope(taiKhoan))
                 .build();
 
         Payload payload = new Payload(jwtClaimsSet.toJSONObject());
@@ -128,5 +130,30 @@ public class TaiKhoanService {
         }
 
     }
+
+
+    private String buildScope(TaiKhoan taiKhoan) {
+        StringJoiner stringJoiner = new StringJoiner(" ");
+        if (taiKhoan.getIdChucVu() != null && taiKhoan.getIdChucVu().getTen() != null) {
+            List<String> tenList = Collections.singletonList(taiKhoan.getIdChucVu().getTen());
+            for (String chucVu : tenList) {
+                stringJoiner.add(chucVu);
+            }
+        }
+        return stringJoiner.toString();
+    }
+
+    public TaiKhoanResponse getMyInfo(){
+        var context = SecurityContextHolder.getContext();
+        String name = context.getAuthentication().getName();
+        TaiKhoan byTenDangNhap = taiKhoanRepository.findByTenDangNhap(name).orElseThrow(() -> new AppException(ErrorCode.ACCOUNT_NOT_EXISTED));
+
+        TaiKhoanResponse taiKhoanResponse = new TaiKhoanResponse();
+        taiKhoanResponse.setUsername(byTenDangNhap.getTenDangNhap());
+        taiKhoanResponse.setChucVu(byTenDangNhap.getIdChucVu().getTen());
+        taiKhoanResponse.setId(String.valueOf(byTenDangNhap.getId()));
+        return taiKhoanResponse;
+    }
+
 
 }
