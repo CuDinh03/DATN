@@ -15,6 +15,7 @@ import java.util.UUID;
 public class ChatLieuController {
     @Autowired
     private IService<ChatLieu> chatLieuService;
+
     @GetMapping()
     public ResponseEntity<?> getAll(){
         return ResponseEntity.ok(chatLieuService.getAll());

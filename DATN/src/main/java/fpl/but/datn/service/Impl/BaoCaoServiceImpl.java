@@ -1,4 +1,4 @@
-package fpl.but.datn.service.Impl;
+package fpl.but.datn.service.impl;
 
 import fpl.but.datn.entity.BaoCao;
 import fpl.but.datn.repository.BaoCaoRepository;
@@ -6,6 +6,7 @@ import fpl.but.datn.service.IService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -21,6 +22,18 @@ public class BaoCaoServiceImpl implements IService<BaoCao> {
 
     @Override
     public BaoCao addNew(BaoCao baoCao) {
+        return null;
+    }
+
+    public BaoCao create(BaoCao request) {
+        BaoCao baoCao = new BaoCao();
+        baoCao.setTen(request.getTen());
+        baoCao.setMa(request.getMa());
+        baoCao.setId(UUID.randomUUID());
+        baoCao.setNgayTao(new Date());
+        baoCao.setNgaySua(new Date());
+        baoCao.setTrangThai(request.getTrangThai());
+
         return baoCaoRepository.save(baoCao);
     }
 
@@ -29,7 +42,6 @@ public class BaoCaoServiceImpl implements IService<BaoCao> {
         Optional<BaoCao> optional = baoCaoRepository.findById(id);
         return optional.map(o -> {
             o.setMa(baoCao.getMa());
-            o.setMoTa(baoCao.getMoTa());
             o.setTen(baoCao.getTen());
             o.setTrangThai(baoCao.getTrangThai());
             return baoCaoRepository.save(o);

@@ -1,13 +1,21 @@
 package fpl.but.datn.controller;
 
+import fpl.but.datn.dto.request.BaoCaoDto;
+import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.entity.BaoCao;
 import fpl.but.datn.entity.BaoCao;
+import fpl.but.datn.exception.AppException;
+import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.service.IService;
+import fpl.but.datn.service.impl.BaoCaoServiceImpl;
+import fpl.but.datn.tranferdata.TranferDatas;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -15,32 +23,56 @@ import java.util.UUID;
 public class BaoCaoController {
 
     @Autowired
-    private IService<BaoCao> baoCaoService;
-    @GetMapping()
-    public ResponseEntity<?> getAll(){
-        return ResponseEntity.ok(baoCaoService.getAll());
-    }
+    private BaoCaoServiceImpl baoCaoService;
 
     @PostMapping("/addNew")
-    public ResponseEntity<?> getAll(@RequestBody BaoCao baoCao){
-        return ResponseEntity.ok(baoCaoService.addNew(baoCao));
+    ApiResponse<BaoCao> createBaoCao(@RequestBody @Valid BaoCaoDto request) {
+        ApiResponse<BaoCao> apiResponse = new ApiResponse<>();
+        if (request != null)
+            apiResponse.setResult(baoCaoService.create(TranferDatas.convertToEntity(request)));
+
+        return apiResponse;
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<?> update(@RequestBody BaoCao baoCao, @PathVariable UUID id){
-        return ResponseEntity.ok(baoCaoService.update(baoCao,id));
+    @GetMapping("/all")
+    ApiResponse<List<BaoCaoDto>> getAccounts() {
+        List<BaoCaoDto> listDto = TranferDatas.convertListBaoCaoToDto(baoCaoService.getAll());
+        ApiResponse<List<BaoCaoDto>> apiResponse = new ApiResponse<>();
+
+        if (!listDto.isEmpty()) {
+            apiResponse.setMessage("Lấy danh sách tài khoản thành công");
+            apiResponse.setResult(listDto);
+        } else {
+            throw new AppException(ErrorCode.NO_ACCOUNTS_FOUND);
+        }
+
+        return apiResponse;
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable UUID id){
-        if (baoCaoService.delete(id)){
-            return ResponseEntity.ok("xoa thanh cong");
-        }else
-            return ResponseEntity.ok("xoa that bai");
+    @GetMapping("/{id}")
+    ApiResponse<BaoCaoDto> getAccount(@PathVariable String id) {
+        ApiResponse<BaoCaoDto> apiResponse = new ApiResponse<>();
+        UUID idAccount = null;
+        if (id != null) idAccount = UUID.fromString(id);
+        BaoCaoDto dto = TranferDatas.convertToDto(baoCaoService.findById(idAccount));
+        apiResponse.setMessage("Lấy tài khoản thành công");
+        apiResponse.setResult(dto);
+        return apiResponse;
     }
 
-    @GetMapping("/detail/{id}")
-    public ResponseEntity<?> detail(@PathVariable UUID id){
-        return ResponseEntity.ok(baoCaoService.findById(id));
+    @PutMapping("/{id}")
+    BaoCao updateAccount(@PathVariable String id, @RequestBody BaoCaoDto request) {
+        UUID idAccount = null;
+        if (id != null) idAccount = UUID.fromString(id);
+        if (request != null)
+            return baoCaoService.update(TranferDatas.convertToEntity(request), idAccount);
+        return null;
+    }
+
+    @DeleteMapping("/{id}")
+    String deleteAccount(@PathVariable String id) {
+        UUID idAccount = UUID.fromString(id);
+        baoCaoService.delete(idAccount);
+        return "xoa thanh cong";
     }
 }
