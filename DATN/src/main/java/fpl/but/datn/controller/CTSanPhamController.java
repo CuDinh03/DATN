@@ -1,7 +1,8 @@
 package fpl.but.datn.controller;
 
 import fpl.but.datn.entity.ChiTietSanPham;
-import fpl.but.datn.service.IService;
+import fpl.but.datn.service.ICTSanPhamService;
+import fpl.but.datn.service.IDanhMucService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,7 +15,7 @@ import java.util.UUID;
 public class CTSanPhamController {
 
     @Autowired
-    private IService<ChiTietSanPham> ctSanPhamService;
+    private ICTSanPhamService ctSanPhamService;
     @GetMapping()
     public ResponseEntity<?> getAll(){
         return ResponseEntity.ok(ctSanPhamService.getAll());
@@ -22,7 +23,7 @@ public class CTSanPhamController {
 
     @PostMapping("/addNew")
     public ResponseEntity<?> getAll(@RequestBody ChiTietSanPham ctSanPham){
-        return ResponseEntity.ok(ctSanPhamService.addNew(ctSanPham));
+        return ResponseEntity.ok(ctSanPhamService.create(ctSanPham));
     }
 
     @PutMapping("/update/{id}")

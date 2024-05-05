@@ -1,8 +1,8 @@
-package fpl.but.datn.service.Impl;
+package fpl.but.datn.service.impl;
 
 import fpl.but.datn.entity.ChucVu;
 import fpl.but.datn.repository.ChucVuRepository;
-import fpl.but.datn.service.IService;
+import fpl.but.datn.service.IChucVuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class ChucVuServiceImpl implements IService<ChucVu> {
+public class ChucVuService implements IChucVuService {
 
     @Autowired
     private ChucVuRepository chucVuRepository;
@@ -22,7 +22,7 @@ public class ChucVuServiceImpl implements IService<ChucVu> {
     }
 
     @Override
-    public ChucVu addNew(ChucVu chucVu) {
+    public ChucVu create(ChucVu chucVu) {
         return chucVuRepository.save(chucVu);
     }
 

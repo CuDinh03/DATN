@@ -8,9 +8,9 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class TaiKhoanResponse {
-    String id;
-    String username;
-    String chucVu;
+public class BaoCaoResponse {
 
+    private String ma;
+    private String moTa;
+    private String ten;
 }

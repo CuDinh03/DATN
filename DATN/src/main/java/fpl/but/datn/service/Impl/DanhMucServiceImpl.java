@@ -1,17 +1,20 @@
-package fpl.but.datn.service.Impl;
+package fpl.but.datn.service.impl;
 
 import fpl.but.datn.entity.DanhMuc;
+import fpl.but.datn.exception.AppException;
+import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.repository.DanhMucRepository;
-import fpl.but.datn.service.IService;
+import fpl.but.datn.service.IDanhMucService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class DanhMucServiceImpl implements IService<DanhMuc> {
+public class DanhMucServiceImpl implements IDanhMucService {
 
     @Autowired
     private DanhMucRepository danhMucRepository;
@@ -21,20 +24,32 @@ public class DanhMucServiceImpl implements IService<DanhMuc> {
     }
 
     @Override
-    public DanhMuc addNew(DanhMuc danhMuc) {
+    public DanhMuc create(DanhMuc request) {
+        DanhMuc danhMuc = new DanhMuc();
+
+        if (danhMucRepository.existsByMa(request.getMa()))
+            throw new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION);
+        danhMuc.setMa(request.getMa());
+        danhMuc.setTen(request.getTen());
+        danhMuc.setNgayTao(new Date());
+        danhMuc.setNgaySua(new Date());
+        danhMuc.setTrangThai(request.getTrangThai());
+
         return danhMucRepository.save(danhMuc);
     }
 
     @Override
-    public DanhMuc update(DanhMuc danhMuc, UUID id) {
-        Optional<DanhMuc> optional = danhMucRepository.findById(id);
-        return optional.map(o -> {
-            o.setMa(danhMuc.getMa());
-            o.setMoTa(danhMuc.getMoTa());
-            o.setTen(danhMuc.getTen());
-            o.setTrangThai(danhMuc.getTrangThai());
-            return danhMucRepository.save(o);
-        }).orElse(null);
+    public DanhMuc update(DanhMuc request, UUID id) {
+        DanhMuc danhMuc = new DanhMuc();
+
+        danhMuc.setId(UUID.randomUUID());
+        danhMuc.setMa(request.getMa());
+        danhMuc.setTen(request.getTen());
+        danhMuc.setNgayTao(new Date());
+        danhMuc.setNgaySua(new Date());
+        danhMuc.setTrangThai(request.getTrangThai());
+
+        return danhMucRepository.save(danhMuc);
 
     }
 
@@ -53,6 +68,7 @@ public class DanhMucServiceImpl implements IService<DanhMuc> {
 
     @Override
     public DanhMuc findById(UUID id) {
-        return danhMucRepository.findById(id).get();
+
+        return danhMucRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.CATEGORY_NOT_EXISTED));
     }
 }

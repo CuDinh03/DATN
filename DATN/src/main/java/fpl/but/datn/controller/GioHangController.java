@@ -1,9 +1,8 @@
 package fpl.but.datn.controller;
 
 import fpl.but.datn.entity.GioHang;
-import fpl.but.datn.entity.GioHang;
-import fpl.but.datn.service.IService;
-import fpl.but.datn.service.Impl.GioHangServiceImpl;
+import fpl.but.datn.service.IDanhMucService;
+import fpl.but.datn.service.IGioHangService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,7 +15,7 @@ import java.util.UUID;
 public class GioHangController {
 
     @Autowired
-    private IService<GioHang> gioHangService;
+    private IGioHangService gioHangService;
     @GetMapping()
     public ResponseEntity<?> getAll(){
         return ResponseEntity.ok(gioHangService.getAll());
@@ -24,7 +23,7 @@ public class GioHangController {
 
     @PostMapping("/addNew")
     public ResponseEntity<?> getAll(@RequestBody GioHang gioHang){
-        return ResponseEntity.ok(gioHangService.addNew(gioHang));
+        return ResponseEntity.ok(gioHangService.create(gioHang));
     }
 
     @PutMapping("/update/{id}")

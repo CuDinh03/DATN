@@ -1,11 +1,8 @@
-package fpl.but.datn.service.Impl;
+package fpl.but.datn.service.impl;
 
-import fpl.but.datn.dto.GioHangDto;
 import fpl.but.datn.entity.GioHang;
-import fpl.but.datn.entity.GioHang;
-import fpl.but.datn.repository.ChucVuRepository;
 import fpl.but.datn.repository.GioHangRepository;
-import fpl.but.datn.service.IService;
+import fpl.but.datn.service.IGioHangService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +11,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class GioHangServiceImpl implements IService<GioHang> {
+public class GioHangService implements IGioHangService {
 
     @Autowired
     private GioHangRepository gioHangRepository;
@@ -25,7 +22,7 @@ public class GioHangServiceImpl implements IService<GioHang> {
     }
 
     @Override
-    public GioHang addNew(GioHang gioHang) {
+    public GioHang create(GioHang gioHang) {
         return gioHangRepository.save(gioHang);
     }
 

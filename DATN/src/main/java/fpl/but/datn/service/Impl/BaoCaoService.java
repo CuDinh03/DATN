@@ -1,8 +1,11 @@
 package fpl.but.datn.service.impl;
 
+import fpl.but.datn.dto.request.BaoCaoDto;
 import fpl.but.datn.entity.BaoCao;
+import fpl.but.datn.exception.AppException;
+import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.repository.BaoCaoRepository;
-import fpl.but.datn.service.IService;
+import fpl.but.datn.service.IBaoCaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +15,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class BaoCaoServiceImpl implements IService<BaoCao> {
+public class BaoCaoService implements IBaoCaoService {
     @Autowired
     private BaoCaoRepository baoCaoRepository;
     @Override
@@ -21,31 +24,32 @@ public class BaoCaoServiceImpl implements IService<BaoCao> {
     }
 
     @Override
-    public BaoCao addNew(BaoCao baoCao) {
-        return null;
-    }
-
     public BaoCao create(BaoCao request) {
         BaoCao baoCao = new BaoCao();
-        baoCao.setTen(request.getTen());
+
+        if (baoCaoRepository.existsByMa(request.getMa()))
+            throw new AppException(ErrorCode.REPORT_EXISTED);
         baoCao.setMa(request.getMa());
+        baoCao.setTen(request.getTen());
+        baoCao.setMoTa(request.getMoTa());
         baoCao.setId(UUID.randomUUID());
         baoCao.setNgayTao(new Date());
         baoCao.setNgaySua(new Date());
         baoCao.setTrangThai(request.getTrangThai());
-
         return baoCaoRepository.save(baoCao);
     }
 
+
     @Override
-    public BaoCao update(BaoCao baoCao, UUID id) {
-        Optional<BaoCao> optional = baoCaoRepository.findById(id);
-        return optional.map(o -> {
-            o.setMa(baoCao.getMa());
-            o.setTen(baoCao.getTen());
-            o.setTrangThai(baoCao.getTrangThai());
-            return baoCaoRepository.save(o);
-        }).orElse(null);
+    public BaoCao update(BaoCao request, UUID id) {
+        BaoCao baoCao = new BaoCao();
+        baoCao.setTen(request.getTen());
+        baoCao.setMa(request.getMa());
+        baoCao.setMoTa(request.getMoTa());
+        baoCao.setNgayTao(new Date());
+        baoCao.setNgaySua(new Date());
+        baoCao.setTrangThai(request.getTrangThai());
+         return baoCaoRepository.save(baoCao);
 
     }
 
@@ -64,6 +68,8 @@ public class BaoCaoServiceImpl implements IService<BaoCao> {
 
     @Override
     public BaoCao findById(UUID id) {
-        return baoCaoRepository.findById(id).get();
+        return baoCaoRepository.findById(id)
+                .orElseThrow(() -> new AppException(ErrorCode.ACCOUNT_NOT_EXISTED));
     }
+
 }
