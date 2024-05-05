@@ -8,6 +8,7 @@ import java.util.UUID;
 
 public class ChucVuDto {
     private UUID id;
+    private String ma;
     private String ten;
     private Date ngayTao;
     private Date ngaySua;

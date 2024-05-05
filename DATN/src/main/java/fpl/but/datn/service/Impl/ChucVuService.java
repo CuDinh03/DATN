@@ -1,11 +1,14 @@
 package fpl.but.datn.service.impl;
 
 import fpl.but.datn.entity.ChucVu;
+import fpl.but.datn.exception.AppException;
+import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.repository.ChucVuRepository;
 import fpl.but.datn.service.IChucVuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -22,18 +25,35 @@ public class ChucVuService implements IChucVuService {
     }
 
     @Override
-    public ChucVu create(ChucVu chucVu) {
+    public ChucVu create(ChucVu request) {
+        ChucVu chucVu = new ChucVu();
+
+        if (chucVuRepository.existsByMa(request.getMa())){
+            throw new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION);
+        }
+        chucVu.setId(UUID.randomUUID());
+        chucVu.setMa(request.getMa());
+        chucVu.setTen(request.getTen());
+        chucVu.setNgayTao(new Date());
+        chucVu.setNgaySua(new Date());
+        chucVu.setTrangThai(request.getTrangThai());
+
         return chucVuRepository.save(chucVu);
     }
 
     @Override
-    public ChucVu update(ChucVu chucVu, UUID id) {
-        Optional<ChucVu> optional = chucVuRepository.findById(id);
-        return optional.map(o -> {
-            o.setTen(chucVu.getTen());
-            o.setTrangThai(chucVu.getTrangThai());
-            return chucVuRepository.save(o);
-        }).orElse(null);
+    public ChucVu update(ChucVu request, UUID id) {
+        ChucVu chucVu = new ChucVu();
+
+        chucVu.setId(UUID.randomUUID());
+        chucVu.setMa(request.getMa());
+        chucVu.setId(id);
+        chucVu.setTen(request.getTen());
+        chucVu.setNgayTao(new Date());
+        chucVu.setNgaySua(new Date());
+        chucVu.setTrangThai(request.getTrangThai());
+        return chucVuRepository.save(chucVu);
+
 
     }
 
@@ -51,7 +71,7 @@ public class ChucVuService implements IChucVuService {
 
     @Override
     public ChucVu findById(UUID id) {
-        return chucVuRepository.findById(id).get();
+        return chucVuRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION));
     }
 
 }

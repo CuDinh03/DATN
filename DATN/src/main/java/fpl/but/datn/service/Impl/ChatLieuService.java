@@ -46,6 +46,7 @@ public class ChatLieuService implements IChatLieuService {
         ChatLieu chatLieu = new ChatLieu();
         chatLieu.setMa(request.getMa());
         chatLieu.setTen(request.getTen());
+        chatLieu.setId(id);
         chatLieu.setNgayTao(new Date());
         chatLieu.setNgaySua(new Date());
         chatLieu.setTrangThai(true);

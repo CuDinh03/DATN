@@ -46,6 +46,7 @@ public class BaoCaoService implements IBaoCaoService {
         baoCao.setTen(request.getTen());
         baoCao.setMa(request.getMa());
         baoCao.setMoTa(request.getMoTa());
+        baoCao.setId(id);
         baoCao.setNgayTao(new Date());
         baoCao.setNgaySua(new Date());
         baoCao.setTrangThai(request.getTrangThai());
