@@ -1,7 +1,8 @@
 
-package fpl.but.datn.entity;
+package fpl.but.datn.dto.request;
 
-import jakarta.persistence.*;
+import fpl.but.datn.entity.HoaDon;
+import fpl.but.datn.entity.PhuongThucThanhToan;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -12,18 +13,14 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@Entity
-@Table(name = "thanh_toan")
-public class ThanhToan {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+
+
+public class ThanhToanDto {
+
     private UUID id;
-    @ManyToOne
-    @JoinColumn(name = "id_hoa_don")
+
     private HoaDon idHoaDon;
-    @ManyToOne
-    @JoinColumn(name = "id_phuong_thuc")
+
     private PhuongThucThanhToan idPhuongThucThanhToan;
 
     private BigDecimal tienThanhToan;

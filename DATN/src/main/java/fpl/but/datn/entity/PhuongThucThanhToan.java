@@ -18,5 +18,5 @@ public class PhuongThucThanhToan {
     private UUID id;
     private String ma;
     private String ten;
-    private boolean trangThai;
+    private Boolean trangThai;
 }

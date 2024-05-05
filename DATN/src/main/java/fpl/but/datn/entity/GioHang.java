@@ -20,5 +20,5 @@ public class GioHang {
     @OneToOne
     @JoinColumn(name = "id_khach_hang")
     private KhachHang idKhachHang;
-    private boolean trangThai;
+    private Boolean trangThai;
 }

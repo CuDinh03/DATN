@@ -26,5 +26,5 @@ public class NhanVien {
     private boolean gioiTinh;
     private Date ngaySinh;
     private String diaChi;
-    private boolean trangThai;
+    private Boolean trangThai;
 }

@@ -25,5 +25,5 @@ public class HoaDonChiTiet {
     private SanPham sanPham;
     private Integer soLuong;
     private BigDecimal giaBan;
-    private boolean trangThai;
+    private Boolean trangThai;
 }

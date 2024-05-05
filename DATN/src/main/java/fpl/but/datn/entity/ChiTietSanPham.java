@@ -44,6 +44,6 @@ public class ChiTietSanPham {
     private BigDecimal giaNhap;
     private BigDecimal giaBan;
     private Date ngayNhap;
-    private boolean trangThai;
+    private Boolean trangThai;
 
 }

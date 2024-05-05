@@ -40,5 +40,5 @@ public class Voucher {
 
     private Date ngaySua;
 
-    private boolean trangThai;
+    private Boolean trangThai;
 }

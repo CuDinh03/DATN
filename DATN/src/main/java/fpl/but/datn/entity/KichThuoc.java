@@ -20,6 +20,6 @@ public class KichThuoc {
     private String ma;
     private String ten;
     private String moTa;
-    private boolean trangThai;
+    private Boolean trangThai;
 
 }

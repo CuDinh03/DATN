@@ -36,7 +36,7 @@ public class ThuongHieuServiceImpl implements InterfaceService<ThuongHieu> {
             o.setMoTa(thuongHieu.getMoTa());
             o.setNgayTao(thuongHieu.getNgayTao());
             o.setNgaySua(thuongHieu.getNgaySua());
-            o.setTrangThai(thuongHieu.isTrangThai());
+            o.setTrangThai(thuongHieu.getTrangThai());
             return thuongHieuRepository.save(o);
         }).orElse(null);
     }

@@ -1,5 +1,12 @@
  --CREATE DATABASE DATN_V1
 
+ select * from chuc_vu
+ select * from nguoi_dung
+ select * from tai_khoan
+ select * from nhan_vien
+ select * from khach_hang
+ select * from thuong_hieu
+
 USE DATN_V1
 --Chuc vu
 CREATE TABLE chuc_vu(
@@ -358,3 +365,21 @@ VALUES
 ('PTTT003', N'Thanh toán qua thẻ tín dụng', '2024-04-21', '2024-04-21', 1),
 ('PTTT004', N'Ví điện tử', '2024-04-21', '2024-04-21', 1),
 ('PTTT005', N'Trả góp', '2024-04-21', '2024-04-21', 1);
+
+INSERT INTO tai_khoan (id, ma, ten_dang_nhap, mat_khau, id_chuc_vu, ngay_tao, ngay_sua, trang_thai)
+VALUES 
+(NEWID(), 'TK001', 'admin', 'admin123', (SELECT id FROM chuc_vu WHERE ma = 'CV001'), GETDATE(), GETDATE(), 1),
+(NEWID(), 'TK002', 'user', 'user123', (SELECT id FROM chuc_vu WHERE ma = 'CV002'), GETDATE(), GETDATE(), 1),
+(NEWID(), 'TK003', 'manager', 'manager123', (SELECT id FROM chuc_vu WHERE ma = 'CV003'), GETDATE(), GETDATE(), 1);
+
+-- Nhân viên
+INSERT INTO nhan_vien (id, ma, id_tai_khoan, ten, sdt, email, gioi_tinh, ngay_sinh, dia_chi, ngay_tao, ngay_sua, trang_thai)
+VALUES 
+(NEWID(), 'NV001', (SELECT id FROM tai_khoan WHERE ma = 'TK001'), N'Nguyễn Văn A', '0987654321', 'nguyenvana@example.com', 1, '1990-01-01', N'Hà Nội', GETDATE(), GETDATE(), 1),
+(NEWID(), 'NV002', (SELECT id FROM tai_khoan WHERE ma = 'TK002'), N'Trần Thị B', '0987654322', 'tranthib@example.com', 0, '1995-05-05', N'Hồ Chí Minh', GETDATE(), GETDATE(), 1);
+
+-- Khách hàng
+INSERT INTO khach_hang (id, ma, id_tai_khoan, ten, sdt, email, gioi_tinh, ngay_sinh, dia_chi, ngay_tao, ngay_sua, trang_thai)
+VALUES 
+(NEWID(), 'KH001', (SELECT id FROM tai_khoan WHERE ma = 'TK003'), N'Nguyễn Thị C', '0987654323', 'nguyenthic@example.com', 0, '1992-03-15', N'Đà Nẵng', GETDATE(), GETDATE(), 1),
+(NEWID(), 'KH002', (SELECT id FROM tai_khoan WHERE ma = 'TK003'), N'Lê Văn D', '0987654324', 'levand@example.com', 1, '1988-07-20', N'Hải Phòng', GETDATE(), GETDATE(), 1);

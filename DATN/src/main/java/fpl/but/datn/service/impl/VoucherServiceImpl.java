@@ -1,8 +1,13 @@
 package fpl.but.datn.service.impl;
 
 import fpl.but.datn.entity.Voucher;
+import fpl.but.datn.exception.AppException;
+import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.repository.VoucherRepository;
 import fpl.but.datn.service.InterfaceService;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +16,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
+
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class VoucherServiceImpl implements InterfaceService<Voucher> {
 
     @Autowired
@@ -24,6 +32,7 @@ public class VoucherServiceImpl implements InterfaceService<Voucher> {
     @Override
     public Voucher addNew(Voucher voucher) {
         return voucherRepository.save(voucher);
+
     }
 
     @Override
@@ -40,7 +49,7 @@ public class VoucherServiceImpl implements InterfaceService<Voucher> {
             o.setSoLuong(voucher.getSoLuong());
             o.setNgayTao(voucher.getNgayTao());
             o.setNgaySua(voucher.getNgaySua());
-            o.setTrangThai(voucher.isTrangThai());
+            o.setTrangThai(voucher.getTrangThai());
             return voucherRepository.save(o);
         }).orElse(null);
     }

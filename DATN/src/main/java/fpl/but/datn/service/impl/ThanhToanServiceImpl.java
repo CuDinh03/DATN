@@ -36,7 +36,7 @@ public class ThanhToanServiceImpl implements InterfaceService<ThanhToan> {
             o.setTienThanhToan(thanhToan.getTienThanhToan());
             o.setNgayTao(thanhToan.getNgayTao());
             o.setNgaySua(thanhToan.getNgaySua());
-            o.setTrangThai(thanhToan.isTrangThai());
+            o.setTrangThai(thanhToan.getTrangThai());
             return thanhToanRepository.save(o);
         }).orElse(null);
     }

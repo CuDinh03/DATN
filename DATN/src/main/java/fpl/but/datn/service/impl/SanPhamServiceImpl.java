@@ -35,7 +35,7 @@ public class SanPhamServiceImpl implements InterfaceService<SanPham> {
             o.setMoTa(sanPham.getMoTa());
             o.setNgayTao(sanPham.getNgayTao());
             o.setNgaySua(sanPham.getNgaySua());
-            o.setTrangThai(sanPham.isTrangThai());
+            o.setTrangThai(sanPham.getTrangThai());
             return sanPhamRepository.save(o);
         }).orElse(null);
     }

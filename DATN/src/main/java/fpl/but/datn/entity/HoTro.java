@@ -22,5 +22,5 @@ public class HoTro {
     private String tieuDe;
     private String noiDung;
     private Date ngayTao;
-    private boolean trangThai;
+    private Boolean trangThai;
 }
