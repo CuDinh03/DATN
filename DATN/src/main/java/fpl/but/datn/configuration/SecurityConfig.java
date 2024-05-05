@@ -22,8 +22,12 @@ import javax.crypto.spec.SecretKeySpec;
 @EnableWebSecurity
 public class SecurityConfig {
     // cac endpoint duoc phep truy cap khong can xac thuc
-    private final String[] PUBLIC_ENDPOINT = {"/auth/log-in", "/users",
-            "/auth/token","auth/introspect"};
+    private final String[] PUBLIC_ENDPOINT = {"/auth/log-in"};
+
+    private final String[] ADMIN_ENDPOINT_GET ={"/api/users/all"};
+    private final String[] ADMIN_ENDPOINT_POST ={"/api/users/create"};
+
+    private final String[] CUSTOMER_END_POINT = {};
 
     @Value("${jwt.signerKey}")
     private String signerKey;
@@ -31,8 +35,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         // cho phep cac patterns co endpoint duoc truy cap
-        httpSecurity.authorizeHttpRequests(request -> request.requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINT).permitAll()
-                .requestMatchers(HttpMethod.GET,"/api/users/all")
+        httpSecurity.authorizeHttpRequests(request -> request.requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINT ).permitAll()
+                .requestMatchers(HttpMethod.GET,ADMIN_ENDPOINT_GET)
+                .hasRole("ADMIN").
+                requestMatchers(HttpMethod.POST, ADMIN_ENDPOINT_POST)
                 .hasRole("ADMIN")
                 .anyRequest().authenticated());
 

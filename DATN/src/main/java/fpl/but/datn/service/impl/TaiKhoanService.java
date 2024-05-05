@@ -19,7 +19,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -47,7 +46,7 @@ public class TaiKhoanService {
         taiKhoan.setMa(request.getMa());
         taiKhoan.setId(UUID.randomUUID());
         taiKhoan.setTenDangNhap(request.getTenDangNhap());
-        ChucVu chucVu = chucVuService.getChucVu(UUID.fromString("9239b027-9ff9-47bc-8a10-080a82df45cd"));
+        ChucVu chucVu = chucVuService.getChucVu(UUID.fromString("24daa782-d3df-4d79-9eae-908ab7620de9"));
 
         taiKhoan.setIdChucVu(chucVu);
         taiKhoan.setMatKhau(passwordEncoder.encode(request.getMatKhau()));
