@@ -11,7 +11,6 @@ import fpl.but.datn.tranferdata.TranferDatas;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -78,7 +77,7 @@ public class UserController {
         if (id != null) idAccount = UUID.fromString(id);
         TaiKhoan taiKhoan = new TaiKhoan();
         if (request != null)
-             taiKhoan =   taiKhoanService.updateTaiKhoan(idAccount, TranferDatas.convertToEntity(request));
+            taiKhoan =   taiKhoanService.updateTaiKhoan(idAccount, TranferDatas.convertToEntity(request));
 
         return ApiResponse.<TaiKhoanDto>builder().result(TranferDatas.convertToDto(taiKhoan)).build();
     }

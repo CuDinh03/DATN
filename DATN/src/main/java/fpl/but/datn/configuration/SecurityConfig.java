@@ -22,7 +22,7 @@ import javax.crypto.spec.SecretKeySpec;
 @EnableWebSecurity
 public class SecurityConfig {
     // cac endpoint duoc phep truy cap khong can xac thuc
-    private final String[] PUBLIC_ENDPOINT = {"/auth/log-in"};
+    private final String[] PUBLIC_ENDPOINT = {"/auth/log-in","/admin/login","/admin/index"};
 
     private final String[] ADMIN_ENDPOINT_GET ={"/api/users/all"};
     private final String[] ADMIN_ENDPOINT_POST ={"/api/users/create"};
@@ -36,6 +36,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         // cho phep cac patterns co endpoint duoc truy cap
         httpSecurity.authorizeHttpRequests(request -> request.requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINT ).permitAll()
+                .requestMatchers(HttpMethod.GET, PUBLIC_ENDPOINT ).permitAll()
                 .requestMatchers(HttpMethod.GET,ADMIN_ENDPOINT_GET)
                 .hasRole("ADMIN").
                 requestMatchers(HttpMethod.POST, ADMIN_ENDPOINT_POST)

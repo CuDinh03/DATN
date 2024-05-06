@@ -80,7 +80,7 @@ public class TaiKhoanService {
         return updateTaiKhoan;
     }
 
-    public void deleteTaiKhoan(UUID id) {
+    public void deleteTaiKhoan(UUID id)     {
         taiKhoanRepository.deleteById(id);
         Optional<TaiKhoan> optionalDeletedTaiKhoan = taiKhoanRepository.findById(id);
         if (optionalDeletedTaiKhoan.isPresent()) {
