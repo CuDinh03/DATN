@@ -22,17 +22,32 @@ public class ViewUserController {
     private RestTemplate restTemplate;
 
     @GetMapping
-    public String viewAdmin(){
+    public String viewAdmin(Model model) {
+        ResponseEntity<TaiKhoanDto> response = restTemplate.exchange("http://localhost:9091/auth/log-in",
+                HttpMethod.POST,
+                null,
+                new ParameterizedTypeReference<TaiKhoanDto>() {
+        });
+
+        TaiKhoanDto taiKhoanDto = response.getBody();
+        model.addAttribute("taiKhoan", taiKhoanDto);
 
         return "admin/index";
     }
 
+    @GetMapping("/login")
+    public String logIn(Model model) {
+
+        return "admin/login";
+    }
+
     @GetMapping("/get-all-user")
-    public String getAllUser(Model model){
+    public String getAllUser(Model model) {
         ResponseEntity<List<TaiKhoanDto>> response = restTemplate.exchange("http://localhost:9091/api/users",
                 HttpMethod.GET,
                 null,
-                new ParameterizedTypeReference<List<TaiKhoanDto>>() {}
+                new ParameterizedTypeReference<List<TaiKhoanDto>>() {
+                }
         );
         List<TaiKhoanDto> users = response.getBody();
         model.addAttribute("users", users);
