@@ -73,12 +73,21 @@ public class TaiKhoanService {
         taiKhoan.setNgaySua(new Date());
         taiKhoan.setTrangThai(request.getTrangThai());
 
-        return taiKhoanRepository.save(taiKhoan);
+        TaiKhoan updateTaiKhoan = taiKhoanRepository.save(taiKhoan);
+        if (updateTaiKhoan==null)
+            throw new AppException(ErrorCode.UPDATE_FAILED);
+
+        return updateTaiKhoan;
     }
 
     public void deleteTaiKhoan(UUID id) {
         taiKhoanRepository.deleteById(id);
+        Optional<TaiKhoan> optionalDeletedTaiKhoan = taiKhoanRepository.findById(id);
+        if (optionalDeletedTaiKhoan.isPresent()) {
+            throw new AppException(ErrorCode.DELETE_FAILED);
+        }
     }
+
 
 
 //    //author

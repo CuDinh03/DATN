@@ -73,19 +73,22 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    TaiKhoan updateAccount(@PathVariable String id, @RequestBody TaiKhoanDto request) {
+    ApiResponse<TaiKhoanDto> updateAccount(@PathVariable String id, @RequestBody TaiKhoanDto request) {
         UUID idAccount = null;
         if (id != null) idAccount = UUID.fromString(id);
+        TaiKhoan taiKhoan = new TaiKhoan();
         if (request != null)
-            return taiKhoanService.updateTaiKhoan(idAccount, TranferDatas.convertToEntity(request));
-        return null;
+             taiKhoan =   taiKhoanService.updateTaiKhoan(idAccount, TranferDatas.convertToEntity(request));
+
+        return ApiResponse.<TaiKhoanDto>builder().result(TranferDatas.convertToDto(taiKhoan)).build();
     }
 
     @DeleteMapping("/{id}")
-    String deleteAccount(@PathVariable String id) {
-        UUID idAccount = UUID.fromString(id);
+    ApiResponse<Void> deleteAccount(@PathVariable String id) {
+        UUID idAccount = null;
+        if (id != null) idAccount = UUID.fromString(id);
         taiKhoanService.deleteTaiKhoan(idAccount);
-        return "xoa thanh cong";
+        return ApiResponse.<Void>builder().build();
     }
 
 }

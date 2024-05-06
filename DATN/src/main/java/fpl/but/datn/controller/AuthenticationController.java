@@ -19,6 +19,7 @@ public class AuthenticationController {
     ApiResponse<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request){
        var result = taiKhoanService.authenticate(request);
        return ApiResponse.<AuthenticationResponse>builder()
+               .code(1000)
                .result(result)
                .build();
     }

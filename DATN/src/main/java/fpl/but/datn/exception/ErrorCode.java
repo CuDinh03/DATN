@@ -16,7 +16,9 @@ public enum ErrorCode {
     UNAUTHENTICATED(1006, "UNAUTHENTICATED", HttpStatus.UNAUTHORIZED),
     UNAUTHORIZED(1009, "Khong co quyen truy cap", HttpStatus.FORBIDDEN),
     NO_ACCOUNTS_FOUND(1007, "Không tìm thấy danh sách tài khoản nào",HttpStatus.NOT_FOUND),
-    ROLES_NOT_EXISTED(1008, "Không tìm thấy roles nào", HttpStatus.NOT_FOUND)
+    ROLES_NOT_EXISTED(1008, "Không tìm thấy roles nào", HttpStatus.NOT_FOUND),
+    UPDATE_FAILED(1010, "Cập nhật thất bại", HttpStatus.BAD_REQUEST),
+    DELETE_FAILED(1011, "Xoá thất bại", HttpStatus.BAD_REQUEST)
 
     ;
 
