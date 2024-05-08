@@ -21,7 +21,6 @@ import javax.crypto.spec.SecretKeySpec;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    // cac endpoint duoc phep truy cap khong can xac thuc
     private final String[] PUBLIC_ENDPOINT = {"/api/auth/log-in","/admin/login","/admin/index"};
 
     private final String[] ADMIN_ENDPOINT_GET ={"/api/users/all"};
