@@ -11,12 +11,13 @@ import fpl.but.datn.tranferdata.TranferDatas;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
+//import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/users")
 @Slf4j
@@ -36,9 +37,9 @@ public class UserController {
 
     @GetMapping("/all")
     ApiResponse<List<TaiKhoanDto>> getAccounts() {
-        var authentication = SecurityContextHolder.getContext().getAuthentication();
-        log.info("Ten Dang Nhap: {}", authentication.getName());
-        authentication.getAuthorities().forEach(grantedAuthority -> log.info(grantedAuthority.getAuthority()));
+//        var authentication = SecurityContextHolder.getContext().getAuthentication();
+//        log.info("Ten Dang Nhap: {}", authentication.getName());
+//        authentication.getAuthorities().forEach(grantedAuthority -> log.info(grantedAuthority.getAuthority()));
 
         List<TaiKhoanDto> listDto = TranferDatas.convertListTaiKhoanToDto(taiKhoanService.getAllTaiKhoan());
         ApiResponse<List<TaiKhoanDto>> apiResponse = new ApiResponse<>();
@@ -65,11 +66,11 @@ public class UserController {
         return apiResponse;
     }
 
-    @GetMapping("/myInfo")
-    ApiResponse<TaiKhoanResponse> getMyinfo() {
-        return ApiResponse.<TaiKhoanResponse>builder()
-                .result(taiKhoanService.getMyInfo()).build();
-    }
+//    @GetMapping("/myInfo")
+//    ApiResponse<TaiKhoanResponse> getMyinfo() {
+//        return ApiResponse.<TaiKhoanResponse>builder()
+//                .result(taiKhoanService.getMyInfo()).build();
+//    }
 
     @PutMapping("/{id}")
     ApiResponse<TaiKhoanDto> updateAccount(@PathVariable String id, @RequestBody TaiKhoanDto request) {
