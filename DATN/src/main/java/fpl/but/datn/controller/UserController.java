@@ -11,6 +11,10 @@ import fpl.but.datn.tranferdata.TranferDatas;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,23 +40,26 @@ public class UserController {
 
 
     @GetMapping("/all")
-    ApiResponse<List<TaiKhoanDto>> getAccounts() {
-        var authentication = SecurityContextHolder.getContext().getAuthentication();
-        log.info("Ten Dang Nhap: {}", authentication.getName());
-        authentication.getAuthorities().forEach(grantedAuthority -> log.info(grantedAuthority.getAuthority()));
+    ApiResponse<Page<TaiKhoanDto>> getAccounts(@RequestParam(defaultValue = "0") int page,
+                                               @RequestParam(defaultValue = "5") int size) {
 
-        List<TaiKhoanDto> listDto = TranferDatas.convertListTaiKhoanToDto(taiKhoanService.getAllTaiKhoan());
-        ApiResponse<List<TaiKhoanDto>> apiResponse = new ApiResponse<>();
+        Pageable pageable = PageRequest.of(page, size);
+        Page<TaiKhoan> taiKhoanPage = taiKhoanService.getAllTaiKhoanPageable(pageable);
+        List<TaiKhoanDto> listDto = TranferDatas.convertListTaiKhoanToDto(taiKhoanPage.getContent());
+
+        ApiResponse<Page<TaiKhoanDto>> apiResponse = new ApiResponse<>();
 
         if (!listDto.isEmpty()) {
             apiResponse.setMessage("Lấy danh sách tài khoản thành công");
-            apiResponse.setResult(listDto);
+            apiResponse.setResult(new PageImpl<>(listDto, pageable, taiKhoanPage.getTotalElements()));
         } else {
             throw new AppException(ErrorCode.NO_ACCOUNTS_FOUND);
         }
 
         return apiResponse;
     }
+
+
 
 
     @GetMapping("/{id}")

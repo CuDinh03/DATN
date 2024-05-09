@@ -73,5 +73,9 @@ public class ChucVuService implements IChucVuService {
     public ChucVu findById(UUID id) {
         return chucVuRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION));
     }
+    public ChucVu getChucVu(UUID id) {
+        return chucVuRepository.findById(id)
+                .orElseThrow(() -> new AppException(ErrorCode.ROLES_NOT_EXISTED));
+    }
 
 }

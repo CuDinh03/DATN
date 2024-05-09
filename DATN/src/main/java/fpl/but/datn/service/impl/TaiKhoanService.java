@@ -15,6 +15,8 @@ import fpl.but.datn.repository.TaiKhoanRepository;
 import lombok.experimental.NonFinal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -86,6 +88,9 @@ public class TaiKhoanService {
         if (optionalDeletedTaiKhoan.isPresent()) {
             throw new AppException(ErrorCode.DELETE_FAILED);
         }
+    }
+    public Page<TaiKhoan> getAllTaiKhoanPageable(Pageable pageable) {
+        return taiKhoanRepository.findAll(pageable);
     }
 
 
