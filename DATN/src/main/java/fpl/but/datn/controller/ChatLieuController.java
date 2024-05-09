@@ -71,7 +71,7 @@ public class ChatLieuController {
         if (id != null){
             idChatLieu = UUID.fromString(id);
             ChatLieuDto dto = TranferDatas.convertToDto(chatLieuService.findById(idChatLieu));
-            apiResponse.setMessage("Lấy tài khoản thành công");
+            apiResponse.setMessage("Lấy chất liệu thành công");
             apiResponse.setResult(dto);
         }
         return apiResponse;
