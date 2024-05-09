@@ -6,7 +6,6 @@ import fpl.but.datn.entity.BaoCao;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.service.IBaoCaoService;
-import fpl.but.datn.service.impl.BaoCaoService;
 import fpl.but.datn.tranferdata.TranferDatas;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

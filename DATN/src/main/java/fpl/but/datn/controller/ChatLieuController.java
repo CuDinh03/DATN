@@ -1,20 +1,14 @@
 package fpl.but.datn.controller;
 
-import fpl.but.datn.dto.request.BaoCaoDto;
 import fpl.but.datn.dto.request.ChatLieuDto;
 import fpl.but.datn.dto.response.ApiResponse;
-import fpl.but.datn.entity.BaoCao;
 import fpl.but.datn.entity.ChatLieu;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
-import fpl.but.datn.service.IChatLieuService;
-import fpl.but.datn.service.IDanhMucService;
 import fpl.but.datn.service.impl.ChatLieuService;
 import fpl.but.datn.tranferdata.TranferDatas;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
