@@ -1,10 +1,7 @@
 package fpl.but.datn.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -12,29 +9,24 @@ import java.util.UUID;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
-@Table(name = "hoa_don_chi_tiet")
+@Table
 public class HoaDonChiTiet {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    @Column(name = "ma")
-    private String ma;
     @ManyToOne
-    @JoinColumn(name = "id_san_pham")
-    private SanPham idSanPham;
-    @ManyToOne
-    @JoinColumn(name = "id_hoa_don")
+    @JoinColumn(name = "id")
     private HoaDon idHoaDon;
-
-    @Column(name = "so_luong")
+    @ManyToOne
+    @JoinColumn(name = "id")
+    private SanPham sanPham;
     private Integer soLuong;
-    @Column(name = "gia_ban")
-    private BigDecimal giaBan;
     private Date ngayTao;
     private Date ngaySua;
-    @Column(name = "trang_thai")
+    private BigDecimal giaBan;
     private boolean trangThai;
 }

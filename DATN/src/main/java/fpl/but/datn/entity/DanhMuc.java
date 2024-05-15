@@ -5,14 +5,13 @@ import lombok.*;
 
 import java.util.Date;
 import java.util.UUID;
-
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "danh_muc")
+@Table
 public class DanhMuc {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

@@ -22,5 +22,6 @@ public class KhachHang {
     private Date ngaySinh;
     private String diaChi;
     private Date ngaySua;
+    private Date ngayTao;
     private Boolean trangThai;
 }

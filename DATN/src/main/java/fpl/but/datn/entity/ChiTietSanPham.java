@@ -13,7 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "chi_tiet_san_pham")
+@Table
 public class ChiTietSanPham {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -47,4 +47,5 @@ public class ChiTietSanPham {
     private Date ngaySua;
     private Date ngayTao;
     private Boolean trangThai;
+
 }

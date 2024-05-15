@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class AuthenticationController {
     @Autowired
     private TaiKhoanService taiKhoanService;
@@ -19,6 +19,7 @@ public class AuthenticationController {
     ApiResponse<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request){
        var result = taiKhoanService.authenticate(request);
        return ApiResponse.<AuthenticationResponse>builder()
+               .code(1000)
                .result(result)
                .build();
     }

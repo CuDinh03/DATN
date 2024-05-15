@@ -4,7 +4,6 @@ import lombok.Data;
 
 import java.util.Date;
 import java.util.UUID;
-
 @Data
 public class SanPhamDto {
     private UUID id;

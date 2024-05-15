@@ -12,7 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "mau_sac")
+@Table
 public class MauSac {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -22,4 +22,5 @@ public class MauSac {
     private Date ngayTao;
     private Date ngaySua;
     private Boolean trangThai;
+
 }

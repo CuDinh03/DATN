@@ -1,8 +1,6 @@
 package fpl.but.datn.dto.request;
 
 import fpl.but.datn.entity.ChucVu;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -12,8 +12,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "kich_thuoc")
+@Table
 public class KichThuoc {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -22,4 +23,5 @@ public class KichThuoc {
     private Date ngayTao;
     private Date ngaySua;
     private Boolean trangThai;
+
 }
