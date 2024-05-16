@@ -1,8 +1,7 @@
 package fpl.but.datn.controller;
 
-import fpl.but.datn.entity.HinhAnh;
 import fpl.but.datn.entity.HoTro;
-import fpl.but.datn.service.IService;
+import fpl.but.datn.service.IHoTroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,7 +13,7 @@ import java.util.UUID;
 @RequestMapping("/ho-tro")
 public class HoTroController {
     @Autowired
-    private IService<HoTro> hoTroService;
+    private IHoTroService hoTroService;
 
     @GetMapping()
     public ResponseEntity<?> getAll(){
@@ -23,7 +22,7 @@ public class HoTroController {
 
     @PostMapping("/addNew")
     public ResponseEntity<?> getAll(@RequestBody HoTro hoTro){
-        return ResponseEntity.ok(hoTroService.addNew(hoTro));
+        return ResponseEntity.ok(hoTroService.create(hoTro));
     }
 
     @PutMapping("/update/{id}")

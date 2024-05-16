@@ -1,7 +1,7 @@
 package fpl.but.datn.controller;
 
 import fpl.but.datn.entity.HoaDon;
-import fpl.but.datn.service.IService;
+import fpl.but.datn.service.IHoaDonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -13,7 +13,7 @@ import java.util.UUID;
 @RequestMapping("/hoa-don")
 public class HoaDonController {
     @Autowired
-    private IService<HoaDon> hoaDonIService;
+    private IHoaDonService hoaDonIService;
     @GetMapping()
     public ResponseEntity<?> getAll(){
         return ResponseEntity.ok(hoaDonIService.getAll());
@@ -21,7 +21,7 @@ public class HoaDonController {
 
     @PostMapping("/addNew")
     public ResponseEntity<?> getAll(@RequestBody HoaDon hoaDon){
-        return ResponseEntity.ok(hoaDonIService.addNew(hoaDon));
+        return ResponseEntity.ok(hoaDonIService.create(hoaDon));
     }
 
     @PutMapping("/update/{id}")

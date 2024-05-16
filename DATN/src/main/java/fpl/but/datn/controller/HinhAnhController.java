@@ -1,7 +1,7 @@
 package fpl.but.datn.controller;
 
 import fpl.but.datn.entity.HinhAnh;
-import fpl.but.datn.service.IService;
+import fpl.but.datn.service.IHinhAnhService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -13,7 +13,7 @@ import java.util.UUID;
 @RequestMapping("/hinh-anh")
 public class HinhAnhController {
     @Autowired
-    private IService<HinhAnh> hinhAnhService;
+    private IHinhAnhService hinhAnhService;
     @GetMapping()
     public ResponseEntity<?> getAll(){
         return ResponseEntity.ok(hinhAnhService.getAll());
@@ -21,7 +21,7 @@ public class HinhAnhController {
 
     @PostMapping("/addNew")
     public ResponseEntity<?> getAll(@RequestBody HinhAnh hinhAnh){
-        return ResponseEntity.ok(hinhAnhService.addNew(hinhAnh));
+        return ResponseEntity.ok(hinhAnhService.create(hinhAnh));
     }
 
     @PutMapping("/update/{id}")
