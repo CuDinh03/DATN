@@ -54,7 +54,7 @@ public class TaiKhoanService {
         taiKhoan.setMatKhau(passwordEncoder.encode(request.getMatKhau()));
         taiKhoan.setNgayTao(new Date());
         taiKhoan.setNgaySua(new Date());
-        taiKhoan.setTrangThai(request.getTrangThai());
+        taiKhoan.setTrangThai(Boolean.TRUE);
 
         return taiKhoanRepository.save(taiKhoan);
     }
