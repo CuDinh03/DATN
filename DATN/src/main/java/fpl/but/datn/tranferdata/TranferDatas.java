@@ -151,7 +151,7 @@ public class TranferDatas {
     public static HinhAnhDto convertToDto(HinhAnh entity) {
         HinhAnhDto dto = new HinhAnhDto();
         if (entity.getId() != null) dto.setId(entity.getId());
-        if (entity.getTen() != null) dto.setTen(entity.getTen());
+        if (entity.getUrl() != null) dto.setUrl(entity.getUrl());
         if (entity.getMa() != null) dto.setMa(entity.getMa());
         if (entity.getNgayTao() != null) dto.setNgayTao(entity.getNgayTao());
         if (entity.getNgaySua() != null) dto.setNgaySua(entity.getNgaySua());
@@ -162,7 +162,7 @@ public class TranferDatas {
     public static HinhAnh convertToEntity(HinhAnhDto dto) {
         HinhAnh entity = new HinhAnh();
         if (dto.getId() != null) entity.setId(dto.getId());
-        if (dto.getTen() != null) entity.setTen(dto.getTen());
+        if (dto.getUrl() != null) entity.setUrl(dto.getUrl());
         if (dto.getMa() != null) entity.setMa(dto.getMa());
         if (dto.getNgayTao() != null) entity.setNgayTao(dto.getNgayTao());
         if (dto.getNgaySua() != null) entity.setNgaySua(dto.getNgaySua());
@@ -419,5 +419,4 @@ public class TranferDatas {
     }
 
     //gio hang
-
 }

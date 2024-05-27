@@ -23,7 +23,11 @@ public enum ErrorCode {
     NO_CHATLIEU_FOUND(1013, "Không tìm thấy danh sách chất liệu nào",HttpStatus.NOT_FOUND),
     REPORT_EXISTED(1014, "báo cáo đã ton tai",HttpStatus.BAD_REQUEST),
     CHATLIEU_EXISTED(1015, "Chất liệu đã ton tai",HttpStatus.BAD_REQUEST),
-    CATEGORY_NOT_EXISTED(1016, "Không tìm thấy chất liệu",HttpStatus.NOT_FOUND)
+    CATEGORY_NOT_EXISTED(1016, "Không tìm thấy chất liệu",HttpStatus.NOT_FOUND),
+    HINHANH_EXISTED(1015, "Hình ảnh đã ton tai",HttpStatus.BAD_REQUEST),
+    HINHANH_NOT_EXISTED(1016, "Không tìm thấy hình ảnh",HttpStatus.NOT_FOUND),
+
+
 
 
     ;

@@ -22,7 +22,6 @@ import javax.crypto.spec.SecretKeySpec;
 @EnableWebSecurity
 public class SecurityConfig {
     private final String[] PUBLIC_ENDPOINT = {"/api/auth/log-in","/admin/login","/admin/index"};
-
     private final String[] ADMIN_ENDPOINT_GET ={"/api/users/all"};
     private final String[] ADMIN_ENDPOINT_POST ={"/api/users/create"};
 

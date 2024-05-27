@@ -1,11 +1,14 @@
 package fpl.but.datn.service.impl;
 
 import fpl.but.datn.entity.DanhMuc;
+import fpl.but.datn.entity.TaiKhoan;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.repository.DanhMucRepository;
 import fpl.but.datn.service.IDanhMucService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -22,13 +25,12 @@ public class DanhMucServiceImpl implements IDanhMucService {
     public List<DanhMuc> getAll() {
         return danhMucRepository.findAll();
     }
-
     @Override
     public DanhMuc create(DanhMuc request) {
         DanhMuc danhMuc = new DanhMuc();
 
-        if (danhMucRepository.existsByMa(request.getMa()))
-            throw new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION);
+//        if (danhMucRepository.existsByMa(request.getMa()))
+//            throw new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION);
         danhMuc.setMa(request.getMa());
         danhMuc.setTen(request.getTen());
         danhMuc.setNgayTao(new Date());
@@ -70,5 +72,10 @@ public class DanhMucServiceImpl implements IDanhMucService {
     public DanhMuc findById(UUID id) {
 
         return danhMucRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.CATEGORY_NOT_EXISTED));
+    }
+
+    @Override
+    public Page<DanhMuc> getAllDanhMucPageable(Pageable pageable) {
+        return danhMucRepository.findAll(pageable);
     }
 }
