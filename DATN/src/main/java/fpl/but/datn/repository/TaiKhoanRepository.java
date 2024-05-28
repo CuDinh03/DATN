@@ -14,10 +14,10 @@ import java.util.UUID;
 @Repository
 
 public interface TaiKhoanRepository extends JpaRepository<TaiKhoan, UUID> {
-    @Query("SELECT tk FROM TaiKhoan tk where tk.trangThai = true ORDER BY tk.ngayTao DESC")
+    @Query("SELECT tk FROM TaiKhoan tk where tk.trangThai = 1 ORDER BY tk.ngayTao DESC")
     Page<TaiKhoan> findAll(Pageable pageable);
 
-    @Query("SELECT tk FROM TaiKhoan tk INNER JOIN  ChucVu cv on tk.idChucVu.id = cv.id WHERE cv.ten = :role and tk.trangThai = true ORDER BY tk.ngayTao DESC")
+    @Query("SELECT tk FROM TaiKhoan tk INNER JOIN  ChucVu cv on tk.idChucVu.id = cv.id WHERE cv.ten = :role and tk.trangThai = 1 ORDER BY tk.ngayTao DESC")
     Page<TaiKhoan> findByTenChucVu(@Param("role") String role, Pageable pageable);
 
 

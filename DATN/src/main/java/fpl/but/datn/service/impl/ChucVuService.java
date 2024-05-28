@@ -78,4 +78,9 @@ public class ChucVuService implements IChucVuService {
                 .orElseThrow(() -> new AppException(ErrorCode.ROLES_NOT_EXISTED));
     }
 
+    public ChucVu getChucVuByName(String name) {
+        return chucVuRepository.findByTen(name)
+                .orElseThrow(() -> new AppException(ErrorCode.ROLES_NOT_EXISTED));
+    }
+
 }

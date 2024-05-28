@@ -50,13 +50,12 @@ public class TaiKhoanService implements ITaiKhoanService {
         taiKhoan.setMa(request.getMa());
         taiKhoan.setId(UUID.randomUUID());
         taiKhoan.setTenDangNhap(request.getTenDangNhap());
-        ChucVu chucVu = chucVuService.getChucVu(UUID.fromString("24daa782-d3df-4d79-9eae-908ab7620de9"));
-
+        ChucVu chucVu = chucVuService.getChucVuByName("CUSTOMER");
         taiKhoan.setIdChucVu(chucVu);
         taiKhoan.setMatKhau(passwordEncoder.encode(request.getMatKhau()));
         taiKhoan.setNgayTao(new Date());
         taiKhoan.setNgaySua(new Date());
-        taiKhoan.setTrangThai(request.getTrangThai());
+        taiKhoan.setTrangThai(1);
 
         return taiKhoanRepository.save(taiKhoan);
     }
@@ -173,7 +172,7 @@ public class TaiKhoanService implements ITaiKhoanService {
     @Override
     public void delete(UUID id) {
         TaiKhoan taiKhoan = getByID(id);
-        taiKhoan.setTrangThai(Boolean.FALSE);
+        taiKhoan.setTrangThai(0);
         taiKhoanRepository.save(taiKhoan);
     }
 

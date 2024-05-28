@@ -307,7 +307,7 @@ public class TranferDatas {
         if (entity.getMa() != null) dto.setMa(entity.getMa());
         if (entity.getGiaTriToiThieu() != null) dto.setGiaTriToiThieu(entity.getGiaTriToiThieu());
         if (entity.getSoLuong() != null) dto.setSoLuong(entity.getSoLuong());
-        if (entity.getGiamTriGiam() != null) dto.setGiamTriGiam(entity.getGiamTriGiam());
+        if (entity.getGiaTriGiam() != null) dto.setGiamTriGiam(entity.getGiaTriGiam());
         if (entity.getNgayBatDau() != null) dto.setNgayBatDau(entity.getNgayBatDau());
         if (entity.getNgayTao() != null) dto.setNgayTao(entity.getNgayTao());
         if (entity.getNgaySua() != null) dto.setNgaySua(entity.getNgaySua());
@@ -321,7 +321,7 @@ public class TranferDatas {
         if (dto.getMa() != null) entity.setMa(dto.getMa());
         if (dto.getGiaTriToiThieu() != null) entity.setGiaTriToiThieu(dto.getGiaTriToiThieu());
         if (dto.getSoLuong() != null) entity.setSoLuong(dto.getSoLuong());
-        if (dto.getGiamTriGiam() != null) entity.setGiamTriGiam(dto.getGiamTriGiam());
+        if (dto.getGiamTriGiam() != null) entity.setGiaTriGiam(dto.getGiamTriGiam());
         if (dto.getNgayBatDau() != null) entity.setNgayBatDau(dto.getNgayBatDau());
         if (dto.getNgayTao() != null) entity.setNgayTao(dto.getNgayTao());
         if (dto.getNgaySua() != null) entity.setNgaySua(dto.getNgaySua());
