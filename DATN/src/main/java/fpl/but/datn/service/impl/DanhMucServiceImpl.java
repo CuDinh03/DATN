@@ -29,8 +29,8 @@ public class DanhMucServiceImpl implements IDanhMucService {
     public DanhMuc create(DanhMuc request) {
         DanhMuc danhMuc = new DanhMuc();
 
-//        if (danhMucRepository.existsByMa(request.getMa()))
-//            throw new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION);
+        if (danhMucRepository.existsByMa(request.getMa()))
+            throw new AppException(ErrorCode.CATEGORY_EXISTED);
         danhMuc.setMa(request.getMa());
         danhMuc.setTen(request.getTen());
         danhMuc.setNgayTao(new Date());
@@ -55,23 +55,26 @@ public class DanhMucServiceImpl implements IDanhMucService {
 
     }
 
-    @Override
-    public boolean delete(UUID id) {
-        Optional<DanhMuc> optional = danhMucRepository.findById(id);
-        if (optional.isPresent()){
-            DanhMuc danhMuc = optional.get();
-            danhMucRepository.delete(danhMuc);
-            return true;
-        }else {
-            return false;
-        }
 
-    }
 
     @Override
     public DanhMuc findById(UUID id) {
 
         return danhMucRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.CATEGORY_NOT_EXISTED));
+    }
+    @Override
+    public void delete(UUID id) {
+        DanhMuc taiKhoan = findById(id);
+        taiKhoan.setTrangThai(Boolean.FALSE);
+        danhMucRepository.save(taiKhoan);
+
+    }
+
+    public void open(UUID id) {
+        DanhMuc taiKhoan = findById(id);
+        taiKhoan.setTrangThai(Boolean.TRUE);
+        danhMucRepository.save(taiKhoan);
+
     }
 
     @Override
