@@ -12,6 +12,7 @@ import fpl.but.datn.entity.TaiKhoan;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.repository.TaiKhoanRepository;
+import fpl.but.datn.service.ITaiKhoanService;
 import lombok.experimental.NonFinal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,7 +29,7 @@ import java.util.*;
 
 @Service
 
-public class TaiKhoanService {
+public class TaiKhoanService implements ITaiKhoanService {
 
     @Autowired
     private TaiKhoanRepository taiKhoanRepository;
@@ -38,6 +39,7 @@ public class TaiKhoanService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Override
     public TaiKhoan createAccount(TaiKhoan request) {
         TaiKhoan taiKhoan = new TaiKhoan();
 
@@ -48,54 +50,28 @@ public class TaiKhoanService {
         taiKhoan.setMa(request.getMa());
         taiKhoan.setId(UUID.randomUUID());
         taiKhoan.setTenDangNhap(request.getTenDangNhap());
-        ChucVu chucVu = chucVuService.getChucVu(UUID.fromString("24daa782-d3df-4d79-9eae-908ab7620de9"));
-
+        ChucVu chucVu = chucVuService.getChucVuByName("CUSTOMER");
         taiKhoan.setIdChucVu(chucVu);
         taiKhoan.setMatKhau(passwordEncoder.encode(request.getMatKhau()));
         taiKhoan.setNgayTao(new Date());
         taiKhoan.setNgaySua(new Date());
-        taiKhoan.setTrangThai(Boolean.TRUE);
+        taiKhoan.setTrangThai(1);
 
         return taiKhoanRepository.save(taiKhoan);
     }
 
-    public List<TaiKhoan> getAllTaiKhoan() {
-        return taiKhoanRepository.findAll();
-    }
-
-    public TaiKhoan getTaiKhoan(UUID id) {
-        return taiKhoanRepository.findById(id)
-                .orElseThrow(() -> new AppException(ErrorCode.ACCOUNT_NOT_EXISTED));
-    }
-
-
-    public TaiKhoan updateTaiKhoan(UUID id, TaiKhoan request) {
-        TaiKhoan taiKhoan = getTaiKhoan(id);
-        taiKhoan.setMatKhau(request.getMatKhau());
-        taiKhoan.setNgaySua(new Date());
-        taiKhoan.setTrangThai(request.getTrangThai());
-
-        TaiKhoan updateTaiKhoan = taiKhoanRepository.save(taiKhoan);
-        if (updateTaiKhoan==null)
-            throw new AppException(ErrorCode.UPDATE_FAILED);
-
-        return updateTaiKhoan;
-    }
-
-    public void deleteTaiKhoan(UUID id)     {
-        taiKhoanRepository.deleteById(id);
-        Optional<TaiKhoan> optionalDeletedTaiKhoan = taiKhoanRepository.findById(id);
-        if (optionalDeletedTaiKhoan.isPresent()) {
-            throw new AppException(ErrorCode.DELETE_FAILED);
-        }
-    }
+    @Override
     public Page<TaiKhoan> getAllTaiKhoanPageable(Pageable pageable) {
         return taiKhoanRepository.findAll(pageable);
     }
 
+    @Override
+    public Page<TaiKhoan> findByRoles(String role, Pageable pageable) {
+        return taiKhoanRepository.findByTenChucVu(role,pageable);
+    }
 
 
-//    //author
+    //    //author
     @NonFinal
 
     @Value("${jwt.signerKey}")
@@ -122,7 +98,7 @@ public class TaiKhoanService {
 
         JWTClaimsSet jwtClaimsSet = new JWTClaimsSet.Builder()
                 .subject(taiKhoan.getTenDangNhap())
-                .issuer("adminCu")
+                .issuer(taiKhoan.getTenDangNhap())
                 .issueTime(new Date())
                 .expirationTime(new Date(
                         Instant.now().plus(1, ChronoUnit.HOURS).toEpochMilli()
@@ -156,6 +132,7 @@ public class TaiKhoanService {
         return stringJoiner.toString();
     }
 
+
     public TaiKhoanResponse getMyInfo(){
         var context = SecurityContextHolder.getContext();
         String name = context.getAuthentication().getName();
@@ -168,5 +145,35 @@ public class TaiKhoanService {
         return taiKhoanResponse;
     }
 
+
+    @Override
+    public List<TaiKhoan> getAllTk() {
+        return taiKhoanRepository.findAll();
+    }
+
+    @Override
+    public TaiKhoan getByID(UUID id) {
+        return taiKhoanRepository.findById(id)
+                .orElseThrow(() -> new AppException(ErrorCode.ACCOUNT_NOT_EXISTED));    }
+
+    @Override
+    public TaiKhoan update(UUID uuid, TaiKhoan request) {
+        TaiKhoan taiKhoan = getByID(uuid);
+        taiKhoan.setMatKhau(request.getMatKhau());
+        taiKhoan.setNgaySua(new Date());
+        taiKhoan.setTrangThai(request.getTrangThai());
+
+        TaiKhoan updateTaiKhoan = taiKhoanRepository.save(taiKhoan);
+        if (updateTaiKhoan==null)
+            throw new AppException(ErrorCode.UPDATE_FAILED);
+
+        return updateTaiKhoan;    }
+
+    @Override
+    public void delete(UUID id) {
+        TaiKhoan taiKhoan = getByID(id);
+        taiKhoan.setTrangThai(0);
+        taiKhoanRepository.save(taiKhoan);
+    }
 
 }
