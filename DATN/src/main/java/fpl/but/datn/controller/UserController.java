@@ -26,6 +26,7 @@ import java.util.UUID;
 @RequestMapping("/api/users")
 @Slf4j
 public class UserController {
+
     @Autowired
     private TaiKhoanService taiKhoanService;
 
@@ -59,6 +60,23 @@ public class UserController {
         return apiResponse;
     }
 
+    @GetMapping("/all/{role}")
+    public ApiResponse<Page<TaiKhoanDto>> getAccountsByRoles(@RequestParam(defaultValue = "0") int page,
+                                                             @RequestParam(defaultValue = "5") int size,
+                                                             @PathVariable String role) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<TaiKhoan> taiKhoanPage = taiKhoanService.findByRoles(role, pageable);
+        List<TaiKhoanDto> listDto = TranferDatas.convertListTaiKhoanToDto(taiKhoanPage.getContent());
+
+        ApiResponse<Page<TaiKhoanDto>> apiResponse = new ApiResponse<>();
+        if (!listDto.isEmpty()) {
+            apiResponse.setMessage("Lấy danh sách tài khoản thành công");
+            apiResponse.setResult(new PageImpl<>(listDto, pageable, taiKhoanPage.getTotalElements()));
+        } else {
+            throw new AppException(ErrorCode.NO_ACCOUNTS_FOUND);
+        }
+        return apiResponse;
+    }
 
 
 
@@ -67,7 +85,7 @@ public class UserController {
         ApiResponse<TaiKhoanDto> apiResponse = new ApiResponse<>();
         UUID idAccount = null;
         if (id != null) idAccount = UUID.fromString(id);
-        TaiKhoanDto dto = TranferDatas.convertToDto(taiKhoanService.getTaiKhoan(idAccount));
+        TaiKhoanDto dto = TranferDatas.convertToDto(taiKhoanService.getByID(idAccount));
         apiResponse.setMessage("Lấy tài khoản thành công");
         apiResponse.setResult(dto);
         return apiResponse;
@@ -85,7 +103,7 @@ public class UserController {
         if (id != null) idAccount = UUID.fromString(id);
         TaiKhoan taiKhoan = new TaiKhoan();
         if (request != null)
-            taiKhoan =   taiKhoanService.updateTaiKhoan(idAccount, TranferDatas.convertToEntity(request));
+            taiKhoan = taiKhoanService.update(idAccount, TranferDatas.convertToEntity(request));
 
         return ApiResponse.<TaiKhoanDto>builder().result(TranferDatas.convertToDto(taiKhoan)).build();
     }
@@ -94,7 +112,7 @@ public class UserController {
     ApiResponse<Void> deleteAccount(@PathVariable String id) {
         UUID idAccount = null;
         if (id != null) idAccount = UUID.fromString(id);
-        taiKhoanService.deleteTaiKhoan(idAccount);
+        taiKhoanService.delete(idAccount);
         return ApiResponse.<Void>builder().build();
     }
 

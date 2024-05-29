@@ -15,6 +15,7 @@ import java.util.UUID;
 @Entity
 @Table
 public class HoaDonChiTiet {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;

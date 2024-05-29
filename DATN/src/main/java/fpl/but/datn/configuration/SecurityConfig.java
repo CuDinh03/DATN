@@ -21,10 +21,10 @@ import javax.crypto.spec.SecretKeySpec;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    private final String[] PUBLIC_ENDPOINT = {"/api/auth/log-in","/admin/login","/admin/index"};
+    private final String[] PUBLIC_ENDPOINT = {"/api/auth/log-in","/api/users/create"};
 
-    private final String[] ADMIN_ENDPOINT_GET ={"/api/users/all"};
-    private final String[] ADMIN_ENDPOINT_POST ={"/api/users/create"};
+    private final String[] ADMIN_ENDPOINT_GET ={"/api/users/all/**"};
+//    private final String[] ADMIN_ENDPOINT_POST ={"/api/users/create"};
 
     private final String[] CUSTOMER_END_POINT = {};
 
@@ -37,9 +37,9 @@ public class SecurityConfig {
         httpSecurity.authorizeHttpRequests(request -> request.requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINT ).permitAll()
                 .requestMatchers(HttpMethod.GET, PUBLIC_ENDPOINT ).permitAll()
                 .requestMatchers(HttpMethod.GET,ADMIN_ENDPOINT_GET)
-                .hasRole("ADMIN").
-                requestMatchers(HttpMethod.POST, ADMIN_ENDPOINT_POST)
                 .hasRole("ADMIN")
+//                .requestMatchers(HttpMethod.POST, ADMIN_ENDPOINT_POST)
+//                .hasRole("ADMIN")
                 .anyRequest().authenticated());
 
         httpSecurity.oauth2ResourceServer(

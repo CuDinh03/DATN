@@ -1,14 +1,22 @@
 package fpl.but.datn.controller;
 
 import fpl.but.datn.dto.request.DanhMucDto;
+import fpl.but.datn.dto.request.TaiKhoanDto;
 import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.entity.DanhMuc;
+import fpl.but.datn.entity.TaiKhoan;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.service.IDanhMucService;
 import fpl.but.datn.tranferdata.TranferDatas;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,16 +29,22 @@ public class DanhMucController {
     private IDanhMucService danhMucService;
 
     @GetMapping("/all")
-    ApiResponse<List<DanhMucDto>> getAll() {
-        List<DanhMucDto> listDto = TranferDatas.convertListDanhMucToDto(danhMucService.getAll());
-        ApiResponse<List<DanhMucDto>> apiResponse = new ApiResponse<>();
+    ApiResponse<Page<DanhMucDto>> getDanhMuc(@RequestParam(defaultValue = "0") int page,
+                                               @RequestParam(defaultValue = "5") int size) {
+
+        Pageable pageable = PageRequest.of(page, size);
+        Page<DanhMuc> danhMucPage = danhMucService.getAllDanhMucPageable(pageable);
+        List<DanhMucDto> listDto = TranferDatas.convertListDanhMucToDto(danhMucPage.getContent());
+
+        ApiResponse<Page<DanhMucDto>> apiResponse = new ApiResponse<>();
 
         if (!listDto.isEmpty()) {
             apiResponse.setMessage("Lấy danh sách danh mục thành công");
-            apiResponse.setResult(listDto);
+            apiResponse.setResult(new PageImpl<>(listDto, pageable, danhMucPage.getTotalElements()));
         } else {
-            throw new AppException(ErrorCode.NO_CHATLIEU_FOUND);
+            throw new AppException(ErrorCode.NO_ACCOUNTS_FOUND);
         }
+
         return apiResponse;
     }
 
@@ -52,12 +66,21 @@ public class DanhMucController {
     }
 
     @DeleteMapping("/{id}")
-    String delete(@PathVariable String id) {
-        UUID idDanhMuc = UUID.fromString(id);
-        if (danhMucService.delete(idDanhMuc)) {
-            return "xoa thanh cong";
-        } else
-            return "xoa that bai";
+    ApiResponse<Void> delete(@PathVariable String id) {
+        UUID idDanhMuc = null;
+        if (id != null) {
+            idDanhMuc = UUID.fromString(id);
+            danhMucService.delete(idDanhMuc);
+        } return ApiResponse.<Void>builder().build();
+    }
+
+    @DeleteMapping("/open/{id}")
+    ApiResponse<Void> open(@PathVariable String id) {
+        UUID idDanhMuc = null;
+        if (id != null) {
+            idDanhMuc = UUID.fromString(id);
+            danhMucService.open(idDanhMuc);
+        } return ApiResponse.<Void>builder().build();
     }
 
     @GetMapping("/{id}")

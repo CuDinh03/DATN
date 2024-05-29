@@ -1,44 +1,36 @@
 package fpl.but.datn.controller;
 
-import fpl.but.datn.entity.HoaDon;
+import fpl.but.datn.dto.request.ChucVuDto;
+import fpl.but.datn.dto.request.HoaDonDto;
+import fpl.but.datn.dto.response.ApiResponse;
+import fpl.but.datn.exception.AppException;
+import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.service.IHoaDonService;
+import fpl.but.datn.tranferdata.TranferDatas;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.UUID;
+import java.util.List;
 
-@Controller
-@RequestMapping("/hoa-don")
+@RestController
+@RequestMapping("/api/hoa-don")
 public class HoaDonController {
+
     @Autowired
-    private IHoaDonService hoaDonIService;
-    @GetMapping()
-    public ResponseEntity<?> getAll(){
-        return ResponseEntity.ok(hoaDonIService.getAll());
-    }
+    private IHoaDonService hoaDonService;
 
-    @PostMapping("/addNew")
-    public ResponseEntity<?> getAll(@RequestBody HoaDon hoaDon){
-        return ResponseEntity.ok(hoaDonIService.create(hoaDon));
-    }
-
-    @PutMapping("/update/{id}")
-    public ResponseEntity<?> update(@RequestBody HoaDon hoaDon, @PathVariable UUID id){
-        return ResponseEntity.ok(hoaDonIService.update(hoaDon,id));
-    }
-
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable UUID id){
-        if (hoaDonIService.delete(id)){
-            return ResponseEntity.ok("xoa thanh cong");
-        }else
-            return ResponseEntity.ok("xoa that bai");
-    }
-
-    @GetMapping("/detail/{id}")
-    public ResponseEntity<?> detail(@PathVariable UUID id){
-        return ResponseEntity.ok(hoaDonIService.findById(id));
+    @GetMapping("/all")
+    ApiResponse<List<HoaDonDto>> getAll(){
+        List<HoaDonDto> dto = TranferDatas.convertListHoaDonToDto(hoaDonService.getAll());
+        ApiResponse<List<HoaDonDto>> apiResponse = new ApiResponse<>();
+        if (!dto.isEmpty()){
+            apiResponse.setMessage("Lấy danh sách hoa don thành công");
+            apiResponse.setResult(dto);
+        }else {
+            throw new AppException(ErrorCode.NO_ORDER_FOUND);
+        }
+        return apiResponse;
     }
 }

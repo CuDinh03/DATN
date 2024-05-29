@@ -1,16 +1,19 @@
 package fpl.but.datn.service.impl;
 
 import fpl.but.datn.entity.HinhAnh;
+import fpl.but.datn.exception.AppException;
+import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.repository.HinhAnhRepository;
 import fpl.but.datn.service.IHinhAnhService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-
 @Service
 public class HinhAnhService implements IHinhAnhService {
+
     @Autowired
     private HinhAnhRepository hinhAnhRepository;
     @Override
@@ -19,13 +22,23 @@ public class HinhAnhService implements IHinhAnhService {
     }
 
     @Override
-    public HinhAnh create(HinhAnh hinhAnh) {
-       return hinhAnhRepository.save(hinhAnh);
+    public HinhAnh create(HinhAnh request) {
+        HinhAnh hinhAnh = new HinhAnh();
+
+        if(hinhAnhRepository.existsByMa(request.getMa()))
+            throw new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION);
+        hinhAnh.setId(UUID.randomUUID());
+        hinhAnh.setMa(request.getMa());
+        hinhAnh.setUrl(request.getUrl());
+        hinhAnh.setNgayTao(new Date());
+        hinhAnh.setNgaySua(new Date());
+        hinhAnh.setTrangThai(request.getTrangThai());
+        return hinhAnhRepository.save(hinhAnh);
     }
 
     @Override
     public HinhAnh update(HinhAnh hinhAnh, UUID id) {
-      return null;
+        return null;
     }
 
     @Override
@@ -35,6 +48,6 @@ public class HinhAnhService implements IHinhAnhService {
 
     @Override
     public HinhAnh findById(UUID id) {
-        return null;
+        return hinhAnhRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.ACCOUNT_EXISTED));
     }
 }

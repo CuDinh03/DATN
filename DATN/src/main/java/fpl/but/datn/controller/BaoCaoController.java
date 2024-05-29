@@ -53,7 +53,7 @@ public class BaoCaoController {
         UUID idBaoCao = null;
         if (id != null) idBaoCao = UUID.fromString(id);
         BaoCaoDto dto = TranferDatas.convertToDto(baoCaoService.findById(idBaoCao));
-        apiResponse.setMessage("Lấy tài khoản thành công");
+        apiResponse.setMessage("Lấy báo cáo thành công");
         apiResponse.setResult(dto);
         return apiResponse;
     }

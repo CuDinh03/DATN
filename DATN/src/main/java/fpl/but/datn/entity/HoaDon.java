@@ -16,7 +16,7 @@ public class HoaDon {
     private UUID id;
     private String ma;
     @ManyToOne
-    private NguoiDung idNhanVien;
+    private NguoiDung idNguoiDung;
     @ManyToOne
     private KhachHang idKhachHang;
     private BigDecimal tongTien;
@@ -24,6 +24,5 @@ public class HoaDon {
     private Date ngayTao;
     private Date ngaySua;
     private UUID idVoucher;
-    private String ghiChu;
-    private boolean trangThai;
+    private Boolean trangThai;
 }

@@ -20,6 +20,5 @@ public class HoaDonDto {
     private Date ngayTao;
     private Date ngaySua;
     private UUID idVoucher;
-    private String ghiChu;
     private Boolean trangThai;
 }
