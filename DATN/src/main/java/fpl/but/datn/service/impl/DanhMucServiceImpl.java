@@ -11,10 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class DanhMucServiceImpl implements IDanhMucService {
@@ -28,10 +25,11 @@ public class DanhMucServiceImpl implements IDanhMucService {
     @Override
     public DanhMuc create(DanhMuc request) {
         DanhMuc danhMuc = new DanhMuc();
+        Random random = new Random();
 
         if (danhMucRepository.existsByMa(request.getMa()))
             throw new AppException(ErrorCode.CATEGORY_EXISTED);
-        danhMuc.setMa(request.getMa());
+        danhMuc.setMa("DM" + random.nextInt(1000));
         danhMuc.setTen(request.getTen());
         danhMuc.setNgayTao(new Date());
         danhMuc.setNgaySua(new Date());
@@ -43,8 +41,7 @@ public class DanhMucServiceImpl implements IDanhMucService {
     @Override
     public DanhMuc update(DanhMuc request, UUID id) {
         DanhMuc danhMuc = new DanhMuc();
-
-        danhMuc.setId(UUID.randomUUID());
+        danhMuc.setId(id);
         danhMuc.setMa(request.getMa());
         danhMuc.setTen(request.getTen());
         danhMuc.setNgayTao(new Date());

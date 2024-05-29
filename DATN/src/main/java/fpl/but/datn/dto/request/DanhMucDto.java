@@ -12,7 +12,6 @@ public class DanhMucDto {
     private UUID id;
     @NotBlank(message = "TEN KHONG DUOC DE TRONG")
     private String ten;
-    @NotBlank(message = "MA KHONG DUOC DE TRONG")
     private String ma;
     private Date ngayTao;
     private Date ngaySua;
