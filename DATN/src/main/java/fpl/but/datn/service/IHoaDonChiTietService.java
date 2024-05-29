@@ -11,7 +11,7 @@ import java.util.UUID;
 
 public interface IHoaDonChiTietService {
     List getAll();
-    DanhMuc create(HoaDonChiTiet hoaDonChiTiet);
+    HoaDonChiTiet create(HoaDonChiTiet hoaDonChiTiet);
     HoaDonChiTiet update(HoaDonChiTiet hoaDonChiTiet, UUID id);
     void delete(UUID id);
     void open(UUID id);

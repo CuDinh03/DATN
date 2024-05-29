@@ -1,8 +1,6 @@
 package fpl.but.datn.service.impl;
 
-import fpl.but.datn.entity.DanhMuc;
-import fpl.but.datn.entity.HoaDon;
-import fpl.but.datn.entity.HoaDonChiTiet;
+import fpl.but.datn.entity.*;
 import fpl.but.datn.repository.HoaDonChiTietRepository;
 import fpl.but.datn.repository.HoaDonRepository;
 import fpl.but.datn.service.IHoaDonChiTietService;
@@ -24,6 +22,8 @@ public class HoaDonChiTietService implements IHoaDonChiTietService {
     private HoaDonChiTietRepository hoaDonChiTietRepository;
     @Autowired
     private HoaDonRepository hoaDonRepository;
+    @Autowired
+    private NguoiDungService nguoiDungService;
 
     @Override
     public List getAll() {
@@ -31,21 +31,24 @@ public class HoaDonChiTietService implements IHoaDonChiTietService {
     }
 
     @Override
-    public DanhMuc create(HoaDonChiTiet request) {
+    public HoaDonChiTiet create(HoaDonChiTiet request) {
         Random random = new Random();
         HoaDon hoaDon = new HoaDon();
         hoaDon.setMa("HD" + random.nextInt(1000));
         hoaDon.setNgayTao(new Date());
         hoaDon.setNgaySua(new Date());
         hoaDon.setTrangThai(true);
+        NguoiDung nguoiDung = nguoiDungService.findById(UUID.fromString("c267d5f3-bc1f-4e44-aeb7-fee8e4a6e62a"));
+        hoaDon.setIdNguoiDung(nguoiDung);
         hoaDonRepository.save(hoaDon);
 
         HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
         hoaDonChiTiet.setNgayTao(new Date());
         hoaDonChiTiet.setNgaySua(new Date());
         hoaDonChiTiet.setIdHoaDon(hoaDon);
-
-        return null;
+        hoaDonChiTiet.setSoLuong(0);
+        hoaDon.setTrangThai(true);
+        return hoaDonChiTietRepository.save(hoaDonChiTiet);
     }
 
     @Override
