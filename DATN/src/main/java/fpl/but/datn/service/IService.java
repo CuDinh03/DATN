@@ -17,5 +17,5 @@ public interface IService<T> {
 
     List<T> getAll();
 
-    Page<T> getAllTaiKhoanPageable(Pageable pageable);
+    Page<T> getAllPageable(Pageable pageable);
 }

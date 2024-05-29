@@ -300,34 +300,89 @@ public class TranferDatas {
     }
 
     //voucher
-    public static VoucherDto convertToDto(Voucher entity){
+    public static VoucherDto convertToDto(Voucher entity) {
         VoucherDto dto = new VoucherDto();
-        if (entity.getId() != null) dto.setId(entity.getId());
-        if (entity.getTen() != null) dto.setTen(entity.getTen());
-        if (entity.getMa() != null) dto.setMa(entity.getMa());
-        if (entity.getGiaTriToiThieu() != null) dto.setGiaTriToiThieu(entity.getGiaTriToiThieu());
-        if (entity.getSoLuong() != null) dto.setSoLuong(entity.getSoLuong());
-        if (entity.getGiaTriGiam() != null) dto.setGiamTriGiam(entity.getGiaTriGiam());
-        if (entity.getNgayBatDau() != null) dto.setNgayBatDau(entity.getNgayBatDau());
-        if (entity.getNgayTao() != null) dto.setNgayTao(entity.getNgayTao());
-        if (entity.getNgaySua() != null) dto.setNgaySua(entity.getNgaySua());
-        if (entity.getTrangThai() != null) dto.setTrangThai(entity.getTrangThai());
+        if (entity.getId() != null) {
+            dto.setId(entity.getId());
+        }
+        if (entity.getTen() != null) {
+            dto.setTen(entity.getTen());
+        }
+        if (entity.getMa() != null) {
+            dto.setMa(entity.getMa());
+        }
+        if (entity.getLoaiGiamGia() != null) {
+            dto.setLoaiGiamGia(entity.getLoaiGiamGia());
+        }
+        if (entity.getNgayBatDau() != null) {
+            dto.setNgayBatDau(entity.getNgayBatDau());
+        }
+        if (entity.getNgayKetThuc() != null) {
+            dto.setNgayKetThuc(entity.getNgayKetThuc());
+        }
+        if (entity.getGiaTriGiam() != null) {
+            dto.setGiaTriGiam(entity.getGiaTriGiam());
+        }
+        if (entity.getGiaTriToiThieu() != null) {
+            dto.setGiaTriToiThieu(entity.getGiaTriToiThieu());
+        }
+        if (entity.getSoLuong() != null) {
+            dto.setSoLuong(entity.getSoLuong());
+        }
+        if (entity.getNgayTao() != null) {
+            dto.setNgayTao(entity.getNgayTao());
+        }
+        if (entity.getNgaySua() != null) {
+            dto.setNgaySua(entity.getNgaySua());
+        }
+        if (entity.getTrangThai() != null) {
+            dto.setTrangThai(entity.getTrangThai());
+        }
         return dto;
     }
-    public static Voucher convertToEntity(VoucherDto dto){
+
+    public static Voucher convertToEntity(VoucherDto dto) {
         Voucher entity = new Voucher();
-        if (dto.getId() != null) entity.setId(dto.getId());
-        if (dto.getTen() != null) entity.setTen(dto.getTen());
-        if (dto.getMa() != null) entity.setMa(dto.getMa());
-        if (dto.getGiaTriToiThieu() != null) entity.setGiaTriToiThieu(dto.getGiaTriToiThieu());
-        if (dto.getSoLuong() != null) entity.setSoLuong(dto.getSoLuong());
-        if (dto.getGiamTriGiam() != null) entity.setGiaTriGiam(dto.getGiamTriGiam());
-        if (dto.getNgayBatDau() != null) entity.setNgayBatDau(dto.getNgayBatDau());
-        if (dto.getNgayTao() != null) entity.setNgayTao(dto.getNgayTao());
-        if (dto.getNgaySua() != null) entity.setNgaySua(dto.getNgaySua());
-        if (dto.getTrangThai() != null) entity.setTrangThai(dto.getTrangThai());
+        if (dto.getId() != null) {
+            entity.setId(dto.getId());
+        }
+        if (dto.getTen() != null) {
+            entity.setTen(dto.getTen());
+        }
+        if (dto.getMa() != null) {
+            entity.setMa(dto.getMa());
+        }
+        if (dto.getLoaiGiamGia() != null) {
+            // Assuming the LoaiGiamGia name is set in the DTO
+            entity.setLoaiGiamGia(dto.getLoaiGiamGia());
+        }
+        if (dto.getNgayBatDau() != null) {
+            entity.setNgayBatDau(dto.getNgayBatDau());
+        }
+        if (dto.getNgayKetThuc() != null) {
+            entity.setNgayKetThuc(dto.getNgayKetThuc());
+        }
+        if (dto.getGiaTriGiam() != null) {
+            entity.setGiaTriGiam(dto.getGiaTriGiam());
+        }
+        if (dto.getGiaTriToiThieu() != null) {
+            entity.setGiaTriToiThieu(dto.getGiaTriToiThieu());
+        }
+        if (dto.getSoLuong() != null) {
+            entity.setSoLuong(dto.getSoLuong());
+        }
+        if (dto.getNgayTao() != null) {
+            entity.setNgayTao(dto.getNgayTao());
+        }
+        if (dto.getNgaySua() != null) {
+            entity.setNgaySua(dto.getNgaySua());
+        }
+        if (dto.getTrangThai() != null) {
+            entity.setTrangThai(dto.getTrangThai());
+        }
         return entity;
     }
+
     public static List<VoucherDto> convertListVoucherToDto(List<Voucher> entityList) {
         List<VoucherDto> dtoList = new ArrayList<>();
         for (Voucher entity : entityList) {
@@ -335,6 +390,7 @@ public class TranferDatas {
         }
         return dtoList;
     }
+
 
     //bao cao
     public static BaoCaoDto convertToDto(BaoCao entity){

@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-//@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/users")
 @Slf4j
@@ -98,6 +97,7 @@ public class UserController {
 
     @PutMapping("/{id}")
     ApiResponse<TaiKhoanDto> updateAccount(@PathVariable String id, @RequestBody TaiKhoanDto request) {
+        System.out.println(id);
         UUID idAccount = null;
         if (id != null) idAccount = UUID.fromString(id);
         TaiKhoan taiKhoan = new TaiKhoan();

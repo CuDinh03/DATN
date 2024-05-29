@@ -29,7 +29,8 @@ public class HoaDon {
     private BigDecimal tongTienGiam;
     private Date ngayTao;
     private Date ngaySua;
-    private UUID idVoucher;
+    @ManyToOne
+    private Voucher idVoucher;
     private String ghiChu;
     private Boolean trangThai;
 }
