@@ -1,16 +1,11 @@
 package fpl.but.datn.service.impl;
 
-import fpl.but.datn.entity.ChatLieu;
-import fpl.but.datn.entity.DanhMuc;
 import fpl.but.datn.entity.HinhAnh;
-import fpl.but.datn.exception.AppException;
-import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.repository.HinhAnhRepository;
 import fpl.but.datn.service.IHinhAnhService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 

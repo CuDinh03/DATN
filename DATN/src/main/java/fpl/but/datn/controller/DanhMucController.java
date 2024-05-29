@@ -1,6 +1,5 @@
 package fpl.but.datn.controller;
 
-import fpl.but.datn.dto.request.ChatLieuDto;
 import fpl.but.datn.dto.request.DanhMucDto;
 import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.entity.DanhMuc;
@@ -10,15 +9,13 @@ import fpl.but.datn.service.IDanhMucService;
 import fpl.but.datn.tranferdata.TranferDatas;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/danh-muc")
+@RequestMapping("/api/danh-muc")
 public class DanhMucController {
     @Autowired
     private IDanhMucService danhMucService;

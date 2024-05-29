@@ -1,7 +1,5 @@
 package fpl.but.datn.service;
 
-import fpl.but.datn.entity.BaoCao;
-import fpl.but.datn.entity.DanhMuc;
 import fpl.but.datn.entity.GioHang;
 
 import java.util.List;
