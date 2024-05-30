@@ -38,7 +38,7 @@ public class HoaDonChiTietService implements IHoaDonChiTietService {
         hoaDon.setNgayTao(new Date());
         hoaDon.setNgaySua(new Date());
         hoaDon.setTrangThai(true);
-        NguoiDung nguoiDung = nguoiDungService.findById(UUID.fromString("c267d5f3-bc1f-4e44-aeb7-fee8e4a6e62a"));
+        NguoiDung nguoiDung = nguoiDungService.findById(UUID.fromString("9769af07-3c53-4fa3-bc3d-fa531deb5520"));
         hoaDon.setIdNguoiDung(nguoiDung);
         hoaDonRepository.save(hoaDon);
 
