@@ -16,7 +16,7 @@ public interface VoucherRepository extends JpaRepository<Voucher, UUID> {
     Optional<Voucher> findByTen(String ten);
 
     @Query("SELECT vc from Voucher vc where vc.trangThai = true order by vc.ngayTao DESC ")
-    Page<Voucher> findAll(Pageable pageable);
+    Page<Voucher> findAllPage(Pageable pageable);
 
     Optional<Voucher> findByMa(String ma);
 }

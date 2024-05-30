@@ -10,6 +10,9 @@ import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.service.impl.VoucherService;
 import fpl.but.datn.tranferdata.TranferDatas;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -22,7 +25,10 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/voucher")
+@Slf4j
 public class VoucherController {
+    private static final Logger logger = LoggerFactory.getLogger(VoucherController.class);
+
     @Autowired
     private VoucherService voucherService;
 
@@ -30,25 +36,36 @@ public class VoucherController {
     ApiResponse<Voucher> createVoucher(@RequestBody @Valid VoucherDto request) {
         ApiResponse<Voucher> apiResponse = new ApiResponse<>();
         if (request != null) {
-            apiResponse.setResult(voucherService.createAccount(TranferDatas.convertToEntity(request)));
+            apiResponse.setResult(voucherService.create(TranferDatas.convertToEntity(request)));
         }
         return apiResponse;
     }
 
     @GetMapping("/allVouchers")
     ApiResponse<List<VoucherDto>> getAllVoucher() {
-        List<VoucherDto> listDto = TranferDatas.convertListVoucherToDto(voucherService.getAll());
-        if (!listDto.isEmpty()) {
 
-        } else {
-            throw new AppException(ErrorCode.NO_VOUCHER_FOUND);
+        ApiResponse<List<VoucherDto>> apiResponse = new ApiResponse<>();
+
+        try {
+            logger.debug("Fetching all vouchers");
+            List<VoucherDto> listDto = TranferDatas.convertListVoucherToDto(voucherService.getAll());
+            System.out.println(listDto);
+            if (!listDto.isEmpty()) {
+             apiResponse.setMessage("Lấy danh sách voucher thành công");
+             apiResponse.setResult(listDto);
+
+            } else {
+                throw new AppException(ErrorCode.NO_VOUCHER_FOUND);
+            }
+        } catch (IllegalArgumentException e) {
+            logger.error("Invalid UUID encountered in getAllVoucher: " + e.getMessage(), e);
+            throw e;
         }
 
-        return ApiResponse.<List<VoucherDto>>builder()
-                .message("Lấy danh sách voucher thành công")
-                .result(listDto)
-                .build();
+        return apiResponse;
     }
+
+
     @GetMapping("/all")
     ApiResponse<Page<VoucherDto>> getVouchers(@RequestParam(defaultValue = "0") int page,
                                                @RequestParam(defaultValue = "5") int size) {
@@ -89,6 +106,21 @@ public class VoucherController {
         if (id != null) idVoucher = UUID.fromString(id);
         voucherService.delete(idVoucher);
         return ApiResponse.<Void>builder().build();
+    }
+
+    @GetMapping("/{id}")
+    ApiResponse<VoucherDto> selecVoucher(@PathVariable String id){
+        UUID idVoucher = null;
+        if (id != null) idVoucher = UUID.fromString(id);
+        Voucher voucher = voucherService.getByID(idVoucher);
+        if (voucher == null) {
+            throw new AppException(ErrorCode.VOUCHER_NOT_EXISTED);
+
+        }
+        return ApiResponse.<VoucherDto>builder()
+                .message("ss")
+                .result(TranferDatas.convertToDto(voucher))
+                .build();
     }
 
 

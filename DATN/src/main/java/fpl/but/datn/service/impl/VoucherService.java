@@ -25,7 +25,7 @@ public class VoucherService implements IService<Voucher>, IVoucherService {
     }
 
     @Override
-    public Voucher createAccount(Voucher request) {
+    public Voucher create(Voucher request) {
         Optional<Voucher> optionalVoucher = voucherRepository.findByTen(request.getTen());
 
         if (optionalVoucher.isPresent()) {
@@ -100,7 +100,7 @@ public class VoucherService implements IService<Voucher>, IVoucherService {
 
     @Override
     public Page<Voucher> getAllPageable(Pageable pageable) {
-        return voucherRepository.findAll(pageable);
+        return voucherRepository.findAllPage(pageable);
     }
 
     @Override

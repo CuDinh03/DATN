@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public interface IService<T> {
     T getByID(UUID id);
-    T createAccount( T t);
+    T create( T t);
 
     T update (UUID uuid, T t);
 
