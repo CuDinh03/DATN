@@ -5,6 +5,8 @@ import fpl.but.datn.entity.SanPham;
 import fpl.but.datn.repository.CTSanPhamRepository;
 import fpl.but.datn.service.ICTSanPhamService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,5 +41,10 @@ public class CTSanPhamService implements ICTSanPhamService {
     @Override
     public ChiTietSanPham findById(UUID id) {
         return null;
+    }
+
+    @Override
+    public Page<ChiTietSanPham> getAllCTSanPhamPageable(Pageable pageable) {
+        return ctSanPhamRepository.findAll(pageable);
     }
 }
