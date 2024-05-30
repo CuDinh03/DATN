@@ -11,6 +11,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
+@Data
 public class ChiTietSanPhamDto {
     private UUID id;
     private String ma;
