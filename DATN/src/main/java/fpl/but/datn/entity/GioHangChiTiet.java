@@ -12,15 +12,19 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "mau_sac")
-public class MauSac {
+@Table(name = "GioHangChiTiet")
+public class GioHangChiTiet {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    private String ten;
-    private String ma;
+    @OneToOne
+    @JoinColumn(name = "id_gio_hang")
+    private GioHang idGioHang;
+    @ManyToOne
+    @JoinColumn(name = "id_san_pham")
+    private SanPham idSanPham;
+    private Integer soLuong;
     private Date ngayTao;
     private Date ngaySua;
     private Boolean trangThai;
-
 }

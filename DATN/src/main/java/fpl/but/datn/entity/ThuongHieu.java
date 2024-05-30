@@ -12,8 +12,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "mau_sac")
-public class MauSac {
+@Table(name = "ThuongHieu")
+public class ThuongHieu {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -22,5 +22,4 @@ public class MauSac {
     private Date ngayTao;
     private Date ngaySua;
     private Boolean trangThai;
-
 }

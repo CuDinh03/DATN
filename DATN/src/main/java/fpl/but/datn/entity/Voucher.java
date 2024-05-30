@@ -3,6 +3,7 @@ package fpl.but.datn.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.UUID;
 
@@ -12,15 +13,20 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "mau_sac")
-public class MauSac {
+@Table(name = "voucher")
+public class Voucher {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    private String ten;
     private String ma;
+    private String ten;
+    private String loaiGiamGia;
+    private Date ngayBatDau;
+    private Date ngayKetThuc;
+    private BigDecimal giaTriGiam;
+    private BigDecimal giaTriToiThieu;
+    private Integer soLuong;
     private Date ngayTao;
     private Date ngaySua;
     private Boolean trangThai;
-
 }

@@ -3,24 +3,29 @@ package fpl.but.datn.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.UUID;
 
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "mau_sac")
-public class MauSac {
+@Entity
+@Table(name = "ThanhToan")
+public class ThanhToan {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    private String ten;
-    private String ma;
+    @ManyToOne
+    @JoinColumn(name = "id_hoa_don")
+    private HoaDon idHoaDon;
+    @ManyToOne
+    @JoinColumn(name = "id_phuong_thuc")
+    private PhuongThucThanhToan idPhuongThucThanhToan;
+    private BigDecimal tienThanhToan;
     private Date ngayTao;
     private Date ngaySua;
     private Boolean trangThai;
-
 }

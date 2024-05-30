@@ -12,13 +12,14 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "mau_sac")
-public class MauSac {
+@Table(name = "HinhAnh")
+public class HinhAnh {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    private String ten;
     private String ma;
+    private String url;
     private Date ngayTao;
     private Date ngaySua;
     private Boolean trangThai;
