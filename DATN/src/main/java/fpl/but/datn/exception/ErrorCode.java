@@ -28,7 +28,6 @@ public enum ErrorCode {
     CATEGORY_NAME_NULL(1018, "Tên danh mục không được để trống", HttpStatus.BAD_REQUEST),
     CATEGORY_CODE_NULL(1019, "Mã danh mục không được để trống", HttpStatus.BAD_REQUEST),
     NO_ORDER_FOUND(1020, "Không tìm thấy danh sách hoa don nào",HttpStatus.NOT_FOUND ),
-    NO_LISTSPChiTiet_FOUND(1020, "Không tìm thấy danh sách SPCT nào",HttpStatus.NOT_FOUND ),
 
 
 

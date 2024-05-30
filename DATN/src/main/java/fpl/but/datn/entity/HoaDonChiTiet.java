@@ -19,10 +19,8 @@ public class HoaDonChiTiet {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-
     @ManyToOne
     private HoaDon idHoaDon;
-
     @ManyToOne
     private ChiTietSanPham idSanPham;
     private Integer soLuong;
