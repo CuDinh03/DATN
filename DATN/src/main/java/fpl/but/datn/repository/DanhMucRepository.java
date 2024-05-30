@@ -1,7 +1,6 @@
 package fpl.but.datn.repository;
 
 import fpl.but.datn.entity.DanhMuc;
-import fpl.but.datn.entity.TaiKhoan;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

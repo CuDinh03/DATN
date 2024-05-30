@@ -18,10 +18,12 @@ public class DanhMucServiceImpl implements IDanhMucService {
 
     @Autowired
     private DanhMucRepository danhMucRepository;
+
     @Override
     public List<DanhMuc> getAll() {
         return danhMucRepository.findAll();
     }
+
     @Override
     public DanhMuc create(DanhMuc request) {
         DanhMuc danhMuc = new DanhMuc();
@@ -53,12 +55,12 @@ public class DanhMucServiceImpl implements IDanhMucService {
     }
 
 
-
     @Override
     public DanhMuc findById(UUID id) {
 
         return danhMucRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.CATEGORY_NOT_EXISTED));
     }
+
     @Override
     public void delete(UUID id) {
         DanhMuc taiKhoan = findById(id);
