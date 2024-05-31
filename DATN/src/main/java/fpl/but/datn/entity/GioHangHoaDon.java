@@ -3,7 +3,6 @@ package fpl.but.datn.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
 import java.util.UUID;
 
 @Entity
@@ -12,7 +11,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class GioHangChiTiet {
+public class GioHangHoaDon {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -20,10 +20,6 @@ public class GioHangChiTiet {
     @JoinColumn(name = "id_gio_hang")
     private GioHang idGioHang;
     @ManyToOne
-    @JoinColumn(name = "id_san_pham")
-    private ChiTietSanPham idSanPham;
-    private Integer soLuong;
-    private Date ngayTao;
-    private Date ngaySua;
-    private Boolean trangThai;
+    @JoinColumn(name = "id_hoa_don")
+    private HoaDon idHoaDon;
 }

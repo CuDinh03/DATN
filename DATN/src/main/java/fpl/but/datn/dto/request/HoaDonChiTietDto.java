@@ -16,7 +16,7 @@ public class HoaDonChiTietDto {
 
     private UUID id;
     private HoaDon idHoaDon;
-    private ChiTietSanPham idSanPhamChiTiet;
+    private ChiTietSanPham idChiTietSanPham;
     private Integer soLuong;
     private Date ngayTao;
     private Date ngaySua;
