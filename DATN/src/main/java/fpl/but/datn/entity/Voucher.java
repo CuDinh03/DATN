@@ -8,12 +8,11 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
+@Table
+@Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-@Table(name = "voucher")
 public class Voucher {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -23,7 +22,7 @@ public class Voucher {
     private String loaiGiamGia;
     private Date ngayBatDau;
     private Date ngayKetThuc;
-    private BigDecimal giamTriGiam;
+    private BigDecimal giaTriGiam;
     private BigDecimal giaTriToiThieu;
     private Integer soLuong;
     private Date ngayTao;

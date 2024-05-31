@@ -10,5 +10,7 @@ import java.util.UUID;
 public interface ChucVuRepository extends JpaRepository<ChucVu, UUID> {
 
     Optional<ChucVu> findByMa(String ma);
+
+    Optional<ChucVu> findByTen(String ten);
     boolean existsByMa(String ma);
 }
