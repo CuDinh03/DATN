@@ -21,10 +21,17 @@ import javax.crypto.spec.SecretKeySpec;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    private final String[] PUBLIC_ENDPOINT = {"/api/auth/log-in","/api/users/create"};
-
-    private final String[] ADMIN_ENDPOINT_GET ={"/api/users/all/**"};
-//    private final String[] ADMIN_ENDPOINT_POST ={"/api/users/create"};
+    private final String[] PUBLIC_ENDPOINT = {"/api/auth/log-in", "/api/users/create"};
+    private final String[] ADMIN_ENDPOINT_GET = {
+            "/api/users/all","/api/users/{id}", "/api/users/myInfo",
+            "/api/voucher/all","/api/voucher/allVouchers","/api/voucher/{id}",
+            "/api/khs/all","/api/khs/{sdt}"
+    };
+    private final String[] ADMIN_ENDPOINT_POST = {"/api/voucher/create",
+            "/api/khs/create"
+    };
+    private final String[] ADMIN_ENDPOINT_PUT = {"/api/voucher/{id}", "/api/users/{id}"};
+    private final String[] ADMIN_ENDPOINT_DELETE = {"/api/voucher/{id}","/api/users/{id}"};
 
     private final String[] CUSTOMER_END_POINT = {};
 
@@ -34,17 +41,22 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         // cho phep cac patterns co endpoint duoc truy cap
-        httpSecurity.authorizeHttpRequests(request -> request.requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINT ).permitAll()
-                .requestMatchers(HttpMethod.GET, PUBLIC_ENDPOINT ).permitAll()
-                .requestMatchers(HttpMethod.GET,ADMIN_ENDPOINT_GET)
+        httpSecurity.authorizeHttpRequests(request -> request
+                .requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINT).permitAll()
+                .requestMatchers(HttpMethod.GET, PUBLIC_ENDPOINT).permitAll()
+                .requestMatchers(HttpMethod.GET, ADMIN_ENDPOINT_GET)
                 .hasRole("ADMIN")
-//                .requestMatchers(HttpMethod.POST, ADMIN_ENDPOINT_POST)
-//                .hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, ADMIN_ENDPOINT_POST)
+                .hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, ADMIN_ENDPOINT_DELETE)
+                .hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, ADMIN_ENDPOINT_PUT)
+                .hasRole("ADMIN")
                 .anyRequest().authenticated());
 
         httpSecurity.oauth2ResourceServer(
                 oauth2 -> oauth2.jwt(jwtConfigurer -> jwtConfigurer.decoder(jwtDecoder())
-                        .jwtAuthenticationConverter(jwtAuthenticationConverter()))
+                                .jwtAuthenticationConverter(jwtAuthenticationConverter()))
                         .authenticationEntryPoint(new JwtAuthenticationEntryPoint())
         );
 
@@ -55,7 +67,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    JwtAuthenticationConverter jwtAuthenticationConverter(){
+    JwtAuthenticationConverter jwtAuthenticationConverter() {
         JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
         jwtGrantedAuthoritiesConverter.setAuthorityPrefix("ROLE_");
         JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
@@ -64,15 +76,16 @@ public class SecurityConfig {
     }
 
     @Bean
-    JwtDecoder jwtDecoder(){
-        SecretKeySpec secretKeySpec = new SecretKeySpec(signerKey.getBytes(),"HS512");
+    JwtDecoder jwtDecoder() {
+        SecretKeySpec secretKeySpec = new SecretKeySpec(signerKey.getBytes(), "HS512");
         return NimbusJwtDecoder
                 .withSecretKey(secretKeySpec)
                 .macAlgorithm(MacAlgorithm.HS512)
                 .build();
     }
+
     @Bean
-    PasswordEncoder passwordEncoder(){
+    PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(10);
     }
 
