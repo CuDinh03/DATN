@@ -17,4 +17,5 @@ public interface IHoaDonChiTietService {
     void open(UUID id);
     HoaDonChiTiet findById(UUID id);
     Page<HoaDonChiTiet> getAllDanhMucPageable(Pageable pageable);
+    List<HoaDonChiTiet> getHoaDonChiTietByIdHoaDon(UUID idHoaDon);
 }

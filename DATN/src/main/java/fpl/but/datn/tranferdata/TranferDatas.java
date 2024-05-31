@@ -459,7 +459,7 @@ public class TranferDatas {
         HoaDonChiTietDto dto = new HoaDonChiTietDto();
         if (entity.getId() != null) dto.setId(entity.getId());
         if (entity.getIdHoaDon() != null) dto.setIdHoaDon(entity.getIdHoaDon());
-        if (entity.getIdSanPham() != null) dto.setIdSanPham(entity.getIdSanPham());
+        if (entity.getIdSanPhamChiTiet() != null) dto.setIdSanPhamChiTiet(entity.getIdSanPhamChiTiet());
         if (entity.getSoLuong() != null) dto.setSoLuong(entity.getSoLuong());
         if (entity.getGiaBan() != null) dto.setGiaBan(entity.getGiaBan());
         if (entity.getNgayTao() != null) dto.setNgayTao(entity.getNgayTao());
@@ -471,7 +471,7 @@ public class TranferDatas {
         HoaDonChiTiet entity = new HoaDonChiTiet();
         if (dto.getId() != null) entity.setId(dto.getId());
         if (dto.getIdHoaDon() != null) entity.setIdHoaDon(dto.getIdHoaDon());
-        if (dto.getIdSanPham() != null) entity.setIdSanPham(dto.getIdSanPham());
+        if (dto.getIdSanPhamChiTiet() != null) entity.setIdSanPhamChiTiet(dto.getIdSanPhamChiTiet());
         if (dto.getSoLuong() != null) entity.setSoLuong(dto.getSoLuong());
         if (dto.getGiaBan() != null) entity.setGiaBan(dto.getGiaBan());
         if (dto.getNgayTao() != null) entity.setNgayTao(dto.getNgayTao());

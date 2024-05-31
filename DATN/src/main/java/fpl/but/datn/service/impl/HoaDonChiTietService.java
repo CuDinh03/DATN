@@ -38,7 +38,7 @@ public class HoaDonChiTietService implements IHoaDonChiTietService {
         hoaDon.setNgayTao(new Date());
         hoaDon.setNgaySua(new Date());
         hoaDon.setTrangThai(true);
-        NguoiDung nguoiDung = nguoiDungService.findById(UUID.fromString("c267d5f3-bc1f-4e44-aeb7-fee8e4a6e62a"));
+        NguoiDung nguoiDung = nguoiDungService.findById(UUID.fromString("767ce273-301c-4c64-8039-5c92f4285ccb"));
         hoaDon.setIdNguoiDung(nguoiDung);
         hoaDonRepository.save(hoaDon);
 
@@ -74,5 +74,9 @@ public class HoaDonChiTietService implements IHoaDonChiTietService {
     @Override
     public Page<HoaDonChiTiet> getAllDanhMucPageable(Pageable pageable) {
         return null;
+    }
+
+    public List<HoaDonChiTiet> getHoaDonChiTietByIdHoaDon(UUID idHoaDon) {
+        return hoaDonChiTietRepository.findAllHoaDonChiTietByIdHoaDon(idHoaDon);
     }
 }
