@@ -1,6 +1,5 @@
 package fpl.but.datn.entity;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,17 +15,24 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class TaiKhoan {
+public class GiaoHang {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    private String ma;
-    private String tenDangNhap;
-    private String matKhau;
+
     @ManyToOne
-    private ChucVu idChucVu;
+    private KhachHang khachHang;
+
+    @ManyToOne
+    private HoaDon hoaDon;
+
+    private String diaChiGiaoHang;
+    private String phuongThucGiaoHang;
+    private String donViVanChuyen;
     private Date ngayTao;
     private Date ngaySua;
+    private Date ngayDuKienGiao;
     private Integer trangThai;
+
 }
