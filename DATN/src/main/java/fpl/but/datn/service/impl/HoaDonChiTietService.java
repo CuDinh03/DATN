@@ -4,7 +4,7 @@ import fpl.but.datn.entity.*;
 import fpl.but.datn.repository.HoaDonChiTietRepository;
 import fpl.but.datn.repository.HoaDonRepository;
 import fpl.but.datn.service.IHoaDonChiTietService;
-import fpl.but.datn.service.IHoaDonService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,8 +20,10 @@ public class HoaDonChiTietService implements IHoaDonChiTietService {
 
     @Autowired
     private HoaDonChiTietRepository hoaDonChiTietRepository;
+
     @Autowired
     private HoaDonRepository hoaDonRepository;
+
     @Autowired
     private NguoiDungService nguoiDungService;
 
@@ -38,7 +40,7 @@ public class HoaDonChiTietService implements IHoaDonChiTietService {
         hoaDon.setNgayTao(new Date());
         hoaDon.setNgaySua(new Date());
         hoaDon.setTrangThai(true);
-        NguoiDung nguoiDung = nguoiDungService.findById(UUID.fromString("c267d5f3-bc1f-4e44-aeb7-fee8e4a6e62a"));
+        NguoiDung nguoiDung = nguoiDungService.findById(UUID.fromString("324AA318-89E4-4038-AAF0-3452C11A3118"));
         hoaDon.setIdNguoiDung(nguoiDung);
         hoaDonRepository.save(hoaDon);
 
@@ -50,6 +52,11 @@ public class HoaDonChiTietService implements IHoaDonChiTietService {
         hoaDon.setTrangThai(true);
         return hoaDonChiTietRepository.save(hoaDonChiTiet);
     }
+
+//    public List<HoaDonChiTiet> getHoaDonChiTietByHoaDonId(UUID hoaDonId) {
+//        return hoaDonChiTietRepository.findChiTietByHoaDonId(hoaDonId);
+//    }
+
 
     @Override
     public HoaDonChiTiet update(HoaDonChiTiet hoaDonChiTiet, UUID id) {
