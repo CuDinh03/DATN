@@ -26,6 +26,9 @@ public enum ErrorCode {
     CATEGORY_NOT_EXISTED(1016, "Không tìm thấy chất liệu",HttpStatus.NOT_FOUND),
     VOUCHER_NOT_EXISTED(1017, "Không tìm thấy Voucher này!",HttpStatus.NOT_FOUND),
     NO_VOUCHER_FOUND(1017, "Không tìm thấy Voucher nào!",HttpStatus.NOT_FOUND),
+    SDT_ALREADY_USED(1018, "Số điện thoại này đã được đăng ký!",HttpStatus.NOT_FOUND),
+    NO_CUSTOMERS_FOUND(1019, "Không tìm thấy khách hàng nào!",HttpStatus.NOT_FOUND),
+
 
 
     ;

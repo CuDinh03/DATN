@@ -22,8 +22,14 @@ import javax.crypto.spec.SecretKeySpec;
 @EnableWebSecurity
 public class SecurityConfig {
     private final String[] PUBLIC_ENDPOINT = {"/api/auth/log-in", "/api/users/create"};
-    private final String[] ADMIN_ENDPOINT_GET = {"/api/users/all", "/api/voucher/all","/api/voucher/allVouchers","/api/voucher/{id}" , "/api/users/{id}", "/api/users/myInfo"};
-    private final String[] ADMIN_ENDPOINT_POST = {"/api/voucher/create"};
+    private final String[] ADMIN_ENDPOINT_GET = {
+            "/api/users/all","/api/users/{id}", "/api/users/myInfo",
+            "/api/voucher/all","/api/voucher/allVouchers","/api/voucher/{id}",
+            "/api/khs/all","/api/khs/{sdt}"
+    };
+    private final String[] ADMIN_ENDPOINT_POST = {"/api/voucher/create",
+            "/api/khs/create"
+    };
     private final String[] ADMIN_ENDPOINT_PUT = {"/api/voucher/{id}", "/api/users/{id}"};
     private final String[] ADMIN_ENDPOINT_DELETE = {"/api/voucher/{id}","/api/users/{id}"};
 
