@@ -29,6 +29,9 @@ public enum ErrorCode {
     CATEGORY_CODE_NULL(1019, "Mã danh mục không được để trống", HttpStatus.BAD_REQUEST),
     NO_ORDER_FOUND(1020, "Không tìm thấy danh sách hoa don nào",HttpStatus.NOT_FOUND ),
     NO_LISTSPChiTiet_FOUND(1020, "Không tìm thấy danh sách SPCT nào",HttpStatus.NOT_FOUND ),
+    MA_MAUSAC_TRUNG(1018, "Trùng mã màu sắc", HttpStatus.BAD_REQUEST),
+    LIST_COLOR_NOT_FOUND(1021, "Không tìm thấy danh sách màu", HttpStatus.NOT_FOUND),
+    COLOR_NOT_FOUND(1022, "Màu sắc đang tìm không có", HttpStatus.NOT_FOUND),
 
 
 

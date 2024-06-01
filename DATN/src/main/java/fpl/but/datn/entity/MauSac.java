@@ -12,7 +12,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "mau_sac")
 public class MauSac {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

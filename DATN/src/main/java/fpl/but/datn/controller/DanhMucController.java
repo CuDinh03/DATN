@@ -1,11 +1,8 @@
 package fpl.but.datn.controller;
 
-import fpl.but.datn.dto.request.ChatLieuDto;
 import fpl.but.datn.dto.request.DanhMucDto;
-import fpl.but.datn.dto.request.TaiKhoanDto;
 import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.entity.DanhMuc;
-import fpl.but.datn.entity.TaiKhoan;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.service.IDanhMucService;
@@ -38,7 +35,7 @@ public class DanhMucController {
 
         ApiResponse<Page<DanhMucDto>> apiResponse = new ApiResponse<>();
         if (!listDto.isEmpty()) {
-            apiResponse.setMessage("Lấy danh sách danh mục thành công");
+            apiResponse.setMessage("Lấy danh sách sản phẩm chi tiết thành công");
             apiResponse.setResult(new PageImpl<>(listDto, pageable, danhMucPage.getTotalElements()));
         } else {
             throw new AppException(ErrorCode.NO_ACCOUNTS_FOUND);

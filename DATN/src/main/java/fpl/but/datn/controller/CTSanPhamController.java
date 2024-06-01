@@ -1,9 +1,9 @@
 package fpl.but.datn.controller;
 
-import fpl.but.datn.dto.request.ChatLieuDto;
 import fpl.but.datn.dto.request.ChiTietSanPhamDto;
 import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.entity.ChiTietSanPham;
+import fpl.but.datn.entity.DanhMuc;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.service.ICTSanPhamService;
@@ -26,39 +26,39 @@ public class CTSanPhamController {
     @Autowired
     private ICTSanPhamService ctSanPhamService;
 
-//    @GetMapping("/all")
-//    ApiResponse<Page<ChiTietSanPhamDto>> getAll(@RequestParam(defaultValue = "0") int page,
-//                                                @RequestParam(defaultValue = "5") int size){
-//
-//        Pageable pageable = PageRequest.of(page, size);
-//        Page<ChiTietSanPham> CTSanPhamPage = ctSanPhamService.getAllCTSanPhamPageable(pageable);
-//
-//        List<ChiTietSanPhamDto> dto = TranferDatas.convertListChiTietSanPhamToDto(CTSanPhamPage.getContent());
-//
-//        ApiResponse<Page<ChiTietSanPhamDto>> apiResponse = new ApiResponse<>();
-//        if (!dto.isEmpty()){
-//            apiResponse.setMessage("Lấy danh sách SPCT thành công");
-//            apiResponse.setResult(new PageImpl<>(dto, pageable, CTSanPhamPage.getTotalElements()));
-//        }else {
-//            throw new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION);
-//        }
-//
-//        return apiResponse;
-//    }
-
     @GetMapping("/all")
-    ApiResponse<List<ChiTietSanPhamDto>> getAll() {
-        List<ChiTietSanPhamDto> listDto = TranferDatas.convertListChiTietSanPhamToDto(ctSanPhamService.getAll());
-        ApiResponse<List<ChiTietSanPhamDto>> apiResponse = new ApiResponse<>();
+    ApiResponse<Page<ChiTietSanPhamDto>> getSanPhamChiTiet(@RequestParam(defaultValue = "0") int page,
+                                                           @RequestParam(defaultValue = "5") int size) {
 
+        Pageable pageable = PageRequest.of(page, size);
+        Page<ChiTietSanPham> CTSanPhamPage = ctSanPhamService.getAllCTSanPhamPageable(pageable);
+
+        List<ChiTietSanPhamDto> listDto = TranferDatas.convertListChiTietSanPhamToDto(CTSanPhamPage.getContent());
+
+        ApiResponse<Page<ChiTietSanPhamDto>> apiResponse = new ApiResponse<>();
         if (!listDto.isEmpty()) {
-            apiResponse.setMessage("Lấy danh sách CTSP thành công");
-            apiResponse.setResult(listDto);
+            apiResponse.setMessage("Lấy danh sách danh mục thành công");
+            apiResponse.setResult(new PageImpl<>(listDto, pageable, CTSanPhamPage.getTotalElements()));
         } else {
-            throw new AppException(ErrorCode.NO_LISTSPChiTiet_FOUND);
+            throw new AppException(ErrorCode.NO_ACCOUNTS_FOUND);
         }
         return apiResponse;
     }
+
+
+//    @GetMapping("/all")
+//    ApiResponse<List<ChiTietSanPhamDto>> getAll() {
+//        List<ChiTietSanPhamDto> listDto = TranferDatas.convertListChiTietSanPhamToDto(ctSanPhamService.getAll());
+//        ApiResponse<List<ChiTietSanPhamDto>> apiResponse = new ApiResponse<>();
+//
+//        if (!listDto.isEmpty()) {
+//            apiResponse.setMessage("Lấy danh sách CTSP thành công");
+//            apiResponse.setResult(listDto);
+//        } else {
+//            throw new AppException(ErrorCode.NO_LISTSPChiTiet_FOUND);
+//        }
+//        return apiResponse;
+//    }
 
     @PostMapping("/addNew")
     public ResponseEntity<?> getAll(@RequestBody ChiTietSanPham ctSanPham){

@@ -7,6 +7,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TranferDatas {
+
+    // 1. Mau sac
+    //  entity => dto
+    public static MauSacDto convertToMauSacDto(MauSac entity) {
+        MauSacDto mauSacDto = new MauSacDto();
+        if (entity.getId() != null) mauSacDto.setId(entity.getId());
+        if (entity.getMa() != null) mauSacDto.setMa(entity.getMa());
+        if (entity.getTen() != null) mauSacDto.setTen(entity.getTen());
+        if (entity.getNgaySua() != null) mauSacDto.setNgaySua(entity.getNgaySua());
+        if (entity.getNgayTao() != null) mauSacDto.setNgayTao(entity.getNgayTao());
+        if (entity.getTrangThai() != null) mauSacDto.setTrangThai(entity.getTrangThai());
+        return mauSacDto;
+    }
+
+    // dto => entity
+    public static MauSac convertToMauSacEntity(MauSacDto dto) {
+        MauSac mauSac = new MauSac();
+        if (dto.getId() != null) mauSac.setId(dto.getId());
+        if (dto.getMa() != null) mauSac.setMa(dto.getMa());
+        if (dto.getTen() != null) mauSac.setTen(dto.getTen());
+        if (dto.getNgaySua() != null) mauSac.setNgaySua(dto.getNgaySua());
+        if (dto.getNgayTao() != null) mauSac.setNgayTao(dto.getNgayTao());
+        if (dto.getTrangThai() != null) mauSac.setTrangThai(dto.getTrangThai());
+        return mauSac;
+    }
+
+    // List<entity> => List<dto>
+    public static List<MauSacDto> convertToListMauSacDto(List<MauSac> lstMauSac) {
+        List<MauSacDto> lstMauSacDto = new ArrayList<>();
+        for (MauSac mauSac : lstMauSac) {
+            lstMauSacDto.add(convertToMauSacDto(mauSac));
+        }
+        return lstMauSacDto;
+    }
+
     public static ChucVuDto convertToDto(ChucVu entity) {
         ChucVuDto dto = new ChucVuDto();
         if (entity.getId() != null) dto.setId(entity.getId());
