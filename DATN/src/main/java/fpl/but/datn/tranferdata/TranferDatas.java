@@ -214,7 +214,7 @@ public class TranferDatas {
     }
 
     // Kich thuoc
-    public static KichThuocDto convertToDto(KichThuoc entity) {
+    public static KichThuocDto convertKichThuocToDto(KichThuoc entity) {
         KichThuocDto dto = new KichThuocDto();
         if (entity.getId() != null) dto.setId(entity.getId());
         if (entity.getTen() != null) dto.setTen(entity.getTen());
@@ -239,7 +239,7 @@ public class TranferDatas {
     public static List<KichThuocDto> convertListKichThuocToDto(List<KichThuoc> entityList) {
         List<KichThuocDto> dtoList = new ArrayList<>();
         for (KichThuoc entity : entityList) {
-            dtoList.add(convertToDto(entity));
+            dtoList.add(convertKichThuocToDto(entity));
         }
         return dtoList;
     }
