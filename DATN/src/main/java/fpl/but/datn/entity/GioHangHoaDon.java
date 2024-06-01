@@ -3,6 +3,7 @@ package fpl.but.datn.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Entity
@@ -22,4 +23,6 @@ public class GioHangHoaDon {
     @ManyToOne
     @JoinColumn(name = "id_hoa_don")
     private HoaDon idHoaDon;
+    private Date ngayTao;
+    private Date ngaySua;
 }
