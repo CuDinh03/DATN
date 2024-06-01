@@ -1,13 +1,16 @@
 package fpl.but.datn.controller;
 
 import fpl.but.datn.dto.request.ChiTietSanPhamDto;
+import fpl.but.datn.dto.request.DanhMucDto;
 import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.entity.ChiTietSanPham;
+import fpl.but.datn.entity.DanhMuc;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.service.ICTSanPhamService;
 import fpl.but.datn.service.IDanhMucService;
 import fpl.but.datn.tranferdata.TranferDatas;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -40,15 +43,32 @@ ApiResponse<List<ChiTietSanPhamDto>> getAll() {
     return apiResponse;
 }
 
-    @PostMapping("/addNew")
-    public ResponseEntity<?> getAll(@RequestBody ChiTietSanPham ctSanPham){
-        return ResponseEntity.ok(ctSanPhamService.create(ctSanPham));
+//    @PostMapping("/addNew")
+//    public ResponseEntity<?> getAll(@RequestBody ChiTietSanPham ctSanPham){
+//        return ResponseEntity.ok(ctSanPhamService.create(ctSanPham));
+//    }
+
+    @PostMapping("/create")
+    ApiResponse<ChiTietSanPham> create(@RequestBody @Valid ChiTietSanPhamDto request) {
+        ApiResponse<ChiTietSanPham> apiResponse = new ApiResponse<>();
+        if (request != null)
+            apiResponse.setResult(ctSanPhamService.create(TranferDatas.convertToEntity(request)));
+        return apiResponse;
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<?> update(@RequestBody ChiTietSanPham ctSanPham, @PathVariable UUID id){
-        return ResponseEntity.ok(ctSanPhamService.update(ctSanPham,id));
-    }
+//    @PutMapping("/update/{id}")
+//    public ResponseEntity<?> update(@RequestBody ChiTietSanPham ctSanPham, @PathVariable UUID id){
+//        return ResponseEntity.ok(ctSanPhamService.update(ctSanPham,id));
+//    }
+@PutMapping("/{id}")
+ChiTietSanPham update(@RequestBody ChiTietSanPhamDto request, @PathVariable String id) {
+    UUID idCTSP = null;
+    if (id != null) idCTSP = UUID.fromString(id);
+    if (request != null)
+        return ctSanPhamService.update(TranferDatas.convertToEntity(request), idCTSP);
+    return null;
+}
+
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable UUID id){

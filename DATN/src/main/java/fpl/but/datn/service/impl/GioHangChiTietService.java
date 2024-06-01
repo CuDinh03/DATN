@@ -1,16 +1,19 @@
 package fpl.but.datn.service.impl;
 
+import fpl.but.datn.entity.ChiTietSanPham;
 import fpl.but.datn.entity.GioHang;
 import fpl.but.datn.entity.GioHangChiTiet;
+import fpl.but.datn.exception.AppException;
+import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.repository.GioHangChiTietRepository;
 import fpl.but.datn.repository.GioHangRepository;
 import fpl.but.datn.service.IGioHangChiTietService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 
 @Service
@@ -24,8 +27,19 @@ public class GioHangChiTietService implements IGioHangChiTietService {
     }
 
     @Override
-    public GioHangChiTiet create(GioHangChiTiet gioHangChiTiet) {
-        return gioHangChiTietRepository.save(gioHangChiTiet);
+    public GioHangChiTiet create(GioHangChiTiet request) {
+        GioHangChiTiet ghct = new GioHangChiTiet();
+
+//        ghct.setId(request.getId());
+        ghct.setIdGioHang(request.getIdGioHang());
+        ghct.setIdChiTietSanPham(request.getIdChiTietSanPham());
+        ghct.setSoLuong(request.getSoLuong());
+        ghct.setNgayTao(new Date());
+        ghct.setNgaySua(new Date());
+        ghct.setTrangThai(request.getTrangThai());
+
+        return gioHangChiTietRepository.save(ghct);
+
     }
 
     @Override
@@ -33,7 +47,7 @@ public class GioHangChiTietService implements IGioHangChiTietService {
         Optional<GioHangChiTiet> optional = gioHangChiTietRepository.findById(id);
         return optional.map(o -> {
             o.setIdGioHang(gioHangChiTiet.getIdGioHang());
-            o.setIdSanPham(gioHangChiTiet.getIdSanPham());
+            o.setIdChiTietSanPham(gioHangChiTiet.getIdChiTietSanPham());
             o.setSoLuong(gioHangChiTiet.getSoLuong());
             o.setTrangThai(gioHangChiTiet.getTrangThai());
             return gioHangChiTietRepository.save(o);
@@ -53,7 +67,19 @@ public class GioHangChiTietService implements IGioHangChiTietService {
     }
 
     @Override
+    public void open(UUID id) {
+        GioHangChiTiet taiKhoan = findById(id);
+        taiKhoan.setTrangThai(Boolean.TRUE);
+        gioHangChiTietRepository.save(taiKhoan);
+    }
+
+    @Override
     public GioHangChiTiet findById(UUID id) {
         return gioHangChiTietRepository.findById(id).get();
+    }
+
+    @Override
+    public Page<GioHangChiTiet> getAllGHCTPageable(Pageable pageable) {
+        return gioHangChiTietRepository.findAll(pageable);
     }
 }
