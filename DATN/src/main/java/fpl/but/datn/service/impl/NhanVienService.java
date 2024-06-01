@@ -40,6 +40,11 @@ public class NhanVienService implements INhanVienService {
         nhanVien1.setId(UUID.randomUUID());
         nhanVien1.setMa(request.getMa());
         nhanVien1.setTen(request.getTen());
+        nhanVien1.setEmail(request.getEmail());
+        nhanVien1.setSdt(request.getSdt());
+        nhanVien1.setGioiTinh(request.getGioiTinh());
+        nhanVien1.setNgaySinh(request.getNgaySinh());
+        nhanVien1.setDiaChi(request.getDiaChi());
         nhanVien1.setNgaySua(new Date());
         nhanVien1.setNgayTao(new Date());
         nhanVien1.setTrangThai(request.getTrangThai());
@@ -49,11 +54,17 @@ public class NhanVienService implements INhanVienService {
 
     @Override
     public NhanVien update(NhanVien request, UUID id) {
+
         NhanVien nhanVien1 = new NhanVien();
 
         nhanVien1.setId(id);
         nhanVien1.setMa(request.getMa());
         nhanVien1.setTen(request.getTen());
+        nhanVien1.setEmail(request.getEmail());
+        nhanVien1.setSdt(request.getSdt());
+        nhanVien1.setGioiTinh(request.getGioiTinh());
+        nhanVien1.setNgaySinh(request.getNgaySinh());
+        nhanVien1.setDiaChi(request.getDiaChi());
         nhanVien1.setNgaySua(new Date());
         nhanVien1.setNgayTao(request.getNgayTao());
         nhanVien1.setTrangThai(request.getTrangThai());
