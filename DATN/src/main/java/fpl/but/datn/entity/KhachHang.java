@@ -14,8 +14,6 @@ public class KhachHang {
     private UUID id;
     private String ma;
     private String ten;
-    @OneToOne
-    private TaiKhoan idTaiKhoan;
     private String email;
     private String sdt;
     private Boolean gioiTinh;
@@ -24,4 +22,7 @@ public class KhachHang {
     private Date ngaySua;
     private Date ngayTao;
     private Boolean trangThai;
+
+    @OneToOne
+    private TaiKhoan idTaiKhoan;
 }

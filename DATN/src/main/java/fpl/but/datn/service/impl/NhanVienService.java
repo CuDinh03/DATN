@@ -74,9 +74,9 @@ public class NhanVienService implements INhanVienService {
 
     @Override
     public Boolean delete(UUID id) {
-        Optional<NhanVien> kichThuocOptional = nhanVienRepository.findById(id);
-        if (kichThuocOptional.isPresent()){
-            NhanVien nhanVien = kichThuocOptional.get();
+        Optional<NhanVien> nhanVienOptional = nhanVienRepository.findById(id);
+        if (nhanVienOptional.isPresent()){
+            NhanVien nhanVien = nhanVienOptional.get();
             nhanVienRepository.delete(nhanVien);
             return true;
         }

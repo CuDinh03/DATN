@@ -42,6 +42,10 @@ public enum ErrorCode {
     LIST_NHANVIEN_NOT_FOUND(1025, "Không tìm thấy danh sách nhân viên", HttpStatus.NOT_FOUND),
     NHANVIEN_NOT_FOUND(1026, "Nhân viên đang tìm không có", HttpStatus.NOT_FOUND),
 
+    MA_KHACHHANG_TRUNG(1024, "Trùng mã khach hang", HttpStatus.BAD_REQUEST),
+    LIST_KHACHHANG_NOT_FOUND(1025, "Không tìm thấy danh sách khach hang", HttpStatus.NOT_FOUND),
+    KHACHHANG_NOT_FOUND(1026, "khach hang đang tìm không có", HttpStatus.NOT_FOUND),
+
     MA_PTTHANHTOAN_TRUNG(1024, "Trùng mã phương thức thanh toán", HttpStatus.BAD_REQUEST),
     LIST_PTTHANHTOAN_NOT_FOUND(1025, "Không tìm thấy danh sách phương thức thanh toán", HttpStatus.NOT_FOUND),
     PTTHANHTOAN_NOT_FOUND(1026, "Phương thức thanh toán đang tìm không có", HttpStatus.NOT_FOUND),

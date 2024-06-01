@@ -113,6 +113,50 @@ public class TranferDatas {
         return lstNhanVienDto;
     }
 
+
+    // ---------- KhachHang
+    public static KhachHangDto convertKhachHangToDto(KhachHang entity) {
+        KhachHangDto khachHangDto = new KhachHangDto();
+        if (entity.getId() != null) khachHangDto.setId(entity.getId());
+        if (entity.getMa() != null) khachHangDto.setMa(entity.getMa());
+        if (entity.getTen() != null) khachHangDto.setTen(entity.getTen());
+        if (entity.getEmail() != null) khachHangDto.setEmail(entity.getEmail());
+        if (entity.getSdt() != null) khachHangDto.setSdt(entity.getSdt());
+        if (entity.getGioiTinh() != null) khachHangDto.setGioiTinh(entity.getGioiTinh());
+        if (entity.getNgaySinh() != null) khachHangDto.setNgaySinh(entity.getNgaySinh());
+        if (entity.getDiaChi() != null) khachHangDto.setDiaChi(entity.getDiaChi());
+        if (entity.getNgaySua() != null) khachHangDto.setNgaySua(entity.getNgaySua());
+        if (entity.getNgayTao() != null) khachHangDto.setNgayTao(entity.getNgayTao());
+        if (entity.getTrangThai() != null) khachHangDto.setTrangThai(entity.getTrangThai());
+        if (entity.getIdTaiKhoan() != null) khachHangDto.setIdTaiKhoan(entity.getIdTaiKhoan());
+        return khachHangDto;
+    }
+
+    public static KhachHang convertToKhachHangEntity(KhachHangDto dto) {
+        KhachHang khachHang = new KhachHang();
+        if (dto.getId() != null) khachHang.setId(dto.getId());
+        if (dto.getMa() != null) khachHang.setMa(dto.getMa());
+        if (dto.getTen() != null) khachHang.setTen(dto.getTen());
+        if (dto.getEmail() != null) khachHang.setEmail(dto.getEmail());
+        if (dto.getSdt() != null) khachHang.setSdt(dto.getSdt());
+        if (dto.getGioiTinh() != null) khachHang.setGioiTinh(dto.getGioiTinh());
+        if (dto.getNgaySinh() != null) khachHang.setNgaySinh(dto.getNgaySinh());
+        if (dto.getDiaChi() != null) khachHang.setDiaChi(dto.getDiaChi());
+        if (dto.getNgaySua() != null) khachHang.setNgaySua(dto.getNgaySua());
+        if (dto.getNgayTao() != null) khachHang.setNgayTao(dto.getNgayTao());
+        if (dto.getTrangThai() != null) khachHang.setTrangThai(dto.getTrangThai());
+        if (dto.getIdTaiKhoan() != null) khachHang.setIdTaiKhoan(dto.getIdTaiKhoan());
+        return khachHang;
+    }
+
+    public static List<KhachHangDto> convertToListKhachHangDto(List<KhachHang> lstKhachHang) {
+        List<KhachHangDto> lstKhachHangDto= new ArrayList<>();
+        for (KhachHang khachHang : lstKhachHang) {
+            lstKhachHangDto.add(convertKhachHangToDto(khachHang));
+        }
+        return lstKhachHangDto;
+    }
+
     // ---------- Chuc vu
     public static ChucVuDto convertToDto(ChucVu entity) {
         ChucVuDto dto = new ChucVuDto();
