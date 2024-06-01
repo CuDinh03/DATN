@@ -57,7 +57,7 @@ public class KichThuocService implements IKichThuocService {
         kichThuoc1.setMa(request.getMa());
         kichThuoc1.setTen(request.getTen());
         kichThuoc1.setNgaySua(new Date());
-        kichThuoc1.setNgayTao(new Date());
+        kichThuoc1.setNgayTao(request.getNgayTao());
         kichThuoc1.setTrangThai(request.getTrangThai());
 
         return kichThuocRepository.save(kichThuoc1);

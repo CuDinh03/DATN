@@ -8,6 +8,7 @@ import fpl.but.datn.service.IMauSacService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -39,8 +40,8 @@ public class MauSacService implements IMauSacService {
         mauSac.setId(request.getId());
         mauSac.setTen(request.getTen());
         mauSac.setMa(request.getMa());
-        mauSac.setNgayTao(request.getNgayTao());
-        mauSac.setNgaySua(request.getNgaySua());
+        mauSac.setNgayTao(new Date());
+        mauSac.setNgaySua(new Date());
         mauSac.setTrangThai(request.getTrangThai());
 
         return mauSac;
@@ -54,7 +55,7 @@ public class MauSacService implements IMauSacService {
         mauSac.setTen(request.getTen());
         mauSac.setMa(request.getMa());
         mauSac.setNgayTao(request.getNgayTao());
-        mauSac.setNgaySua(request.getNgaySua());
+        mauSac.setNgaySua(new Date());
         mauSac.setTrangThai(request.getTrangThai());
 
         return mauSac;

@@ -38,6 +38,10 @@ public enum ErrorCode {
     LIST_KICHTHUOC_NOT_FOUND(1025, "Không tìm thấy danh sách kích thước", HttpStatus.NOT_FOUND),
     KICHTHUOC_NOT_FOUND(1026, "Kích thước đang tìm không có", HttpStatus.NOT_FOUND),
 
+    MA_NHANVIEN_TRUNG(1024, "Trùng mã nhân viên", HttpStatus.BAD_REQUEST),
+    LIST_NHANVIEN_NOT_FOUND(1025, "Không tìm thấy danh sách nhân viên", HttpStatus.NOT_FOUND),
+    NHANVIEN_NOT_FOUND(1026, "Nhân viên đang tìm không có", HttpStatus.NOT_FOUND),
+
 
 
 

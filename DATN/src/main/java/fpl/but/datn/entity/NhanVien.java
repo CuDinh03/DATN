@@ -11,16 +11,12 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "NhanVien")
 public class NhanVien {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String ma;
     private String ten;
-    @OneToOne
-    @JoinColumn(name = "id_tai_khoan")
-    private TaiKhoan idTaiKhoan;
     private String email;
     private String sdt;
     private Boolean gioiTinh;
@@ -29,4 +25,8 @@ public class NhanVien {
     private Date ngayTao;
     private Date ngaySua;
     private Boolean trangThai;
+
+    @OneToOne
+    @JoinColumn(name = "id_tai_khoan")
+    private TaiKhoan idTaiKhoan;
 }

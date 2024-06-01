@@ -24,7 +24,7 @@ public class KichThuocController {
     @GetMapping("/all")
     ApiResponse<List<KichThuocDto>> getAll() {
 
-        List<KichThuocDto> lstKichThuocDto = TranferDatas.convertListKichThuocToDto(kichThuocService.getAll());
+        List<KichThuocDto> lstKichThuocDto = TranferDatas.convertToListkichThuocDto(kichThuocService.getAll());
         ApiResponse<List<KichThuocDto>> apiResponse = new ApiResponse<>();
 
         if (!lstKichThuocDto.isEmpty()) {
@@ -58,7 +58,7 @@ public class KichThuocController {
     public ApiResponse<KichThuoc> add(@RequestBody @Valid KichThuocDto kichThuocDto) {
         ApiResponse<KichThuoc> apiResponse = new ApiResponse<>();
         if (kichThuocDto != null) {
-            apiResponse.setResult(kichThuocService.add(TranferDatas.convertToEntity(kichThuocDto)));
+            apiResponse.setResult(kichThuocService.add(TranferDatas.convertToKichThuocEntity(kichThuocDto)));
         }
         return apiResponse;
     }
@@ -70,7 +70,7 @@ public class KichThuocController {
             idKichthuoc = id;
         }
         if (idKichthuoc != null){
-            return kichThuocService.update(TranferDatas.convertToEntity(kichThuocDto), idKichthuoc);
+            return kichThuocService.update(TranferDatas.convertToKichThuocEntity(kichThuocDto), idKichthuoc);
         }
         return null;
     }
@@ -84,5 +84,4 @@ public class KichThuocController {
             return "Xoa that bai!";
         }
     }
-
 }

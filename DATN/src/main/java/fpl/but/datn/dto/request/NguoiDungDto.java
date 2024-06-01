@@ -9,7 +9,6 @@ import java.util.UUID;
 
 public class NguoiDungDto {
 
-
     private UUID id;
     private String ma;
     private String ten;

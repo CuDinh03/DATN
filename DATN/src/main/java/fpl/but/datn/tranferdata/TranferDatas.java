@@ -8,8 +8,7 @@ import java.util.List;
 
 public class TranferDatas {
 
-    // 1. Mau sac
-    //  entity => dto
+    //  ---------- MauSac
     public static MauSacDto convertToMauSacDto(MauSac entity) {
         MauSacDto mauSacDto = new MauSacDto();
         if (entity.getId() != null) mauSacDto.setId(entity.getId());
@@ -21,7 +20,6 @@ public class TranferDatas {
         return mauSacDto;
     }
 
-    // dto => entity
     public static MauSac convertToMauSacEntity(MauSacDto dto) {
         MauSac mauSac = new MauSac();
         if (dto.getId() != null) mauSac.setId(dto.getId());
@@ -33,7 +31,6 @@ public class TranferDatas {
         return mauSac;
     }
 
-    // List<entity> => List<dto>
     public static List<MauSacDto> convertToListMauSacDto(List<MauSac> lstMauSac) {
         List<MauSacDto> lstMauSacDto = new ArrayList<>();
         for (MauSac mauSac : lstMauSac) {
@@ -42,6 +39,81 @@ public class TranferDatas {
         return lstMauSacDto;
     }
 
+    // ---------- Kich Thuoc
+    public static KichThuocDto convertKichThuocToDto(KichThuoc entity) {
+        KichThuocDto kichThuocDto = new KichThuocDto();
+        if (entity.getId() != null) kichThuocDto.setId(entity.getId());
+        if (entity.getMa() != null) kichThuocDto.setMa(entity.getMa());
+        if (entity.getTen() != null) kichThuocDto.setTen(entity.getTen());
+        if (entity.getNgaySua() != null) kichThuocDto.setNgaySua(entity.getNgaySua());
+        if (entity.getNgayTao() != null) kichThuocDto.setNgayTao(entity.getNgayTao());
+        if (entity.getTrangThai() != null) kichThuocDto.setTrangThai(entity.getTrangThai());
+        return kichThuocDto;
+    }
+
+    public static KichThuoc convertToKichThuocEntity(KichThuocDto dto) {
+        KichThuoc kichThuoc = new KichThuoc();
+        if (dto.getId() != null) kichThuoc.setId(dto.getId());
+        if (dto.getMa() != null) kichThuoc.setMa(dto.getMa());
+        if (dto.getTen() != null) kichThuoc.setTen(dto.getTen());
+        if (dto.getNgaySua() != null) kichThuoc.setNgaySua(dto.getNgaySua());
+        if (dto.getNgayTao() != null) kichThuoc.setNgayTao(dto.getNgayTao());
+        if (dto.getTrangThai() != null) kichThuoc.setTrangThai(dto.getTrangThai());
+        return kichThuoc;
+    }
+
+    public static List<KichThuocDto> convertToListkichThuocDto(List<KichThuoc> lstKichThuoc) {
+        List<KichThuocDto> lstkichThuocDto = new ArrayList<>();
+        for (KichThuoc kichThuoc : lstKichThuoc) {
+            lstkichThuocDto.add(convertKichThuocToDto(kichThuoc));
+        }
+        return lstkichThuocDto;
+    }
+
+    // ---------- NhanVien
+    public static NhanVienDto convertNhanVienToDto(NhanVien entity) {
+        NhanVienDto nhanVienDto = new NhanVienDto();
+        if (entity.getId() != null) nhanVienDto.setId(entity.getId());
+        if (entity.getMa() != null) nhanVienDto.setMa(entity.getMa());
+        if (entity.getTen() != null) nhanVienDto.setTen(entity.getTen());
+        if (entity.getEmail() != null) nhanVienDto.setEmail(entity.getEmail());
+        if (entity.getSdt() != null) nhanVienDto.setSdt(entity.getSdt());
+        if (entity.getGioiTinh() != null) nhanVienDto.setGioiTinh(entity.getGioiTinh());
+        if (entity.getNgaySinh() != null) nhanVienDto.setNgaySinh(entity.getNgaySinh());
+        if (entity.getDiaChi() != null) nhanVienDto.setDiaChi(entity.getDiaChi());
+        if (entity.getNgaySua() != null) nhanVienDto.setNgaySua(entity.getNgaySua());
+        if (entity.getNgayTao() != null) nhanVienDto.setNgayTao(entity.getNgayTao());
+        if (entity.getTrangThai() != null) nhanVienDto.setTrangThai(entity.getTrangThai());
+        if (entity.getIdTaiKhoan() != null) nhanVienDto.setIdTaiKhoan(entity.getIdTaiKhoan());
+        return nhanVienDto;
+    }
+
+    public static NhanVien convertToNhanVienEntity(NhanVienDto dto) {
+        NhanVien nhanVien = new NhanVien();
+        if (dto.getId() != null) nhanVien.setId(dto.getId());
+        if (dto.getMa() != null) nhanVien.setMa(dto.getMa());
+        if (dto.getTen() != null) nhanVien.setTen(dto.getTen());
+        if (dto.getEmail() != null) nhanVien.setEmail(dto.getEmail());
+        if (dto.getSdt() != null) nhanVien.setSdt(dto.getSdt());
+        if (dto.getGioiTinh() != null) nhanVien.setGioiTinh(dto.getGioiTinh());
+        if (dto.getNgaySinh() != null) nhanVien.setNgaySinh(dto.getNgaySinh());
+        if (dto.getDiaChi() != null) nhanVien.setDiaChi(dto.getDiaChi());
+        if (dto.getNgaySua() != null) nhanVien.setNgaySua(dto.getNgaySua());
+        if (dto.getNgayTao() != null) nhanVien.setNgayTao(dto.getNgayTao());
+        if (dto.getTrangThai() != null) nhanVien.setTrangThai(dto.getTrangThai());
+        if (dto.getIdTaiKhoan() != null) nhanVien.setIdTaiKhoan(dto.getIdTaiKhoan());
+        return nhanVien;
+    }
+
+    public static List<NhanVienDto> convertToListNhanVienDto(List<NhanVien> lstNhanVien) {
+        List<NhanVienDto> lstNhanVienDto = new ArrayList<>();
+        for (NhanVien nhanVien : lstNhanVien) {
+            lstNhanVienDto.add(convertNhanVienToDto(nhanVien));
+        }
+        return lstNhanVienDto;
+    }
+
+    // ---------- Chuc vu
     public static ChucVuDto convertToDto(ChucVu entity) {
         ChucVuDto dto = new ChucVuDto();
         if (entity.getId() != null) dto.setId(entity.getId());
@@ -120,7 +192,7 @@ public class TranferDatas {
         return dtoList;
     }
 
-    //danh muc
+    // ---------- danh muc
     public static DanhMucDto convertToDto(DanhMuc entity) {
         DanhMucDto dto = new DanhMucDto();
         if (entity.getId() != null) dto.setId(entity.getId());
@@ -151,7 +223,7 @@ public class TranferDatas {
         return dtoList;
     }
 
-    //chat lieu
+    // ---------- chat lieu
     public static ChatLieuDto convertToDto(ChatLieu entity) {
         ChatLieuDto dto = new ChatLieuDto();
         if (entity.getId() != null) dto.setId(entity.getId());
@@ -182,7 +254,7 @@ public class TranferDatas {
         return dtoList;
     }
 
-    // hinh anh
+    // ---------- hinh anh
     public static HinhAnhDto convertToDto(HinhAnh entity) {
         HinhAnhDto dto = new HinhAnhDto();
         if (entity.getId() != null) dto.setId(entity.getId());
@@ -213,39 +285,8 @@ public class TranferDatas {
         return dtoList;
     }
 
-    // Kich thuoc
-    public static KichThuocDto convertKichThuocToDto(KichThuoc entity) {
-        KichThuocDto dto = new KichThuocDto();
-        if (entity.getId() != null) dto.setId(entity.getId());
-        if (entity.getTen() != null) dto.setTen(entity.getTen());
-        if (entity.getMa() != null) dto.setMa(entity.getMa());
-        if (entity.getNgayTao() != null) dto.setNgayTao(entity.getNgayTao());
-        if (entity.getNgaySua() != null) dto.setNgaySua(entity.getNgaySua());
-        if (entity.getTrangThai() != null) dto.setTrangThai(entity.getTrangThai());
-        return dto;
-    }
 
-    public static KichThuoc convertToEntity(KichThuocDto dto) {
-        KichThuoc entity = new KichThuoc();
-        if (dto.getId() != null) entity.setId(dto.getId());
-        if (dto.getTen() != null) entity.setTen(dto.getTen());
-        if (dto.getMa() != null) entity.setMa(dto.getMa());
-        if (dto.getNgayTao() != null) entity.setNgayTao(dto.getNgayTao());
-        if (dto.getNgaySua() != null) entity.setNgaySua(dto.getNgaySua());
-        if (dto.getTrangThai() != null) entity.setTrangThai(dto.getTrangThai());
-        return entity;
-    }
-
-    public static List<KichThuocDto> convertListKichThuocToDto(List<KichThuoc> entityList) {
-        List<KichThuocDto> dtoList = new ArrayList<>();
-        for (KichThuoc entity : entityList) {
-            dtoList.add(convertKichThuocToDto(entity));
-        }
-        return dtoList;
-    }
-
-    //mau sac
-
+    // ---------- mau sac
     public static MauSacDto convertToDto(MauSac entity) {
         MauSacDto dto = new MauSacDto();
         if (entity.getId() != null) dto.setId(entity.getId());
@@ -276,7 +317,7 @@ public class TranferDatas {
         return dtoList;
     }
 
-    //san pham
+    // ---------- san pham
     public static SanPhamDto convertToDto(SanPham entity){
         SanPhamDto dto = new SanPhamDto();
         if (entity.getId() != null) dto.setId(entity.getId());
@@ -305,7 +346,7 @@ public class TranferDatas {
         return dtoList;
     }
 
-    //thuong hieu
+    //---------- thuong hieu
     public static ThuongHieuDto convertToDto(ThuongHieu entity){
         ThuongHieuDto dto = new ThuongHieuDto();
         if (entity.getId() != null) dto.setId(entity.getId());
@@ -334,7 +375,7 @@ public class TranferDatas {
         return dtoList;
     }
 
-    //voucher
+    // ---------- voucher
     public static VoucherDto convertToDto(Voucher entity){
         VoucherDto dto = new VoucherDto();
         if (entity.getId() != null) dto.setId(entity.getId());
@@ -371,7 +412,7 @@ public class TranferDatas {
         return dtoList;
     }
 
-    //bao cao
+    // ---------- bao cao
     public static BaoCaoDto convertToDto(BaoCao entity){
         BaoCaoDto dto = new BaoCaoDto();
         if (entity.getId() != null) dto.setId(entity.getId());
@@ -402,7 +443,7 @@ public class TranferDatas {
         return dtoList;
     }
 
-    //chi tiet san pham
+    // ---------- chi tiet san pham
     public static ChiTietSanPhamDto convertToDto(ChiTietSanPham entity){
         ChiTietSanPhamDto dto = new ChiTietSanPhamDto();
         if (entity.getId() != null) dto.setId(entity.getId());
@@ -453,7 +494,7 @@ public class TranferDatas {
         return dtoList;
     }
 
-    //hoa don
+    // ---------- hoa don
 
     public static HoaDonDto convertToDto(HoaDon entity){
         HoaDonDto dto = new HoaDonDto();
@@ -489,7 +530,7 @@ public class TranferDatas {
         return dtoList;
     }
 
-    //hoa don chi tiet
+    // ---------- hoa don chi tiet
     public static HoaDonChiTietDto convertToDto(HoaDonChiTiet entity){
         HoaDonChiTietDto dto = new HoaDonChiTietDto();
         if (entity.getId() != null) dto.setId(entity.getId());
