@@ -15,7 +15,6 @@ import java.util.UUID;
 
 @Repository
 public interface GioHangChiTietRepository extends JpaRepository<GioHangChiTiet, UUID> {
-    @Query(value = "SELECT ghct.* FROM gio_hang_chi_tiet ghct INNER JOIN gio_hang gh ON ghct.id_gio_hang = gh.id WHERE gh.id = :idGioHang and " +
-            "gh.trang_thai = 1 ORDER BY ghct.ngay_tao DESC", nativeQuery = true)
-    Page<GioHangChiTiet> findAllByIdGioHang(@Param("idGioHang") UUID idGioHang, Pageable pageable);
+    @Query(value = "SELECT ghct.* FROM gio_hang_chi_tiet ghct INNER JOIN gio_hang gh ON ghct.id_gio_hang = gh.id WHERE gh.id = :idGioHang ", nativeQuery = true)
+    List<GioHangChiTiet> findAllByIdGioHang(@Param("idGioHang") UUID idGioHang);
 }

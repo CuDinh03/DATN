@@ -41,8 +41,8 @@ public class GioHangChiTietService implements IGioHangChiTietService {
     }
 
     @Override
-    public Page<GioHangChiTiet> getAllByIdGioHang(UUID id, Pageable pageable) {
-        return gioHangChiTietRepository.findAllByIdGioHang(id, pageable);
+    public List<GioHangChiTiet> getAllByIdGioHang(UUID id) {
+        return gioHangChiTietRepository.findAllByIdGioHang(id);
     }
 
 
@@ -75,6 +75,7 @@ public class GioHangChiTietService implements IGioHangChiTietService {
             throw new RuntimeException("Gio Hang Chi Tiet không tồn tại với id " + id);
         }
     }
+
 
 
 }

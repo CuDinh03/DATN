@@ -13,6 +13,6 @@ public interface IGioHangChiTietService {
     GioHangChiTiet create(GioHangChiTiet hoaDonGioHang);
     GioHangChiTiet update(GioHangChiTiet hoaDonGioHang, UUID id);
     GioHangChiTiet findById(UUID id);
-    Page<GioHangChiTiet> getAllByIdGioHang(UUID id, Pageable pageable);
+    List<GioHangChiTiet> getAllByIdGioHang(UUID id);
     GioHangChiTiet updateGioHangChiTiet(UUID id, Integer newSoLuong);
 }

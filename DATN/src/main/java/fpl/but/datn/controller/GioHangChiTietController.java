@@ -28,23 +28,15 @@ public class GioHangChiTietController {
     private IGioHangChiTietService gioHangChiTietService;
 
     @GetMapping("/all/{id}")
-    ApiResponse<Page<GioHangChiTietDto>> getGioHangChiTiet(@PathVariable("id") UUID id,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "5") int size) {
-
-        Pageable pageable = PageRequest.of(page, size);
-        Page<GioHangChiTiet> danhMucPage = gioHangChiTietService.getAllByIdGioHang(id,pageable);
-        List<GioHangChiTietDto> listDto = TranferDatas.convertListGioHangChiTietToDto(danhMucPage.getContent());
-
-        ApiResponse<Page<GioHangChiTietDto>> apiResponse = new ApiResponse<>();
-
-        if (!listDto.isEmpty()) {
-            apiResponse.setMessage("Lấy danh sách Gio hang thành công");
-            apiResponse.setResult(new PageImpl<>(listDto, pageable, danhMucPage.getTotalElements()));
-        } else {
-            throw new AppException(ErrorCode.NO_ACCOUNTS_FOUND);
+    ApiResponse<List<GioHangChiTietDto>> getAllGioHangCTByIdGioHang(@PathVariable("id") UUID idGioHang){
+        List<GioHangChiTietDto> dto = TranferDatas.convertListGioHangChiTietToDto(gioHangChiTietService.getAllByIdGioHang(idGioHang));
+        ApiResponse<List<GioHangChiTietDto>> apiResponse = new ApiResponse<>();
+        if (!dto.isEmpty()){
+            apiResponse.setMessage("Lấy danh sách hoa don thành công");
+            apiResponse.setResult(dto);
+        }else {
+            throw new AppException(ErrorCode.NO_ORDER_FOUND);
         }
-
         return apiResponse;
     }
 
