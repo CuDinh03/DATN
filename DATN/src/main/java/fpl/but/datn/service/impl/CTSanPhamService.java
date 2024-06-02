@@ -1,6 +1,8 @@
 package fpl.but.datn.service.impl;
 
-import fpl.but.datn.entity.*;
+import fpl.but.datn.entity.ChiTietSanPham;
+import fpl.but.datn.entity.DanhMuc;
+import fpl.but.datn.entity.SanPham;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.repository.CTSanPhamRepository;
@@ -25,7 +27,7 @@ public class CTSanPhamService implements ICTSanPhamService {
     private GioHangRepository gioHangRepository;
 
     @Override
-    public List getAll() {
+    public List<ChiTietSanPham> getAll() {
         return ctSanPhamRepository.findAll();
     }
 
@@ -107,33 +109,7 @@ public class CTSanPhamService implements ICTSanPhamService {
     }
 
     @Override
-    public Page<ChiTietSanPham> getAllCTSanPhamPageable(Pageable pageable) {
+    public Page<ChiTietSanPham> getAllChiTietSanPhamPageable(Pageable pageable) {
         return ctSanPhamRepository.findAll(pageable);
     }
-
-    public GioHangChiTiet themChiTietSanPham(UUID idGioHang,UUID idCTSanPham, Integer soLuong) {
-        ChiTietSanPham chiTietSanPham = ctSanPhamRepository.findById(idCTSanPham).get();
-        GioHang gioHang =  gioHangRepository.findById(idGioHang).get();
-        Optional<GioHangChiTiet> optionalGioHangChiTiet = gioHangChiTietRepository.findByIdGioHangAndIdChiTietSanPham(idGioHang,idCTSanPham);
-
-        if (chiTietSanPham.getSoLuong()< soLuong){
-            throw new RuntimeException("Số lượng sản phẩm không đủ");
-
-        }
-        GioHangChiTiet gioHangChiTiet;
-        if (optionalGioHangChiTiet.isPresent()){
-            gioHangChiTiet = optionalGioHangChiTiet.get();
-            gioHangChiTiet.setSoLuong(gioHangChiTiet.getSoLuong()+soLuong);
-        }else {
-            gioHangChiTiet = new GioHangChiTiet();
-            gioHangChiTiet.setIdGioHang(gioHang);
-            gioHangChiTiet.setIdChiTietSanPham(chiTietSanPham);
-            gioHangChiTiet.setSoLuong(soLuong);
-
-        }
-        chiTietSanPham.setSoLuong(chiTietSanPham.getSoLuong()-soLuong);
-        ctSanPhamRepository.save(chiTietSanPham);
-        return gioHangChiTietRepository.save(gioHangChiTiet);
-    }
-
 }

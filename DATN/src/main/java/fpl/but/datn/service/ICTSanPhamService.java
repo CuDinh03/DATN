@@ -1,6 +1,7 @@
 package fpl.but.datn.service;
 
 import fpl.but.datn.entity.ChiTietSanPham;
+import fpl.but.datn.entity.DanhMuc;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -14,5 +15,5 @@ public interface ICTSanPhamService {
     boolean delete(UUID id);
     void open(UUID id);
     ChiTietSanPham findById(UUID id);
-    Page<ChiTietSanPham> getAllCTSanPhamPageable(Pageable pageable);
+    Page<ChiTietSanPham> getAllChiTietSanPhamPageable(Pageable pageable);
 }

@@ -1,19 +1,19 @@
 package fpl.but.datn.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+import java.util.Date;
 import java.util.UUID;
+
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-
+@Builder
 public class GioHangHoaDon {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -23,4 +23,6 @@ public class GioHangHoaDon {
     @ManyToOne
     @JoinColumn(name = "id_hoa_don")
     private HoaDon idHoaDon;
+    private Date ngayTao;
+    private Date ngaySua;
 }

@@ -12,7 +12,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table
 public class GioHangChiTiet {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -21,8 +20,8 @@ public class GioHangChiTiet {
     @JoinColumn(name = "id_gio_hang")
     private GioHang idGioHang;
     @ManyToOne
-    @JoinColumn(name = "id_chi_tiet_san_pham")
-    private ChiTietSanPham idChiTietSanPham;
+    @JoinColumn(name = "id_san_pham")
+    private ChiTietSanPham idSanPham;
     private Integer soLuong;
     private Date ngayTao;
     private Date ngaySua;

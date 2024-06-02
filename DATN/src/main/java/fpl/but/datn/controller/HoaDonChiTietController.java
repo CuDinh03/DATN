@@ -48,21 +48,16 @@ public class HoaDonChiTietController {
         return apiResponse;
     }
 
-    @DeleteMapping("/{id}")
-    ApiResponse<Void> delete(@PathVariable String id) {
-        UUID idHDCT = null;
-        if (id != null) {
-            idHDCT = UUID.fromString(id);
-            hoaDonChiTietService.delete(idHDCT);
-        } return ApiResponse.<Void>builder().build();
-    }
-
-    @PutMapping("/{id}")
-    HoaDonChiTiet update(@RequestBody HoaDonChiTietDto request, @PathVariable String id) {
-        UUID idHDCT = null;
-        if (id != null) idHDCT = UUID.fromString(id);
-        if (request != null)
-            return hoaDonChiTietService.update(TranferDatas.convertToEntity(request), idHDCT);
-        return null;
+    @GetMapping("/all/{id}")
+    ApiResponse<List<HoaDonChiTietDto>> getAllHDCTByIdHoaDon(@PathVariable("id") UUID idHoaDon){
+        List<HoaDonChiTietDto> dto = TranferDatas.convertListHoaDonChiTietToDto(hoaDonChiTietService.getHoaDonChiTietByIdHoaDon(idHoaDon));
+        ApiResponse<List<HoaDonChiTietDto>> apiResponse = new ApiResponse<>();
+        if (!dto.isEmpty()){
+            apiResponse.setMessage("Lấy danh sách hoa don thành công");
+            apiResponse.setResult(dto);
+        }else {
+            throw new AppException(ErrorCode.NO_ORDER_FOUND);
+        }
+        return apiResponse;
     }
 }

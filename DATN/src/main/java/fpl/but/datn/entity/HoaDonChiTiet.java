@@ -20,9 +20,11 @@ public class HoaDonChiTiet {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     @ManyToOne
+    @JoinColumn(name = "id_hoa_don")
     private HoaDon idHoaDon;
     @ManyToOne
-    private ChiTietSanPham idSanPham;
+    @JoinColumn(name = "id_san_pham_chi_tiet")
+    private ChiTietSanPham idChiTietSanPham;
     private Integer soLuong;
     private Date ngayTao;
     private Date ngaySua;

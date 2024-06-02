@@ -8,12 +8,11 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Table
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Voucher {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

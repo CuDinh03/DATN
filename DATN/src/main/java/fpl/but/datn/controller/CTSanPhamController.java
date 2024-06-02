@@ -5,7 +5,6 @@ import fpl.but.datn.dto.request.DanhMucDto;
 import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.entity.ChiTietSanPham;
 import fpl.but.datn.entity.DanhMuc;
-import fpl.but.datn.entity.GioHangChiTiet;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.service.ICTSanPhamService;
@@ -13,6 +12,10 @@ import fpl.but.datn.service.IDanhMucService;
 import fpl.but.datn.tranferdata.TranferDatas;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -21,27 +24,30 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/ct-san-pham")
+@RequestMapping("/api/chi-tiet-san-pham")
 public class CTSanPhamController {
 
     @Autowired
     private ICTSanPhamService ctSanPhamService;
+    @GetMapping("/all")
+    ApiResponse<Page<ChiTietSanPhamDto>> getDanhMuc(@RequestParam(defaultValue = "0") int page,
+                                             @RequestParam(defaultValue = "5") int size) {
 
-@GetMapping("/all")
-ApiResponse<List<ChiTietSanPhamDto>> getAll() {
-    List<ChiTietSanPhamDto> listDto = TranferDatas.convertListChiTietSanPhamToDto(ctSanPhamService.getAll());
-    ApiResponse<List<ChiTietSanPhamDto>> apiResponse = new ApiResponse<List<ChiTietSanPhamDto>>();
+        Pageable pageable = PageRequest.of(page, size);
+        Page<ChiTietSanPham> chiTietSanPhamPage = ctSanPhamService.getAllChiTietSanPhamPageable(pageable);
+        List<ChiTietSanPhamDto> listDto = TranferDatas.convertListChiTietSanPhamToDto(chiTietSanPhamPage.getContent());
 
-    if (!listDto.isEmpty()) {
-        apiResponse.setMessage("Lấy danh sách CTSP thành công");
-        apiResponse.setResult(listDto);
-    } else {
-        throw new AppException(ErrorCode.NO_LISTSPChiTiet_FOUND);
+        ApiResponse<Page<ChiTietSanPhamDto>> apiResponse = new ApiResponse<>();
+
+        if (!listDto.isEmpty()) {
+            apiResponse.setMessage("Lấy danh sách sa pham thành công");
+            apiResponse.setResult(new PageImpl<>(listDto, pageable, chiTietSanPhamPage.getTotalElements()));
+        } else {
+            throw new AppException(ErrorCode.NO_ACCOUNTS_FOUND);
+        }
+
+        return apiResponse;
     }
-    return apiResponse;
-}
-
-
 
     @PostMapping("/create")
     ApiResponse<ChiTietSanPham> create(@RequestBody @Valid ChiTietSanPhamDto request) {

@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface IVoucherService {
     Voucher findByMaGiam(String ma);
+
+    Voucher findByTen(String ten);
 }
