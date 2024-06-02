@@ -26,8 +26,10 @@ public class GioHangChiTietService implements IGioHangChiTietService {
     }
 
     @Override
-    public GioHangChiTiet create(GioHangChiTiet hoaDonGioHang) {
-        return null;
+    public GioHangChiTiet create(GioHangChiTiet gioHangChiTiet) {
+
+        return gioHangChiTietRepository.save(gioHangChiTiet);
+
     }
 
     @Override
@@ -37,7 +39,7 @@ public class GioHangChiTietService implements IGioHangChiTietService {
 
     @Override
     public GioHangChiTiet findById(UUID id) {
-        return null;
+        return gioHangChiTietRepository.findById(id).get();
     }
 
     @Override
