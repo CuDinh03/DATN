@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -46,18 +47,24 @@ public class HoaDonGioHangService implements IHoaDonGioHangService {
         gioHang.setTrangThai(true);
         gioHangRepository.save(gioHang);
 
+        BigDecimal tongTien = BigDecimal.ZERO;
+        List<GioHangChiTiet> gioHangChiTietList = gioHangChiTietRepository.findAllByIdGioHang(gioHang.getId());
+        for (GioHangChiTiet gioHangChiTiet : gioHangChiTietList) {
+            tongTien = tongTien.add(gioHangChiTiet.getIdSanPham().getGiaBan().multiply(new BigDecimal(gioHangChiTiet.getSoLuong())));
+        }
+
         // Tạo hóa đơn
         HoaDon hoaDon = new HoaDon();
         hoaDon.setMa("HD" + random.nextInt(1000));
         hoaDon.setNgayTao(new Date());
         hoaDon.setNgaySua(new Date());
         hoaDon.setTrangThai(true);
+        hoaDon.setTongTien(tongTien);
         hoaDonRepository.save(hoaDon);
 
         // Tạo giỏ hàng chi tiết
         GioHangChiTiet gioHangChiTiet = new GioHangChiTiet();
         gioHangChiTiet.setIdGioHang(gioHang);
-        gioHangChiTiet.setSoLuong(0);
         gioHangChiTiet.setNgayTao(new Date());
         gioHangChiTiet.setNgaySua(new Date());
         gioHangChiTiet.setTrangThai(true);
@@ -67,6 +74,8 @@ public class HoaDonGioHangService implements IHoaDonGioHangService {
         GioHangHoaDon gioHangHoaDon = new GioHangHoaDon();
         gioHangHoaDon.setIdHoaDon(hoaDon);
         gioHangHoaDon.setIdGioHang(gioHang);
+        gioHangHoaDon.setNgayTao(new Date());
+        gioHangHoaDon.setNgaySua(new Date());
         return gioHangHoaDonRepository.save(gioHangHoaDon);
     }
 
