@@ -1,16 +1,16 @@
 package fpl.but.datn.controller;
 
-import fpl.but.datn.dto.request.DanhMucDto;
-import fpl.but.datn.dto.request.GioHangChiTietDto;
-import fpl.but.datn.dto.request.GioHangHoaDonDto;
-import fpl.but.datn.dto.request.HoaDonChiTietDto;
+import fpl.but.datn.dto.request.*;
 import fpl.but.datn.dto.response.ApiResponse;
+import fpl.but.datn.entity.ChiTietSanPham;
 import fpl.but.datn.entity.DanhMuc;
 import fpl.but.datn.entity.GioHangChiTiet;
 import fpl.but.datn.entity.HoaDonChiTiet;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
+import fpl.but.datn.service.ICTSanPhamService;
 import fpl.but.datn.service.IGioHangChiTietService;
+import fpl.but.datn.service.IGioHangService;
 import fpl.but.datn.tranferdata.TranferDatas;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,6 +26,12 @@ import java.util.UUID;
 public class GioHangChiTietController {
     @Autowired
     private IGioHangChiTietService gioHangChiTietService;
+
+    @Autowired
+    private IGioHangService gioHangService;
+
+    @Autowired
+    private ICTSanPhamService ctSanPhamService;
 
     @GetMapping("/all/{id}")
     ApiResponse<List<GioHangChiTietDto>> getAllGioHangCTByIdGioHang(@PathVariable("id") UUID idGioHang){
@@ -61,4 +67,32 @@ public class GioHangChiTietController {
 
         return apiResponse;
     }
+
+    @PostMapping("/create")
+    public ApiResponse<GioHangChiTietDto> createGioHangChiTiet(@RequestBody GioHangChiTietDto request) {
+        ApiResponse<GioHangChiTietDto> apiResponse = new ApiResponse<>();
+
+        try {
+            GioHangChiTietDto createdDto = new GioHangChiTietDto();
+            createdDto.setId(UUID.randomUUID());
+            createdDto.setIdGioHang(request.getIdGioHang());
+            createdDto.setIdSanPham(request.getIdSanPham());
+            createdDto.setSoLuong(1);
+            createdDto.setNgayTao(request.getNgayTao());
+            createdDto.setNgaySua(request.getNgaySua());
+            createdDto.setTrangThai(Boolean.TRUE);
+
+            gioHangChiTietService.create(TranferDatas.convertToEntity(createdDto));
+
+            apiResponse.setMessage("Created GioHangChiTiet successfully");
+            apiResponse.setResult(createdDto);
+
+        } catch (AppException e) {
+            apiResponse.setMessage(e.getMessage());
+            apiResponse.setResult(null);
+        }
+
+        return apiResponse;
+    }
+
 }
