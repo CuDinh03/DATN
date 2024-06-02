@@ -67,12 +67,21 @@ public class DanhMucController {
     }
 
     @DeleteMapping("/{id}")
-    String delete(@PathVariable String id) {
-        UUID idDanhMuc = UUID.fromString(id);
-        if (danhMucService.delete(idDanhMuc)) {
-            return "xoa thanh cong";
-        } else
-            return "xoa that bai";
+    ApiResponse<Void> delete(@PathVariable String id) {
+        UUID idDanhMuc = null;
+        if (id != null) {
+            idDanhMuc = UUID.fromString(id);
+            danhMucService.delete(idDanhMuc);
+        } return ApiResponse.<Void>builder().build();
+    }
+
+    @DeleteMapping("/open/{id}")
+    ApiResponse<Void> open(@PathVariable String id) {
+        UUID idDanhMuc = null;
+        if (id != null) {
+            idDanhMuc = UUID.fromString(id);
+            danhMucService.open(idDanhMuc);
+        } return ApiResponse.<Void>builder().build();
     }
 
     @GetMapping("/{id}")

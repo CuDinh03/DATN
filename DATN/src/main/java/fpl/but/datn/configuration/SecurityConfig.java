@@ -25,13 +25,25 @@ public class SecurityConfig {
     private final String[] ADMIN_ENDPOINT_GET = {
             "/api/users/all","/api/users/{id}", "/api/users/myInfo",
             "/api/voucher/all","/api/voucher/allVouchers","/api/voucher/{id}",
-            "/api/khs/all","/api/khs/{sdt}"
+            "/api/khs/all","/api/khs/{sdt}",
+            "/api/chi-tiet-san-pham/all", "/api/chi-tiet-san-pham/addNew", "/api/chi-tiet-san-pham/update/{id}", "/api/chi-tiet-san-pham/delete/{id}", "/api/chi-tiet-san-pham/detail/{id}",
+            "/api/danh-muc/all","/api/danh-muc/{id}",
+            "/api/gio-hang-chi-tiet/all/{id}", "/api/gio-hang-chi-tiet/{id}",
+            "/api/hoa-don-chi-tiet/all/{id}","/api/hoa-don-chi-tiet/{id}",
+            "/api/hoa-don/all",
+            "/api/hoa-don-gio-hang/all", "/api/hoa-don-gio-hang/all/{id}"
     };
     private final String[] ADMIN_ENDPOINT_POST = {"/api/voucher/create",
-            "/api/khs/create"
+            "/api/khs/create",
+            "/api/danh-muc/create",
+            "/api/hoa-don-gio-hang/create"
     };
-    private final String[] ADMIN_ENDPOINT_PUT = {"/api/voucher/{id}", "/api/users/{id}"};
-    private final String[] ADMIN_ENDPOINT_DELETE = {"/api/voucher/{id}","/api/users/{id}"};
+    private final String[] ADMIN_ENDPOINT_PUT = {"/api/voucher/{id}", "/api/users/{id}",
+            "/api/danh-muc/{id}"
+    };
+    private final String[] ADMIN_ENDPOINT_DELETE = {"/api/voucher/{id}","/api/users/{id}",
+            "/api/danh-muc/{id}"
+    };
 
     private final String[] CUSTOMER_END_POINT = {};
 

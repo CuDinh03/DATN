@@ -29,6 +29,13 @@ public enum ErrorCode {
     NO_CUSTOMERS_FOUND(1019, "Không tìm thấy khách hàng nào!",HttpStatus.NOT_FOUND),
     HINHANH_EXISTED(1015, "Hình ảnh đã ton tai",HttpStatus.BAD_REQUEST),
     HINHANH_NOT_EXISTED(1016, "Không tìm thấy hình ảnh",HttpStatus.NOT_FOUND),
+    CATEGORY_EXISTED(1017, "Danh mục này đã tồn tai", HttpStatus.BAD_REQUEST),
+    CATEGORY_NAME_NULL(1018, "Tên danh mục không được để trống", HttpStatus.BAD_REQUEST),
+    CATEGORY_CODE_NULL(1019, "Mã danh mục không được để trống", HttpStatus.BAD_REQUEST),
+    NO_ORDER_FOUND(1020, "Không tìm thấy danh sách hoa don nào",HttpStatus.NOT_FOUND ),
+
+
+
 
 
 

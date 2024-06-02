@@ -15,6 +15,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "HoaDonChiTiet")
 public class HoaDonChiTiet {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -22,11 +23,11 @@ public class HoaDonChiTiet {
     @JoinColumn(name = "id_hoa_don")
     private HoaDon idHoaDon;
     @ManyToOne
-    @JoinColumn(name = "id_san_pham")
-    private SanPham sanPham;
+    @JoinColumn(name = "id_san_pham_chi_tiet")
+    private ChiTietSanPham idChiTietSanPham;
     private Integer soLuong;
     private Date ngayTao;
     private Date ngaySua;
     private BigDecimal giaBan;
-    private boolean trangThai;
+    private Boolean trangThai;
 }
