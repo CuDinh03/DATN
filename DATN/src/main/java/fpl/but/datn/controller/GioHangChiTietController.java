@@ -45,35 +45,55 @@ public class GioHangChiTietController {
 //        return ResponseEntity.ok(iGioHangChiTietService.create(gioHangChiTiet));
 //    }
 
-    @PostMapping("/create")
-    ApiResponse<GioHangChiTiet> create(@RequestBody @Valid GioHangChiTietDto request) {
-        ApiResponse<GioHangChiTiet> apiResponse = new ApiResponse<>();
-        if (request != null)
-            apiResponse.setResult(iGioHangChiTietService.create(TranferDatas.convertToEntity(request)));
-        return apiResponse;
-    }
+//    @PostMapping("/create")
+//    ApiResponse<GioHangChiTiet> create(@RequestBody @Valid GioHangChiTietDto request) {
+//        ApiResponse<GioHangChiTiet> apiResponse = new ApiResponse<>();
+//        if (request != null)
+//            apiResponse.setResult(iGioHangChiTietService.create(TranferDatas.convertToEntity(request)));
+//        return apiResponse;
+//    }
+@PostMapping ("/create")
+public ApiResponse<GioHangChiTiet> themSPVaoGioHang(@RequestParam UUID idGioHang,@RequestParam UUID idChiTietSanPham, @RequestParam Integer soLuong) {
+   GioHangChiTiet gioHangChiTiet = iGioHangChiTietService.themChiTietSanPham(idGioHang,idChiTietSanPham,soLuong);
+   ApiResponse<GioHangChiTiet> apiResponse = new ApiResponse<>();
+   apiResponse.setMessage("Thêm sp vào giỏ hàng thành công");
+   apiResponse.setResult(gioHangChiTiet);
+   return apiResponse;
+}
 
-//    @PutMapping("/update/{id}")
-//    public ResponseEntity<?> update(@RequestBody GioHangChiTiet gioHangChiTiet, @PathVariable UUID id){
-//        return ResponseEntity.ok(iGioHangChiTietService.update(gioHangChiTiet,id));
+
+
+//    @PutMapping("/{id}")
+//    public ApiResponse<GioHangChiTiet> updateGioHangChiTiet(@PathVariable UUID id, @RequestParam Integer soLuong) {
+//        ApiResponse<GioHangChiTiet> apiResponse = new ApiResponse<>();
+//
+//        try {
+//            GioHangChiTiet updatedGioHangChiTiet = iGioHangChiTietService.updateGioHangChiTiet(id, soLuong);
+//
+//            if (updatedGioHangChiTiet == null) {
+//                apiResponse.setMessage("GioHangChiTiet đã bị xóa vì số lượng là 0");
+//                apiResponse.setResult(null);
+//            } else {
+//                apiResponse.setMessage("Cập nhật GioHangChiTiet thành công");
+//                apiResponse.setResult(updatedGioHangChiTiet);
+//            }
+//        } catch (AppException e) {
+//            apiResponse.setMessage(e.getMessage());
+//            apiResponse.setResult(null);
+//        }
+//
+//        return apiResponse;
 //    }
 
-    @PutMapping("/{id}")
-    GioHangChiTiet update(@RequestBody GioHangChiTietDto request, @PathVariable String id) {
-        UUID idGHCT = null;
-        if (id != null) idGHCT = UUID.fromString(id);
-        if (request != null)
-            return iGioHangChiTietService.update(TranferDatas.convertToEntity(request), idGHCT);
-        return null;
-    }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable UUID id){
-        if (iGioHangChiTietService.delete(id)){
-            return ResponseEntity.ok("xoa thanh cong");
-        }else
-            return ResponseEntity.ok("xoa that bai");
-    }
+@DeleteMapping("/{id}")
+ApiResponse<Void> delete(@PathVariable String id) {
+    UUID idGHCT = null;
+    if (id != null) {
+        idGHCT = UUID.fromString(id);
+        iGioHangChiTietService.delete(idGHCT);
+    } return ApiResponse.<Void>builder().build();
+}
 
     @GetMapping("/detail/{id}")
     public ResponseEntity<?> detail(@PathVariable UUID id){

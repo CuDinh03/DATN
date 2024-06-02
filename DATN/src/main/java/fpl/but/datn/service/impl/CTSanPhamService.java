@@ -1,26 +1,28 @@
 package fpl.but.datn.service.impl;
 
-import fpl.but.datn.entity.ChiTietSanPham;
-import fpl.but.datn.entity.DanhMuc;
-import fpl.but.datn.entity.SanPham;
+import fpl.but.datn.entity.*;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.repository.CTSanPhamRepository;
+import fpl.but.datn.repository.GioHangChiTietRepository;
+import fpl.but.datn.repository.GioHangRepository;
 import fpl.but.datn.service.ICTSanPhamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
+
 @Service
 public class CTSanPhamService implements ICTSanPhamService {
 
     @Autowired
     private CTSanPhamRepository ctSanPhamRepository;
+    @Autowired
+    private GioHangChiTietRepository gioHangChiTietRepository;
+    @Autowired
+    private GioHangRepository gioHangRepository;
 
     @Override
     public List getAll() {
@@ -80,7 +82,15 @@ public class CTSanPhamService implements ICTSanPhamService {
 
     @Override
     public boolean delete(UUID id) {
-        return false;
+        Optional<ChiTietSanPham> optional = ctSanPhamRepository.findById(id);
+        if (optional.isPresent()){
+            ChiTietSanPham chiTietSanPham = optional.get();
+            ctSanPhamRepository.delete(chiTietSanPham);
+            return true;
+        }else {
+            return false;
+        }
+
     }
 
     @Override
@@ -100,4 +110,30 @@ public class CTSanPhamService implements ICTSanPhamService {
     public Page<ChiTietSanPham> getAllCTSanPhamPageable(Pageable pageable) {
         return ctSanPhamRepository.findAll(pageable);
     }
+
+    public GioHangChiTiet themChiTietSanPham(UUID idGioHang,UUID idCTSanPham, Integer soLuong) {
+        ChiTietSanPham chiTietSanPham = ctSanPhamRepository.findById(idCTSanPham).get();
+        GioHang gioHang =  gioHangRepository.findById(idGioHang).get();
+        Optional<GioHangChiTiet> optionalGioHangChiTiet = gioHangChiTietRepository.findByIdGioHangAndIdChiTietSanPham(idGioHang,idCTSanPham);
+
+        if (chiTietSanPham.getSoLuong()< soLuong){
+            throw new RuntimeException("Số lượng sản phẩm không đủ");
+
+        }
+        GioHangChiTiet gioHangChiTiet;
+        if (optionalGioHangChiTiet.isPresent()){
+            gioHangChiTiet = optionalGioHangChiTiet.get();
+            gioHangChiTiet.setSoLuong(gioHangChiTiet.getSoLuong()+soLuong);
+        }else {
+            gioHangChiTiet = new GioHangChiTiet();
+            gioHangChiTiet.setIdGioHang(gioHang);
+            gioHangChiTiet.setIdChiTietSanPham(chiTietSanPham);
+            gioHangChiTiet.setSoLuong(soLuong);
+
+        }
+        chiTietSanPham.setSoLuong(chiTietSanPham.getSoLuong()-soLuong);
+        ctSanPhamRepository.save(chiTietSanPham);
+        return gioHangChiTietRepository.save(gioHangChiTiet);
+    }
+
 }

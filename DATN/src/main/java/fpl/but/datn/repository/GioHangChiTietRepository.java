@@ -17,4 +17,5 @@ public interface GioHangChiTietRepository extends JpaRepository<GioHangChiTiet, 
     Page<GioHangChiTiet> findAll(Pageable pageable);
 //    Optional<GioHangChiTiet> findByMa(String ma);
 //    boolean existsByMa(String ma);
+    Optional<GioHangChiTiet> findByIdGioHangAndIdChiTietSanPham(UUID idGioHang, UUID idChiTietSanPham);
 }

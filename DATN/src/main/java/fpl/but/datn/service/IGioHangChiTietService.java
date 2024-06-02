@@ -17,4 +17,6 @@ public interface IGioHangChiTietService {
     void open(UUID id);
     GioHangChiTiet findById(UUID id);
     Page<GioHangChiTiet> getAllGHCTPageable(Pageable pageable);
+//    GioHangChiTiet updateGioHangChiTiet(UUID id, Integer newSoLuong);
+     GioHangChiTiet themChiTietSanPham(UUID idGioHang,UUID idCTSanPham, Integer soLuong);
 }
