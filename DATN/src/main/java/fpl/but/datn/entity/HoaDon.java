@@ -22,7 +22,7 @@ public class HoaDon {
     private UUID id;
     private String ma;
     @ManyToOne
-    private NguoiDung idNhanVien;
+    private NguoiDung idNguoiDung;
     @ManyToOne
     private KhachHang idKhachHang;
     private BigDecimal tongTien;
