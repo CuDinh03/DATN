@@ -41,7 +41,7 @@ public class CTSanPhamService implements ICTSanPhamService {
 
     @Override
     public ChiTietSanPham findById(UUID id) {
-        return null;
+        return ctSanPhamRepository.findById(id).get();
     }
 
     @Override

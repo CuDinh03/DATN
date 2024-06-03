@@ -2,6 +2,7 @@ package fpl.but.datn.controller;
 
 import fpl.but.datn.dto.request.DanhMucDto;
 import fpl.but.datn.dto.request.GioHangDto;
+import fpl.but.datn.dto.request.HoaDonDto;
 import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.entity.GioHang;
 import fpl.but.datn.service.IDanhMucService;
@@ -14,8 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
-@Controller
-@RequestMapping("/gio-hang")
+@RestController
+@RequestMapping("/api/gio-hang")
 public class GioHangController {
 
     @Autowired
@@ -33,6 +34,19 @@ public class GioHangController {
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@RequestBody GioHang gioHang, @PathVariable UUID id){
         return ResponseEntity.ok(gioHangService.update(gioHang,id));
+    }
+
+    @GetMapping("/{id}")
+    ApiResponse<GioHangDto> detail(@PathVariable String id) {
+        ApiResponse<GioHangDto> apiResponse = new ApiResponse<>();
+        UUID idGioHang = null;
+        if (id != null){
+            idGioHang = UUID.fromString(id);
+            GioHangDto dto = TranferDatas.convertToDto(gioHangService.findById(idGioHang));
+            apiResponse.setMessage("Lấy Hóa đơn thành công");
+            apiResponse.setResult(dto);
+        }
+        return apiResponse;
     }
 
     @DeleteMapping("/delete/{id}")

@@ -41,7 +41,7 @@ public class GioHangChiTietController {
             apiResponse.setMessage("Lấy danh sách gio hang chi tiet thành công");
             apiResponse.setResult(dto);
         }else {
-            throw new AppException(ErrorCode.NO_ORDER_FOUND);
+            throw new AppException(ErrorCode.NO_CARTDETAIl_FOUND);
         }
         return apiResponse;
     }
@@ -84,7 +84,7 @@ public class GioHangChiTietController {
 
             gioHangChiTietService.create(TranferDatas.convertToEntity(createdDto));
 
-            apiResponse.setMessage("Created GioHangChiTiet successfully");
+            apiResponse.setMessage("Created Gio Hang Chi Tiet successfully");
             apiResponse.setResult(createdDto);
 
         } catch (AppException e) {
