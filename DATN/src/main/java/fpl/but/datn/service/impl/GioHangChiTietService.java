@@ -53,7 +53,7 @@ public class GioHangChiTietService implements IGioHangChiTietService {
 
         if (optionalGioHangChiTiet.isPresent()) {
             GioHangChiTiet chiTietGioHang = optionalGioHangChiTiet.get();
-            ChiTietSanPham chiTietSanPham = chiTietGioHang.getIdSanPham();
+            ChiTietSanPham chiTietSanPham = chiTietGioHang.getChiTietSanPham();
             Integer oldSoLuong = chiTietGioHang.getSoLuong();
 
             // Cập nhật số lượng trong GioHangChiTiet

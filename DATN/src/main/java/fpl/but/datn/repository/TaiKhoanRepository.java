@@ -17,7 +17,7 @@ public interface TaiKhoanRepository extends JpaRepository<TaiKhoan, UUID> {
     Page<TaiKhoan> findAll(Pageable pageable);
     @Query("SELECT tk FROM TaiKhoan tk INNER JOIN  ChucVu cv on tk.idChucVu.id = cv.id WHERE cv.ten = :role and tk.trangThai = 1 ORDER BY tk.ngayTao DESC")
     Page<TaiKhoan> findByTenChucVu(@Param("role") String role, Pageable pageable);
-    @Query("SELECT nd FROM TaiKhoan tk INNER JOIN NguoiDung nd on tk.id = nd.idTaiKhoan.id WHERE tk.tenDangNhap = :tenDangNhap")
+    @Query("SELECT nd FROM TaiKhoan tk INNER JOIN NguoiDung nd on tk.id = nd.taiKhoan.id WHERE tk.tenDangNhap = :tenDangNhap")
     Optional<TaiKhoan> findByNguoiDungByTenDangNhap(@Param("tenDangNhap") String tenDangNhap);
     Optional<TaiKhoan> findByTenDangNhap(String tenDangNhap);
 

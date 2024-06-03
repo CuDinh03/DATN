@@ -14,8 +14,8 @@ import java.util.UUID;
 public class GioHangChiTietDto {
 
     private UUID id;
-    private GioHang idGioHang;
-    private ChiTietSanPham idSanPham;
+    private GioHang gioHang;
+    private ChiTietSanPham chiTietSanPham;
     private Integer soLuong;
     private Date ngayTao;
     private Date ngaySua;

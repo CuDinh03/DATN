@@ -75,8 +75,8 @@ public class GioHangChiTietController {
         try {
             GioHangChiTietDto createdDto = new GioHangChiTietDto();
             createdDto.setId(UUID.randomUUID());
-            createdDto.setIdGioHang(request.getIdGioHang());
-            createdDto.setIdSanPham(request.getIdSanPham());
+            createdDto.setGioHang(request.getGioHang());
+            createdDto.setChiTietSanPham(request.getChiTietSanPham());
             createdDto.setSoLuong(1);
             createdDto.setNgayTao(request.getNgayTao());
             createdDto.setNgaySua(request.getNgaySua());

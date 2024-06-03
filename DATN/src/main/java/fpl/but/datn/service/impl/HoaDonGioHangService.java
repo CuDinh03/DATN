@@ -50,7 +50,7 @@ public class HoaDonGioHangService implements IHoaDonGioHangService {
         BigDecimal tongTien = BigDecimal.ZERO;
         List<GioHangChiTiet> gioHangChiTietList = gioHangChiTietRepository.findAllByIdGioHang(gioHang.getId());
         for (GioHangChiTiet gioHangChiTiet : gioHangChiTietList) {
-            tongTien = tongTien.add(gioHangChiTiet.getIdSanPham().getGiaBan().multiply(new BigDecimal(gioHangChiTiet.getSoLuong())));
+            tongTien = tongTien.add(gioHangChiTiet.getChiTietSanPham().getGiaBan().multiply(new BigDecimal(gioHangChiTiet.getSoLuong())));
         }
 
         // Tạo hóa đơn
@@ -64,7 +64,7 @@ public class HoaDonGioHangService implements IHoaDonGioHangService {
 
         // Tạo giỏ hàng chi tiết
         GioHangChiTiet gioHangChiTiet = new GioHangChiTiet();
-        gioHangChiTiet.setIdGioHang(gioHang);
+        gioHangChiTiet.setGioHang(gioHang);
         gioHangChiTiet.setNgayTao(new Date());
         gioHangChiTiet.setNgaySua(new Date());
         gioHangChiTiet.setTrangThai(true);
@@ -72,8 +72,8 @@ public class HoaDonGioHangService implements IHoaDonGioHangService {
 
         // Tạo giỏ hàng hóa đơn
         GioHangHoaDon gioHangHoaDon = new GioHangHoaDon();
-        gioHangHoaDon.setIdHoaDon(hoaDon);
-        gioHangHoaDon.setIdGioHang(gioHang);
+        gioHangHoaDon.setHoaDon(hoaDon);
+        gioHangHoaDon.setGioHang(gioHang);
         gioHangHoaDon.setNgayTao(new Date());
         gioHangHoaDon.setNgaySua(new Date());
         return gioHangHoaDonRepository.save(gioHangHoaDon);
