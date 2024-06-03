@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatusCode;
 @Getter
 public enum ErrorCode {
     UNCATEGORIZED_EXCEPTION(9999, "UNCATEGORIZED ERROR", HttpStatus.INTERNAL_SERVER_ERROR),
-
     INVALID_KEY(1001, "INVALID MESSAGE", HttpStatus.BAD_REQUEST),
     ACCOUNT_EXISTED(1002, "Tai khoan da ton tai", HttpStatus.BAD_REQUEST),
     USERNAME_INVALID(1003, "Ten dang nhap phai tu 6 den 10 ky tu", HttpStatus.BAD_REQUEST),
@@ -28,6 +27,8 @@ public enum ErrorCode {
     NO_VOUCHER_FOUND(1017, "Không tìm thấy Voucher nào!",HttpStatus.NOT_FOUND),
     SDT_ALREADY_USED(1018, "Số điện thoại này đã được đăng ký!",HttpStatus.NOT_FOUND),
     NO_CUSTOMERS_FOUND(1019, "Không tìm thấy khách hàng nào!",HttpStatus.NOT_FOUND),
+    HINHANH_EXISTED(1015, "Hình ảnh đã ton tai",HttpStatus.BAD_REQUEST),
+    HINHANH_NOT_EXISTED(1016, "Không tìm thấy hình ảnh",HttpStatus.NOT_FOUND),
     CATEGORY_EXISTED(1017, "Danh mục này đã tồn tai", HttpStatus.BAD_REQUEST),
     CATEGORY_NAME_NULL(1018, "Tên danh mục không được để trống", HttpStatus.BAD_REQUEST),
     CATEGORY_CODE_NULL(1019, "Mã danh mục không được để trống", HttpStatus.BAD_REQUEST),
