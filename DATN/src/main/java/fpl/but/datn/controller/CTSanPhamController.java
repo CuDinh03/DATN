@@ -43,7 +43,7 @@ public class CTSanPhamController {
             apiResponse.setMessage("Lấy danh sách sa pham thành công");
             apiResponse.setResult(new PageImpl<>(listDto, pageable, chiTietSanPhamPage.getTotalElements()));
         } else {
-            throw new AppException(ErrorCode.NO_ACCOUNTS_FOUND);
+            throw new AppException(ErrorCode.NO_PRODUCT_DETAIL_FOUND);
         }
 
         return apiResponse;

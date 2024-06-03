@@ -52,8 +52,6 @@ public class DanhMucServiceImpl implements IDanhMucService {
 
     }
 
-
-
     @Override
     public DanhMuc findById(UUID id) {
 

@@ -43,7 +43,6 @@ public class HoaDonService implements IHoaDonService {
 
     @Override
     public void open(UUID id) {
-
     }
 
     @Override
