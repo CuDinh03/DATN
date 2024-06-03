@@ -62,14 +62,6 @@ public class HoaDonGioHangService implements IHoaDonGioHangService {
         hoaDon.setTongTien(tongTien);
         hoaDonRepository.save(hoaDon);
 
-        // Tạo giỏ hàng chi tiết
-        GioHangChiTiet gioHangChiTiet = new GioHangChiTiet();
-        gioHangChiTiet.setIdGioHang(gioHang);
-        gioHangChiTiet.setNgayTao(new Date());
-        gioHangChiTiet.setNgaySua(new Date());
-        gioHangChiTiet.setTrangThai(true);
-        gioHangChiTietRepository.save(gioHangChiTiet);
-
         // Tạo giỏ hàng hóa đơn
         GioHangHoaDon gioHangHoaDon = new GioHangHoaDon();
         gioHangHoaDon.setIdHoaDon(hoaDon);

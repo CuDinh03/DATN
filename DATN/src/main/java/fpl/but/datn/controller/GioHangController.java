@@ -1,8 +1,12 @@
 package fpl.but.datn.controller;
 
+import fpl.but.datn.dto.request.DanhMucDto;
+import fpl.but.datn.dto.request.GioHangDto;
+import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.entity.GioHang;
 import fpl.but.datn.service.IDanhMucService;
 import fpl.but.datn.service.IGioHangService;
+import fpl.but.datn.tranferdata.TranferDatas;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -39,8 +43,6 @@ public class GioHangController {
             return ResponseEntity.ok("xoa that bai");
     }
 
-    @GetMapping("/detail/{id}")
-    public ResponseEntity<?> detail(@PathVariable UUID id){
-        return ResponseEntity.ok(gioHangService.findById(id));
-    }
+
+
 }

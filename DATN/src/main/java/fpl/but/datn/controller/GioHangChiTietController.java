@@ -61,4 +61,31 @@ public class GioHangChiTietController {
 
         return apiResponse;
     }
+
+    @PostMapping("/create")
+    public ApiResponse<GioHangChiTietDto> createGioHangChiTiet(@RequestBody GioHangChiTietDto request) {
+        ApiResponse<GioHangChiTietDto> apiResponse = new ApiResponse<>();
+
+        try {
+            GioHangChiTietDto createdDto = new GioHangChiTietDto();
+            createdDto.setId(UUID.randomUUID());
+            createdDto.setIdGioHang(request.getIdGioHang());
+            createdDto.setIdSanPham(request.getIdSanPham());
+            createdDto.setSoLuong(1);
+            createdDto.setNgayTao(request.getNgayTao());
+            createdDto.setNgaySua(request.getNgaySua());
+            createdDto.setTrangThai(Boolean.TRUE);
+
+            gioHangChiTietService.create(TranferDatas.convertToEntity(createdDto));
+
+            apiResponse.setMessage("Created GioHangChiTiet successfully");
+            apiResponse.setResult(createdDto);
+
+        } catch (AppException e) {
+            apiResponse.setMessage(e.getMessage());
+            apiResponse.setResult(null);
+        }
+
+        return apiResponse;
+    }
 }

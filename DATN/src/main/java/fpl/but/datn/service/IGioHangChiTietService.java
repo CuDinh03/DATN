@@ -10,8 +10,8 @@ import java.util.UUID;
 
 public interface IGioHangChiTietService {
     List getAll();
-    GioHangChiTiet create(GioHangChiTiet hoaDonGioHang);
-    GioHangChiTiet update(GioHangChiTiet hoaDonGioHang, UUID id);
+    GioHangChiTiet create(GioHangChiTiet gioHangChiTiet);
+    GioHangChiTiet update(GioHangChiTiet gioHangChiTiet, UUID id);
     GioHangChiTiet findById(UUID id);
     List<GioHangChiTiet> getAllByIdGioHang(UUID id);
     GioHangChiTiet updateGioHangChiTiet(UUID id, Integer newSoLuong);
