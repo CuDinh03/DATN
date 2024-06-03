@@ -14,6 +14,7 @@ public interface IHoaDonGioHangService {
     GioHangHoaDon create(GioHangHoaDon hoaDonGioHang);
     GioHangHoaDon update(GioHangHoaDon hoaDonGioHang, UUID id);
     GioHangHoaDon findById(UUID id);
+
     List<GioHangHoaDon> getAllByIdHoaDon(UUID id);
 
 }

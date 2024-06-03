@@ -1,6 +1,7 @@
 package fpl.but.datn.controller;
 
 import fpl.but.datn.dto.request.ChucVuDto;
+import fpl.but.datn.dto.request.GioHangDto;
 import fpl.but.datn.dto.request.HoaDonDto;
 import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.entity.HoaDonChiTiet;
@@ -10,10 +11,7 @@ import fpl.but.datn.service.IHoaDonService;
 import fpl.but.datn.service.impl.HoaDonService;
 import fpl.but.datn.tranferdata.TranferDatas;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -36,6 +34,28 @@ public class HoaDonController {
             throw new AppException(ErrorCode.NO_ORDER_FOUND);
         }
         return apiResponse;
+    }
+
+    @GetMapping("/{id}")
+    ApiResponse<HoaDonDto> detail(@PathVariable String id) {
+        ApiResponse<HoaDonDto> apiResponse = new ApiResponse<>();
+        UUID idHoaDon = null;
+        if (id != null){
+            idHoaDon = UUID.fromString(id);
+            HoaDonDto dto = TranferDatas.convertToDto(hoaDonService.findById(idHoaDon));
+            apiResponse.setMessage("Lấy Hóa đơn thành công");
+            apiResponse.setResult(dto);
+        }
+        return apiResponse;
+    }
+
+    @DeleteMapping("/{id}")
+    ApiResponse<Void> open(@PathVariable String id) {
+        UUID idHoaDon = null;
+        if (id != null) {
+            idHoaDon = UUID.fromString(id);
+            hoaDonService.delete(idHoaDon);
+        } return ApiResponse.<Void>builder().build();
     }
 
 

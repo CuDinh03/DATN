@@ -36,7 +36,8 @@ public class SecurityConfig {
     private final String[] ADMIN_ENDPOINT_POST = {"/api/voucher/create",
             "/api/khs/create",
             "/api/danh-muc/create",
-            "/api/hoa-don-gio-hang/create"
+            "/api/hoa-don-gio-hang/create",
+            "/api/gio-hang-chi-tiet/create"
     };
     private final String[] ADMIN_ENDPOINT_PUT = {"/api/voucher/{id}", "/api/users/{id}",
             "/api/danh-muc/{id}"

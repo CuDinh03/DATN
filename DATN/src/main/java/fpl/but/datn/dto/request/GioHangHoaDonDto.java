@@ -5,12 +5,15 @@ import fpl.but.datn.entity.HoaDon;
 import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Data
 public class GioHangHoaDonDto {
 
     private UUID id;
-    private GioHang idGioHang;
-    private HoaDon idHoaDon;
+    private GioHang gioHang;
+    private HoaDon hoaDon;
+    private Date ngayTao;
+    private Date ngaySua;
 }
