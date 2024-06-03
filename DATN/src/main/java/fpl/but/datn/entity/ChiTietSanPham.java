@@ -20,26 +20,19 @@ public class ChiTietSanPham {
     private UUID id;
     private String ma;
     @ManyToOne
-    @JoinColumn(name = "id_san_pham")
-    private SanPham idSanPham;
+    private SanPham sanPham;
     @ManyToOne
-    @JoinColumn(name = "id_hinh_anh")
-    private HinhAnh idHinhAnh;
+    private HinhAnh hinhAnh;
     @ManyToOne
-    @JoinColumn(name = "id_thuong_hieu")
-    private ThuongHieu idThuongHieu;
+    private ThuongHieu thuongHieu;
     @ManyToOne
-    @JoinColumn(name = "id_chat_lieu")
-    private ChatLieu idChatLieu;
+    private ChatLieu chatLieu;
     @ManyToOne
-    @JoinColumn(name = "id_danh_muc")
-    private DanhMuc idDanhMuc;
+    private DanhMuc danhMuc;
     @ManyToOne
-    @JoinColumn(name = "id_kich_thuoc")
-    private KichThuoc idKichThuoc;
+    private KichThuoc kichThuoc;
     @ManyToOne
-    @JoinColumn(name = "id_mau_sac")
-    private MauSac idMauSac;
+    private MauSac mauSac;
     private Integer soLuong;
     private BigDecimal giaNhap;
     private BigDecimal giaBan;

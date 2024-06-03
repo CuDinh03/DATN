@@ -36,7 +36,9 @@ public class HoaDonService implements IHoaDonService {
 
     @Override
     public void delete(UUID id) {
-
+        HoaDon hoaDon = findById(id);
+        hoaDon.setTrangThai(Boolean.FALSE);
+        hoaDonRepository.save(hoaDon);
     }
 
     @Override

@@ -1,9 +1,6 @@
 package fpl.but.datn.service.impl;
 
-import fpl.but.datn.entity.GioHang;
-import fpl.but.datn.entity.GioHangChiTiet;
-import fpl.but.datn.entity.GioHangHoaDon;
-import fpl.but.datn.entity.HoaDon;
+import fpl.but.datn.entity.*;
 import fpl.but.datn.repository.GioHangChiTietRepository;
 import fpl.but.datn.repository.GioHangHoaDonRepository;
 import fpl.but.datn.repository.GioHangRepository;
@@ -33,8 +30,9 @@ public class HoaDonGioHangService implements IHoaDonGioHangService {
 
     @Override
     public List getAll() {
-        return gioHangHoaDonRepository.findAllByNgayTao();
+        return gioHangHoaDonRepository.findAllByTrangThai();
     }
+
 
     @Override
     public GioHangHoaDon create(GioHangHoaDon hoaDonGioHang) {
@@ -50,7 +48,7 @@ public class HoaDonGioHangService implements IHoaDonGioHangService {
         BigDecimal tongTien = BigDecimal.ZERO;
         List<GioHangChiTiet> gioHangChiTietList = gioHangChiTietRepository.findAllByIdGioHang(gioHang.getId());
         for (GioHangChiTiet gioHangChiTiet : gioHangChiTietList) {
-            tongTien = tongTien.add(gioHangChiTiet.getIdSanPham().getGiaBan().multiply(new BigDecimal(gioHangChiTiet.getSoLuong())));
+            tongTien = tongTien.add(gioHangChiTiet.getChiTietSanPham().getGiaBan().multiply(new BigDecimal(gioHangChiTiet.getSoLuong())));
         }
 
         // Tạo hóa đơn
@@ -64,8 +62,8 @@ public class HoaDonGioHangService implements IHoaDonGioHangService {
 
         // Tạo giỏ hàng hóa đơn
         GioHangHoaDon gioHangHoaDon = new GioHangHoaDon();
-        gioHangHoaDon.setIdHoaDon(hoaDon);
-        gioHangHoaDon.setIdGioHang(gioHang);
+        gioHangHoaDon.setHoaDon(hoaDon);
+        gioHangHoaDon.setGioHang(gioHang);
         gioHangHoaDon.setNgayTao(new Date());
         gioHangHoaDon.setNgaySua(new Date());
         return gioHangHoaDonRepository.save(gioHangHoaDon);
@@ -80,6 +78,10 @@ public class HoaDonGioHangService implements IHoaDonGioHangService {
     public GioHangHoaDon findById(UUID id) {
         return null;
     }
+
+
+
+
 
     @Override
     public List<GioHangHoaDon> getAllByIdHoaDon(UUID id) {

@@ -49,5 +49,14 @@ public class HoaDonController {
         return apiResponse;
     }
 
+    @DeleteMapping("/{id}")
+    ApiResponse<Void> open(@PathVariable String id) {
+        UUID idHoaDon = null;
+        if (id != null) {
+            idHoaDon = UUID.fromString(id);
+            hoaDonService.delete(idHoaDon);
+        } return ApiResponse.<Void>builder().build();
+    }
+
 
 }

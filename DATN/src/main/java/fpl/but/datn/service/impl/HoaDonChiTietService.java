@@ -45,7 +45,7 @@ public class HoaDonChiTietService implements IHoaDonChiTietService {
         HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
         hoaDonChiTiet.setNgayTao(new Date());
         hoaDonChiTiet.setNgaySua(new Date());
-        hoaDonChiTiet.setIdHoaDon(hoaDon);
+        hoaDonChiTiet.setHoaDon(hoaDon);
         hoaDonChiTiet.setSoLuong(0);
         hoaDon.setTrangThai(true);
         return hoaDonChiTietRepository.save(hoaDonChiTiet);

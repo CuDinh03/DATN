@@ -21,8 +21,7 @@ public class GioHang {
     private UUID id;
     private String ma;
     @OneToOne
-    @JoinColumn(name = "id_khach_hang")
-    private KhachHang idKhachHang;
+    private KhachHang khachHang;
     private Date ngayTao;
     private Date ngaySua;
     private Boolean trangThai;
