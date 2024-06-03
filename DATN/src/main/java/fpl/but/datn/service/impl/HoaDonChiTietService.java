@@ -79,4 +79,5 @@ public class HoaDonChiTietService implements IHoaDonChiTietService {
     public List<HoaDonChiTiet> getHoaDonChiTietByIdHoaDon(UUID idHoaDon) {
         return hoaDonChiTietRepository.findAllHoaDonChiTietByIdHoaDon(idHoaDon);
     }
+
 }

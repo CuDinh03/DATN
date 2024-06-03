@@ -15,8 +15,8 @@ import java.util.UUID;
 public class HoaDonChiTietDto {
 
     private UUID id;
-    private HoaDon idHoaDon;
-    private ChiTietSanPham idChiTietSanPham;
+    private HoaDon hoaDon;
+    private ChiTietSanPham chiTietSanPham;
     private Integer soLuong;
     private Date ngayTao;
     private Date ngaySua;

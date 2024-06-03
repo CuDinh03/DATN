@@ -11,6 +11,6 @@ import java.util.UUID;
 public class GioHangHoaDonDto {
 
     private UUID id;
-    private GioHang idGioHang;
-    private HoaDon idHoaDon;
+    private GioHang gioHang;
+    private HoaDon hoaDon;
 }

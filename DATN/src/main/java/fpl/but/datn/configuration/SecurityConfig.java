@@ -37,7 +37,8 @@ public class SecurityConfig {
             "/api/khs/create",
             "/api/danh-muc/create",
             "/api/hoa-don-gio-hang/create",
-            "/api/gio-hang-chi-tiet/create"
+            "/api/gio-hang-chi-tiet/create",
+            "/api/thanhtoan"
     };
     private final String[] ADMIN_ENDPOINT_PUT = {"/api/voucher/{id}", "/api/users/{id}",
             "/api/danh-muc/{id}"

@@ -62,14 +62,6 @@ public class HoaDonGioHangService implements IHoaDonGioHangService {
         hoaDon.setTongTien(tongTien);
         hoaDonRepository.save(hoaDon);
 
-        // Tạo giỏ hàng chi tiết
-        GioHangChiTiet gioHangChiTiet = new GioHangChiTiet();
-        gioHangChiTiet.setGioHang(gioHang);
-        gioHangChiTiet.setNgayTao(new Date());
-        gioHangChiTiet.setNgaySua(new Date());
-        gioHangChiTiet.setTrangThai(true);
-        gioHangChiTietRepository.save(gioHangChiTiet);
-
         // Tạo giỏ hàng hóa đơn
         GioHangHoaDon gioHangHoaDon = new GioHangHoaDon();
         gioHangHoaDon.setHoaDon(hoaDon);
@@ -87,6 +79,9 @@ public class HoaDonGioHangService implements IHoaDonGioHangService {
     @Override
     public GioHangHoaDon findById(UUID id) {
         return null;
+    }
+    public GioHangHoaDon findByIdHoaDon(UUID idHoaDon) {
+        return gioHangHoaDonRepository.findByIdHoaDon(idHoaDon);
     }
 
     @Override

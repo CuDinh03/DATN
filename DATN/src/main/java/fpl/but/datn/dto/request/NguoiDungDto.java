@@ -13,7 +13,7 @@ public class NguoiDungDto {
     private UUID id;
     private String ma;
     private String ten;
-    private TaiKhoan idTaiKhoan;
+    private TaiKhoan taiKhoan;
     private String email;
     private String sdt;
     private Boolean gioiTinh;
