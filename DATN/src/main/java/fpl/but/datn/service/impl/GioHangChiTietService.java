@@ -8,7 +8,9 @@ import fpl.but.datn.service.IGioHangChiTietService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -52,12 +54,17 @@ public class GioHangChiTietService implements IGioHangChiTietService {
     public GioHangChiTiet updateGioHangChiTiet(UUID id, Integer newSoLuong) {
         Optional<GioHangChiTiet> optionalGioHangChiTiet = gioHangChiTietRepository.findById(id);
 
+
+
         if (optionalGioHangChiTiet.isPresent()) {
             GioHangChiTiet chiTietGioHang = optionalGioHangChiTiet.get();
             ChiTietSanPham chiTietSanPham = chiTietGioHang.getChiTietSanPham();
             Integer oldSoLuong = chiTietGioHang.getSoLuong();
 
-            // Cập nhật số lượng trong GioHangChiTiet
+            if (newSoLuong > chiTietSanPham.getSoLuong() + oldSoLuong) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Số lượng nhập vào vượt quá số lượng sản phẩm chi tiết hiện có.");
+
+            }
             chiTietGioHang.setSoLuong(newSoLuong);
 
             if (newSoLuong == 0) {

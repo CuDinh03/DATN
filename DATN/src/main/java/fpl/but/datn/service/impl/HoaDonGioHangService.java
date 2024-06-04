@@ -26,6 +26,8 @@ public class HoaDonGioHangService implements IHoaDonGioHangService {
     private HoaDonRepository hoaDonRepository;
     @Autowired
     private KhachHangService khachHangService;
+    @Autowired
+    private NguoiDungService nguoiDungService;
 
     @Override
     public List getAll() {
@@ -56,6 +58,8 @@ public class HoaDonGioHangService implements IHoaDonGioHangService {
         hoaDon.setNgayTao(new Date());
         hoaDon.setNgaySua(new Date());
         hoaDon.setTrangThai(true);
+        NguoiDung nguoiDung = nguoiDungService.findById(UUID.fromString("8663275a-9e74-4f82-b26b-21fa4bb40dc8"));
+        hoaDon.setNguoiDung(nguoiDung);
         hoaDon.setTongTien(tongTien);
         hoaDonRepository.save(hoaDon);
 

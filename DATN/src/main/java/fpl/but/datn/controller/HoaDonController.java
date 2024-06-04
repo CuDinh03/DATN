@@ -1,9 +1,12 @@
 package fpl.but.datn.controller;
 
 import fpl.but.datn.dto.request.ChucVuDto;
+import fpl.but.datn.dto.request.DanhMucDto;
 import fpl.but.datn.dto.request.GioHangDto;
 import fpl.but.datn.dto.request.HoaDonDto;
 import fpl.but.datn.dto.response.ApiResponse;
+import fpl.but.datn.entity.DanhMuc;
+import fpl.but.datn.entity.HoaDon;
 import fpl.but.datn.entity.HoaDonChiTiet;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
@@ -11,6 +14,10 @@ import fpl.but.datn.service.IHoaDonService;
 import fpl.but.datn.service.impl.HoaDonService;
 import fpl.but.datn.tranferdata.TranferDatas;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -56,6 +63,25 @@ public class HoaDonController {
             idHoaDon = UUID.fromString(id);
             hoaDonService.delete(idHoaDon);
         } return ApiResponse.<Void>builder().build();
+    }
+
+    @GetMapping("/allPage")
+    ApiResponse<Page<HoaDonDto>> getHoaDonPage(@RequestParam(defaultValue = "0") int page,
+                                             @RequestParam(defaultValue = "5") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<HoaDon> hoaDonPage = hoaDonService.getAllHoaDonPageable(pageable);
+        List<HoaDonDto> listDto = TranferDatas.convertListHoaDonToDto(hoaDonPage.getContent());
+
+        ApiResponse<Page<HoaDonDto>> apiResponse = new ApiResponse<>();
+
+        if (!listDto.isEmpty()) {
+            apiResponse.setMessage("Lấy danh sách danh mục thành công");
+            apiResponse.setResult(new PageImpl<>(listDto, pageable, hoaDonPage.getTotalElements()));
+        } else {
+            throw new AppException(ErrorCode.NO_ACCOUNTS_FOUND);
+        }
+
+        return apiResponse;
     }
 
 

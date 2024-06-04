@@ -51,9 +51,8 @@ public class HoaDonService implements IHoaDonService {
     }
 
     @Override
-    public Page<HoaDon> getAllDanhMucPageable(Pageable pageable) {
-        return null;
+    public Page<HoaDon> getAllHoaDonPageable(Pageable pageable) {
+        return hoaDonRepository.findAllPage(pageable);
     }
-
 
 }
