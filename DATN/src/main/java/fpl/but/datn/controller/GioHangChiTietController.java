@@ -71,7 +71,6 @@ public class GioHangChiTietController {
     @PostMapping("/create")
     public ApiResponse<GioHangChiTietDto> createGioHangChiTiet(@RequestBody GioHangChiTietDto request) {
         ApiResponse<GioHangChiTietDto> apiResponse = new ApiResponse<>();
-
         try {
             GioHangChiTietDto createdDto = new GioHangChiTietDto();
             createdDto.setId(UUID.randomUUID());
