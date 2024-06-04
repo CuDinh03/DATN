@@ -19,11 +19,9 @@ public class ThanhToan {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     @ManyToOne
-    @JoinColumn(name = "id_hoa_don")
-    private HoaDon idHoaDon;
+    private HoaDon hoaDon;
     @ManyToOne
-    @JoinColumn(name = "id_phuong_thuc")
-    private PhuongThucThanhToan idPhuongThucThanhToan;
+    private PhuongThucThanhToan phuongThucThanhToan;
     private BigDecimal tienThanhToan;
     private Date ngayTao;
     private Date ngaySua;

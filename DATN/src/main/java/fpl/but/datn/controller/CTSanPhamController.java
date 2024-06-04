@@ -2,6 +2,7 @@ package fpl.but.datn.controller;
 
 import fpl.but.datn.dto.request.ChiTietSanPhamDto;
 import fpl.but.datn.dto.request.DanhMucDto;
+import fpl.but.datn.dto.request.GioHangDto;
 import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.entity.ChiTietSanPham;
 import fpl.but.datn.entity.DanhMuc;
@@ -43,7 +44,7 @@ public class CTSanPhamController {
             apiResponse.setMessage("Lấy danh sách sa pham thành công");
             apiResponse.setResult(new PageImpl<>(listDto, pageable, chiTietSanPhamPage.getTotalElements()));
         } else {
-            throw new AppException(ErrorCode.NO_ACCOUNTS_FOUND);
+            throw new AppException(ErrorCode.NO_PRODUCT_DETAIL_FOUND);
         }
 
         return apiResponse;
@@ -79,9 +80,16 @@ ApiResponse<Void> delete(@PathVariable String id) {
     } return ApiResponse.<Void>builder().build();
 }
 
-    @GetMapping("/detail/{id}")
-    public ResponseEntity<?> detail(@PathVariable UUID id){
-
-    return ResponseEntity.ok(ctSanPhamService.findById(id));
+    @GetMapping("/{id}")
+    ApiResponse<ChiTietSanPhamDto> detail(@PathVariable String id) {
+        ApiResponse<ChiTietSanPhamDto> apiResponse = new ApiResponse<>();
+        UUID idChiTietSanPham = null;
+        if (id != null){
+            idChiTietSanPham = UUID.fromString(id);
+            ChiTietSanPhamDto dto = TranferDatas.convertToDto(ctSanPhamService.findById(idChiTietSanPham));
+            apiResponse.setMessage("Lấy chi tiết sản phẩm thành công");
+            apiResponse.setResult(dto);
+        }
+        return apiResponse;
     }
 }

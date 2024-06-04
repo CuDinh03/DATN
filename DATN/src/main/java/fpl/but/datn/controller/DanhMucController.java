@@ -1,6 +1,7 @@
 package fpl.but.datn.controller;
 
 import fpl.but.datn.dto.request.DanhMucDto;
+import fpl.but.datn.dto.request.HinhAnhDto;
 import fpl.but.datn.dto.request.TaiKhoanDto;
 import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.entity.DanhMuc;
@@ -28,6 +29,20 @@ public class DanhMucController {
     @Autowired
     private IDanhMucService danhMucService;
 
+    @GetMapping("/getAll")
+    ApiResponse<List<DanhMucDto>> getAll() {
+        List<DanhMucDto> listDto = TranferDatas.convertListDanhMucToDto(danhMucService.getAll());
+        ApiResponse<List<DanhMucDto>> apiResponse = new ApiResponse<>();
+
+        if (!listDto.isEmpty()) {
+            apiResponse.setMessage("Lấy danh sách hinh anh thành công");
+            apiResponse.setResult(listDto);
+        } else {
+            throw new AppException(ErrorCode.NO_REPORT_FOUND);
+        }
+
+        return apiResponse;
+    }
     @GetMapping("/all")
     ApiResponse<Page<DanhMucDto>> getDanhMuc(@RequestParam(defaultValue = "0") int page,
                                                @RequestParam(defaultValue = "5") int size) {

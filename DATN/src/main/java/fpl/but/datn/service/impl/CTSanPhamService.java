@@ -39,13 +39,14 @@ public class CTSanPhamService implements ICTSanPhamService {
         if (ctSanPhamRepository.existsByMa(request.getMa()))
             throw new AppException(ErrorCode.NO_LISTSPChiTiet_FOUND);
         ctsp.setMa("CTSP" + random.nextInt(1000));
-        ctsp.setIdSanPham(request.getIdSanPham());
-        ctsp.setIdHinhAnh(request.getIdHinhAnh());
-        ctsp.setIdThuongHieu(request.getIdThuongHieu());
-        ctsp.setIdChatLieu(request.getIdChatLieu());
-        ctsp.setIdDanhMuc(request.getIdDanhMuc());
-        ctsp.setIdKichThuoc(request.getIdKichThuoc());
-        ctsp.setIdMauSac(request.getIdMauSac());
+        ctsp.setId(request.getId());
+        ctsp.setMa(request.getMa());
+        ctsp.setHinhAnh(request.getHinhAnh());
+        ctsp.setThuongHieu(request.getThuongHieu());
+        ctsp.setChatLieu(request.getChatLieu());
+        ctsp.setDanhMuc(request.getDanhMuc());
+        ctsp.setKichThuoc(request.getKichThuoc());
+        ctsp.setMauSac(request.getMauSac());
         ctsp.setSoLuong(request.getSoLuong());
         ctsp.setGiaNhap(request.getGiaNhap());
         ctsp.setGiaBan(request.getGiaBan());
@@ -63,13 +64,13 @@ public class CTSanPhamService implements ICTSanPhamService {
         ChiTietSanPham ctsp = new ChiTietSanPham();
         ctsp.setId(id);
         ctsp.setMa(request.getMa());
-        ctsp.setIdSanPham(request.getIdSanPham());
-        ctsp.setIdHinhAnh(request.getIdHinhAnh());
-        ctsp.setIdThuongHieu(request.getIdThuongHieu());
-        ctsp.setIdChatLieu(request.getIdChatLieu());
-        ctsp.setIdDanhMuc(request.getIdDanhMuc());
-        ctsp.setIdKichThuoc(request.getIdKichThuoc());
-        ctsp.setIdMauSac(request.getIdMauSac());
+        ctsp.setSanPham(request.getSanPham());
+        ctsp.setHinhAnh(request.getHinhAnh());
+        ctsp.setThuongHieu(request.getThuongHieu());
+        ctsp.setChatLieu(request.getChatLieu());
+        ctsp.setDanhMuc(request.getDanhMuc());
+        ctsp.setKichThuoc(request.getKichThuoc());
+        ctsp.setMauSac(request.getMauSac());
         ctsp.setSoLuong(request.getSoLuong());
         ctsp.setGiaNhap(request.getGiaNhap());
         ctsp.setGiaBan(request.getGiaBan());
@@ -105,7 +106,7 @@ public class CTSanPhamService implements ICTSanPhamService {
 
     @Override
     public ChiTietSanPham findById(UUID id) {
-        return null;
+        return ctSanPhamRepository.findById(id).get();
     }
 
     @Override

@@ -21,8 +21,7 @@ public class KhachHang {
     private String ma;
     private String ten;
     @OneToOne
-    @JoinColumn(name = "id_tai_khoan")
-    private TaiKhoan idTaiKhoan;
+    private TaiKhoan taiKhoan;
     private String email;
     private String sdt;
     private Boolean gioiTinh;

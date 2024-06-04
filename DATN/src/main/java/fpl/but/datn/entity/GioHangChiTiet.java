@@ -17,11 +17,9 @@ public class GioHangChiTiet {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     @ManyToOne
-    @JoinColumn(name = "id_gio_hang")
-    private GioHang idGioHang;
+    private GioHang gioHang;
     @ManyToOne
-    @JoinColumn(name = "id_san_pham")
-    private ChiTietSanPham idSanPham;
+    private ChiTietSanPham chiTietSanPham;
     private Integer soLuong;
     private Date ngayTao;
     private Date ngaySua;
