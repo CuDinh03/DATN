@@ -2,6 +2,7 @@ package fpl.but.datn.service.impl;
 
 import fpl.but.datn.entity.*;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import fpl.but.datn.repository.*;
 =======
 import fpl.but.datn.repository.GioHangChiTietRepository;
@@ -9,6 +10,9 @@ import fpl.but.datn.repository.GioHangHoaDonRepository;
 import fpl.but.datn.repository.GioHangRepository;
 import fpl.but.datn.repository.HoaDonRepository;
 >>>>>>> cc54a61 (update entity)
+=======
+import fpl.but.datn.repository.*;
+>>>>>>> 6998d93 (update them san pham vao gio hang)
 import fpl.but.datn.service.IHoaDonGioHangService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
