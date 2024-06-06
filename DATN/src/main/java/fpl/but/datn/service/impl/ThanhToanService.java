@@ -65,12 +65,10 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
 
     public void thanhToanSanPham(HoaDon request,
                                  List<GioHangChiTiet> listGioHangCt) {
-        System.out.println(request.getId());
+
 
         if (request != null) {
             HoaDon hoaDon = hoaDonService.findById(request.getId());
-            System.out.println("");
-            System.out.println(hoaDon);
             if (hoaDon != null) {
                 hoaDon.setTrangThai(Boolean.FALSE);
                 hoaDon.setTongTien(request.getTongTien());
@@ -80,20 +78,17 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
                     hoaDon.setKhachHang(request.getKhachHang());
                 }
                 hoaDonService.update(hoaDon, hoaDon.getId());
-
                 for (GioHangChiTiet ghCt : listGioHangCt) {
-                    HoaDonChiTiet hoaDonChiTiet = HoaDonChiTiet.builder()
-                            .id(UUID.randomUUID())
-                            .giaBan(ghCt.getChiTietSanPham().getGiaBan())
-                            .soLuong(ghCt.getSoLuong())
-                            .ngaySua(new Date())
-                            .ngayTao(new Date())
-                            .chiTietSanPham(ghCt.getChiTietSanPham())
-                            .hoaDon(hoaDon)
-                            .trangThai(Boolean.FALSE)
-                            .build();
-                    System.out.println("");
-                    System.out.println(hoaDonChiTiet);
+                    System.out.println(ghCt);
+                    HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
+                            hoaDonChiTiet.setId(UUID.randomUUID());
+                            hoaDonChiTiet.setGiaBan(ghCt.getChiTietSanPham().getGiaBan());
+                            hoaDonChiTiet.setSoLuong(ghCt.getSoLuong());
+                            hoaDonChiTiet.setNgayTao(new Date());
+                            hoaDonChiTiet.setNgaySua(new Date());
+                            hoaDonChiTiet.setChiTietSanPham(ghCt.getChiTietSanPham());
+                            hoaDonChiTiet.setHoaDon(hoaDon);
+                            hoaDonChiTiet.setTrangThai(Boolean.TRUE);
                     this.hoaDonChiTietService.create(hoaDonChiTiet);
                 }
 
