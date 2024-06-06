@@ -10,10 +10,7 @@ import fpl.but.datn.service.IHoaDonService;
 import fpl.but.datn.service.impl.HoaDonService;
 import fpl.but.datn.tranferdata.TranferDatas;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -35,6 +32,15 @@ public class HoaDonController {
         }else {
             throw new AppException(ErrorCode.NO_ORDER_FOUND);
         }
+        return apiResponse;
+    }
+
+    @GetMapping("/{ma}")
+    ApiResponse<HoaDonDto> findByMa(@PathVariable String ma){
+        ApiResponse<HoaDonDto> apiResponse =  new ApiResponse<>();
+        HoaDonDto dto = TranferDatas.convertToDto(hoaDonService.findByMa(ma).get());
+        apiResponse.setMessage("Lấy hoa don thành công");
+        apiResponse.setResult(dto);
         return apiResponse;
     }
 

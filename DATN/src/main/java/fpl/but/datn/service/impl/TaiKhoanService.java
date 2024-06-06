@@ -70,6 +70,11 @@ public class TaiKhoanService implements ITaiKhoanService {
         return taiKhoanRepository.findByTenChucVu(role,pageable);
     }
 
+    @Override
+    public Optional<TaiKhoan> findByNguoiDungByTenDangNhap(String tenDangNhap) {
+        return taiKhoanRepository.findByNguoiDungByTenDangNhap(tenDangNhap);
+    }
+
 
     //    //author
     @NonFinal
