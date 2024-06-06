@@ -851,8 +851,6 @@ public class TranferDatas {
         if (entity.getId() != null) dto.setId(entity.getId());
         if (entity.getGioHang() != null) dto.setGioHang(entity.getGioHang());
         if (entity.getChiTietSanPham() != null) dto.setChiTietSanPham(entity.getChiTietSanPham());
-        if (entity.getGioHang() != null) dto.setGioHang(entity.getGioHang());
-        if (entity.getChiTietSanPham() != null) dto.setChiTietSanPham(entity.getChiTietSanPham());
         if (entity.getSoLuong() != null) dto.setSoLuong(entity.getSoLuong());
         if (entity.getNgayTao() != null) dto.setNgayTao(entity.getNgayTao());
         if (entity.getNgaySua() != null) dto.setNgaySua(entity.getNgaySua());
@@ -862,8 +860,6 @@ public class TranferDatas {
     public static GioHangChiTiet convertToEntity(GioHangChiTietDto dto){
         GioHangChiTiet entity = new GioHangChiTiet();
         if (dto.getId() != null) entity.setId(dto.getId());
-        if (dto.getGioHang() != null) entity.setGioHang(dto.getGioHang());
-        if (dto.getChiTietSanPham() != null) entity.setChiTietSanPham(dto.getChiTietSanPham());
         if (dto.getGioHang() != null) entity.setGioHang(dto.getGioHang());
         if (dto.getChiTietSanPham() != null) entity.setChiTietSanPham(dto.getChiTietSanPham());
         if (dto.getSoLuong() != null) entity.setSoLuong(dto.getSoLuong());

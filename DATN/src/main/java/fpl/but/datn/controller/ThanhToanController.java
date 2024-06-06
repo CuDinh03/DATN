@@ -22,12 +22,9 @@ public class ThanhToanController {
     private ThanhToanService thanhToanService;
     @PostMapping()
     public ApiResponse<ThanhToanDto> thanhtoan(@RequestBody ThanhToanDto thanhToanDto) {
-
-        HoaDonDto hoaDon = thanhToanDto.getHoaDonDto();
-        List<GioHangChiTietDto> gioHangChiTietDtos = thanhToanDto.getGioHangChiTietDtoList();
         ApiResponse<ThanhToanDto> apiResponse = new ApiResponse<>();
         try {
-            if (hoaDon != null && gioHangChiTietDtos != null) {
+            if (thanhToanDto.getHoaDonDto() != null && thanhToanDto.getGioHangChiTietDtoList() != null) {
                 thanhToanService.thanhToanSanPham(TranferDatas.convertToEntity(thanhToanDto.getHoaDonDto()), TranferDatas.convertListGioHangChiTietToEntity(thanhToanDto.getGioHangChiTietDtoList()));
                 apiResponse.setMessage("Thanh toán thành công");
                 apiResponse.setResult(thanhToanDto);

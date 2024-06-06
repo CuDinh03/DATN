@@ -13,6 +13,7 @@ import java.util.UUID;
 
 @Repository
 public interface GioHangChiTietRepository extends JpaRepository<GioHangChiTiet, UUID> {
+
     @Query(value = "SELECT ghct.* FROM gio_hang_chi_tiet ghct INNER JOIN gio_hang gh ON ghct.gio_hang_id = gh.id WHERE gh.id = :idGioHang ", nativeQuery = true)
     List<GioHangChiTiet> findAllByIdGioHang(@Param("idGioHang") UUID idGioHang);
 }
