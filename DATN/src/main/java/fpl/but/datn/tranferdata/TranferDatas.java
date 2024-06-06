@@ -324,6 +324,7 @@ public class TranferDatas {
         HinhAnhDto dto = new HinhAnhDto();
         if (entity.getId() != null) dto.setId(entity.getId());
         if (entity.getUrl() != null) dto.setUrl(entity.getUrl());
+        if (entity.getChiTietSanPham() != null) dto.setChiTietSanPham(entity.getChiTietSanPham());
         if (entity.getMa() != null) dto.setMa(entity.getMa());
         if (entity.getNgayTao() != null) dto.setNgayTao(entity.getNgayTao());
         if (entity.getNgaySua() != null) dto.setNgaySua(entity.getNgaySua());
@@ -335,6 +336,7 @@ public class TranferDatas {
         HinhAnh entity = new HinhAnh();
         if (dto.getId() != null) entity.setId(dto.getId());
         if (dto.getUrl() != null) entity.setUrl(dto.getUrl());
+        if (dto.getChiTietSanPham() != null) entity.setChiTietSanPham(dto.getChiTietSanPham());
         if (dto.getMa() != null) entity.setMa(dto.getMa());
         if (dto.getNgayTao() != null) entity.setNgayTao(dto.getNgayTao());
         if (dto.getNgaySua() != null) entity.setNgaySua(dto.getNgaySua());
@@ -602,8 +604,8 @@ public class TranferDatas {
         if (entity.getMa() != null) dto.setMa(entity.getMa());
         if (entity.getMa() != null) dto.setMa(entity.getMa());
         if (entity.getSanPham() != null) dto.setSanPham(entity.getSanPham());
-        if (entity.getHinhAnh() != null) dto.setHinhAnh(entity.getHinhAnh());
         if (entity.getThuongHieu() != null) dto.setThuongHieu(entity.getThuongHieu());
+        if (entity.getHinhAnh() != null) dto.setHinhAnh(entity.getHinhAnh());
         if (entity.getChatLieu() != null) dto.setChatLieu(entity.getChatLieu());
         if (entity.getDanhMuc() != null) dto.setDanhMuc(entity.getDanhMuc());
         if (entity.getKichThuoc() != null) dto.setKichThuoc(entity.getKichThuoc());
@@ -623,8 +625,8 @@ public class TranferDatas {
         if (dto.getMa() != null) entity.setMa(dto.getMa());
         if (dto.getMa() != null) entity.setMa(dto.getMa());
         if (dto.getSanPham() != null) entity.setSanPham(dto.getSanPham());
-        if (dto.getHinhAnh() != null) entity.setHinhAnh(dto.getHinhAnh());
         if (dto.getThuongHieu() != null) entity.setThuongHieu(dto.getThuongHieu());
+        if (dto.getHinhAnh() != null) entity.setHinhAnh(dto.getHinhAnh());
         if (dto.getChatLieu() != null) entity.setChatLieu(dto.getChatLieu());
         if (dto.getDanhMuc() != null) entity.setDanhMuc(dto.getDanhMuc());
         if (dto.getKichThuoc() != null) entity.setKichThuoc(dto.getKichThuoc());

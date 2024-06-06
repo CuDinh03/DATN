@@ -2,6 +2,7 @@ package fpl.but.datn.controller;
 
 import fpl.but.datn.dto.request.BaoCaoDto;
 import fpl.but.datn.dto.request.HinhAnhDto;
+import fpl.but.datn.dto.request.HoaDonChiTietDto;
 import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.entity.BaoCao;
 import fpl.but.datn.entity.HinhAnh;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/hinh-anh")
@@ -32,7 +34,7 @@ public class HinhAnhController {
             apiResponse.setMessage("Lấy danh sách hinh anh thành công");
             apiResponse.setResult(listDto);
         } else {
-            throw new AppException(ErrorCode.NO_REPORT_FOUND);
+            throw new AppException(ErrorCode.NO_IMAGES_FOUND);
         }
 
         return apiResponse;
@@ -43,6 +45,19 @@ public class HinhAnhController {
         ApiResponse<HinhAnh> apiResponse = new ApiResponse<>();
         if (request != null)
             apiResponse.setResult(hinhAnhService.create(TranferDatas.convertToEntity(request)));
+        return apiResponse;
+    }
+
+    @GetMapping("/all/{id}")
+    ApiResponse<List<HinhAnhDto>> getAllByChiTietSanPham(@PathVariable("id") UUID idChiTietSanPham){
+        List<HinhAnhDto> dto = TranferDatas.convertListHinhAnhToDto(hinhAnhService.finAllByChiTietSanPham(idChiTietSanPham));
+        ApiResponse<List<HinhAnhDto>> apiResponse = new ApiResponse<>();
+        if (!dto.isEmpty()){
+            apiResponse.setMessage("Lấy danh sách Hinh ảnh thành công");
+            apiResponse.setResult(dto);
+        }else {
+            throw new AppException(ErrorCode.NO_IMAGES_FOUND);
+        }
         return apiResponse;
     }
 }

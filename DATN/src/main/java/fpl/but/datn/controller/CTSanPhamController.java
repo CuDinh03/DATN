@@ -49,6 +49,21 @@ public class CTSanPhamController {
         return apiResponse;
     }
 
+    @GetMapping("/getAll")
+    ApiResponse<List<ChiTietSanPhamDto>> getAll() {
+        List<ChiTietSanPhamDto> listDto = TranferDatas.convertListChiTietSanPhamToDto(ctSanPhamService.getAll());
+        ApiResponse<List<ChiTietSanPhamDto>> apiResponse = new ApiResponse<>();
+
+        if (!listDto.isEmpty()) {
+            apiResponse.setMessage("Lấy danh sách sản phẩm thành công");
+            apiResponse.setResult(listDto);
+        } else {
+            throw new AppException(ErrorCode.NO_PRODUCT_DETAIL_FOUND);
+        }
+
+        return apiResponse;
+    }
+
     @PostMapping("/addNew")
     public ResponseEntity<?> getAll(@RequestBody ChiTietSanPham ctSanPham){
         return ResponseEntity.ok(ctSanPhamService.create(ctSanPham));
