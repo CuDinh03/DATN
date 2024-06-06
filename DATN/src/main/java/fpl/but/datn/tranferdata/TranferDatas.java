@@ -880,6 +880,14 @@ public class TranferDatas {
         return dtoList;
     }
 
+    public static List<GioHangChiTiet> convertListGioHangChiTietToEntity(List<GioHangChiTietDto> dtoList) {
+        List<GioHangChiTiet> entityList = new ArrayList<>();
+        for (GioHangChiTietDto dto : dtoList) {
+            entityList.add(convertToEntity(dto));
+        }
+        return entityList;
+    }
+
     public static GioHangDto convertToDto(GioHang entity){
         GioHangDto dto = new GioHangDto();
         if (entity.getId() != null) dto.setId(entity.getId());
@@ -907,5 +915,7 @@ public class TranferDatas {
         }
         return dtoList;
     }
+
+
 
 }

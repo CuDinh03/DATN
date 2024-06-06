@@ -73,7 +73,6 @@ public class ChatLieuController {
             ChatLieuDto dto = TranferDatas.convertToDto(chatLieuService.findById(idChatLieu));
             apiResponse.setMessage("Lấy chất liệu thành công");
             apiResponse.setResult(dto);
-        }
-        return apiResponse;
+        }return apiResponse;
     }
 }

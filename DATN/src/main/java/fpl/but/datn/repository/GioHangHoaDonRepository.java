@@ -1,5 +1,6 @@
 package fpl.but.datn.repository;
 
+import fpl.but.datn.entity.GioHang;
 import fpl.but.datn.entity.GioHangHoaDon;
 import fpl.but.datn.entity.HoaDonChiTiet;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,4 +20,11 @@ public interface GioHangHoaDonRepository extends JpaRepository<GioHangHoaDon, UU
 
     @Query("SELECT ghhd FROM GioHangHoaDon ghhd ORDER BY ghhd.ngayTao DESC")
     List<GioHangHoaDon> findAllByNgayTao();
+
+    @Query("select ghhd from GioHangHoaDon ghhd where ghhd.hoaDon.id = :idHoaDon")
+    GioHangHoaDon findByIdHoaDon (@Param("idHoaDon") UUID idHoaDon);
+
+    @Query("select ghhd.gioHang from GioHangHoaDon ghhd where ghhd.hoaDon.id = :idHoaDon")
+    GioHang findGioHangByIdHoaDon(@Param("idHoaDon") UUID idHoaDon);
+
 }

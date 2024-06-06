@@ -82,15 +82,13 @@ public class HoaDonGioHangService implements IHoaDonGioHangService {
         return null;
     }
 
-
-
-
-
     @Override
     public List<GioHangHoaDon> getAllByIdHoaDon(UUID id) {
         return gioHangHoaDonRepository.findAllHoaDonGioHangByIdHoaDon(id);
     }
-
+    public GioHangHoaDon findByIdHoaDon(UUID idHoaDon) {
+        return gioHangHoaDonRepository.findByIdHoaDon(idHoaDon);
+    }
 
 
 }

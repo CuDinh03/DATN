@@ -1,6 +1,7 @@
 package fpl.but.datn.repository;
 
 
+import fpl.but.datn.entity.GioHang;
 import fpl.but.datn.entity.GioHangChiTiet;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
