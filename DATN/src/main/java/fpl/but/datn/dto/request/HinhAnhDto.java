@@ -8,7 +8,7 @@ import java.util.UUID;
 public class HinhAnhDto {
     private UUID id;
     private String ma;
-    private String ten;
+    private String url;
     private Date ngayTao;
     private Date ngaySua;
     private Boolean trangThai;

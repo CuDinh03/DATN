@@ -22,9 +22,9 @@ public class HoaDon {
     private UUID id;
     private String ma;
     @ManyToOne
-    private NguoiDung idNhanVien;
+    private NguoiDung nguoiDung;
     @ManyToOne
-    private KhachHang idKhachHang;
+    private KhachHang khachHang;
     private BigDecimal tongTien;
     private BigDecimal tongTienGiam;
     private Date ngayTao;

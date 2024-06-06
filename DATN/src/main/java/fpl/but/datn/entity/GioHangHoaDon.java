@@ -5,27 +5,22 @@ import lombok.*;
 
 import java.util.Date;
 import java.util.UUID;
+
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity
-@Table(name = "NhanVien")
-public class NhanVien {
+public class GioHangHoaDon {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    private String ma;
-    private String ten;
-    @OneToOne
-    private TaiKhoan taiKhoan;
-    private String email;
-    private String sdt;
-    private Boolean gioiTinh;
-    private Date ngaySinh;
-    private String diaChi;
+    @ManyToOne
+    private GioHang gioHang;
+    @ManyToOne
+    private HoaDon hoaDon;
     private Date ngayTao;
     private Date ngaySua;
-    private Boolean trangThai;
 }

@@ -21,7 +21,7 @@ public class KhachHang {
     private String ma;
     private String ten;
     @OneToOne
-    private TaiKhoan idTaiKhoan;
+    private TaiKhoan taiKhoan;
     private String email;
     private String sdt;
     private Boolean gioiTinh;
