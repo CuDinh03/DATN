@@ -19,6 +19,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -114,6 +115,23 @@ public class UserController {
         if (id != null) idAccount = UUID.fromString(id);
         taiKhoanService.delete(idAccount);
         return ApiResponse.<Void>builder().build();
+    }
+
+    @PostMapping("/check-username")
+    public ApiResponse<TaiKhoanDto> findByTenDangNhap(@RequestParam String tenDangNhap) {
+        Optional<TaiKhoan> taiKhoanOptional = taiKhoanService.findByNguoiDungByTenDangNhap(tenDangNhap);
+
+        if (taiKhoanOptional.isPresent()) {
+            TaiKhoanDto taiKhoanDto = TranferDatas.convertToDto(taiKhoanOptional.get());
+            return ApiResponse.<TaiKhoanDto>builder()
+                    .message("Tìm thấy tài khoản")
+                    .result(taiKhoanDto)
+                    .build();
+        } else {
+            return ApiResponse.<TaiKhoanDto>builder()
+                    .message("Không tìm thấy tài khoản")
+                    .build();
+        }
     }
 
 

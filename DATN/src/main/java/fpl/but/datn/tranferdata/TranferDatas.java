@@ -728,7 +728,7 @@ public class TranferDatas {
             dto.setTen(entity.getTen());
         }
         if (entity.getTaiKhoan() != null) {
-            dto.setIdTaiKhoan(entity.getTaiKhoan());
+            dto.setTaiKhoan(entity.getTaiKhoan());
         }
         if (entity.getEmail() != null) {
             dto.setEmail(entity.getEmail());
@@ -769,8 +769,8 @@ public class TranferDatas {
         if (dto.getTen() != null) {
             entity.setTen(dto.getTen());
         }
-        if (dto.getIdTaiKhoan() != null) {
-            entity.setTaiKhoan(dto.getIdTaiKhoan());
+        if (dto.getTaiKhoan() != null) {
+            entity.setTaiKhoan(dto.getTaiKhoan());
         }
         if (dto.getEmail() != null) {
             entity.setEmail(dto.getEmail());

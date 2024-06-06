@@ -24,4 +24,16 @@ public class GioHangChiTiet {
     private Date ngayTao;
     private Date ngaySua;
     private Boolean trangThai;
+    @Override
+    public String toString() {
+        return "GioHangChiTiet{" +
+                "id=" + id +
+                ", gioHang=" + gioHang +
+                ", chiTietSanPham=" + chiTietSanPham +
+                ", soLuong=" + soLuong +
+                ", ngayTao=" + ngayTao +
+                ", ngaySua=" + ngaySua +
+                ", trangThai=" + trangThai +
+                '}';
+    }
 }

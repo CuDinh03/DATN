@@ -43,7 +43,7 @@ public class HoaDonController {
         return apiResponse;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/detail/{id}")
     ApiResponse<HoaDonDto> detail(@PathVariable String id) {
         ApiResponse<HoaDonDto> apiResponse = new ApiResponse<>();
         UUID idHoaDon = null;
@@ -67,7 +67,7 @@ public class HoaDonController {
 
     @GetMapping("/allPage")
     ApiResponse<Page<HoaDonDto>> getHoaDonPage(@RequestParam(defaultValue = "0") int page,
-                                             @RequestParam(defaultValue = "5") int size) {
+                                               @RequestParam(defaultValue = "5") int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<HoaDon> hoaDonPage = hoaDonService.getAllHoaDonPageable(pageable);
         List<HoaDonDto> listDto = TranferDatas.convertListHoaDonToDto(hoaDonPage.getContent());
@@ -83,6 +83,13 @@ public class HoaDonController {
 
         return apiResponse;
     }
-
+    @GetMapping("/{ma}")
+    ApiResponse<HoaDonDto> findByMa(@PathVariable String ma){
+        ApiResponse<HoaDonDto> apiResponse =  new ApiResponse<>();
+        HoaDonDto dto = TranferDatas.convertToDto(hoaDonService.findByMa(ma).get());
+        apiResponse.setMessage("Lấy hoa don thành công");
+        apiResponse.setResult(dto);
+        return apiResponse;
+    }
 
 }

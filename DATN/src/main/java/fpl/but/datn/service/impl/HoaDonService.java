@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -48,11 +49,16 @@ public class HoaDonService implements IHoaDonService {
     @Override
     public HoaDon findById(UUID id) {
         return hoaDonRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.ORDER_NOT_EXISTED));
-    }
 
+    }
     @Override
     public Page<HoaDon> getAllHoaDonPageable(Pageable pageable) {
         return hoaDonRepository.findAllPage(pageable);
+    }
+
+    @Override
+    public Optional<HoaDon> findByMa(String ma) {
+        return hoaDonRepository.findByMa(ma);
     }
 
 }
