@@ -50,6 +50,7 @@ public class HoaDonService implements IHoaDonService {
     public HoaDon findById(UUID id) {
         return hoaDonRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.ORDER_NOT_EXISTED));
 
+
     }
     @Override
     public Page<HoaDon> getAllHoaDonPageable(Pageable pageable) {
