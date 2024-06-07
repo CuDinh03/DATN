@@ -886,6 +886,7 @@ public class TranferDatas {
             entityList.add(convertToEntity(dto));
         }
         return entityList;
+    }
     public static GioHangDto convertToDto(GioHang entity){
         GioHangDto dto = new GioHangDto();
         if (entity.getId() != null) dto.setId(entity.getId());

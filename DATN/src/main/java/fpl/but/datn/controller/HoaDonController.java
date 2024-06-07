@@ -36,7 +36,7 @@ public class HoaDonController {
         return apiResponse;
     }
 
-    @GetMapping("/{ma}")
+    @GetMapping("/find/{ma}")
     ApiResponse<HoaDonDto> findByMa(@PathVariable String ma){
         ApiResponse<HoaDonDto> apiResponse =  new ApiResponse<>();
         HoaDonDto dto = TranferDatas.convertToDto(hoaDonService.findByMa(ma).get());
