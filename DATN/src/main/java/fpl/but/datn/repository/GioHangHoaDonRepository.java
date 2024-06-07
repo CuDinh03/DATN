@@ -14,6 +14,9 @@ public interface GioHangHoaDonRepository extends JpaRepository<GioHangHoaDon, UU
     @Query(value = "SELECT hdgh.* FROM gio_hang_hoa_don hdgh INNER JOIN hoa_don hd ON hdgh.hoa_don_id = hd.id WHERE hd.id = :idHoaDon AND hd.trang_thai = 1", nativeQuery = true)
     List<GioHangHoaDon> findAllHoaDonGioHangByIdHoaDon(@Param("idHoaDon") UUID idHoaDon);
 
+    @Query(value = "SELECT hdgh.* FROM gio_hang_hoa_don hdgh INNER JOIN hoa_don hd ON hdgh.hoa_don_id = hd.id WHERE hd.trang_thai = 1", nativeQuery = true)
+    List<GioHangHoaDon> findAllByTrangThai();
+
     @Query("SELECT ghhd FROM GioHangHoaDon ghhd ORDER BY ghhd.ngayTao DESC")
     List<GioHangHoaDon> findAllByNgayTao();
 

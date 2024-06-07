@@ -33,9 +33,10 @@ public class GioHangChiTietService implements IGioHangChiTietService {
     }
 
     @Override
-    public GioHangChiTiet update(GioHangChiTiet hoaDonGioHang, UUID id) {
+    public GioHangChiTiet update(GioHangChiTiet gioHangChiTiet, UUID id) {
         return null;
     }
+
 
     @Override
     public GioHangChiTiet findById(UUID id) {

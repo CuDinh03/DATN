@@ -33,10 +33,12 @@ public enum ErrorCode {
     CATEGORY_NAME_NULL(1024, "Tên danh mục không được để trống", HttpStatus.BAD_REQUEST),
     CATEGORY_CODE_NULL(1025, "Mã danh mục không được để trống", HttpStatus.BAD_REQUEST),
     NO_ORDER_FOUND(1026, "Không tìm thấy danh sách hoa don nào",HttpStatus.NOT_FOUND ),
-
-
-
-
+    CATEGORY_NAME_NULL(1018, "Tên danh mục không được để trống", HttpStatus.BAD_REQUEST),
+    CATEGORY_CODE_NULL(1019, "Mã danh mục không được để trống", HttpStatus.BAD_REQUEST),
+    NO_ORDER_FOUND(1020, "Không tìm thấy danh sách hoa don nào",HttpStatus.NOT_FOUND ),
+    ORDER_NOT_EXISTED(1021, "Không tìm thấy hoa don",HttpStatus.NOT_FOUND),
+    NO_CARTDETAIl_FOUND(1022, "Không tìm thấy danh sách gio hang chi tiet nào",HttpStatus.NOT_FOUND ),
+    NO_PRODUCT_DETAIL_FOUND(1023, "Không tìm thấy danh sách chi tiet san pham nào",HttpStatus.NOT_FOUND),
 
     ;
 

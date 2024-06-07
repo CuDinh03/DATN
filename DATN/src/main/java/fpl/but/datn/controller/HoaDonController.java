@@ -1,6 +1,7 @@
 package fpl.but.datn.controller;
 
 import fpl.but.datn.dto.request.ChucVuDto;
+import fpl.but.datn.dto.request.GioHangDto;
 import fpl.but.datn.dto.request.HoaDonDto;
 import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.entity.HoaDonChiTiet;
@@ -42,6 +43,28 @@ public class HoaDonController {
         apiResponse.setMessage("Lấy hoa don thành công");
         apiResponse.setResult(dto);
         return apiResponse;
+    }
+
+    @GetMapping("/{id}")
+    ApiResponse<HoaDonDto> detail(@PathVariable String id) {
+        ApiResponse<HoaDonDto> apiResponse = new ApiResponse<>();
+        UUID idHoaDon = null;
+        if (id != null){
+            idHoaDon = UUID.fromString(id);
+            HoaDonDto dto = TranferDatas.convertToDto(hoaDonService.findById(idHoaDon));
+            apiResponse.setMessage("Lấy Hóa đơn thành công");
+            apiResponse.setResult(dto);
+        }
+        return apiResponse;
+    }
+
+    @DeleteMapping("/{id}")
+    ApiResponse<Void> open(@PathVariable String id) {
+        UUID idHoaDon = null;
+        if (id != null) {
+            idHoaDon = UUID.fromString(id);
+            hoaDonService.delete(idHoaDon);
+        } return ApiResponse.<Void>builder().build();
     }
 
 

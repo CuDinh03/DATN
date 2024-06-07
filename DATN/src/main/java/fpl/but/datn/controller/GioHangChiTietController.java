@@ -38,10 +38,10 @@ public class GioHangChiTietController {
         List<GioHangChiTietDto> dto = TranferDatas.convertListGioHangChiTietToDto(gioHangChiTietService.getAllByIdGioHang(idGioHang));
         ApiResponse<List<GioHangChiTietDto>> apiResponse = new ApiResponse<>();
         if (!dto.isEmpty()){
-            apiResponse.setMessage("Lấy danh sách hoa don thành công");
+            apiResponse.setMessage("Lấy danh sách gio hang chi tiet thành công");
             apiResponse.setResult(dto);
         }else {
-            throw new AppException(ErrorCode.NO_ORDER_FOUND);
+            throw new AppException(ErrorCode.NO_CARTDETAIl_FOUND);
         }
         return apiResponse;
     }
@@ -54,10 +54,10 @@ public class GioHangChiTietController {
             GioHangChiTiet updatedGioHangChiTiet = gioHangChiTietService.updateGioHangChiTiet(id, soLuong);
 
             if (updatedGioHangChiTiet == null) {
-                apiResponse.setMessage("GioHangChiTiet đã bị xóa vì số lượng là 0");
+                apiResponse.setMessage("Gio hang chi tiet đã bị xóa vì số lượng là 0");
                 apiResponse.setResult(null);
             } else {
-                apiResponse.setMessage("Cập nhật GioHangChiTiet thành công");
+                apiResponse.setMessage("Cập nhật gio hang chi tiet thành công");
                 apiResponse.setResult(updatedGioHangChiTiet);
             }
         } catch (AppException e) {

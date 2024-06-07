@@ -2,6 +2,8 @@ package fpl.but.datn.service.impl;
 
 import fpl.but.datn.entity.DanhMuc;
 import fpl.but.datn.entity.HoaDon;
+import fpl.but.datn.exception.AppException;
+import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.repository.HoaDonRepository;
 import fpl.but.datn.service.IHoaDonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +37,9 @@ public class HoaDonService implements IHoaDonService {
 
     @Override
     public void delete(UUID id) {
-
+        HoaDon hoaDon = findById(id);
+        hoaDon.setTrangThai(Boolean.FALSE);
+        hoaDonRepository.save(hoaDon);
     }
 
     @Override
@@ -45,7 +49,8 @@ public class HoaDonService implements IHoaDonService {
 
     @Override
     public HoaDon findById(UUID id) {
-        return hoaDonRepository.findById(id).get();
+
+        return hoaDonRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.ORDER_NOT_EXISTED));
     }
 
     @Override
