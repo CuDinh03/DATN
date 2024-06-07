@@ -43,7 +43,7 @@ public class HoaDonController {
         return apiResponse;
     }
 
-    @GetMapping("/detail/{id}")
+    @GetMapping("/{id}")
     ApiResponse<HoaDonDto> detail(@PathVariable String id) {
         ApiResponse<HoaDonDto> apiResponse = new ApiResponse<>();
         UUID idHoaDon = null;
@@ -83,7 +83,7 @@ public class HoaDonController {
 
         return apiResponse;
     }
-    @GetMapping("/{ma}")
+    @GetMapping("/find/{ma}")
     ApiResponse<HoaDonDto> findByMa(@PathVariable String ma){
         ApiResponse<HoaDonDto> apiResponse =  new ApiResponse<>();
         HoaDonDto dto = TranferDatas.convertToDto(hoaDonService.findByMa(ma).get());
