@@ -10,11 +10,10 @@ import java.util.UUID;
 @Data
 
 public class HoaDonDto {
-
     private UUID id;
     private String ma;
-    private NguoiDung idNhanVien;
-    private KhachHang idKhachHang;
+    private NguoiDung nhanVien;
+    private KhachHang khachHang;
     private BigDecimal tongTien;
     private BigDecimal tongTienGiam;
     private Date ngayTao;

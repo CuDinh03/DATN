@@ -47,7 +47,7 @@ public class NguoiDungService implements INguoiDungService {
 
     @Override
     public NguoiDung findById(UUID id) {
-        return nguoiDungRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.CATEGORY_NOT_EXISTED));
+        return nguoiDungRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
     }
 
     @Override

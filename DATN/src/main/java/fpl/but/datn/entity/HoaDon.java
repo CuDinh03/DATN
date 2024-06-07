@@ -17,18 +17,25 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 public class HoaDon {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String ma;
-    @ManyToOne
-    private NguoiDung idNguoiDung;
-    @ManyToOne
-    private KhachHang idKhachHang;
     private BigDecimal tongTien;
     private BigDecimal tongTienGiam;
     private Date ngayTao;
     private Date ngaySua;
-    private UUID idVoucher;
+    private String ghiChu;
     private Boolean trangThai;
+
+    @ManyToOne
+    private NguoiDung nguoiDung;
+
+    @ManyToOne
+    private KhachHang khachHang;
+
+    @ManyToOne
+    private Voucher idVoucher;
+
 }

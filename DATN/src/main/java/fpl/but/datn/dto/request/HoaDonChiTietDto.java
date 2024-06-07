@@ -10,8 +10,8 @@ import java.util.UUID;
 @Data
 public class HoaDonChiTietDto {
     private UUID id;
-    private HoaDon idHoaDon;
-    private ChiTietSanPham idSanPham;
+    private HoaDon hoaDon;
+    private ChiTietSanPham chiTietSanPham;
     private Integer soLuong;
     private Date ngayTao;
     private Date ngaySua;

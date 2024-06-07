@@ -13,5 +13,8 @@ public interface IKhachHangService {
 
     KhachHang update(KhachHang khachHang, UUID id);
 
-    Boolean delete(UUID id);
+    KhachHang getKhachHangBySdt(String sdt);
+
+    KhachHang getKhachHangByIdTaiKhoan(UUID idTaiKhoan);
+
 }

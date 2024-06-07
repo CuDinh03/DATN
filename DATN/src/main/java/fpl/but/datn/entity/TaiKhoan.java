@@ -24,9 +24,11 @@ public class TaiKhoan {
     private String ma;
     private String tenDangNhap;
     private String matKhau;
-    @ManyToOne
-    private ChucVu idChucVu;
     private Date ngayTao;
     private Date ngaySua;
     private Integer trangThai;
+
+    @ManyToOne
+    private ChucVu idChucVu;
+
 }

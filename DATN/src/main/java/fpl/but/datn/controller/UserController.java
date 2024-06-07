@@ -39,7 +39,6 @@ public class UserController {
         return apiResponse;
     }
 
-
     @GetMapping("/all")
     ApiResponse<Page<TaiKhoanDto>> getAccounts(@RequestParam(defaultValue = "0") int page,
                                                @RequestParam(defaultValue = "5") int size) {
@@ -56,7 +55,6 @@ public class UserController {
         } else {
             throw new AppException(ErrorCode.NO_ACCOUNTS_FOUND);
         }
-
         return apiResponse;
     }
 
@@ -77,8 +75,6 @@ public class UserController {
         }
         return apiResponse;
     }
-
-
 
     @GetMapping("/{id}")
     ApiResponse<TaiKhoanDto> getAccount(@PathVariable String id) {
@@ -115,5 +111,4 @@ public class UserController {
         taiKhoanService.delete(idAccount);
         return ApiResponse.<Void>builder().build();
     }
-
 }

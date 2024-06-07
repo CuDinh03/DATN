@@ -18,15 +18,16 @@ public class HoaDonChiTiet {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-
-    @ManyToOne
-    private HoaDon idHoaDon;
-
-    @ManyToOne
-    private ChiTietSanPham idSanPham;
     private Integer soLuong;
     private Date ngayTao;
     private Date ngaySua;
     private BigDecimal giaBan;
     private Boolean trangThai;
+
+    @ManyToOne
+    private HoaDon hoaDon;
+    
+    @ManyToOne
+    private ChiTietSanPham chiTietSanPham;
+
 }

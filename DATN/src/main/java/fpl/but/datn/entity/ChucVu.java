@@ -15,6 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 public class ChucVu {
+
     @Id
     @GeneratedValue (strategy = GenerationType.UUID)
     private UUID id;

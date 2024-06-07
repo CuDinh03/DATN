@@ -43,7 +43,7 @@ public class CTSanPhamService implements ICTSanPhamService {
     }
 
     @Override
-    public Page<ChiTietSanPham> getAllCTSanPhamPageable(Pageable pageable) {
+    public Page<ChiTietSanPham> getAllChiTietSanPhamPageable(Pageable pageable) {
         return ctSanPhamRepository.findAll(pageable);
     }
 }

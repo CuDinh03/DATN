@@ -8,7 +8,6 @@ import java.util.Optional;
 import java.util.UUID;
 @Repository
 public interface HinhAnhRepository extends JpaRepository<HinhAnh, UUID> {
-
     Optional<HinhAnh> findByMa(String ma);
     boolean existsByMa(String ma);
 }

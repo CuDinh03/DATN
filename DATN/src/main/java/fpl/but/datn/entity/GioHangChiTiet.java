@@ -13,17 +13,19 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 public class GioHangChiTiet {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    @OneToOne
-    @JoinColumn(name = "id_gio_hang")
-    private GioHang idGioHang;
-    @ManyToOne
-    @JoinColumn(name = "id_san_pham")
-    private SanPham idSanPham;
     private Integer soLuong;
     private Date ngayTao;
     private Date ngaySua;
     private Boolean trangThai;
+
+    @ManyToOne
+    private GioHang gioHang;
+
+    @ManyToOne
+    private ChiTietSanPham chiTietSanPham;
+
 }

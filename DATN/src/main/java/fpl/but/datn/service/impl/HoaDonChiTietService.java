@@ -4,7 +4,7 @@ import fpl.but.datn.entity.*;
 import fpl.but.datn.repository.HoaDonChiTietRepository;
 import fpl.but.datn.repository.HoaDonRepository;
 import fpl.but.datn.service.IHoaDonChiTietService;
-
+import fpl.but.datn.service.IHoaDonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,10 +20,8 @@ public class HoaDonChiTietService implements IHoaDonChiTietService {
 
     @Autowired
     private HoaDonChiTietRepository hoaDonChiTietRepository;
-
     @Autowired
     private HoaDonRepository hoaDonRepository;
-
     @Autowired
     private NguoiDungService nguoiDungService;
 
@@ -34,29 +32,24 @@ public class HoaDonChiTietService implements IHoaDonChiTietService {
 
     @Override
     public HoaDonChiTiet create(HoaDonChiTiet request) {
-        Random random = new Random();
-        HoaDon hoaDon = new HoaDon();
-        hoaDon.setMa("HD" + random.nextInt(1000));
-        hoaDon.setNgayTao(new Date());
-        hoaDon.setNgaySua(new Date());
-        hoaDon.setTrangThai(true);
-        NguoiDung nguoiDung = nguoiDungService.findById(UUID.fromString("324AA318-89E4-4038-AAF0-3452C11A3118"));
-        hoaDon.setIdNguoiDung(nguoiDung);
-        hoaDonRepository.save(hoaDon);
-
-        HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
-        hoaDonChiTiet.setNgayTao(new Date());
-        hoaDonChiTiet.setNgaySua(new Date());
-        hoaDonChiTiet.setIdHoaDon(hoaDon);
-        hoaDonChiTiet.setSoLuong(0);
-        hoaDon.setTrangThai(true);
-        return hoaDonChiTietRepository.save(hoaDonChiTiet);
+//        Random random = new Random();
+//        HoaDon hoaDon = new HoaDon();
+//        hoaDon.setMa("HD" + random.nextInt(1000));
+//        hoaDon.setNgayTao(new Date());
+//        hoaDon.setNgaySua(new Date());
+//        hoaDon.setTrangThai(true);
+//        NguoiDung nguoiDung = nguoiDungService.findById(UUID.fromString("767ce273-301c-4c64-8039-5c92f4285ccb"));
+//        hoaDon.setNguoiDung(nguoiDung);
+//        hoaDonRepository.save(hoaDon);
+//
+//        HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
+//        hoaDonChiTiet.setNgayTao(new Date());
+//        hoaDonChiTiet.setNgaySua(new Date());
+//        hoaDonChiTiet.setHoaDon(hoaDon);
+//        hoaDonChiTiet.setSoLuong(0);
+//        hoaDon.setTrangThai(true);
+        return hoaDonChiTietRepository.save(request);
     }
-
-//    public List<HoaDonChiTiet> getHoaDonChiTietByHoaDonId(UUID hoaDonId) {
-//        return hoaDonChiTietRepository.findChiTietByHoaDonId(hoaDonId);
-//    }
-
 
     @Override
     public HoaDonChiTiet update(HoaDonChiTiet hoaDonChiTiet, UUID id) {
@@ -81,5 +74,9 @@ public class HoaDonChiTietService implements IHoaDonChiTietService {
     @Override
     public Page<HoaDonChiTiet> getAllDanhMucPageable(Pageable pageable) {
         return null;
+    }
+
+    public List<HoaDonChiTiet> getHoaDonChiTietByIdHoaDon(UUID idHoaDon) {
+        return hoaDonChiTietRepository.findAllHoaDonChiTietByIdHoaDon(idHoaDon);
     }
 }

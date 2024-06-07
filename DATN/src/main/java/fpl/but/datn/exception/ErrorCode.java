@@ -48,7 +48,14 @@ public enum ErrorCode {
 
     MA_PTTHANHTOAN_TRUNG(1024, "Trùng mã phương thức thanh toán", HttpStatus.BAD_REQUEST),
     LIST_PTTHANHTOAN_NOT_FOUND(1025, "Không tìm thấy danh sách phương thức thanh toán", HttpStatus.NOT_FOUND),
+
     PTTHANHTOAN_NOT_FOUND(1026, "Phương thức thanh toán đang tìm không có", HttpStatus.NOT_FOUND),
+
+    ORDER_NOT_EXISTED(1027, "Không tìm thấy hoa don",HttpStatus.NOT_FOUND),
+    SDT_ALREADY_USED(1028, "Số điện thoại này đã được đăng ký!",HttpStatus.NOT_FOUND),
+    USER_NOT_EXISTED(1029, "Không tìm thấy người dùng ",HttpStatus.NOT_FOUND),
+    VOUCHER_NOT_EXISTED(1030, "Không tìm thấy Voucher này!",HttpStatus.NOT_FOUND),
+    NO_CUSTOMERS_FOUND(1031, "Không tìm thấy khách hàng nào!",HttpStatus.NOT_FOUND),
     ;
 
     ErrorCode(int code, String message, HttpStatusCode httpStatusCode) {

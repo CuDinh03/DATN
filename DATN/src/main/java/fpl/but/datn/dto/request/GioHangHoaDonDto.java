@@ -1,18 +1,15 @@
 package fpl.but.datn.dto.request;
 
-import fpl.but.datn.entity.ChiTietSanPham;
 import fpl.but.datn.entity.GioHang;
+import fpl.but.datn.entity.HoaDon;
 
 import java.util.Date;
 import java.util.UUID;
 
-public class GioHangChiTietDto {
+public class GioHangHoaDonDto {
     private UUID id;
     private GioHang gioHang;
-    private ChiTietSanPham chiTietSanPham;
-    private Integer soLuong;
+    private HoaDon hoaDon;
     private Date ngayTao;
     private Date ngaySua;
-    private Boolean trangThai;
-
 }

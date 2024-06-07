@@ -16,5 +16,4 @@ public interface IHinhAnhService {
     boolean delete(UUID id);
     HinhAnh findById(UUID id);
 
-
 }

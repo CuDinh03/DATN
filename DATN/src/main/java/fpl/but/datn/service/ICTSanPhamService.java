@@ -14,5 +14,5 @@ public interface ICTSanPhamService {
     ChiTietSanPham update(ChiTietSanPham chiTietSanPham, UUID id);
     boolean delete(UUID id);
     ChiTietSanPham findById(UUID id);
-    Page<ChiTietSanPham> getAllCTSanPhamPageable(Pageable pageable);
+    Page<ChiTietSanPham> getAllChiTietSanPhamPageable(Pageable pageable);
 }

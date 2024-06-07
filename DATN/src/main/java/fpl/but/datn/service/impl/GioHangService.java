@@ -31,7 +31,7 @@ public class GioHangService implements IGioHangService {
         Optional<GioHang> optional = gioHangRepository.findById(id);
         return optional.map(o -> {
             o.setMa(gioHang.getMa());
-            o.setIdKhachHang(gioHang.getIdKhachHang());
+            o.setKhachHang(gioHang.getKhachHang());
             o.setTrangThai(gioHang.getTrangThai());
             return gioHangRepository.save(o);
         }).orElse(null);

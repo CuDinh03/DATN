@@ -31,7 +31,7 @@ public class CTSanPhamController {
                                                            @RequestParam(defaultValue = "5") int size) {
 
         Pageable pageable = PageRequest.of(page, size);
-        Page<ChiTietSanPham> CTSanPhamPage = ctSanPhamService.getAllCTSanPhamPageable(pageable);
+        Page<ChiTietSanPham> CTSanPhamPage = ctSanPhamService.getAllChiTietSanPhamPageable(pageable);
 
         List<ChiTietSanPhamDto> listDto = TranferDatas.convertListChiTietSanPhamToDto(CTSanPhamPage.getContent());
 

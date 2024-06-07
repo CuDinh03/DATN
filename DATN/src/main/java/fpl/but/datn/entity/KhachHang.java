@@ -1,13 +1,20 @@
 package fpl.but.datn.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.UUID;
 @Entity
 @Table
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+
 public class KhachHang {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -24,5 +31,7 @@ public class KhachHang {
     private Boolean trangThai;
 
     @OneToOne
-    private TaiKhoan idTaiKhoan;
+    @JoinColumn(name = "id_tai_khoan_id")
+    private TaiKhoan taiKhoan;
+
 }

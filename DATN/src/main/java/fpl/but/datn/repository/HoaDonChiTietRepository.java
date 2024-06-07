@@ -12,7 +12,7 @@ import java.util.UUID;
 @Repository
 public interface HoaDonChiTietRepository extends JpaRepository<HoaDonChiTiet, UUID> {
 
-//    @Query("SELECT hdct From HoaDonChiTiet hdct INNER JOIN HoaDon hd ON hdct.idHoaDon = hd.id WHERE hd.id =: hoaDonId")
-//    List<HoaDonChiTiet> findChiTietByHoaDonId(@Param("hoaDonId") UUID hoaDonId);
+    @Query(value = "SELECT hdct.* FROM hoa_don_chi_tiet hdct INNER JOIN hoa_don hd ON hdct.hoa_don_id = hd.id WHERE hd.id = :idHoaDon", nativeQuery = true)
+    List<HoaDonChiTiet> findAllHoaDonChiTietByIdHoaDon(@Param("idHoaDon") UUID idHoaDon);
 
 }

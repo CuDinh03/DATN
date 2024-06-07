@@ -10,7 +10,7 @@ import java.util.UUID;
 public class GioHangDto {
     private UUID id;
     private String ma;
-    private KhachHang idKhachHang;
+    private KhachHang khachHang;
     private Date ngayTao;
     private Date ngaySua;
     private Boolean trangThai;
