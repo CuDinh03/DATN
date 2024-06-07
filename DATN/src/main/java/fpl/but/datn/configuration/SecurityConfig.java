@@ -21,7 +21,7 @@ import javax.crypto.spec.SecretKeySpec;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    private final String[] PUBLIC_ENDPOINT = {"/api/auth/log-in", "/api/users/create"};
+    private final String[] PUBLIC_ENDPOINT = {"/api/auth/log-in", "/api/users/create", "/api/users/check-username"};
     private final String[] ADMIN_ENDPOINT_GET = {
             "/api/users/all","/api/users/{id}", "/api/users/myInfo",
             "/api/voucher/all","/api/voucher/allVouchers","/api/voucher/{id}",
@@ -30,14 +30,15 @@ public class SecurityConfig {
             "/api/danh-muc/all","/api/danh-muc/{id}",
             "/api/gio-hang-chi-tiet/all/{id}", "/api/gio-hang-chi-tiet/{id}",
             "/api/hoa-don-chi-tiet/all/{id}","/api/hoa-don-chi-tiet/{id}",
-            "/api/hoa-don/all",
+            "/api/hoa-don/all", "/api/hoa-don/{ma}",
             "/api/hoa-don-gio-hang/all", "/api/hoa-don-gio-hang/all/{id}"
     };
     private final String[] ADMIN_ENDPOINT_POST = {"/api/voucher/create",
             "/api/khs/create",
             "/api/danh-muc/create",
             "/api/hoa-don-gio-hang/create",
-            "/api/gio-hang-chi-tiet/create"
+            "/api/gio-hang-chi-tiet/create",
+            "/api/thanhtoan"
     };
     private final String[] ADMIN_ENDPOINT_PUT = {"/api/voucher/{id}", "/api/users/{id}",
             "/api/danh-muc/{id}"

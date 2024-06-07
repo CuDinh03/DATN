@@ -77,6 +77,9 @@ public class HoaDonGioHangService implements IHoaDonGioHangService {
     public GioHangHoaDon findById(UUID id) {
         return null;
     }
+    public GioHangHoaDon findByIdHoaDon(UUID idHoaDon) {
+        return gioHangHoaDonRepository.findByIdHoaDon(idHoaDon);
+    }
 
 
 

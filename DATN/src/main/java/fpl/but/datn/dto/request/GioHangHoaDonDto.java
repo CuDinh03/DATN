@@ -16,4 +16,5 @@ public class GioHangHoaDonDto {
     private HoaDon hoaDon;
     private Date ngayTao;
     private Date ngaySua;
+
 }
