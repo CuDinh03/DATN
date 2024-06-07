@@ -24,7 +24,7 @@ public class HoaDon {
     private Date ngayTao;
     private Date ngaySua;
     @ManyToOne
-    private Voucher idVoucher;
+    private Voucher voucher;
     private String ghiChu;
     private Boolean trangThai;
 }

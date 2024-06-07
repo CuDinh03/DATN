@@ -71,7 +71,6 @@ public class GioHangChiTietController {
     @PostMapping("/create")
     public ApiResponse<GioHangChiTietDto> createGioHangChiTiet(@RequestBody GioHangChiTietDto request) {
         ApiResponse<GioHangChiTietDto> apiResponse = new ApiResponse<>();
-
         try {
             GioHangChiTietDto createdDto = new GioHangChiTietDto();
             createdDto.setId(UUID.randomUUID());
@@ -81,7 +80,6 @@ public class GioHangChiTietController {
             createdDto.setNgayTao(request.getNgayTao());
             createdDto.setNgaySua(request.getNgaySua());
             createdDto.setTrangThai(Boolean.TRUE);
-
             gioHangChiTietService.create(TranferDatas.convertToEntity(createdDto));
 
             apiResponse.setMessage("Created Gio Hang Chi Tiet successfully");

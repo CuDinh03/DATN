@@ -18,6 +18,8 @@ public class HinhAnh {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+    @ManyToOne
+    private ChiTietSanPham chiTietSanPham;
     private String ma;
     private String url;
     private Date ngayTao;

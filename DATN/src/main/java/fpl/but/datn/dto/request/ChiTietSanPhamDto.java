@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -16,7 +17,6 @@ public class ChiTietSanPhamDto {
     private UUID id;
     private String ma;
     private SanPham sanPham;
-    private HinhAnh hinhAnh;
     private ThuongHieu thuongHieu;
     private ChatLieu chatLieu;
     private DanhMuc danhMuc;
@@ -29,4 +29,5 @@ public class ChiTietSanPhamDto {
     private Date ngayTao;
     private Date ngaySua;
     private Boolean trangThai;
+    private List<HinhAnh> HinhAnh;
 }

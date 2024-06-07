@@ -38,6 +38,7 @@ public enum ErrorCode {
     NO_PRODUCT_DETAIL_FOUND(1023, "Không tìm thấy danh sách chi tiet san pham nào",HttpStatus.NOT_FOUND),
     NO_ORDER_DETAIL_FOUND(1024, "Không tìm thấy danh sách chi tiet hoa don nào",HttpStatus.NOT_FOUND ),
     USER_NOT_EXISTED(1025, "Không tìm thấy người dùng ",HttpStatus.NOT_FOUND),
+    NO_IMAGES_FOUND(1025, "Không tìm thấy danh sách Hinh anh nào",HttpStatus.NOT_FOUND ),
     NO_LISTSPChiTiet_FOUND(1025, "Không tìm thấy SPCT ",HttpStatus.NOT_FOUND),
 
 

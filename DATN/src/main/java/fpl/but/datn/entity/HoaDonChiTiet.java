@@ -28,4 +28,17 @@ public class HoaDonChiTiet {
     private Date ngaySua;
     private BigDecimal giaBan;
     private Boolean trangThai;
+    @Override
+    public String toString() {
+        return "GioHangChiTiet{" +
+                "id=" + id +
+                ", hoaDon=" + hoaDon +
+                ", chiTietSanPham=" + chiTietSanPham +
+                ", soLuong=" + soLuong +
+                ", ngayTao=" + ngayTao +
+                ", ngaySua=" + ngaySua +
+                ", giaBan=" + giaBan +
+                ", trangThai=" + trangThai +
+                '}';
+    }
 }

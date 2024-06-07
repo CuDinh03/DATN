@@ -1,11 +1,13 @@
 package fpl.but.datn.service.impl;
 
 import fpl.but.datn.entity.*;
+
 import fpl.but.datn.repository.*;
+import fpl.but.datn.repository.GioHangChiTietRepository;
+import fpl.but.datn.repository.GioHangHoaDonRepository;
+import fpl.but.datn.repository.GioHangRepository;
 import fpl.but.datn.service.IHoaDonGioHangService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -58,7 +60,7 @@ public class HoaDonGioHangService implements IHoaDonGioHangService {
         hoaDon.setNgayTao(new Date());
         hoaDon.setNgaySua(new Date());
         hoaDon.setTrangThai(true);
-        NguoiDung nguoiDung = nguoiDungService.findById(UUID.fromString("8663275a-9e74-4f82-b26b-21fa4bb40dc8"));
+        NguoiDung nguoiDung = nguoiDungService.findById(UUID.fromString("0031a747-eb1c-42f7-a8d4-f4f45a21a76e"));
         hoaDon.setNguoiDung(nguoiDung);
         hoaDon.setTongTien(tongTien);
         hoaDonRepository.save(hoaDon);
@@ -82,15 +84,13 @@ public class HoaDonGioHangService implements IHoaDonGioHangService {
         return null;
     }
 
-
-
-
-
     @Override
     public List<GioHangHoaDon> getAllByIdHoaDon(UUID id) {
         return gioHangHoaDonRepository.findAllHoaDonGioHangByIdHoaDon(id);
     }
-
+    public GioHangHoaDon findByIdHoaDon(UUID idHoaDon) {
+        return gioHangHoaDonRepository.findByIdHoaDon(idHoaDon);
+    }
 
 
 }
