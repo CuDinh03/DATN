@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface ITaiKhoanService {
@@ -20,6 +21,9 @@ public interface ITaiKhoanService {
     Page<TaiKhoan> getAllTaiKhoanPageable(Pageable pageable);
 
     Page<TaiKhoan> findByRoles(String role, Pageable pageable);
+
+    Optional<TaiKhoan> findByNguoiDungByTenDangNhap(String tenDangNhap);
+
 
 
 

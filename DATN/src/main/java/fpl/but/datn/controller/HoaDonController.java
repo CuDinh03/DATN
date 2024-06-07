@@ -36,6 +36,15 @@ public class HoaDonController {
         return apiResponse;
     }
 
+    @GetMapping("/{ma}")
+    ApiResponse<HoaDonDto> findByMa(@PathVariable String ma){
+        ApiResponse<HoaDonDto> apiResponse =  new ApiResponse<>();
+        HoaDonDto dto = TranferDatas.convertToDto(hoaDonService.findByMa(ma).get());
+        apiResponse.setMessage("Lấy hoa don thành công");
+        apiResponse.setResult(dto);
+        return apiResponse;
+    }
+
     @GetMapping("/{id}")
     ApiResponse<HoaDonDto> detail(@PathVariable String id) {
         ApiResponse<HoaDonDto> apiResponse = new ApiResponse<>();

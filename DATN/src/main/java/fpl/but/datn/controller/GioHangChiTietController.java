@@ -81,10 +81,8 @@ public class GioHangChiTietController {
             createdDto.setNgayTao(request.getNgayTao());
             createdDto.setNgaySua(request.getNgaySua());
             createdDto.setTrangThai(Boolean.TRUE);
-
             gioHangChiTietService.create(TranferDatas.convertToEntity(createdDto));
-
-            apiResponse.setMessage("Created Gio Hang Chi Tiet successfully");
+            apiResponse.setMessage("Created GioHangChiTiet successfully");
             apiResponse.setResult(createdDto);
 
         } catch (AppException e) {

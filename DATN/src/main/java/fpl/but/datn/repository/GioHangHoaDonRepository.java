@@ -19,4 +19,7 @@ public interface GioHangHoaDonRepository extends JpaRepository<GioHangHoaDon, UU
 
     @Query("SELECT ghhd FROM GioHangHoaDon ghhd ORDER BY ghhd.ngayTao DESC")
     List<GioHangHoaDon> findAllByNgayTao();
+
+    @Query("select ghhd from GioHangHoaDon ghhd where ghhd.hoaDon.id = :idHoaDon")
+    GioHangHoaDon findByIdHoaDon (@Param("idHoaDon") UUID idHoaDon);
 }

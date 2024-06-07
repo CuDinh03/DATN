@@ -726,7 +726,7 @@ public class TranferDatas {
             dto.setTen(entity.getTen());
         }
         if (entity.getTaiKhoan() != null) {
-            dto.setIdTaiKhoan(entity.getTaiKhoan());
+            dto.setTaiKhoan(entity.getTaiKhoan());
         }
         if (entity.getEmail() != null) {
             dto.setEmail(entity.getEmail());
@@ -767,8 +767,8 @@ public class TranferDatas {
         if (dto.getTen() != null) {
             entity.setTen(dto.getTen());
         }
-        if (dto.getIdTaiKhoan() != null) {
-            entity.setTaiKhoan(dto.getIdTaiKhoan());
+        if (dto.getTaiKhoan() != null) {
+            entity.setTaiKhoan(dto.getTaiKhoan());
         }
         if (dto.getEmail() != null) {
             entity.setEmail(dto.getEmail());
@@ -880,6 +880,12 @@ public class TranferDatas {
         return dtoList;
     }
 
+    public static List<GioHangChiTiet> convertListGioHangChiTietToEntity(List<GioHangChiTietDto> dtoList) {
+        List<GioHangChiTiet> entityList = new ArrayList<>();
+        for (GioHangChiTietDto dto : dtoList) {
+            entityList.add(convertToEntity(dto));
+        }
+        return entityList;
     public static GioHangDto convertToDto(GioHang entity){
         GioHangDto dto = new GioHangDto();
         if (entity.getId() != null) dto.setId(entity.getId());
