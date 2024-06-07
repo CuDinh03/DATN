@@ -1,5 +1,6 @@
 package fpl.but.datn.service.impl;
 
+import fpl.but.datn.entity.DanhMuc;
 import fpl.but.datn.entity.KhachHang;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
@@ -18,7 +19,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class KhachHangService implements IService<KhachHang>, IKhachHangService {
+public class KhachHangService implements IKhachHangService, IService<KhachHang> {
 
     @Autowired
     KhachHangRepository khachHangRepository;
@@ -57,11 +58,53 @@ public class KhachHangService implements IService<KhachHang>, IKhachHangService 
     }
 
     @Override
+    public KhachHang update(KhachHang request, UUID id) {
+        KhachHang khachHang = new KhachHang();
+        khachHang.setId(id);
+        khachHang.setMa(request.getMa());
+        khachHang.setTen(request.getTen());
+        khachHang.setTaiKhoan(request.getTaiKhoan());
+        khachHang.setEmail(request.getEmail());
+        khachHang.setSdt(request.getSdt());
+        khachHang.setGioiTinh(request.getGioiTinh());
+        khachHang.setNgaySinh(request.getNgaySinh());
+        khachHang.setDiaChi(request.getDiaChi());
+        khachHang.setNgayTao(new Date());
+        khachHang.setNgaySua(new Date());
+        khachHang.setTrangThai(request.getTrangThai());
+
+        return khachHangRepository.save(khachHang);
+    }
+
+
+
+
+
+    @Override
     public void delete(UUID id) {
             KhachHang khachHang = this.khachHangRepository.findById(id).get();
             khachHang.setTrangThai(Boolean.FALSE);
             this.khachHangRepository.saveAndFlush(khachHang);
     }
+
+    @Override
+    public void open(UUID id) {
+        KhachHang khachHang = findById(id);
+        khachHang.setTrangThai(Boolean.TRUE);
+        khachHangRepository.save(khachHang);
+
+    }
+
+    @Override
+    public KhachHang findById(UUID id) {
+        return khachHangRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.NO_CUSTOMERS_FOUND));
+    }
+
+    @Override
+    public Page<KhachHang> getAllKhachHangPageable(Pageable pageable) {
+        return khachHangRepository.findAll(pageable);
+    }
+
 
     @Override
     public List<KhachHang> getAll() {

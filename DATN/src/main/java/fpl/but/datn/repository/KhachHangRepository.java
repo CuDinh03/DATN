@@ -1,5 +1,6 @@
 package fpl.but.datn.repository;
 
+import fpl.but.datn.entity.DanhMuc;
 import fpl.but.datn.entity.KhachHang;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +20,9 @@ public interface KhachHangRepository extends JpaRepository<KhachHang, UUID> {
 
     @Query("select kh from KhachHang kh where kh.sdt = :sdt and kh.trangThai = true ")
     Optional<KhachHang> getKhachHangBySdt(@Param("sdt") String sdt);
+
+//    Optional<KhachHang> findByMa(String ma);
+//    boolean existsByMa(String ma);
 
 
 
