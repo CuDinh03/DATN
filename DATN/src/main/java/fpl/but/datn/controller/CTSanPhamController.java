@@ -43,7 +43,22 @@ public class CTSanPhamController {
             apiResponse.setMessage("Lấy danh sách sa pham thành công");
             apiResponse.setResult(new PageImpl<>(listDto, pageable, chiTietSanPhamPage.getTotalElements()));
         } else {
-            throw new AppException(ErrorCode.NO_ACCOUNTS_FOUND);
+            throw new AppException(ErrorCode.NO_PRODUCT_DETAIL_FOUND);
+        }
+
+        return apiResponse;
+    }
+
+    @GetMapping("/getAll")
+    ApiResponse<List<ChiTietSanPhamDto>> getAll() {
+        List<ChiTietSanPhamDto> listDto = TranferDatas.convertListChiTietSanPhamToDto(ctSanPhamService.getAll());
+        ApiResponse<List<ChiTietSanPhamDto>> apiResponse = new ApiResponse<>();
+
+        if (!listDto.isEmpty()) {
+            apiResponse.setMessage("Lấy danh sách sản phẩm thành công");
+            apiResponse.setResult(listDto);
+        } else {
+            throw new AppException(ErrorCode.NO_PRODUCT_DETAIL_FOUND);
         }
 
         return apiResponse;

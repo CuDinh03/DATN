@@ -16,6 +16,7 @@ public interface IHoaDonService {
     void delete(UUID id);
     void open(UUID id);
     HoaDon findById(UUID id);
-    Page<HoaDon> getAllDanhMucPageable(Pageable pageable);
+    Page<HoaDon> getAllHoaDonPageable(Pageable pageable);
     Optional<HoaDon> findByMa(String ma);
+
 }

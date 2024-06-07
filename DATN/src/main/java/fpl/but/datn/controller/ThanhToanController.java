@@ -1,11 +1,7 @@
 package fpl.but.datn.controller;
 
-import fpl.but.datn.dto.request.GioHangChiTietDto;
-import fpl.but.datn.dto.request.HoaDonDto;
 import fpl.but.datn.dto.request.ThanhToanDto;
 import fpl.but.datn.dto.response.ApiResponse;
-import fpl.but.datn.entity.GioHangChiTiet;
-import fpl.but.datn.entity.HoaDon;
 import fpl.but.datn.service.impl.*;
 import fpl.but.datn.tranferdata.TranferDatas;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/thanhtoan")
@@ -34,7 +28,6 @@ public class ThanhToanController {
 
     @Autowired
     private ThanhToanService thanhToanService;
-
     @PostMapping()
     public ApiResponse<ThanhToanDto> thanhtoan(@RequestBody ThanhToanDto thanhToanDto) {
         ApiResponse<ThanhToanDto> apiResponse = new ApiResponse<>();
@@ -54,5 +47,4 @@ public class ThanhToanController {
 
         return apiResponse;
     }
-
 }

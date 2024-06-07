@@ -81,14 +81,14 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
                 for (GioHangChiTiet ghCt : listGioHangCt) {
                     System.out.println(ghCt);
                     HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
-                            hoaDonChiTiet.setId(UUID.randomUUID());
-                            hoaDonChiTiet.setGiaBan(ghCt.getChiTietSanPham().getGiaBan());
-                            hoaDonChiTiet.setSoLuong(ghCt.getSoLuong());
-                            hoaDonChiTiet.setNgayTao(new Date());
-                            hoaDonChiTiet.setNgaySua(new Date());
-                            hoaDonChiTiet.setChiTietSanPham(ghCt.getChiTietSanPham());
-                            hoaDonChiTiet.setHoaDon(hoaDon);
-                            hoaDonChiTiet.setTrangThai(Boolean.TRUE);
+                    hoaDonChiTiet.setId(UUID.randomUUID());
+                    hoaDonChiTiet.setGiaBan(ghCt.getChiTietSanPham().getGiaBan());
+                    hoaDonChiTiet.setSoLuong(ghCt.getSoLuong());
+                    hoaDonChiTiet.setNgayTao(new Date());
+                    hoaDonChiTiet.setNgaySua(new Date());
+                    hoaDonChiTiet.setChiTietSanPham(ghCt.getChiTietSanPham());
+                    hoaDonChiTiet.setHoaDon(hoaDon);
+                    hoaDonChiTiet.setTrangThai(Boolean.TRUE);
                     this.hoaDonChiTietService.create(hoaDonChiTiet);
                 }
 
@@ -105,3 +105,4 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
         }
     }
 }
+

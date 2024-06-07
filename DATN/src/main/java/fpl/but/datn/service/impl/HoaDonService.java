@@ -44,24 +44,22 @@ public class HoaDonService implements IHoaDonService {
 
     @Override
     public void open(UUID id) {
-
     }
 
     @Override
     public HoaDon findById(UUID id) {
-
         return hoaDonRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.ORDER_NOT_EXISTED));
-    }
 
+
+    }
     @Override
-    public Page<HoaDon> getAllDanhMucPageable(Pageable pageable) {
-        return null;
+    public Page<HoaDon> getAllHoaDonPageable(Pageable pageable) {
+        return hoaDonRepository.findAllPage(pageable);
     }
 
     @Override
     public Optional<HoaDon> findByMa(String ma) {
         return hoaDonRepository.findByMa(ma);
     }
-
 
 }

@@ -24,9 +24,6 @@ public class HinhAnhService implements IHinhAnhService {
     @Override
     public HinhAnh create(HinhAnh request) {
         HinhAnh hinhAnh = new HinhAnh();
-
-        if(hinhAnhRepository.existsByMa(request.getMa()))
-            throw new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION);
         hinhAnh.setId(UUID.randomUUID());
         hinhAnh.setMa(request.getMa());
         hinhAnh.setUrl(request.getUrl());
@@ -49,5 +46,9 @@ public class HinhAnhService implements IHinhAnhService {
     @Override
     public HinhAnh findById(UUID id) {
         return hinhAnhRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.ACCOUNT_EXISTED));
+    }
+
+    public List finAllByChiTietSanPham(UUID id){
+        return hinhAnhRepository.findAllByChiTietSanPham(id);
     }
 }
