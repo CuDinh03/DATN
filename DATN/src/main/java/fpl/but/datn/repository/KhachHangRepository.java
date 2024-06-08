@@ -20,6 +20,9 @@ public interface KhachHangRepository extends JpaRepository<KhachHang, UUID> {
     @Query("select kh from KhachHang kh where kh.sdt = :sdt and kh.trangThai = true ")
     Optional<KhachHang> getKhachHangBySdt(@Param("sdt") String sdt);
 
+    @Query(value = "SELECT kh.* FROM tai_khoan tk JOIN khach_hang kh ON tk.id = kh.tai_khoan_id WHERE tk.ten_dang_nhap = :tenDangNhap", nativeQuery = true)
+    KhachHang findKHByTenDangNhap(@Param("tenDangNhap") String tenDangNhap );
+
 
 
 }

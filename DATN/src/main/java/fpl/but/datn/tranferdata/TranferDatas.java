@@ -30,6 +30,11 @@ public class TranferDatas {
         }
 
         @Override
+        public KhachHang findKHByTenDangNhap(String tenDangNhap) {
+            return null;
+        }
+
+        @Override
         public void flush() {
 
         }

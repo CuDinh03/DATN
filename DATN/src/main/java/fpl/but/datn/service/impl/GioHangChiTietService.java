@@ -1,7 +1,9 @@
 package fpl.but.datn.service.impl;
 
+import fpl.but.datn.dto.request.GioHangChiTietDto;
 import fpl.but.datn.entity.ChiTietSanPham;
 import fpl.but.datn.entity.GioHangChiTiet;
+import fpl.but.datn.entity.HinhAnh;
 import fpl.but.datn.repository.CTSanPhamRepository;
 import fpl.but.datn.repository.GioHangChiTietRepository;
 import fpl.but.datn.service.IGioHangChiTietService;
@@ -12,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -84,6 +87,12 @@ public class GioHangChiTietService implements IGioHangChiTietService {
         } else {
             throw new RuntimeException("Gio Hang Chi Tiet không tồn tại với id " + id);
         }
+    }
+
+    @Override
+    public List<Object[]> findAllChiTietAndHinhAnhByIdGioHang(UUID idGioHang) {
+
+        return gioHangChiTietRepository.findAllChiTietAndHinhAnhByIdGioHang(idGioHang);
     }
 
 
