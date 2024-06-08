@@ -11,6 +11,7 @@ import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.service.ICTSanPhamService;
 import fpl.but.datn.service.IDanhMucService;
 import fpl.but.datn.tranferdata.TranferDatas;
+import jakarta.annotation.security.PermitAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -50,6 +51,7 @@ public class CTSanPhamController {
     }
 
     @GetMapping("/getAll")
+        // Cho phép truy cập mà không cần phải xác thực
     ApiResponse<List<ChiTietSanPhamDto>> getAll() {
         List<ChiTietSanPhamDto> listDto = TranferDatas.convertListChiTietSanPhamToDto(ctSanPhamService.getAll());
         ApiResponse<List<ChiTietSanPhamDto>> apiResponse = new ApiResponse<>();
