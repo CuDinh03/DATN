@@ -54,4 +54,9 @@ public class GioHangService implements IGioHangService {
     public GioHang findById(UUID id) {
         return gioHangRepository.findById(id).get();
     }
+
+    @Override
+    public GioHang findByIdKhachHang(UUID id) {
+        return gioHangRepository.findGioHangByKhachHang(id);
+    }
 }

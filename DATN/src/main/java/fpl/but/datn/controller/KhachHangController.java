@@ -1,5 +1,6 @@
 package fpl.but.datn.controller;
 
+import fpl.but.datn.dto.request.HoaDonDto;
 import fpl.but.datn.dto.request.KhachHangDto;
 import fpl.but.datn.dto.request.KhachHangDto;
 import fpl.but.datn.dto.request.TaiKhoanDto;
@@ -62,6 +63,15 @@ public class KhachHangController {
     ApiResponse<KhachHangDto> getKHBySdt(@PathVariable String sdt){
         ApiResponse<KhachHangDto> apiResponse = new ApiResponse<>();
         KhachHangDto dto = TranferDatas.convertToDto(khachHangService.getKhachHangBySdt(sdt));
+        apiResponse.setMessage("Lấy Khách hàng thành công");
+        apiResponse.setResult(dto);
+        return apiResponse;
+    }
+
+    @GetMapping("/findUsername/{tenDangNhap}")
+    ApiResponse<KhachHangDto> findKHByTenDangNhapo(@PathVariable String tenDangNhap){
+        ApiResponse<KhachHangDto> apiResponse =  new ApiResponse<>();
+        KhachHangDto dto = TranferDatas.convertToDto(khachHangService.findKHByTenDangNhap(tenDangNhap));
         apiResponse.setMessage("Lấy Khách hàng thành công");
         apiResponse.setResult(dto);
         return apiResponse;

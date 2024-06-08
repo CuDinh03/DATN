@@ -28,7 +28,6 @@ public class SecurityConfig {
             "/api/khs/all","/api/khs/{sdt}",
             "/api/chi-tiet-san-pham/all", "/api/chi-tiet-san-pham/addNew", "/api/chi-tiet-san-pham/update/{id}", "/api/chi-tiet-san-pham/delete/{id}", "/api/chi-tiet-san-pham/detail/{id}",
             "/api/danh-muc/all","/api/danh-muc/{id}",
-            "/api/gio-hang-chi-tiet/all/{id}", "/api/gio-hang-chi-tiet/{id}",
             "/api/hoa-don-chi-tiet/all/{id}","/api/hoa-don-chi-tiet/{id}",
             "/api/hoa-don/all", "/api/hoa-don/{ma}",
             "/api/hoa-don-gio-hang/all", "/api/hoa-don-gio-hang/all/{id}"
