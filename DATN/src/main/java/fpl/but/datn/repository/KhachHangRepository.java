@@ -22,9 +22,6 @@ public interface KhachHangRepository extends JpaRepository<KhachHang, UUID> {
     Optional<KhachHang> getKhachHangBySdt(@Param("sdt") String sdt);
 
     // Tim khach hang theo id_TaiKhoan
-//    @Query("select kh from KhachHang kh, TaiKhoan tk where kh.taiKhoan = :idTaiKhoan and tk.id = :idTaiKhoan")
-//    KhachHang getKhachHangByIdTaiKhoan(@Param("idTaiKhoan") UUID idTaiKhoan);
-
     @Query("select kh from KhachHang kh where kh.taiKhoan.id = :idTaiKhoan")
     Optional<KhachHang> getKhachHangByIdTaiKhoan(@Param("idTaiKhoan") UUID idTaiKhoan);
 }

@@ -33,5 +33,4 @@ public class KhachHang {
     @OneToOne
     @JoinColumn(name = "id_tai_khoan_id")
     private TaiKhoan taiKhoan;
-
 }

@@ -1,6 +1,7 @@
 package fpl.but.datn.service.impl;
 
 import fpl.but.datn.entity.KhachHang;
+import fpl.but.datn.entity.TaiKhoan;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.repository.KhachHangRepository;
@@ -25,7 +26,7 @@ public class KhachHangService implements IService<KhachHang>, IKhachHangService 
 
     @Override
     public KhachHang getByID(UUID id) {
-        return this.khachHangRepository.findById(id).get();
+        return khachHangRepository.findById(id).get();
     }
 
     @Override
@@ -48,13 +49,25 @@ public class KhachHangService implements IService<KhachHang>, IKhachHangService 
                 .ngaySua(new Date())
                 .trangThai(Boolean.TRUE)
                 .build();
-
         return khachHangRepository.save(khachHang);
     }
 
     @Override
-    public KhachHang update(UUID uuid, KhachHang khachHang) {
-        return null;
+    public KhachHang update(UUID id, KhachHang request) {
+        KhachHang khachHang = KhachHang.builder()
+                .id(id)
+                .ma(request.getMa())
+                .ten(request.getTen())
+                .email(request.getEmail())
+                .sdt(request.getSdt())
+                .gioiTinh(request.getGioiTinh())
+                .ngaySinh(request.getNgaySinh())
+                .diaChi(request.getDiaChi())
+                .ngayTao(request.getNgayTao())
+                .ngaySua(new Date())
+                .trangThai(Boolean.TRUE)
+                .build();
+        return khachHangRepository.save(khachHang);
     }
 
     @Override
@@ -71,7 +84,7 @@ public class KhachHangService implements IService<KhachHang>, IKhachHangService 
 
     @Override
     public KhachHang findById(UUID id) {
-        return null;
+        return khachHangRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION));
     }
 
     @Override
@@ -80,8 +93,22 @@ public class KhachHangService implements IService<KhachHang>, IKhachHangService 
     }
 
     @Override
-    public KhachHang update(KhachHang khachHang, UUID id) {
-        return null;
+    public KhachHang updateKhachHangById(KhachHang request, UUID id) {
+        KhachHang khachHang = KhachHang.builder()
+                .id(id)
+                .ma(request.getMa())
+                .ten(request.getTen())
+                .email(request.getEmail())
+                .sdt(request.getSdt())
+                .gioiTinh(request.getGioiTinh())
+                .ngaySinh(request.getNgaySinh())
+                .diaChi(request.getDiaChi())
+                .ngayTao(request.getNgayTao())
+                .ngaySua(new Date())
+                .trangThai(Boolean.TRUE)
+                .taiKhoan(request.getTaiKhoan())
+                .build();
+        return khachHangRepository.save(khachHang);
     }
 
     @Override
