@@ -114,7 +114,8 @@ public class GioHangChiTietService implements IGioHangChiTietService {
         return gioHangChiTietRepository.findAllChiTietAndHinhAnhByIdGioHang(idGioHang);
     }
 
-    public GioHangChiTiet addProductToGioHang(UUID idGioHang, UUID idSanPham, int soLuong) {
+    @Override
+    public GioHangChiTiet addProductToGioHangKH(UUID idGioHang, UUID idSanPham, int soLuong) {
         // Tìm giỏ hàng theo idGioHang
         GioHang gioHang = gioHangRepository.findById(idGioHang)
                 .orElseThrow(() -> new RuntimeException("Giỏ hàng không tồn tại"));
@@ -148,6 +149,47 @@ public class GioHangChiTietService implements IGioHangChiTietService {
 
         // Cập nhật số lượng trong chi tiết sản phẩm
 //        chiTietSanPham.setSoLuong(chiTietSanPham.getSoLuong() - soLuong);
+        ctSanPhamRepository.save(chiTietSanPham);
+
+        // Lưu chi tiết giỏ hàng
+        return gioHangChiTietRepository.save(gioHangChiTiet);
+    }
+
+    @Override
+    public GioHangChiTiet addProductToGioHang(UUID idGioHang, UUID idSanPham, int soLuong) {
+        // Tìm giỏ hàng theo idGioHang
+        GioHang gioHang = gioHangRepository.findById(idGioHang)
+                .orElseThrow(() -> new RuntimeException("Giỏ hàng không tồn tại"));
+
+        // Tìm chi tiết sản phẩm theo idSanPham
+        ChiTietSanPham chiTietSanPham = ctSanPhamRepository.findById(idSanPham)
+                .orElseThrow(() -> new RuntimeException("Sản phẩm không tồn tại"));
+
+        if (chiTietSanPham.getSoLuong() < soLuong) {
+            throw new RuntimeException("Số lượng sản phẩm không đủ");
+        }
+
+        // Tìm chi tiết giỏ hàng theo idGioHang và idSanPham
+        Optional<GioHangChiTiet> existingChiTietGioHang = gioHangChiTietRepository.findByGioHangAndSanPhamChiTiet(gioHang, chiTietSanPham);
+
+        GioHangChiTiet gioHangChiTiet;
+        if (existingChiTietGioHang.isPresent()) {
+            // Nếu đã tồn tại chi tiết giỏ hàng, cập nhật số lượng
+            gioHangChiTiet = existingChiTietGioHang.get();
+            gioHangChiTiet.setSoLuong(gioHangChiTiet.getSoLuong() + soLuong);
+        } else {
+            // Nếu không tồn tại, tạo mới chi tiết giỏ hàng
+            gioHangChiTiet = new GioHangChiTiet();
+            gioHangChiTiet.setGioHang(gioHang);
+            gioHangChiTiet.setNgaySua(new Date());
+            gioHangChiTiet.setNgayTao(new Date());
+            gioHangChiTiet.setChiTietSanPham(chiTietSanPham);
+            gioHangChiTiet.setSoLuong(soLuong);
+            gioHangChiTiet.setTrangThai(true);
+        }
+
+        // Cập nhật số lượng trong chi tiết sản phẩm
+        chiTietSanPham.setSoLuong(chiTietSanPham.getSoLuong() - soLuong);
         ctSanPhamRepository.save(chiTietSanPham);
 
         // Lưu chi tiết giỏ hàng

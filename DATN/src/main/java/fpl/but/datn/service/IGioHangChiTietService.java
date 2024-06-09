@@ -18,5 +18,6 @@ public interface IGioHangChiTietService {
     GioHangChiTiet updateGioHangChiTiet(UUID id, Integer newSoLuong);
     List<Object[]> findAllChiTietAndHinhAnhByIdGioHang(UUID idGioHang);
     GioHangChiTiet addProductToGioHang(UUID idGioHang, UUID idSanPham, int soLuong);
+    GioHangChiTiet addProductToGioHangKH(UUID idGioHang, UUID idSanPham, int soLuong);
     GioHangChiTiet updateGioHangChiTietKH(UUID id, Integer newSoLuong);
 }
