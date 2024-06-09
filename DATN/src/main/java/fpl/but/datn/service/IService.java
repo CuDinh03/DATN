@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public interface IService<T> {
     T getByID(UUID id);
-    T createAccount( T t);
+    T create( T t);
 
     T update (UUID uuid, T t);
 
@@ -17,5 +17,5 @@ public interface IService<T> {
 
     List<T> getAll();
 
-    Page<T> getAllTaiKhoanPageable(Pageable pageable);
+    Page<T> getAllPageable(Pageable pageable);
 }

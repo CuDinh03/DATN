@@ -15,6 +15,6 @@ public interface IHinhAnhService {
     HinhAnh update(HinhAnh hinhAnh, UUID id);
     boolean delete(UUID id);
     HinhAnh findById(UUID id);
-
+    List finAllByChiTietSanPham(UUID id);
 
 }

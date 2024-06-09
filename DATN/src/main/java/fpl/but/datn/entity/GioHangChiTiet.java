@@ -12,19 +12,28 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "GioHangChiTiet")
 public class GioHangChiTiet {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    @OneToOne
-    @JoinColumn(name = "id_gio_hang")
-    private GioHang idGioHang;
     @ManyToOne
-    @JoinColumn(name = "id_san_pham")
-    private SanPham idSanPham;
+    private GioHang gioHang;
+    @ManyToOne
+    private ChiTietSanPham chiTietSanPham;
     private Integer soLuong;
     private Date ngayTao;
     private Date ngaySua;
     private Boolean trangThai;
+    @Override
+    public String toString() {
+        return "GioHangChiTiet{" +
+                "id=" + id +
+                ", gioHang=" + gioHang +
+                ", chiTietSanPham=" + chiTietSanPham +
+                ", soLuong=" + soLuong +
+                ", ngayTao=" + ngayTao +
+                ", ngaySua=" + ngaySua +
+                ", trangThai=" + trangThai +
+                '}';
+    }
 }

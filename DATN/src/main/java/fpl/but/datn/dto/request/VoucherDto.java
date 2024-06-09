@@ -13,7 +13,7 @@ public class VoucherDto {
     private String loaiGiamGia;
     private Date ngayBatDau;
     private Date ngayKetThuc;
-    private BigDecimal giamTriGiam;
+    private BigDecimal giaTriGiam;
     private BigDecimal giaTriToiThieu;
     private Integer soLuong;
     private Date ngayTao;

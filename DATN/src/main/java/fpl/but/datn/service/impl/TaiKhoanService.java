@@ -47,7 +47,7 @@ public class TaiKhoanService implements ITaiKhoanService {
                         throw new AppException(ErrorCode.ACCOUNT_EXISTED);
         }
 
-        taiKhoan.setMa(request.getMa());
+        taiKhoan.setMa("TK0" + request.getTenDangNhap());
         taiKhoan.setId(UUID.randomUUID());
         taiKhoan.setTenDangNhap(request.getTenDangNhap());
         ChucVu chucVu = chucVuService.getChucVuByName("CUSTOMER");
@@ -68,6 +68,11 @@ public class TaiKhoanService implements ITaiKhoanService {
     @Override
     public Page<TaiKhoan> findByRoles(String role, Pageable pageable) {
         return taiKhoanRepository.findByTenChucVu(role,pageable);
+    }
+
+    @Override
+    public Optional<TaiKhoan> findByNguoiDungByTenDangNhap(String tenDangNhap) {
+        return taiKhoanRepository.findByNguoiDungByTenDangNhap(tenDangNhap);
     }
 
 
@@ -163,7 +168,9 @@ public class TaiKhoanService implements ITaiKhoanService {
         taiKhoan.setNgaySua(new Date());
         taiKhoan.setTrangThai(request.getTrangThai());
 
-        TaiKhoan updateTaiKhoan = taiKhoanRepository.save(taiKhoan);
+        taiKhoanRepository.save(taiKhoan);
+
+        TaiKhoan updateTaiKhoan = getByID(uuid);
         if (updateTaiKhoan==null)
             throw new AppException(ErrorCode.UPDATE_FAILED);
 

@@ -32,23 +32,7 @@ public class HoaDonChiTietService implements IHoaDonChiTietService {
 
     @Override
     public HoaDonChiTiet create(HoaDonChiTiet request) {
-        Random random = new Random();
-        HoaDon hoaDon = new HoaDon();
-        hoaDon.setMa("HD" + random.nextInt(1000));
-        hoaDon.setNgayTao(new Date());
-        hoaDon.setNgaySua(new Date());
-        hoaDon.setTrangThai(true);
-        NguoiDung nguoiDung = nguoiDungService.findById(UUID.fromString("c267d5f3-bc1f-4e44-aeb7-fee8e4a6e62a"));
-        hoaDon.setIdNguoiDung(nguoiDung);
-        hoaDonRepository.save(hoaDon);
-
-        HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
-        hoaDonChiTiet.setNgayTao(new Date());
-        hoaDonChiTiet.setNgaySua(new Date());
-        hoaDonChiTiet.setIdHoaDon(hoaDon);
-        hoaDonChiTiet.setSoLuong(0);
-        hoaDon.setTrangThai(true);
-        return hoaDonChiTietRepository.save(hoaDonChiTiet);
+        return hoaDonChiTietRepository.save(request);
     }
 
     @Override
@@ -75,4 +59,9 @@ public class HoaDonChiTietService implements IHoaDonChiTietService {
     public Page<HoaDonChiTiet> getAllDanhMucPageable(Pageable pageable) {
         return null;
     }
+
+    public List<HoaDonChiTiet> getHoaDonChiTietByIdHoaDon(UUID idHoaDon) {
+        return hoaDonChiTietRepository.findAllHoaDonChiTietByIdHoaDon(idHoaDon);
+    }
+
 }

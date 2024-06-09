@@ -1,10 +1,12 @@
 package fpl.but.datn.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -20,26 +22,20 @@ public class ChiTietSanPham {
     private UUID id;
     private String ma;
     @ManyToOne
-    @JoinColumn(name = "id_san_pham")
-    private SanPham idSanPham;
+    private SanPham sanPham;
     @ManyToOne
-    @JoinColumn(name = "id_hinh_anh")
-    private HinhAnh idHinhAnh;
+    private ThuongHieu thuongHieu;
     @ManyToOne
-    @JoinColumn(name = "id_thuong_hieu")
-    private ThuongHieu idThuongHieu;
+    private ChatLieu chatLieu;
     @ManyToOne
-    @JoinColumn(name = "id_chat_lieu")
-    private ChatLieu idChatLieu;
+    private DanhMuc danhMuc;
     @ManyToOne
-    @JoinColumn(name = "id_danh_muc")
-    private DanhMuc idDanhMuc;
+    private KichThuoc kichThuoc;
     @ManyToOne
-    @JoinColumn(name = "id_kich_thuoc")
-    private KichThuoc idKichThuoc;
-    @ManyToOne
-    @JoinColumn(name = "id_mau_sac")
-    private MauSac idMauSac;
+    private MauSac mauSac;
+    @JsonIgnore
+    @OneToMany(mappedBy = "chiTietSanPham", fetch = FetchType.EAGER)
+    private List<HinhAnh> hinhAnh;
     private Integer soLuong;
     private BigDecimal giaNhap;
     private BigDecimal giaBan;
@@ -47,5 +43,7 @@ public class ChiTietSanPham {
     private Date ngaySua;
     private Date ngayTao;
     private Boolean trangThai;
+
+
 
 }

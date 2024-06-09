@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/hoa-don-chi-tiet")
@@ -42,6 +43,19 @@ public class HoaDonChiTietController {
         ApiResponse<HoaDonChiTiet> apiResponse = new ApiResponse<>();
         if (request != null)
             apiResponse.setResult(hoaDonChiTietService.create(TranferDatas.convertToEntity(request)));
+        return apiResponse;
+    }
+
+    @GetMapping("/all/{id}")
+    ApiResponse<List<HoaDonChiTietDto>> getAllHDCTByIdHoaDon(@PathVariable("id") UUID idHoaDon){
+        List<HoaDonChiTietDto> dto = TranferDatas.convertListHoaDonChiTietToDto(hoaDonChiTietService.getHoaDonChiTietByIdHoaDon(idHoaDon));
+        ApiResponse<List<HoaDonChiTietDto>> apiResponse = new ApiResponse<>();
+        if (!dto.isEmpty()){
+            apiResponse.setMessage("Lấy danh sách hoa don thành công");
+            apiResponse.setResult(dto);
+        }else {
+            throw new AppException(ErrorCode.NO_ORDER_FOUND);
+        }
         return apiResponse;
     }
 }
