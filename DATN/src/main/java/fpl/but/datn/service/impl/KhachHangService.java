@@ -39,6 +39,7 @@ public class KhachHangService implements IKhachHangService, IService<KhachHang> 
         KhachHang khachHang = KhachHang.builder()
                 .ma("KH" + System.currentTimeMillis())
                 .ten(request.getTen())
+                .taiKhoan(request.getTaiKhoan())
                 .email(request.getEmail())
                 .sdt(request.getSdt())
                 .gioiTinh(request.getGioiTinh())
