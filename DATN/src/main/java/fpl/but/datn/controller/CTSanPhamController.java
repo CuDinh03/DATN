@@ -6,11 +6,13 @@ import fpl.but.datn.dto.request.GioHangDto;
 import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.entity.ChiTietSanPham;
 import fpl.but.datn.entity.DanhMuc;
+import fpl.but.datn.entity.GioHangChiTiet;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.service.ICTSanPhamService;
 import fpl.but.datn.service.IDanhMucService;
 import fpl.but.datn.tranferdata.TranferDatas;
+import jakarta.annotation.security.PermitAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -29,6 +31,7 @@ public class CTSanPhamController {
 
     @Autowired
     private ICTSanPhamService ctSanPhamService;
+
     @GetMapping("/all")
     ApiResponse<Page<ChiTietSanPhamDto>> getDanhMuc(@RequestParam(defaultValue = "0") int page,
                                              @RequestParam(defaultValue = "5") int size) {
@@ -50,6 +53,7 @@ public class CTSanPhamController {
     }
 
     @GetMapping("/getAll")
+        // Cho phép truy cập mà không cần phải xác thực
     ApiResponse<List<ChiTietSanPhamDto>> getAll() {
         List<ChiTietSanPhamDto> listDto = TranferDatas.convertListChiTietSanPhamToDto(ctSanPhamService.getAll());
         ApiResponse<List<ChiTietSanPhamDto>> apiResponse = new ApiResponse<>();
