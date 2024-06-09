@@ -6,6 +6,7 @@ import fpl.but.datn.dto.request.GioHangDto;
 import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.entity.ChiTietSanPham;
 import fpl.but.datn.entity.DanhMuc;
+import fpl.but.datn.entity.GioHangChiTiet;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.service.ICTSanPhamService;
@@ -30,6 +31,7 @@ public class CTSanPhamController {
 
     @Autowired
     private ICTSanPhamService ctSanPhamService;
+
     @GetMapping("/all")
     ApiResponse<Page<ChiTietSanPhamDto>> getDanhMuc(@RequestParam(defaultValue = "0") int page,
                                              @RequestParam(defaultValue = "5") int size) {
@@ -83,6 +85,8 @@ public class CTSanPhamController {
         }else
             return ResponseEntity.ok("xoa that bai");
     }
+
+
 
     @GetMapping("/{id}")
     ApiResponse<ChiTietSanPhamDto> detail(@PathVariable String id) {

@@ -80,7 +80,17 @@ public class GioHangChiTietController {
     }
 
 
-
+    @PostMapping("/addProductToCart")
+    public ApiResponse<GioHangChiTiet> addProductToGioHang(
+            @RequestParam UUID idGioHang,
+            @RequestParam UUID idSanPham,
+            @RequestParam Integer soLuong) {
+        GioHangChiTiet gioHangChiTiet = gioHangChiTietService.addProductToGioHang(idGioHang, idSanPham, soLuong);
+        ApiResponse<GioHangChiTiet> response = new ApiResponse<>();
+        response.setMessage("Thêm sản phẩm vào giỏ hàng thành công");
+        response.setResult(gioHangChiTiet);
+        return response;
+    }
 
 
     @PutMapping("/{id}")

@@ -1,6 +1,7 @@
 package fpl.but.datn.repository;
 
 
+import fpl.but.datn.entity.ChiTietSanPham;
 import fpl.but.datn.entity.GioHang;
 import fpl.but.datn.entity.GioHangChiTiet;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -23,6 +25,9 @@ public interface GioHangChiTietRepository extends JpaRepository<GioHangChiTiet, 
             "INNER JOIN hinh_anh ha ON ctsp.id = ha.chi_tiet_san_pham_id " +
             "WHERE gh.id = :idGioHang ", nativeQuery = true)
     List<Object[]> findAllChiTietAndHinhAnhByIdGioHang(@Param("idGioHang") UUID idGioHang);
+
+    @Query(value = "SELECT g FROM GioHangChiTiet g WHERE g.gioHang = :gioHang AND g.chiTietSanPham = :chiTietSanPham")
+    Optional<GioHangChiTiet> findByGioHangAndSanPhamChiTiet(GioHang gioHang, ChiTietSanPham chiTietSanPham);
 
 
 }
