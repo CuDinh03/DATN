@@ -86,8 +86,6 @@ public class CTSanPhamController {
             return ResponseEntity.ok("xoa that bai");
     }
 
-
-
     @GetMapping("/{id}")
     ApiResponse<ChiTietSanPhamDto> detail(@PathVariable String id) {
         ApiResponse<ChiTietSanPhamDto> apiResponse = new ApiResponse<>();

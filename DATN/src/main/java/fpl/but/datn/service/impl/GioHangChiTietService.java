@@ -60,8 +60,6 @@ public class GioHangChiTietService implements IGioHangChiTietService {
     public GioHangChiTiet updateGioHangChiTiet(UUID id, Integer newSoLuong) {
         Optional<GioHangChiTiet> optionalGioHangChiTiet = gioHangChiTietRepository.findById(id);
 
-
-
         if (optionalGioHangChiTiet.isPresent()) {
             GioHangChiTiet chiTietGioHang = optionalGioHangChiTiet.get();
             ChiTietSanPham chiTietSanPham = chiTietGioHang.getChiTietSanPham();
@@ -84,8 +82,26 @@ public class GioHangChiTietService implements IGioHangChiTietService {
                     chiTietSanPham.setSoLuong(chiTietSanPham.getSoLuong() - (newSoLuong - oldSoLuong));
                 }
             }
-
             ctSanPhamRepository.save(chiTietSanPham);
+            return chiTietGioHang;
+        } else {
+            throw new RuntimeException("Gio Hang Chi Tiet không tồn tại với id " + id);
+        }
+    }
+
+
+    public GioHangChiTiet updateGioHangChiTietKH(UUID id, Integer newSoLuong) {
+        Optional<GioHangChiTiet> optionalGioHangChiTiet = gioHangChiTietRepository.findById(id);
+
+        if (optionalGioHangChiTiet.isPresent()) {
+            GioHangChiTiet chiTietGioHang = optionalGioHangChiTiet.get();
+            chiTietGioHang.setSoLuong(newSoLuong);
+
+            if (newSoLuong == 0) {
+                gioHangChiTietRepository.delete(chiTietGioHang);
+            } else {
+                gioHangChiTietRepository.save(chiTietGioHang);
+            }
             return chiTietGioHang;
         } else {
             throw new RuntimeException("Gio Hang Chi Tiet không tồn tại với id " + id);
@@ -131,7 +147,7 @@ public class GioHangChiTietService implements IGioHangChiTietService {
         }
 
         // Cập nhật số lượng trong chi tiết sản phẩm
-        chiTietSanPham.setSoLuong(chiTietSanPham.getSoLuong() - soLuong);
+//        chiTietSanPham.setSoLuong(chiTietSanPham.getSoLuong() - soLuong);
         ctSanPhamRepository.save(chiTietSanPham);
 
         // Lưu chi tiết giỏ hàng

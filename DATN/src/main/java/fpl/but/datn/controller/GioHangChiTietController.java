@@ -92,6 +92,40 @@ public class GioHangChiTietController {
         return response;
     }
 
+    @PostMapping("/addProductToCartKH")
+    public ApiResponse<GioHangChiTiet> addProductToGioHangKH(
+            @RequestParam UUID idGioHang,
+            @RequestParam UUID idSanPham,
+            @RequestParam Integer soLuong) {
+        GioHangChiTiet gioHangChiTiet = gioHangChiTietService.addProductToGioHang(idGioHang, idSanPham, soLuong);
+        ApiResponse<GioHangChiTiet> response = new ApiResponse<>();
+        response.setMessage("Thêm sản phẩm vào giỏ hàng thành công");
+        response.setResult(gioHangChiTiet);
+        return response;
+    }
+
+    @PutMapping("/updateCartKH/{id}")
+    public ApiResponse<GioHangChiTiet> updateGioHangChiTietKH(@PathVariable UUID id, @RequestParam Integer soLuong) {
+        ApiResponse<GioHangChiTiet> apiResponse = new ApiResponse<>();
+
+        try {
+            GioHangChiTiet updatedGioHangChiTiet = gioHangChiTietService.updateGioHangChiTietKH(id, soLuong);
+
+            if (updatedGioHangChiTiet == null) {
+                apiResponse.setMessage("Gio hang chi tiet đã bị xóa vì số lượng là 0");
+                apiResponse.setResult(null);
+            } else {
+                apiResponse.setMessage("Cập nhật gio hang chi tiet thành công");
+                apiResponse.setResult(updatedGioHangChiTiet);
+            }
+        } catch (AppException e) {
+            apiResponse.setMessage(e.getMessage());
+            apiResponse.setResult(null);
+        }
+
+        return apiResponse;
+    }
+
 
     @PutMapping("/{id}")
     public ApiResponse<GioHangChiTiet> updateGioHangChiTiet(@PathVariable UUID id, @RequestParam Integer soLuong) {
