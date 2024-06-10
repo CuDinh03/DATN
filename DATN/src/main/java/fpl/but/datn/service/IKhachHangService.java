@@ -20,4 +20,5 @@ public interface IKhachHangService {
     KhachHang findById(UUID id);
     Page<KhachHang> getAllKhachHangPageable(Pageable pageable);
     Page<KhachHang> getAllPageable(Pageable pageable);
+    KhachHang findKHByTenDangNhap(String tenDangNhap);
 }

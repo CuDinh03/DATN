@@ -11,4 +11,5 @@ public interface IGioHangService {
     GioHang update(GioHang gioHang, UUID id);
     boolean delete(UUID id);
     GioHang findById(UUID id);
+    GioHang findByIdKhachHang(UUID id);
 }

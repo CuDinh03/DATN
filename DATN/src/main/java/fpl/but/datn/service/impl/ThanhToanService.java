@@ -99,7 +99,7 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
                 }
                 GioHangHoaDon gioHangHoaDon = this.hoaDonGioHangService.findByIdHoaDon(hoaDon.getId());
                 GioHang gioHang = this.gioHangService.findById(gioHangHoaDon.getGioHang().getId());
-                gioHang.setTrangThai(Boolean.FALSE);
+                gioHang.setTrangThai(0);
                 this.gioHangService.update(gioHang, gioHang.getId());
             }
         }

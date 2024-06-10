@@ -36,6 +36,17 @@ public class GioHangController {
         return ResponseEntity.ok(gioHangService.update(gioHang,id));
     }
 
+    @GetMapping("/findByKhachHang/{id}")
+    ApiResponse<GioHangDto> findByIdKhachHang(@PathVariable UUID id) {
+        ApiResponse<GioHangDto> apiResponse = new ApiResponse<>();
+        if (id != null){
+            GioHangDto dto = TranferDatas.convertToDto(gioHangService.findByIdKhachHang(id));
+            apiResponse.setMessage("Lấy Hóa đơn thành công");
+            apiResponse.setResult(dto);
+        }
+        return apiResponse;
+    }
+
     @GetMapping("/{id}")
     ApiResponse<GioHangDto> detail(@PathVariable String id) {
         ApiResponse<GioHangDto> apiResponse = new ApiResponse<>();

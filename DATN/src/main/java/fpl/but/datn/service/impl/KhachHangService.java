@@ -121,4 +121,11 @@ public class KhachHangService implements IKhachHangService, IService<KhachHang> 
     public KhachHang getKhachHangBySdt(String sdt) {
         return this.khachHangRepository.getKhachHangBySdt(sdt).get();
     }
+
+    @Override
+    public KhachHang findKHByTenDangNhap(String tenDangNhap) {
+        return this.khachHangRepository.findKHByTenDangNhap(tenDangNhap);
+    }
+
+
 }

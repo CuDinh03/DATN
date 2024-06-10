@@ -45,7 +45,7 @@ public class HoaDonGioHangService implements IHoaDonGioHangService {
         gioHang.setMa("GH" + random.nextInt(1000));
         gioHang.setNgayTao(new Date());
         gioHang.setNgaySua(new Date());
-        gioHang.setTrangThai(true);
+        gioHang.setTrangThai(1);
         gioHangRepository.save(gioHang);
 
         BigDecimal tongTien = BigDecimal.ZERO;

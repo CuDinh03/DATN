@@ -1,6 +1,9 @@
 package fpl.but.datn.dto.request;
 
 import fpl.but.datn.entity.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,8 +13,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-@Getter
-@Setter
 @Data
 public class ChiTietSanPhamDto {
     private UUID id;
