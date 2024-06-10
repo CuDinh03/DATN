@@ -76,14 +76,14 @@ public class KhachHangController {
         return apiResponse;
     }
 
-//    @GetMapping("/{sdt}")
-//    ApiResponse<KhachHangDto> getKHBySdt(@PathVariable String sdt){
-//        ApiResponse<KhachHangDto> apiResponse = new ApiResponse<>();
-//        KhachHangDto dto = TranferDatas.convertToDto(khachHangService.getKhachHangBySdt(sdt));
-//        apiResponse.setMessage("Lấy Khách hàng thành công");
-//        apiResponse.setResult(dto);
-//        return apiResponse;
-//    }
+    @GetMapping("/{sdt}")
+    ApiResponse<KhachHangDto> getKHBySdt(@PathVariable String sdt){
+        ApiResponse<KhachHangDto> apiResponse = new ApiResponse<>();
+        KhachHangDto dto = TranferDatas.convertToDto(khachHangService.getKhachHangBySdt(sdt));
+        apiResponse.setMessage("Lấy Khách hàng thành công");
+        apiResponse.setResult(dto);
+        return apiResponse;
+    }
 
     @PutMapping("/{id}")
     KhachHang update(@RequestBody KhachHangDto request, @PathVariable String id) {
