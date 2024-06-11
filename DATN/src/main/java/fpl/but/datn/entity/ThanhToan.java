@@ -25,5 +25,5 @@ public class ThanhToan {
     private BigDecimal tienThanhToan;
     private Date ngayTao;
     private Date ngaySua;
-    private Boolean trangThai;
+    private Integer trangThai;
 }

@@ -20,7 +20,7 @@ public class TaiKhoanDto {
     private String tenDangNhap;
     @Size(min = 8, max = 16, message = "PASSWORD_INVALID")
     private String matKhau;
-    private ChucVu idChucVu;
+    private ChucVu ChucVu;
     private Date ngayTao;
     private Date ngaySua;
     private Integer trangThai;

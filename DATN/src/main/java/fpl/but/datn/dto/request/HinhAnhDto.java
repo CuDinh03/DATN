@@ -13,5 +13,5 @@ public class HinhAnhDto {
     private ChiTietSanPham chiTietSanPham;
     private Date ngayTao;
     private Date ngaySua;
-    private Boolean trangThai;
+    private Integer trangThai;
 }

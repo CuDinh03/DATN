@@ -18,5 +18,5 @@ public class VoucherDto {
     private Integer soLuong;
     private Date ngayTao;
     private Date ngaySua;
-    private Boolean trangThai;
+    private Integer trangThai;
 }
