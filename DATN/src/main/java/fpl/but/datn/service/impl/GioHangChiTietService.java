@@ -144,7 +144,7 @@ public class GioHangChiTietService implements IGioHangChiTietService {
             gioHangChiTiet.setNgayTao(new Date());
             gioHangChiTiet.setChiTietSanPham(chiTietSanPham);
             gioHangChiTiet.setSoLuong(soLuong);
-            gioHangChiTiet.setTrangThai(true);
+            gioHangChiTiet.setTrangThai(1);
         }
 
         // Cập nhật số lượng trong chi tiết sản phẩm
@@ -185,7 +185,7 @@ public class GioHangChiTietService implements IGioHangChiTietService {
             gioHangChiTiet.setNgayTao(new Date());
             gioHangChiTiet.setChiTietSanPham(chiTietSanPham);
             gioHangChiTiet.setSoLuong(soLuong);
-            gioHangChiTiet.setTrangThai(true);
+            gioHangChiTiet.setTrangThai(1);
         }
 
         // Cập nhật số lượng trong chi tiết sản phẩm

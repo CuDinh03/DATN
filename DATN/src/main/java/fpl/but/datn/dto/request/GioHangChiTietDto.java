@@ -17,7 +17,7 @@ public class GioHangChiTietDto {
     private Integer soLuong;
     private Date ngayTao;
     private Date ngaySua;
-    private Boolean trangThai;
+    private Integer trangThai;
     private List<String> hinhAnhUrls;
 
 }

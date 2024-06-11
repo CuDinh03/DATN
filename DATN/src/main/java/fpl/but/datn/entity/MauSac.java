@@ -21,6 +21,6 @@ public class MauSac {
     private String ma;
     private Date ngayTao;
     private Date ngaySua;
-    private Boolean trangThai;
+    private Integer trangThai;
 
 }

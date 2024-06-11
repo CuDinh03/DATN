@@ -60,14 +60,14 @@ public class DanhMucServiceImpl implements IDanhMucService {
     @Override
     public void delete(UUID id) {
         DanhMuc taiKhoan = findById(id);
-        taiKhoan.setTrangThai(Boolean.FALSE);
+        taiKhoan.setTrangThai(0);
         danhMucRepository.save(taiKhoan);
 
     }
 
     public void open(UUID id) {
         DanhMuc taiKhoan = findById(id);
-        taiKhoan.setTrangThai(Boolean.TRUE);
+        taiKhoan.setTrangThai(1);
         danhMucRepository.save(taiKhoan);
 
     }

@@ -36,7 +36,7 @@ public class ChatLieuService implements IChatLieuService {
         chatLieu.setTen(request.getTen());
         chatLieu.setNgayTao(new Date());
         chatLieu.setNgaySua(new Date());
-        chatLieu.setTrangThai(true);
+        chatLieu.setTrangThai(1);
 
         return chatLieuRepository.save(chatLieu);
     }
@@ -49,7 +49,7 @@ public class ChatLieuService implements IChatLieuService {
         chatLieu.setId(id);
         chatLieu.setNgayTao(new Date());
         chatLieu.setNgaySua(new Date());
-        chatLieu.setTrangThai(true);
+        chatLieu.setTrangThai(1);
         return chatLieuRepository.save(chatLieu);
     }
 

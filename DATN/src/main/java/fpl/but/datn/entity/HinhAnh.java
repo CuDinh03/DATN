@@ -24,6 +24,6 @@ public class HinhAnh {
     private String url;
     private Date ngayTao;
     private Date ngaySua;
-    private Boolean trangThai;
+    private Integer trangThai;
 
 }
