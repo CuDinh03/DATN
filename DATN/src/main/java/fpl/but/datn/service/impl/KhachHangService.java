@@ -91,7 +91,7 @@ public class KhachHangService implements IKhachHangService, IService<KhachHang> 
     @Override
     public void open(UUID id) {
         KhachHang khachHang = findById(id);
-        khachHang.setTrangThai(Boolean.TRUE);
+        khachHang.setTrangThai(1);
         khachHangRepository.save(khachHang);
 
     }

@@ -99,7 +99,7 @@ public class CTSanPhamService implements ICTSanPhamService {
     @Override
     public void open(UUID id) {
             ChiTietSanPham taiKhoan = findById(id);
-            taiKhoan.setTrangThai(Boolean.TRUE);
+            taiKhoan.setTrangThai(1);
             ctSanPhamRepository.save(taiKhoan);
 
     }
