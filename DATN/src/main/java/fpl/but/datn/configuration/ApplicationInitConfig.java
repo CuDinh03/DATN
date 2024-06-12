@@ -38,7 +38,7 @@ public class ApplicationInitConfig {
                             .ma("CV01")
                             .ngayTao(new Date())
                             .ngaySua(new Date())
-                            .trangThai(Boolean.TRUE)
+                            .trangThai(1)
                             .build();
                     chucVuRepository.save(chucVu);
                     log.warn("ADMIN Role has been created!");
@@ -50,7 +50,7 @@ public class ApplicationInitConfig {
                             .ma("CV02")
                             .ngayTao(new Date())
                             .ngaySua(new Date())
-                            .trangThai(Boolean.TRUE)
+                            .trangThai(1)
                             .build();
                     chucVuRepository.save(chucVu);
                     log.warn("CUSTOMER Role has been created!");
@@ -62,7 +62,7 @@ public class ApplicationInitConfig {
                             .ma("CV03")
                             .ngayTao(new Date())
                             .ngaySua(new Date())
-                            .trangThai(Boolean.TRUE)
+                            .trangThai(1)
                             .build();
                     chucVuRepository.save(chucVu);
                     log.warn("STAFF Role has been created!");
@@ -75,7 +75,7 @@ public class ApplicationInitConfig {
                         .ma("TK01")
                         .ngayTao(new Date())
                         .ngaySua(new Date())
-                        .idChucVu(chucVu)
+                        .chucVu(chucVu)
                         .trangThai(1)
                         .matKhau(passwordEncoder.encode("admin"))
                         .build();

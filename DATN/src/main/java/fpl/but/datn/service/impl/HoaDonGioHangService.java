@@ -64,8 +64,13 @@ public class HoaDonGioHangService implements IHoaDonGioHangService {
         hoaDon.setMa("HD" + random.nextInt(1000));
         hoaDon.setNgayTao(new Date());
         hoaDon.setNgaySua(new Date());
+<<<<<<< HEAD
         hoaDon.setTrangThai(true);
         NguoiDung nguoiDung = nguoiDungService.findById(UUID.fromString("324aa318-89e4-4038-aaf0-3452c11a3118"));
+=======
+        hoaDon.setTrangThai(0);
+        NguoiDung nguoiDung = nguoiDungService.findById(UUID.fromString("a6680d0f-dafe-4523-be49-d1b8a5f72375"));
+>>>>>>> 7f62bb47bfe2551a58647a1487daa4da106c1460
         hoaDon.setNguoiDung(nguoiDung);
         hoaDon.setTongTien(tongTien);
         hoaDonRepository.save(hoaDon);

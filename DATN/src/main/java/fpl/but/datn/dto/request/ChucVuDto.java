@@ -12,5 +12,5 @@ public class ChucVuDto {
     private String ten;
     private Date ngayTao;
     private Date ngaySua;
-    private Boolean trangThai;
+    private Integer trangThai;
 }

@@ -35,7 +35,6 @@ public class UserController {
         ApiResponse<TaiKhoan> apiResponse = new ApiResponse<>();
         if (request != null)
             apiResponse.setResult(taiKhoanService.createAccount(TranferDatas.convertToEntity(request)));
-
         return apiResponse;
     }
 

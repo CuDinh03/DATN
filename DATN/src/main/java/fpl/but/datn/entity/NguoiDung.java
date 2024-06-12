@@ -30,5 +30,5 @@ public class NguoiDung {
     private String diaChi;
     private Date ngayTao;
     private Date ngaySua;
-    private Boolean trangThai;
+    private Integer trangThai;
 }

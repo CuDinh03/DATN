@@ -52,7 +52,7 @@ public class VoucherService implements IService<Voucher>, IVoucherService {
                     .soLuong(request.getSoLuong())
                     .ngayTao(new Date())
                     .ngaySua(new Date())
-                    .trangThai(Boolean.TRUE)
+                    .trangThai(1)
                     .build();
 
             return voucherRepository.save(newVoucher);
@@ -86,7 +86,7 @@ public class VoucherService implements IService<Voucher>, IVoucherService {
         if (optionalVoucher.isPresent()) {
 
             Voucher existingVoucher = optionalVoucher.get();
-            existingVoucher.setTrangThai(Boolean.FALSE);
+            existingVoucher.setTrangThai(0);
             existingVoucher.setNgaySua(new Date());
             voucherRepository.save(existingVoucher);
         } else {
