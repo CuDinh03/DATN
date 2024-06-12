@@ -28,5 +28,5 @@ public class TaiKhoan {
     private ChucVu idChucVu;
     private Date ngayTao;
     private Date ngaySua;
-    private Boolean trangThai;
+    private Integer trangThai;
 }

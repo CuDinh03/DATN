@@ -15,18 +15,30 @@ import java.util.UUID;
 @Entity
 @Table(name = "HoaDonChiTiet")
 public class HoaDonChiTiet {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     @ManyToOne
-    @JoinColumn(name = "id_hoa_don")
-    private HoaDon idHoaDon;
+    private HoaDon hoaDon;
     @ManyToOne
-    @JoinColumn(name = "id_san_pham")
-    private SanPham sanPham;
+    private ChiTietSanPham chiTietSanPham;
     private Integer soLuong;
     private Date ngayTao;
     private Date ngaySua;
     private BigDecimal giaBan;
-    private boolean trangThai;
+    private Boolean trangThai;
+    @Override
+    public String toString() {
+        return "GioHangChiTiet{" +
+                "id=" + id +
+                ", hoaDon=" + hoaDon +
+                ", chiTietSanPham=" + chiTietSanPham +
+                ", soLuong=" + soLuong +
+                ", ngayTao=" + ngayTao +
+                ", ngaySua=" + ngaySua +
+                ", giaBan=" + giaBan +
+                ", trangThai=" + trangThai +
+                '}';
+    }
 }

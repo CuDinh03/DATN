@@ -1,10 +1,13 @@
 package fpl.but.datn.service.impl;
 
 import fpl.but.datn.entity.ChiTietSanPham;
+import fpl.but.datn.entity.DanhMuc;
 import fpl.but.datn.entity.SanPham;
 import fpl.but.datn.repository.CTSanPhamRepository;
 import fpl.but.datn.service.ICTSanPhamService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,7 +19,7 @@ public class CTSanPhamService implements ICTSanPhamService {
     private CTSanPhamRepository ctSanPhamRepository;
 
     @Override
-    public List getAll() {
+    public List<ChiTietSanPham> getAll() {
         return ctSanPhamRepository.findAll();
     }
 
@@ -38,6 +41,11 @@ public class CTSanPhamService implements ICTSanPhamService {
 
     @Override
     public ChiTietSanPham findById(UUID id) {
-        return null;
+        return ctSanPhamRepository.findById(id).get();
+    }
+
+    @Override
+    public Page<ChiTietSanPham> getAllChiTietSanPhamPageable(Pageable pageable) {
+        return ctSanPhamRepository.findAll(pageable);
     }
 }

@@ -22,14 +22,15 @@ public class HoaDon {
     private UUID id;
     private String ma;
     @ManyToOne
-    private NguoiDung idNguoiDung;
+    private NguoiDung nguoiDung;
     @ManyToOne
-    private KhachHang idKhachHang;
+    private KhachHang khachHang;
     private BigDecimal tongTien;
     private BigDecimal tongTienGiam;
     private Date ngayTao;
     private Date ngaySua;
-    private UUID idVoucher;
+    @ManyToOne
+    private Voucher voucher;
     private String ghiChu;
     private Boolean trangThai;
 }

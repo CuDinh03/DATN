@@ -12,7 +12,8 @@ public interface IDanhMucService {
     List getAll();
     DanhMuc create(DanhMuc danhMuc);
     DanhMuc update(DanhMuc danhMuc, UUID id);
-    boolean delete(UUID id);
+    void delete(UUID id);
+    void open(UUID id);
     DanhMuc findById(UUID id);
     Page<DanhMuc> getAllDanhMucPageable(Pageable pageable);
 }
