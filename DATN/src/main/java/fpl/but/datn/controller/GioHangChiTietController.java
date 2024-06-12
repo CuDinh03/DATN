@@ -160,7 +160,7 @@ public class GioHangChiTietController {
             createdDto.setSoLuong(1);
             createdDto.setNgayTao(request.getNgayTao());
             createdDto.setNgaySua(request.getNgaySua());
-            createdDto.setTrangThai(Boolean.TRUE);
+            createdDto.setTrangThai(1);
             gioHangChiTietService.create(TranferDatas.convertToEntity(createdDto));
             apiResponse.setMessage("Created Gio Hang Chi Tiet successfully");
 

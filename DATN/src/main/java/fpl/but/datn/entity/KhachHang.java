@@ -29,7 +29,7 @@ public class KhachHang {
     private String diaChi;
     private Date ngaySua;
     private Date ngayTao;
-    private Boolean trangThai;
+    private Integer trangThai;
 
 
 }

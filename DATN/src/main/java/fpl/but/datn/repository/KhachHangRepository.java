@@ -14,10 +14,10 @@ import java.util.UUID;
 @Repository
 public interface KhachHangRepository extends JpaRepository<KhachHang, UUID> {
 
-    @Query("SELECT kh from KhachHang kh where kh.trangThai = true order by kh.ngayTao DESC")
+    @Query("SELECT kh from KhachHang kh where kh.trangThai = 1 order by kh.ngayTao DESC")
     Page<KhachHang> findAllPage(Pageable pageable);
 
-    @Query("select kh from KhachHang kh where kh.sdt = :sdt and kh.trangThai = true ")
+    @Query("select kh from KhachHang kh where kh.sdt = :sdt and kh.trangThai = 1 ")
     Optional<KhachHang> getKhachHangBySdt(@Param("sdt") String sdt);
 
     @Query(value = "SELECT kh.* FROM tai_khoan tk JOIN khach_hang kh ON tk.id = kh.tai_khoan_id WHERE tk.ten_dang_nhap = :tenDangNhap", nativeQuery = true)

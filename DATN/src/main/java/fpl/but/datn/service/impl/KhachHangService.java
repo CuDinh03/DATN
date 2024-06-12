@@ -45,7 +45,7 @@ public class KhachHangService implements IService<KhachHang>, IKhachHangService 
                 .diaChi(request.getDiaChi())
                 .ngayTao(new Date())
                 .ngaySua(new Date())
-                .trangThai(Boolean.TRUE)
+                .trangThai(1)
                 .build();
 
         return khachHangRepository.save(khachHang);
@@ -59,7 +59,7 @@ public class KhachHangService implements IService<KhachHang>, IKhachHangService 
     @Override
     public void delete(UUID id) {
             KhachHang khachHang = this.khachHangRepository.findById(id).get();
-            khachHang.setTrangThai(Boolean.FALSE);
+            khachHang.setTrangThai(0);
             this.khachHangRepository.saveAndFlush(khachHang);
     }
 

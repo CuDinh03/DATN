@@ -23,7 +23,7 @@ public class GioHangChiTiet {
     private Integer soLuong;
     private Date ngayTao;
     private Date ngaySua;
-    private Boolean trangThai;
+    private Integer trangThai;
     @Override
     public String toString() {
         return "GioHangChiTiet{" +
