@@ -70,7 +70,7 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
         if (request != null) {
             HoaDon hoaDon = hoaDonService.findById(request.getId());
             if (hoaDon != null) {
-                hoaDon.setTrangThai(0);
+                hoaDon.setTrangThai(1);
                 hoaDon.setTongTien(request.getTongTien());
                 hoaDon.setNgaySua(new Date());
                 hoaDon.setNgayTao(new Date());
@@ -99,7 +99,7 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
                 }
                 GioHangHoaDon gioHangHoaDon = this.hoaDonGioHangService.findByIdHoaDon(hoaDon.getId());
                 GioHang gioHang = this.gioHangService.findById(gioHangHoaDon.getGioHang().getId());
-                gioHang.setTrangThai(0);
+                gioHang.setTrangThai(1);
                 this.gioHangService.update(gioHang, gioHang.getId());
             }
         }

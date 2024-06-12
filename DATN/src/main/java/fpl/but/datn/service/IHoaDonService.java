@@ -1,6 +1,7 @@
 package fpl.but.datn.service;
 
 import fpl.but.datn.entity.DanhMuc;
+import fpl.but.datn.entity.GioHang;
 import fpl.but.datn.entity.HoaDon;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,5 +19,7 @@ public interface IHoaDonService {
     HoaDon findById(UUID id);
     Page<HoaDon> getAllHoaDonPageable(Pageable pageable);
     Optional<HoaDon> findByMa(String ma);
+
+    Page<HoaDon> getHoaDonsByTrangThai(Pageable pageable, Integer trangThai);
 
 }

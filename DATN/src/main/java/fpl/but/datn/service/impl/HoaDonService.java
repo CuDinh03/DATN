@@ -1,6 +1,7 @@
 package fpl.but.datn.service.impl;
 
 import fpl.but.datn.entity.DanhMuc;
+import fpl.but.datn.entity.GioHang;
 import fpl.but.datn.entity.HoaDon;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
@@ -60,6 +61,11 @@ public class HoaDonService implements IHoaDonService {
     @Override
     public Optional<HoaDon> findByMa(String ma) {
         return hoaDonRepository.findByMa(ma);
+    }
+
+    @Override
+    public Page<HoaDon> getHoaDonsByTrangThai(Pageable pageable, Integer trangThai) {
+        return hoaDonRepository.findByTrangThai(pageable, trangThai);
     }
 
 }

@@ -1,6 +1,7 @@
 package fpl.but.datn.repository;
 
 import fpl.but.datn.entity.DanhMuc;
+import fpl.but.datn.entity.GioHang;
 import fpl.but.datn.entity.HoaDon;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,5 +18,7 @@ public interface HoaDonRepository extends JpaRepository<HoaDon, UUID> {
 
     @Query("SELECT hd from HoaDon hd where hd.ma = :ma ")
     Optional<HoaDon> findByMa(@Param("ma") String ma);
+
+    Page<HoaDon> findByTrangThai(Pageable pageable, Integer trangThai);
 
 }
