@@ -6,6 +6,7 @@ import fpl.but.datn.dto.request.GioHangDto;
 import fpl.but.datn.dto.request.HoaDonDto;
 import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.entity.DanhMuc;
+import fpl.but.datn.entity.GioHang;
 import fpl.but.datn.entity.HoaDon;
 import fpl.but.datn.entity.HoaDonChiTiet;
 import fpl.but.datn.exception.AppException;
@@ -89,6 +90,26 @@ public class HoaDonController {
             apiResponse.setResult(new PageImpl<>(listDto, pageable, hoaDonPage.getTotalElements()));
         } else {
             throw new AppException(ErrorCode.NO_ACCOUNTS_FOUND);
+        }
+
+        return apiResponse;
+    }
+
+    @GetMapping("/getHoaDonsByTranThai/{trangThai}")
+    ApiResponse<Page<HoaDonDto>> getDanhMuc(@RequestParam(defaultValue = "0") int page,
+                                             @RequestParam(defaultValue = "5") int size,
+                                             @PathVariable Integer trangThai) {
+
+        Pageable pageable = PageRequest.of(page, size);
+        Page<HoaDon> hoaDonPage = hoaDonService.getHoaDonsByTrangThai(pageable, trangThai);
+        List<HoaDonDto> listDto = TranferDatas.convertListHoaDonToDto(hoaDonPage.getContent());
+        ApiResponse<Page<HoaDonDto>> apiResponse = new ApiResponse<>();
+
+        if (!listDto.isEmpty()) {
+            apiResponse.setMessage("Lấy danh sách Hóa đơn thành công");
+            apiResponse.setResult(new PageImpl<>(listDto, pageable, hoaDonPage.getTotalElements()));
+        } else {
+            throw new AppException(ErrorCode.NO_ORDER_FOUND);
         }
 
         return apiResponse;
