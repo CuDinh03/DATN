@@ -21,14 +21,13 @@ import javax.crypto.spec.SecretKeySpec;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    private final String[] PUBLIC_ENDPOINT = {"/api/auth/log-in", "/api/users/create", "/api/users/check-username"};
+    private final String[] PUBLIC_ENDPOINT = {"/api/auth/log-in", "/api/users/create", "/api/users/check-username","/api/chi-tiet-san-pham/getAll","/api/chi-tiet-san-pham/all/{id}","/api/chi-tiet-san-pham/{id}"};
     private final String[] ADMIN_ENDPOINT_GET = {
             "/api/users/all","/api/users/{id}", "/api/users/myInfo",
             "/api/voucher/all","/api/voucher/allVouchers","/api/voucher/{id}",
             "/api/khs/all","/api/khs/{sdt}",
             "/api/chi-tiet-san-pham/all", "/api/chi-tiet-san-pham/addNew", "/api/chi-tiet-san-pham/update/{id}", "/api/chi-tiet-san-pham/delete/{id}", "/api/chi-tiet-san-pham/detail/{id}",
             "/api/danh-muc/all","/api/danh-muc/{id}",
-            "/api/gio-hang-chi-tiet/all/{id}", "/api/gio-hang-chi-tiet/{id}",
             "/api/hoa-don-chi-tiet/all/{id}","/api/hoa-don-chi-tiet/{id}",
             "/api/hoa-don/all", "/api/hoa-don/find/{ma}",
             "/api/hoa-don-gio-hang/all", "/api/hoa-don-gio-hang/all/{id}"

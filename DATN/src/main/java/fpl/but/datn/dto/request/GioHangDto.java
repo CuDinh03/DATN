@@ -14,5 +14,5 @@ public class GioHangDto {
     private KhachHang khachHang;
     private Date ngayTao;
     private Date ngaySua;
-    private Boolean trangThai;
+    private Integer trangThai;
 }

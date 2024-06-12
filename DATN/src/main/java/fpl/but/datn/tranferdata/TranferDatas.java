@@ -30,6 +30,11 @@ public class TranferDatas {
         }
 
         @Override
+        public KhachHang findKHByTenDangNhap(String tenDangNhap) {
+            return null;
+        }
+
+        @Override
         public void flush() {
 
         }
@@ -218,7 +223,7 @@ public class TranferDatas {
 
         if (entity.getMatKhau() != null) dto.setMatKhau(entity.getMatKhau());
 
-        if (entity.getIdChucVu() != null) dto.setIdChucVu(entity.getIdChucVu());
+        if (entity.getChucVu() != null) dto.setChucVu(entity.getChucVu());
 
         if (entity.getNgayTao() != null) dto.setNgayTao(entity.getNgayTao());
 
@@ -239,7 +244,7 @@ public class TranferDatas {
 
         if (dto.getMatKhau() != null) entity.setMatKhau(dto.getMatKhau());
 
-        if (dto.getIdChucVu() != null) entity.setIdChucVu(dto.getIdChucVu());
+        if (dto.getChucVu() != null) entity.setChucVu(dto.getChucVu());
 
         if (dto.getNgayTao() != null) entity.setNgayTao(dto.getNgayTao());
 
@@ -658,6 +663,7 @@ public class TranferDatas {
         if (entity.getTongTienGiam() != null) dto.setTongTienGiam(entity.getTongTienGiam());
         if (entity.getNgayTao() != null) dto.setNgayTao(entity.getNgayTao());
         if (entity.getNgaySua() != null) dto.setNgaySua(entity.getNgaySua());
+        if (entity.getVoucher() != null) dto.setVoucher(entity.getVoucher());
         if (entity.getTrangThai() != null) dto.setTrangThai(entity.getTrangThai());
         return dto;
     }
@@ -671,6 +677,7 @@ public class TranferDatas {
         if (dto.getTongTienGiam() != null) entity.setTongTienGiam(dto.getTongTienGiam());
         if (dto.getNgayTao() != null) entity.setNgayTao(dto.getNgayTao());
         if (dto.getNgaySua() != null) entity.setNgaySua(dto.getNgaySua());
+        if (dto.getVoucher() != null) entity.setVoucher(dto.getVoucher());
         if (dto.getTrangThai() != null) entity.setTrangThai(dto.getTrangThai());
         return entity;
     }

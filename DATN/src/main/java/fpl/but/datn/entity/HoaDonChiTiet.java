@@ -27,7 +27,7 @@ public class HoaDonChiTiet {
     private Date ngayTao;
     private Date ngaySua;
     private BigDecimal giaBan;
-    private Boolean trangThai;
+    private Integer trangThai;
     @Override
     public String toString() {
         return "GioHangChiTiet{" +

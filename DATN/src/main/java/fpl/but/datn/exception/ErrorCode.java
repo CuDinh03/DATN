@@ -36,6 +36,9 @@ public enum ErrorCode {
     ORDER_NOT_EXISTED(1030, "Không tìm thấy hoa don",HttpStatus.NOT_FOUND),
     NO_CARTDETAIl_FOUND(1031, "Không tìm thấy danh sách gio hang chi tiet nào",HttpStatus.NOT_FOUND ),
     NO_PRODUCT_DETAIL_FOUND(1032, "Không tìm thấy danh sách chi tiet san pham nào",HttpStatus.NOT_FOUND),
+    NO_ORDER_DETAIL_FOUND(1024, "Không tìm thấy danh sách chi tiet hoa don nào",HttpStatus.NOT_FOUND ),
+    USER_NOT_EXISTED(1025, "Không tìm thấy người dùng ",HttpStatus.NOT_FOUND),
+    NO_IMAGES_FOUND(1026, "Không tìm thấy danh sách Hinh anh nào",HttpStatus.NOT_FOUND ),
 
     ;
 

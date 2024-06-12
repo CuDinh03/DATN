@@ -23,5 +23,5 @@ public class BaoCao {
     private String moTa;
     private Date ngayTao;
     private Date ngaySua;
-    private Boolean trangThai;
+    private Integer trangThai;
 }

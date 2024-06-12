@@ -1,11 +1,13 @@
 package fpl.but.datn.service.impl;
 
 import fpl.but.datn.entity.*;
+
 import fpl.but.datn.repository.*;
+import fpl.but.datn.repository.GioHangChiTietRepository;
+import fpl.but.datn.repository.GioHangHoaDonRepository;
+import fpl.but.datn.repository.GioHangRepository;
 import fpl.but.datn.service.IHoaDonGioHangService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -26,6 +28,8 @@ public class HoaDonGioHangService implements IHoaDonGioHangService {
     private HoaDonRepository hoaDonRepository;
     @Autowired
     private KhachHangService khachHangService;
+    @Autowired
+    private NguoiDungService nguoiDungService;
 
     @Override
     public List getAll() {
@@ -41,7 +45,7 @@ public class HoaDonGioHangService implements IHoaDonGioHangService {
         gioHang.setMa("GH" + random.nextInt(1000));
         gioHang.setNgayTao(new Date());
         gioHang.setNgaySua(new Date());
-        gioHang.setTrangThai(true);
+        gioHang.setTrangThai(1);
         gioHangRepository.save(gioHang);
 
         BigDecimal tongTien = BigDecimal.ZERO;
@@ -55,7 +59,9 @@ public class HoaDonGioHangService implements IHoaDonGioHangService {
         hoaDon.setMa("HD" + random.nextInt(1000));
         hoaDon.setNgayTao(new Date());
         hoaDon.setNgaySua(new Date());
-        hoaDon.setTrangThai(true);
+        hoaDon.setTrangThai(0);
+        NguoiDung nguoiDung = nguoiDungService.findById(UUID.fromString("a6680d0f-dafe-4523-be49-d1b8a5f72375"));
+        hoaDon.setNguoiDung(nguoiDung);
         hoaDon.setTongTien(tongTien);
         hoaDonRepository.save(hoaDon);
 
@@ -77,19 +83,14 @@ public class HoaDonGioHangService implements IHoaDonGioHangService {
     public GioHangHoaDon findById(UUID id) {
         return null;
     }
-    public GioHangHoaDon findByIdHoaDon(UUID idHoaDon) {
-        return gioHangHoaDonRepository.findByIdHoaDon(idHoaDon);
-    }
-
-
-
-
 
     @Override
     public List<GioHangHoaDon> getAllByIdHoaDon(UUID id) {
         return gioHangHoaDonRepository.findAllHoaDonGioHangByIdHoaDon(id);
     }
-
+    public GioHangHoaDon findByIdHoaDon(UUID idHoaDon) {
+        return gioHangHoaDonRepository.findByIdHoaDon(idHoaDon);
+    }
 
 
 }

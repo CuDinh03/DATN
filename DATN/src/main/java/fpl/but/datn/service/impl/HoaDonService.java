@@ -1,6 +1,7 @@
 package fpl.but.datn.service.impl;
 
 import fpl.but.datn.entity.DanhMuc;
+import fpl.but.datn.entity.GioHang;
 import fpl.but.datn.entity.HoaDon;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
@@ -38,24 +39,23 @@ public class HoaDonService implements IHoaDonService {
     @Override
     public void delete(UUID id) {
         HoaDon hoaDon = findById(id);
-        hoaDon.setTrangThai(Boolean.FALSE);
+        hoaDon.setTrangThai(1);
         hoaDonRepository.save(hoaDon);
     }
 
     @Override
     public void open(UUID id) {
-
     }
 
     @Override
     public HoaDon findById(UUID id) {
-
         return hoaDonRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.ORDER_NOT_EXISTED));
-    }
 
+
+    }
     @Override
-    public Page<HoaDon> getAllDanhMucPageable(Pageable pageable) {
-        return null;
+    public Page<HoaDon> getAllHoaDonPageable(Pageable pageable) {
+        return hoaDonRepository.findAllPage(pageable);
     }
 
     @Override
@@ -63,5 +63,9 @@ public class HoaDonService implements IHoaDonService {
         return hoaDonRepository.findByMa(ma);
     }
 
+    @Override
+    public Page<HoaDon> getHoaDonsByTrangThai(Pageable pageable, Integer trangThai) {
+        return hoaDonRepository.findByTrangThai(pageable, trangThai);
+    }
 
 }
