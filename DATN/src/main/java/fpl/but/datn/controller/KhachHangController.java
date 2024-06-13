@@ -76,6 +76,7 @@ public class KhachHangController {
         return apiResponse;
     }
 
+
     @GetMapping("/{sdt}")
     ApiResponse<KhachHangDto> getKHBySdt(@PathVariable String sdt){
         ApiResponse<KhachHangDto> apiResponse = new ApiResponse<>();
@@ -84,7 +85,6 @@ public class KhachHangController {
         apiResponse.setResult(dto);
         return apiResponse;
     }
-
     @PutMapping("/{id}")
     KhachHang update(@RequestBody KhachHangDto request, @PathVariable String id) {
         UUID idKhachHang = null;
@@ -112,7 +112,7 @@ public class KhachHangController {
         } return ApiResponse.<Void>builder().build();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/detail/{id}")
     ApiResponse<KhachHangDto> detail(@PathVariable String id) {
         ApiResponse<KhachHangDto> apiResponse = new ApiResponse<>();
         UUID idKhachHang = null;
@@ -133,4 +133,5 @@ public class KhachHangController {
         apiResponse.setResult(dto);
         return apiResponse;
     }
+
 }

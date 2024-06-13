@@ -101,6 +101,7 @@ public class KhachHangService implements IKhachHangService, IService<KhachHang> 
         return khachHangRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.NO_CUSTOMERS_FOUND));
     }
 
+
     @Override
     public Page<KhachHang> getAllKhachHangPageable(Pageable pageable) {
         return khachHangRepository.findAll(pageable);
