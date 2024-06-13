@@ -1,7 +1,5 @@
 package fpl.but.datn.service.impl;
 
-import fpl.but.datn.entity.DanhMuc;
-import fpl.but.datn.entity.GioHang;
 import fpl.but.datn.entity.HoaDon;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
@@ -12,9 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class HoaDonService implements IHoaDonService {
@@ -27,13 +23,37 @@ public class HoaDonService implements IHoaDonService {
     }
 
     @Override
-    public DanhMuc create(HoaDon hoaDon) {
-        return null;
+    public HoaDon create(HoaDon request) {
+        HoaDon hoaDon = new HoaDon();
+        Random random = new Random();
+
+        hoaDon.setId(UUID.randomUUID());
+        hoaDon.setMa("HD" + random.nextInt(1000));
+        hoaDon.setVoucher(request.getVoucher());
+        hoaDon.setNgaySua(new Date());
+        hoaDon.setNgayTao(new Date());
+        hoaDon.setTongTien(request.getTongTien());
+        hoaDon.setNguoiDung(request.getNguoiDung());
+        hoaDon.setKhachHang(request.getKhachHang());
+        hoaDon.setTongTienGiam(request.getTongTienGiam());
+        hoaDon.setGhiChu(request.getGhiChu());
+        hoaDon.setVoucher(request.getVoucher());
+        hoaDon.setTrangThai(1);
+        return hoaDonRepository.save(hoaDon);
     }
 
     @Override
-    public HoaDon update(HoaDon hoaDon, UUID id) {
-        return null;
+    public HoaDon update(HoaDon request, UUID id) {
+        HoaDon hoaDon = findById(id);
+        hoaDon.setVoucher(request.getVoucher());
+        hoaDon.setNgaySua(new Date());
+        hoaDon.setNgayTao(new Date());
+        hoaDon.setTongTien(request.getTongTien());
+        hoaDon.setTongTienGiam(request.getTongTienGiam());
+        hoaDon.setGhiChu(request.getGhiChu());
+        hoaDon.setVoucher(request.getVoucher());
+        hoaDon.setTrangThai(request.getTrangThai());
+        return hoaDonRepository.save(hoaDon);
     }
 
     @Override
@@ -44,14 +64,21 @@ public class HoaDonService implements IHoaDonService {
     }
 
     @Override
+    public boolean xoaCungHoaDon(UUID id) {
+        Optional<HoaDon> optional = hoaDonRepository.findById(id);
+        if (optional.isPresent()) {
+            HoaDon hoaDon = optional.get();
+            hoaDonRepository.delete(hoaDon);
+            return true;
+        } else {
+            return false;
+        }
+    }
     public void open(UUID id) {
     }
-
     @Override
     public HoaDon findById(UUID id) {
         return hoaDonRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.ORDER_NOT_EXISTED));
-
-
     }
     @Override
     public Page<HoaDon> getAllHoaDonPageable(Pageable pageable) {
