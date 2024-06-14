@@ -49,6 +49,22 @@ public class CTSanPhamController {
         return apiResponse;
     }
 
+    @GetMapping("/all/sap-xep-ngay-tao")
+    ApiResponse<Page<ChiTietSanPhamDto>> getCTSPSapXep(@RequestParam(defaultValue = "0") int page,
+                                                       @RequestParam(defaultValue = "5") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<ChiTietSanPham> chiTietSanPhamPage = ctSanPhamService.getAllChiTietSanPhamPageableSapXepNGayTao(pageable);
+        List<ChiTietSanPhamDto> listDto = TranferDatas.convertListChiTietSanPhamToDto(chiTietSanPhamPage.getContent());
+        ApiResponse<Page<ChiTietSanPhamDto>> apiResponse = new ApiResponse<>();
+        if (!listDto.isEmpty()) {
+            apiResponse.setMessage("Lấy danh sách san pham thành công");
+            apiResponse.setResult(new PageImpl<>(listDto, pageable, chiTietSanPhamPage.getTotalElements()));
+        } else {
+            throw new AppException(ErrorCode.NO_PRODUCT_DETAIL_FOUND);
+        }
+        return apiResponse;
+    }
+
     @GetMapping("/getAll")// Cho phép truy cập mà không cần phải xác thực
     ApiResponse<List<ChiTietSanPhamDto>> getAll() {
         List<ChiTietSanPhamDto> listDto = TranferDatas.convertListChiTietSanPhamToDto(ctSanPhamService.getAll());

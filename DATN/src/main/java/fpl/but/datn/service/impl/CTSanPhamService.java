@@ -28,6 +28,11 @@ public class CTSanPhamService implements ICTSanPhamService {
     }
 
     @Override
+    public Page<ChiTietSanPham> getAllChiTietSanPhamPageableSapXepNGayTao(Pageable pageable) {
+        return ctSanPhamRepository.findAllSapXepNgayTao(pageable);
+    }
+
+    @Override
     public ChiTietSanPham create(ChiTietSanPham request) {
 
         ChiTietSanPham chiTietSanPham = new ChiTietSanPham();
@@ -55,7 +60,7 @@ public class CTSanPhamService implements ICTSanPhamService {
     }
 
     @Override
-    public ChiTietSanPham update(ChiTietSanPham chiTietSanPham, UUID id) {
+    public ChiTietSanPham update(ChiTietSanPham request, UUID id) {
         return null;
     }
 
@@ -73,6 +78,8 @@ public class CTSanPhamService implements ICTSanPhamService {
     public Page<ChiTietSanPham> getAllChiTietSanPhamPageable(Pageable pageable) {
         return ctSanPhamRepository.findAll(pageable);
     }
+
+
 
     @Override
     @Transactional

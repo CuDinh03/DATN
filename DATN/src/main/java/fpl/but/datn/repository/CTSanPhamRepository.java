@@ -18,7 +18,7 @@ public interface CTSanPhamRepository extends JpaRepository<ChiTietSanPham, UUID>
     boolean existsByMa(String ma);
 
     @Query("SELECT ctsp FROM ChiTietSanPham ctsp ORDER BY ctsp.ngayTao DESC ")
-    Page<ChiTietSanPham> finAll(Pageable pageable);
+    Page<ChiTietSanPham> findAllSapXepNgayTao(Pageable pageable);
 
     // chuyển trạng thái theo id SPCT
     // Spring Data JPA không hỗ trợ các câu truy vấn UPDATE hoặc DELETE mà chỉ hỗ trợ các câu truy vấn SELECT.
