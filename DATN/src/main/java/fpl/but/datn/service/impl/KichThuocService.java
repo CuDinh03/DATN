@@ -73,4 +73,9 @@ public class KichThuocService implements IKichThuocService {
         }
         return false;
     }
+
+    @Override
+    public List<KichThuoc> getAllKichThuocDangHoatDong() {
+        return kichThuocRepository.findAllKichThuocDangHoatDong();
+    }
 }

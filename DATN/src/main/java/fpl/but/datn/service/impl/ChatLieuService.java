@@ -70,4 +70,9 @@ public class ChatLieuService implements IChatLieuService {
     public ChatLieu findById(UUID id) {
         return chatLieuRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION));
     }
+
+    @Override
+    public List<ChatLieu> getAllChatLieuDangHoatDong() {
+        return chatLieuRepository.findAllChatLieuDangHoatDong();
+    }
 }

@@ -72,4 +72,9 @@ public class MauSacService implements IMauSacService {
             return false;
         }
     }
+
+    @Override
+    public List<MauSac> getAllMauSacDangHoatDong() {
+        return mauSacRepository.findAllMauSacDangHoatDong();
+    }
 }

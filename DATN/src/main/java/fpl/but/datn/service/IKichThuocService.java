@@ -1,5 +1,6 @@
 package fpl.but.datn.service;
 
+import fpl.but.datn.entity.DanhMuc;
 import fpl.but.datn.entity.KichThuoc;
 
 import java.util.List;
@@ -15,4 +16,6 @@ public interface IKichThuocService {
     KichThuoc update(KichThuoc kichThuoc, UUID id);
 
     Boolean delete(UUID id);
+
+    List<KichThuoc> getAllKichThuocDangHoatDong();
 }

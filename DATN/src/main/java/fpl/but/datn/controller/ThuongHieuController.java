@@ -21,7 +21,6 @@ public class ThuongHieuController {
     private ThuongHieuService thuongHieuService;
 
     @GetMapping("/all")
-
     ApiResponse<List<ThuongHieuDto>> getAll() {
         List<ThuongHieuDto> listDto = TranferDatas.convertListThuongHieuToDto(thuongHieuService.getAll());
         ApiResponse<List<ThuongHieuDto>> apiResponse = new ApiResponse<>();
@@ -34,5 +33,22 @@ public class ThuongHieuController {
         }
         return apiResponse;
     }
+
+
+    @GetMapping("/all/dang-hoat-dong")
+    ApiResponse<List<ThuongHieuDto>> getAllDangHoatDong() {
+        List<ThuongHieuDto> listDto = TranferDatas.convertListThuongHieuToDto(thuongHieuService.getAllThuongHieuDangHoatDong());
+        ApiResponse<List<ThuongHieuDto>> apiResponse = new ApiResponse<>();
+
+        if (!listDto.isEmpty()) {
+            apiResponse.setMessage("Lấy danh sách thương hiệu thành công");
+            apiResponse.setResult(listDto);
+        } else {
+            throw new AppException(ErrorCode.NO_THUONGHIEU_FOUND);
+        }
+        return apiResponse;
+    }
+
+    
 
 }

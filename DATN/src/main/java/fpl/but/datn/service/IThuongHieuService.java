@@ -1,5 +1,6 @@
 package fpl.but.datn.service;
 
+import fpl.but.datn.entity.MauSac;
 import fpl.but.datn.entity.ThuongHieu;
 
 import java.util.List;
@@ -15,4 +16,6 @@ public interface IThuongHieuService {
     ThuongHieu update(ThuongHieu thuongHieu, UUID id);
 
     Boolean delete(UUID id);
+
+    List<ThuongHieu> getAllThuongHieuDangHoatDong();
 }

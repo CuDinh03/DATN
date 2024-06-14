@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -16,4 +17,8 @@ public interface SanPhamRepository extends JpaRepository<SanPham, UUID> {
     Page<SanPham> findAll(Pageable pageable);
     Optional<SanPham> findByMa(String ma);
     boolean existsByMa(String ma);
+
+    // Lấy ra sản phẩm có trạng thái đang hoạt động
+    @Query("SELECT sp FROM SanPham sp WHERE sp.trangThai = 1")
+    List<SanPham> findAllSanPhamDangHoatDong();
 }

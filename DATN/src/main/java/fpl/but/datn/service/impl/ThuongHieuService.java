@@ -40,4 +40,9 @@ public class ThuongHieuService implements IThuongHieuService {
     public Boolean delete(UUID id) {
         return null;
     }
+
+    @Override
+    public List<ThuongHieu> getAllThuongHieuDangHoatDong() {
+        return thuongHieuRepository.findAllThuongHieuDangHoatDong();
+    }
 }

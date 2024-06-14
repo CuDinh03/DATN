@@ -34,6 +34,20 @@ public class ChatLieuController {
         return apiResponse;
     }
 
+    @GetMapping("/all/dang-hoat-dong")
+    ApiResponse<List<ChatLieuDto>> getAllDangHoatDong() {
+        List<ChatLieuDto> listDto = TranferDatas.convertListChatLieuToDto(chatLieuService.getAllChatLieuDangHoatDong());
+        ApiResponse<List<ChatLieuDto>> apiResponse = new ApiResponse<>();
+
+        if (!listDto.isEmpty()) {
+            apiResponse.setMessage("Lấy danh sách chất liệu thành công");
+            apiResponse.setResult(listDto);
+        } else {
+            throw new AppException(ErrorCode.NO_CHATLIEU_FOUND);
+        }
+        return apiResponse;
+    }
+
     @PostMapping("/create")
     ApiResponse<ChatLieu> create(@RequestBody @Valid ChatLieuDto request) {
         ApiResponse<ChatLieu> apiResponse = new ApiResponse<>();

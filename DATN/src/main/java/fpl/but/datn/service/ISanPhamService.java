@@ -1,6 +1,7 @@
 package fpl.but.datn.service;
 
 import fpl.but.datn.entity.SanPham;
+import fpl.but.datn.entity.ThuongHieu;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -21,4 +22,6 @@ public interface ISanPhamService {
     SanPham findById(UUID id);
 
     Page<SanPham> getAllSanPhamPageable(Pageable pageable);
+
+    List<SanPham> getAllSanPhamDangHoatDong();
 }

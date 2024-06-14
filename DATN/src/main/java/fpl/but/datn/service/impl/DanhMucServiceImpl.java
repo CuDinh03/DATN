@@ -77,4 +77,9 @@ public class DanhMucServiceImpl implements IDanhMucService {
     public Page<DanhMuc> getAllDanhMucPageable(Pageable pageable) {
         return danhMucRepository.findAll(pageable);
     }
+
+    @Override
+    public List<DanhMuc> getAllDanhMucDangHoatDong() {
+        return danhMucRepository.findAllDanhMucDangHoatDong();
+    }
 }

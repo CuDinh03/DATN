@@ -36,7 +36,7 @@ public class DanhMucController {
         ApiResponse<List<DanhMucDto>> apiResponse = new ApiResponse<>();
 
         if (!listDto.isEmpty()) {
-            apiResponse.setMessage("Lấy danh sách hinh anh thành công");
+            apiResponse.setMessage("Lấy danh sách danh muc thành công");
             apiResponse.setResult(listDto);
         } else {
             throw new AppException(ErrorCode.NO_REPORT_FOUND);
@@ -44,6 +44,7 @@ public class DanhMucController {
 
         return apiResponse;
     }
+
     @GetMapping("/all")
     ApiResponse<Page<DanhMucDto>> getDanhMuc(@RequestParam(defaultValue = "0") int page,
                                                @RequestParam(defaultValue = "5") int size) {
@@ -59,6 +60,21 @@ public class DanhMucController {
             apiResponse.setResult(new PageImpl<>(listDto, pageable, danhMucPage.getTotalElements()));
         } else {
             throw new AppException(ErrorCode.NO_ACCOUNTS_FOUND);
+        }
+
+        return apiResponse;
+    }
+
+    @GetMapping("/all/dang-hoat-dong")
+    ApiResponse<List<DanhMucDto>> getAllDangHoatDong() {
+        List<DanhMucDto> listDto = TranferDatas.convertListDanhMucToDto(danhMucService.getAllDanhMucDangHoatDong());
+        ApiResponse<List<DanhMucDto>> apiResponse = new ApiResponse<>();
+
+        if (!listDto.isEmpty()) {
+            apiResponse.setMessage("Lấy danh sách danh muc thành công");
+            apiResponse.setResult(listDto);
+        } else {
+            throw new AppException(ErrorCode.NO_REPORT_FOUND);
         }
 
         return apiResponse;

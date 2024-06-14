@@ -37,6 +37,23 @@ public class MauSacController {
         return apiResponse;
     }
 
+
+    @GetMapping("/all/dang-hoat-dong")
+    ApiResponse<List<MauSacDto>> getAllDangHoatDong() {
+
+        List<MauSacDto> lstMauSacDtos = TranferDatas.convertListMauSacToDto(mauSacService.getAllMauSacDangHoatDong());
+        ApiResponse<List<MauSacDto>> apiResponse = new ApiResponse<>();
+
+        if (!lstMauSacDtos.isEmpty()) {
+            apiResponse.setMessage("Tim thay danh sach mau sac!");
+            apiResponse.setResult(lstMauSacDtos);
+        } else {
+            throw new AppException(ErrorCode.LIST_COLOR_NOT_FOUND);
+        }
+
+        return apiResponse;
+    }
+
     @GetMapping("/{id}")
     ApiResponse<MauSacDto> detail(@PathVariable UUID id) {
         ApiResponse<MauSacDto> apiResponse = new ApiResponse<>();

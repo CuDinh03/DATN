@@ -36,6 +36,22 @@ public class KichThuocController {
         return apiResponse;
     }
 
+
+    @GetMapping("/all/dang-hoat-dong")
+    ApiResponse<List<KichThuocDto>> getAllDangHoatDong() {
+
+        List<KichThuocDto> lstKichThuocDto = TranferDatas.convertListKichThuocToDto(kichThuocService.getAllKichThuocDangHoatDong());
+        ApiResponse<List<KichThuocDto>> apiResponse = new ApiResponse<>();
+
+        if (!lstKichThuocDto.isEmpty()) {
+            apiResponse.setMessage("Tim thay danh sach kich thuoc");
+            apiResponse.setResult(lstKichThuocDto);
+        } else {
+            throw new AppException(ErrorCode.LIST_KICHTHUOC_NOT_FOUND);
+        }
+        return apiResponse;
+    }
+
     @GetMapping("{id}")
     ApiResponse<KichThuocDto> detail(@PathVariable UUID id) {
         ApiResponse<KichThuocDto> apiResponse = new ApiResponse<>();
