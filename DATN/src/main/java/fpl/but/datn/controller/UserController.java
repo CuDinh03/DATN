@@ -119,7 +119,7 @@ public class UserController {
     }
 
     @PostMapping("/check-username")
-    public ApiResponse<TaiKhoanDto> findByTenDangNhap(@RequestParam String tenDangNhap) {
+    public ApiResponse<TaiKhoanDto> findByTenDangNhap(@RequestBody String tenDangNhap) {
         Optional<TaiKhoan> taiKhoanOptional = taiKhoanService.findByNguoiDungByTenDangNhap(tenDangNhap);
 
         if (taiKhoanOptional.isPresent()) {

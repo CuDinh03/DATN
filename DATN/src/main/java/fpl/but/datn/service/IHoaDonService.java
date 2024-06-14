@@ -12,13 +12,14 @@ import java.util.UUID;
 
 public interface IHoaDonService {
     List getAll();
-    DanhMuc create(HoaDon hoaDon);
+    HoaDon create(HoaDon hoaDon);
     HoaDon update(HoaDon hoaDon, UUID id);
     void delete(UUID id);
     void open(UUID id);
     HoaDon findById(UUID id);
     Page<HoaDon> getAllHoaDonPageable(Pageable pageable);
     Optional<HoaDon> findByMa(String ma);
+    boolean xoaCungHoaDon(UUID id);
 
     Page<HoaDon> getHoaDonsByTrangThai(Pageable pageable, Integer trangThai);
 
