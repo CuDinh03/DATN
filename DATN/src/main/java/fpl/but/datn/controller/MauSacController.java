@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/mau-sac")
+@RequestMapping("/api/mau-sac")
 public class MauSacController {
 
     @Autowired
@@ -24,7 +24,7 @@ public class MauSacController {
     @GetMapping("/all")
     ApiResponse<List<MauSacDto>> getAll() {
 
-        List<MauSacDto> lstMauSacDtos = TranferDatas.convertToListMauSacDto(mauSacService.getAll());
+        List<MauSacDto> lstMauSacDtos = TranferDatas.convertListMauSacToDto(mauSacService.getAll());
         ApiResponse<List<MauSacDto>> apiResponse = new ApiResponse<>();
 
         if (!lstMauSacDtos.isEmpty()) {
@@ -43,7 +43,7 @@ public class MauSacController {
         if (id != null) {
             MauSac mauSac = mauSacService.findById(id);
             if (mauSac != null) {
-                MauSacDto mauSacDto = TranferDatas.convertToMauSacDto(mauSac);
+                MauSacDto mauSacDto = TranferDatas.convertToDto(mauSac);
                 apiResponse.setMessage("Lấy màu sắc thành công!");
                 apiResponse.setResult(mauSacDto);
             } else {
@@ -61,7 +61,7 @@ public class MauSacController {
         ApiResponse<MauSac> apiResponse = new ApiResponse<>();
 
         if (mauSacDto != null) {
-            MauSac mauSac1 = mauSacService.add(TranferDatas.convertToMauSacEntity(mauSacDto));
+            MauSac mauSac1 = mauSacService.add(TranferDatas.convertToEntity(mauSacDto));
             apiResponse.setResult(mauSac1);
         }
 
@@ -70,17 +70,14 @@ public class MauSacController {
 
     @PutMapping("/update/{id}")
     ApiResponse<MauSac> update(@PathVariable UUID id, @RequestBody MauSacDto mauSacDto) {
-
         ApiResponse<MauSac> apiResponse = new ApiResponse<>();
-
         if (id != null) {
             UUID idMS = id;
-            MauSac mauSac1 = mauSacService.update(TranferDatas.convertToMauSacEntity(mauSacDto), idMS);
+            MauSac mauSac1 = mauSacService.update(TranferDatas.convertToEntity(mauSacDto), idMS);
             apiResponse.setMessage("Update màu sắc thành công!");
             apiResponse.setResult(mauSac1);
             return apiResponse;
         }
-
         return null;
     }
 

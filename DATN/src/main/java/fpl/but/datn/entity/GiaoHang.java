@@ -1,18 +1,22 @@
 package fpl.but.datn.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.UUID;
 
-@Getter
-@Setter
+@Entity
+@Table
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Entity
 public class GiaoHang {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -30,4 +34,5 @@ public class GiaoHang {
     private Date ngaySua;
     private Date ngayDuKienGiao;
     private Integer trangThai;
+
 }

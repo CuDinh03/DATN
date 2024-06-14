@@ -1,6 +1,7 @@
 package fpl.but.datn.service.impl;
 
 import fpl.but.datn.entity.DanhMuc;
+import fpl.but.datn.entity.GioHang;
 import fpl.but.datn.entity.HoaDon;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -37,7 +39,7 @@ public class HoaDonService implements IHoaDonService {
     @Override
     public void delete(UUID id) {
         HoaDon hoaDon = findById(id);
-        hoaDon.setTrangThai(Boolean.FALSE);
+        hoaDon.setTrangThai(1);
         hoaDonRepository.save(hoaDon);
     }
 
@@ -48,11 +50,22 @@ public class HoaDonService implements IHoaDonService {
     @Override
     public HoaDon findById(UUID id) {
         return hoaDonRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.ORDER_NOT_EXISTED));
-    }
 
+
+    }
     @Override
     public Page<HoaDon> getAllHoaDonPageable(Pageable pageable) {
         return hoaDonRepository.findAllPage(pageable);
+    }
+
+    @Override
+    public Optional<HoaDon> findByMa(String ma) {
+        return hoaDonRepository.findByMa(ma);
+    }
+
+    @Override
+    public Page<HoaDon> getHoaDonsByTrangThai(Pageable pageable, Integer trangThai) {
+        return hoaDonRepository.findByTrangThai(pageable, trangThai);
     }
 
 }

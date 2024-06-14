@@ -17,4 +17,6 @@ public interface IKhachHangService {
     KhachHang getKhachHangBySdt(String sdt);
 
     KhachHang getKhachHangByIdTaiKhoan(UUID idTaiKhoan);
+
+    KhachHang findKHByTenDangNhap(String tenDangNhap);
 }

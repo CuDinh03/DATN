@@ -14,4 +14,5 @@ public enum PhuongThucGiaoHang {
     private String ten;
     private Integer code;
     private String moTa;
+    private  Integer trangThai;
 }

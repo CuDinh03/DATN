@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/chat-lieu")
+@RequestMapping("/api/chat-lieu")
 public class ChatLieuController {
     @Autowired
     private ChatLieuService chatLieuService;
@@ -73,7 +73,6 @@ public class ChatLieuController {
             ChatLieuDto dto = TranferDatas.convertToDto(chatLieuService.findById(idChatLieu));
             apiResponse.setMessage("Lấy chất liệu thành công");
             apiResponse.setResult(dto);
-        }
-        return apiResponse;
+        }return apiResponse;
     }
 }

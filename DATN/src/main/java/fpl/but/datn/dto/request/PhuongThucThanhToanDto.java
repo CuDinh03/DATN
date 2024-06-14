@@ -1,22 +1,22 @@
 package fpl.but.datn.dto.request;
 
-import jakarta.persistence.Entity;
-import lombok.*;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 import java.util.UUID;
 
+@Data
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-
 public class PhuongThucThanhToanDto {
     private UUID id;
     private String ma;
     private String ten;
     private Date ngayTao;
     private Date ngaySua;
-    private Boolean trangThai;
+    private Integer code;
+    private String moTa;
+    private Integer trangThai;
 }

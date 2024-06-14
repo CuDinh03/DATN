@@ -47,7 +47,7 @@ public class KhachHangService implements IService<KhachHang>, IKhachHangService 
                 .diaChi(request.getDiaChi())
                 .ngayTao(new Date())
                 .ngaySua(new Date())
-                .trangThai(Boolean.TRUE)
+                .trangThai(1)
                 .build();
         return khachHangRepository.save(khachHang);
     }
@@ -65,7 +65,7 @@ public class KhachHangService implements IService<KhachHang>, IKhachHangService 
                 .diaChi(request.getDiaChi())
                 .ngayTao(request.getNgayTao())
                 .ngaySua(new Date())
-                .trangThai(Boolean.TRUE)
+                .trangThai(1)
                 .build();
         return khachHangRepository.save(khachHang);
     }
@@ -73,7 +73,7 @@ public class KhachHangService implements IService<KhachHang>, IKhachHangService 
     @Override
     public void delete(UUID id) {
         KhachHang khachHang = this.khachHangRepository.findById(id).get();
-        khachHang.setTrangThai(Boolean.FALSE);
+        khachHang.setTrangThai(0);
         this.khachHangRepository.saveAndFlush(khachHang);
     }
 
@@ -105,7 +105,7 @@ public class KhachHangService implements IService<KhachHang>, IKhachHangService 
                 .diaChi(request.getDiaChi())
                 .ngayTao(request.getNgayTao())
                 .ngaySua(new Date())
-                .trangThai(Boolean.TRUE)
+                .trangThai(1)
                 .taiKhoan(request.getTaiKhoan())
                 .build();
         return khachHangRepository.save(khachHang);
@@ -125,4 +125,10 @@ public class KhachHangService implements IService<KhachHang>, IKhachHangService 
     public KhachHang getKhachHangByIdTaiKhoan(UUID idTaiKhoan) {
         return khachHangRepository.getKhachHangByIdTaiKhoan(idTaiKhoan).get();
     }
+
+    @Override
+    public KhachHang findKHByTenDangNhap(String tenDangNhap) {
+        return this.khachHangRepository.findKHByTenDangNhap(tenDangNhap);
+    }
+
 }

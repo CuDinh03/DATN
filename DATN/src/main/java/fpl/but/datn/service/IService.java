@@ -1,5 +1,6 @@
 package fpl.but.datn.service;
 
+import fpl.but.datn.entity.TaiKhoan;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -8,7 +9,6 @@ import java.util.UUID;
 
 public interface IService<T> {
     T getByID(UUID id);
-
     T create( T t);
 
     T update (UUID uuid, T t);

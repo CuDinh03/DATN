@@ -31,7 +31,6 @@ public class ChucVuService implements IChucVuService {
         if (chucVuRepository.existsByMa(request.getMa())){
             throw new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION);
         }
-
         chucVu.setId(UUID.randomUUID());
         chucVu.setMa(request.getMa());
         chucVu.setTen(request.getTen());

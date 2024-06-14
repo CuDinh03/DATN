@@ -21,7 +21,6 @@ public class NguoiDung {
     private UUID id;
     private String ma;
     private String ten;
-
     @OneToOne
     private TaiKhoan taiKhoan;
     private String email;
@@ -31,5 +30,5 @@ public class NguoiDung {
     private String diaChi;
     private Date ngayTao;
     private Date ngaySua;
-    private Boolean trangThai;
+    private Integer trangThai;
 }

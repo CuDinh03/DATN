@@ -17,14 +17,12 @@ public class ThanhToan {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-
     @ManyToOne
     private HoaDon hoaDon;
-
     @ManyToOne
     private PhuongThucThanhToan phuongThucThanhToan;
     private BigDecimal tienThanhToan;
     private Date ngayTao;
     private Date ngaySua;
-    private Boolean trangThai;
+    private Integer trangThai;
 }

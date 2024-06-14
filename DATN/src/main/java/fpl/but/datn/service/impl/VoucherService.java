@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 @Service
@@ -24,38 +25,38 @@ public class VoucherService implements IService<Voucher>, IVoucherService {
         return voucherRepository.findById(id).get();
     }
 
-    @Override
-    public Voucher create(Voucher request) {
-        Optional<Voucher> optionalVoucher = voucherRepository.findByTen(request.getTen());
+        @Override
+        public Voucher create(Voucher request) {
+            Optional<Voucher> optionalVoucher = voucherRepository.findByTen(request.getTen());
 
-        if (optionalVoucher.isPresent()) {
-            Voucher existingVoucher = optionalVoucher.get();
+            if (optionalVoucher.isPresent()) {
+                Voucher existingVoucher = optionalVoucher.get();
 
-            if (request.equals(existingVoucher)) {
-                existingVoucher.setSoLuong(existingVoucher.getSoLuong() + request.getSoLuong());
-                existingVoucher.setNgaySua(new Date());
-                return voucherRepository.saveAndFlush(existingVoucher);
+                if (request.equals(existingVoucher)) {
+                    existingVoucher.setSoLuong(existingVoucher.getSoLuong() + request.getSoLuong());
+                    existingVoucher.setNgaySua(new Date());
+                    return voucherRepository.saveAndFlush(existingVoucher);
+                }
             }
+
+            Random random = new Random();
+            Voucher newVoucher = Voucher.builder()
+                    .id(UUID.randomUUID())
+                    .ma("Voucher" + random.nextInt(1000))
+                    .ten(request.getTen())
+                    .loaiGiamGia(request.getLoaiGiamGia())
+                    .ngayBatDau(request.getNgayBatDau())
+                    .ngayKetThuc(request.getNgayKetThuc())
+                    .giaTriToiThieu(request.getGiaTriToiThieu())
+                    .giaTriGiam(request.getGiaTriGiam())
+                    .soLuong(request.getSoLuong())
+                    .ngayTao(new Date())
+                    .ngaySua(new Date())
+                    .trangThai(1)
+                    .build();
+
+            return voucherRepository.save(newVoucher);
         }
-
-        Random random = new Random();
-        Voucher newVoucher = Voucher.builder()
-                .id(UUID.randomUUID())
-                .ma("Voucher" + random.nextInt(1000))
-                .ten(request.getTen())
-                .loaiGiamGia(request.getLoaiGiamGia())
-                .ngayBatDau(request.getNgayBatDau())
-                .ngayKetThuc(request.getNgayKetThuc())
-                .giaTriToiThieu(request.getGiaTriToiThieu())
-                .giaTriGiam(request.getGiaTriGiam())
-                .soLuong(request.getSoLuong())
-                .ngayTao(new Date())
-                .ngaySua(new Date())
-                .trangThai(Boolean.TRUE)
-                .build();
-
-        return voucherRepository.save(newVoucher);
-    }
 
 
     @Override
@@ -85,7 +86,7 @@ public class VoucherService implements IService<Voucher>, IVoucherService {
         if (optionalVoucher.isPresent()) {
 
             Voucher existingVoucher = optionalVoucher.get();
-            existingVoucher.setTrangThai(Boolean.FALSE);
+            existingVoucher.setTrangThai(0);
             existingVoucher.setNgaySua(new Date());
             voucherRepository.save(existingVoucher);
         } else {
@@ -111,5 +112,37 @@ public class VoucherService implements IService<Voucher>, IVoucherService {
     @Override
     public Voucher findByTen(String ten) {
         return voucherRepository.findByTen(ten).orElseThrow(() -> new AppException(ErrorCode.VOUCHER_NOT_EXISTED));
+    }
+
+    public static void main(String[] args) {
+        for (int i = 1; i <= 10; i++) {
+            Random random = new Random();
+            String ma = "Voucher" + random.nextInt(1000); // Tạo mã ngẫu nhiên
+            String ten = "Voucher " + i;
+            String loaiGiamGia = "Loai " + i;
+            Date ngayBatDau = new Date(); // Ngày hiện tại
+            Date ngayKetThuc = new Date(); // Ngày hiện tại
+            BigDecimal giaTriGiam = BigDecimal.valueOf(random.nextInt(50)); // Giá trị giảm ngẫu nhiên từ 0 đến 500
+            BigDecimal giaTriToiThieu = BigDecimal.valueOf(random.nextInt(500)); // Giá trị tối thiểu giảm ngẫu nhiên từ 0 đến 500
+            Integer soLuong = random.nextInt(20) + 1; // Số lượng ngẫu nhiên từ 1 đến 20
+            Date ngayTao = new Date(); // Ngày hiện tại
+            Date ngaySua = new Date(); // Ngày hiện tại
+            Boolean trangThai = true;
+
+            System.out.println("INSERT INTO voucher (id, ma, ten, loai_giam_gia, ngay_bat_dau, ngay_ket_thuc, gia_tri_giam, gia_tri_toi_thieu, so_luong, ngay_tao, ngay_sua, trang_thai) VALUES ("
+                    + "'" + UUID.randomUUID() + "',"
+                    + "'" + ma + "',"
+                    + "'" + ten + "',"
+                    + "'" + loaiGiamGia + "',"
+                    + "'" + ngayBatDau + "',"
+                    + "'" + ngayKetThuc + "',"
+                    + giaTriGiam + ","
+                    + giaTriToiThieu + ","
+                    + soLuong + ","
+                    + "'" + ngayTao + "',"
+                    + "'" + ngaySua + "',"
+                    + trangThai
+                    + ");");
+        }
     }
 }

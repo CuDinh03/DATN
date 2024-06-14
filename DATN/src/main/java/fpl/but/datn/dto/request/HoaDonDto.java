@@ -2,6 +2,7 @@ package fpl.but.datn.dto.request;
 
 import fpl.but.datn.entity.KhachHang;
 import fpl.but.datn.entity.NguoiDung;
+import fpl.but.datn.entity.Voucher;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -10,6 +11,7 @@ import java.util.UUID;
 @Data
 
 public class HoaDonDto {
+
     private UUID id;
     private String ma;
     private NguoiDung nhanVien;
@@ -18,6 +20,6 @@ public class HoaDonDto {
     private BigDecimal tongTienGiam;
     private Date ngayTao;
     private Date ngaySua;
-    private UUID idVoucher;
-    private Boolean trangThai;
+    private Voucher voucher;
+    private Integer trangThai;
 }

@@ -1,64 +1,75 @@
 package fpl.but.datn.controller;
 
 import fpl.but.datn.dto.request.ChiTietSanPhamDto;
+import fpl.but.datn.dto.request.DanhMucDto;
+import fpl.but.datn.dto.request.GioHangDto;
+import fpl.but.datn.dto.request.KichThuocDto;
 import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.entity.ChiTietSanPham;
 import fpl.but.datn.entity.DanhMuc;
+import fpl.but.datn.entity.GioHangChiTiet;
+import fpl.but.datn.entity.KichThuoc;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.service.ICTSanPhamService;
+import fpl.but.datn.service.IDanhMucService;
 import fpl.but.datn.tranferdata.TranferDatas;
+import jakarta.annotation.security.PermitAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/ct-san-pham")
+@RequestMapping("/api/chi-tiet-san-pham")
 public class CTSanPhamController {
 
     @Autowired
     private ICTSanPhamService ctSanPhamService;
 
     @GetMapping("/all")
-    ApiResponse<Page<ChiTietSanPhamDto>> getSanPhamChiTiet(@RequestParam(defaultValue = "0") int page,
-                                                           @RequestParam(defaultValue = "5") int size) {
+    ApiResponse<Page<ChiTietSanPhamDto>> getDanhMuc(@RequestParam(defaultValue = "0") int page,
+                                                    @RequestParam(defaultValue = "5") int size) {
 
         Pageable pageable = PageRequest.of(page, size);
-        Page<ChiTietSanPham> CTSanPhamPage = ctSanPhamService.getAllChiTietSanPhamPageable(pageable);
+        Page<ChiTietSanPham> chiTietSanPhamPage = ctSanPhamService.getAllChiTietSanPhamPageable(pageable);
 
-        List<ChiTietSanPhamDto> listDto = TranferDatas.convertListChiTietSanPhamToDto(CTSanPhamPage.getContent());
+        List<ChiTietSanPhamDto> listDto = TranferDatas.convertListChiTietSanPhamToDto(chiTietSanPhamPage.getContent());
 
         ApiResponse<Page<ChiTietSanPhamDto>> apiResponse = new ApiResponse<>();
+
         if (!listDto.isEmpty()) {
-            apiResponse.setMessage("Lấy danh sách danh mục thành công");
-            apiResponse.setResult(new PageImpl<>(listDto, pageable, CTSanPhamPage.getTotalElements()));
+            apiResponse.setMessage("Lấy danh sách sa pham thành công");
+            apiResponse.setResult(new PageImpl<>(listDto, pageable, chiTietSanPhamPage.getTotalElements()));
         } else {
-            throw new AppException(ErrorCode.NO_ACCOUNTS_FOUND);
+            throw new AppException(ErrorCode.NO_PRODUCT_DETAIL_FOUND);
         }
         return apiResponse;
     }
 
+    @GetMapping("/getAll")
+        // Cho phép truy cập mà không cần phải xác thực
+    ApiResponse<List<ChiTietSanPhamDto>> getAll() {
+        List<ChiTietSanPhamDto> listDto = TranferDatas.convertListChiTietSanPhamToDto(ctSanPhamService.getAll());
+        ApiResponse<List<ChiTietSanPhamDto>> apiResponse = new ApiResponse<>();
 
-//    @GetMapping("/all")
-//    ApiResponse<List<ChiTietSanPhamDto>> getAll() {
-//        List<ChiTietSanPhamDto> listDto = TranferDatas.convertListChiTietSanPhamToDto(ctSanPhamService.getAll());
-//        ApiResponse<List<ChiTietSanPhamDto>> apiResponse = new ApiResponse<>();
-//
-//        if (!listDto.isEmpty()) {
-//            apiResponse.setMessage("Lấy danh sách CTSP thành công");
-//            apiResponse.setResult(listDto);
-//        } else {
-//            throw new AppException(ErrorCode.NO_LISTSPChiTiet_FOUND);
-//        }
-//        return apiResponse;
-//    }
+        if (!listDto.isEmpty()) {
+            apiResponse.setMessage("Lấy danh sách sản phẩm thành công");
+            apiResponse.setResult(listDto);
+        } else {
+            throw new AppException(ErrorCode.NO_PRODUCT_DETAIL_FOUND);
+        }
+
+        return apiResponse;
+    }
 
     @PostMapping("/addNew")
     public ResponseEntity<?> getAll(@RequestBody ChiTietSanPham ctSanPham){
@@ -78,8 +89,27 @@ public class CTSanPhamController {
             return ResponseEntity.ok("xoa that bai");
     }
 
-    @GetMapping("/detail/{id}")
-    public ResponseEntity<?> detail(@PathVariable UUID id){
-        return ResponseEntity.ok(ctSanPhamService.findById(id));
+    @GetMapping("/{id}")
+    ApiResponse<ChiTietSanPhamDto> detail(@PathVariable String id) {
+        ApiResponse<ChiTietSanPhamDto> apiResponse = new ApiResponse<>();
+        UUID idChiTietSanPham = null;
+        if (id != null){
+            idChiTietSanPham = UUID.fromString(id);
+            ChiTietSanPhamDto dto = TranferDatas.convertToDto(ctSanPhamService.findById(idChiTietSanPham));
+            apiResponse.setMessage("Lấy chi tiết sản phẩm thành công");
+            apiResponse.setResult(dto);
+        }
+        return apiResponse;
     }
+
+    @GetMapping("/updateTrangThai/{id}")
+    public ResponseEntity<String> updateTrangThai(@PathVariable UUID id) {
+        boolean updated = ctSanPhamService.updateTrangThai(id);
+        if (updated) {
+            return ResponseEntity.ok("Updated trạng thái thành công cho chi tiết sản phẩm có id = " + id);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Không tìm thấy chi tiết sản phẩm có id = " + id);
+        }
+    }
+
 }

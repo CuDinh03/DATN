@@ -1,6 +1,5 @@
 package fpl.but.datn.controller;
 
-
 import fpl.but.datn.dto.request.DanhMucDto;
 import fpl.but.datn.dto.request.HoaDonChiTietDto;
 import fpl.but.datn.dto.request.HoaDonDto;
@@ -27,13 +26,13 @@ public class HoaDonChiTietController {
     private IHoaDonChiTietService hoaDonChiTietService;
 
     @GetMapping("/all")
-    ApiResponse<List<HoaDonChiTietDto>> getAll() {
+    ApiResponse<List<HoaDonChiTietDto>> getAll(){
         List<HoaDonChiTietDto> dto = TranferDatas.convertListHoaDonChiTietToDto(hoaDonChiTietService.getAll());
         ApiResponse<List<HoaDonChiTietDto>> apiResponse = new ApiResponse<>();
-        if (!dto.isEmpty()) {
+        if (!dto.isEmpty()){
             apiResponse.setMessage("Lấy danh sách hoa don thành công");
             apiResponse.setResult(dto);
-        } else {
+        }else {
             throw new AppException(ErrorCode.NO_ORDER_FOUND);
         }
         return apiResponse;
@@ -47,17 +46,16 @@ public class HoaDonChiTietController {
         return apiResponse;
     }
 
-     // ==> Hoa don chi tiet dua vao id hoa don
-//    @GetMapping("/hoa-don/{hoaDonId}")
-//    ApiResponse<List<HoaDonChiTietDto>> getHoaDonChiTietByHoaDonId(@PathVariable UUID hoaDonId) {
-//        List<HoaDonChiTietDto> dto = TranferDatas.convertListHoaDonChiTietToDto(hoaDonChiTietService.getHoaDonChiTietByHoaDonId(hoaDonId));
-//        ApiResponse<List<HoaDonChiTietDto>> apiResponse = new ApiResponse<>();
-//        if (!dto.isEmpty()) {
-//            apiResponse.setMessage("Lấy danh sách hóa đơn chi tiết bởi id_hoa_don thành công");
-//            apiResponse.setResult(dto);
-//        } else {
-//            throw new AppException(ErrorCode.NO_ORDER_FOUND);
-//        }
-//        return apiResponse;
-//    }
+    @GetMapping("/all/{id}")
+    ApiResponse<List<HoaDonChiTietDto>> getAllHDCTByIdHoaDon(@PathVariable("id") UUID idHoaDon){
+        List<HoaDonChiTietDto> dto = TranferDatas.convertListHoaDonChiTietToDto(hoaDonChiTietService.getHoaDonChiTietByIdHoaDon(idHoaDon));
+        ApiResponse<List<HoaDonChiTietDto>> apiResponse = new ApiResponse<>();
+        if (!dto.isEmpty()){
+            apiResponse.setMessage("Lấy danh sách hoa don thành công");
+            apiResponse.setResult(dto);
+        }else {
+            throw new AppException(ErrorCode.NO_ORDER_FOUND);
+        }
+        return apiResponse;
+    }
 }

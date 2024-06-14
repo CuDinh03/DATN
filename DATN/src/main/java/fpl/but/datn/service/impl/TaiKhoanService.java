@@ -44,14 +44,14 @@ public class TaiKhoanService implements ITaiKhoanService {
         TaiKhoan taiKhoan = new TaiKhoan();
 
         if (taiKhoanRepository.existsByTenDangNhap(request.getTenDangNhap())){
-            throw new AppException(ErrorCode.ACCOUNT_EXISTED);
+                        throw new AppException(ErrorCode.ACCOUNT_EXISTED);
         }
 
         taiKhoan.setMa("TK0" + request.getTenDangNhap());
         taiKhoan.setId(UUID.randomUUID());
         taiKhoan.setTenDangNhap(request.getTenDangNhap());
         ChucVu chucVu = chucVuService.getChucVuByName("CUSTOMER");
-        taiKhoan.setIdChucVu(chucVu);
+        taiKhoan.setChucVu(chucVu);
         taiKhoan.setMatKhau(passwordEncoder.encode(request.getMatKhau()));
         taiKhoan.setNgayTao(new Date());
         taiKhoan.setNgaySua(new Date());
@@ -70,6 +70,10 @@ public class TaiKhoanService implements ITaiKhoanService {
         return taiKhoanRepository.findByTenChucVu(role,pageable);
     }
 
+    @Override
+    public Optional<TaiKhoan> findByNguoiDungByTenDangNhap(String tenDangNhap) {
+        return taiKhoanRepository.findByNguoiDungByTenDangNhap(tenDangNhap);
+    }
 
     //    //author
     @NonFinal
@@ -123,8 +127,8 @@ public class TaiKhoanService implements ITaiKhoanService {
 
     private String buildScope(TaiKhoan taiKhoan) {
         StringJoiner stringJoiner = new StringJoiner(" ");
-        if (taiKhoan.getIdChucVu() != null && taiKhoan.getIdChucVu().getTen() != null) {
-            List<String> tenList = Collections.singletonList(taiKhoan.getIdChucVu().getTen());
+        if (taiKhoan.getChucVu() != null && taiKhoan.getChucVu().getTen() != null) {
+            List<String> tenList = Collections.singletonList(taiKhoan.getChucVu().getTen());
             for (String chucVu : tenList) {
                 stringJoiner.add(chucVu);
             }
@@ -140,7 +144,7 @@ public class TaiKhoanService implements ITaiKhoanService {
 
         TaiKhoanResponse taiKhoanResponse = new TaiKhoanResponse();
         taiKhoanResponse.setUsername(byTenDangNhap.getTenDangNhap());
-        taiKhoanResponse.setChucVu(byTenDangNhap.getIdChucVu().getTen());
+        taiKhoanResponse.setChucVu(byTenDangNhap.getChucVu().getTen());
         taiKhoanResponse.setId(String.valueOf(byTenDangNhap.getId()));
         return taiKhoanResponse;
     }

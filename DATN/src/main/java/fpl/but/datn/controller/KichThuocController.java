@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("kich-thuoc")
+@RequestMapping("/api/kich-thuoc")
 public class KichThuocController {
 
     @Autowired
@@ -24,7 +24,7 @@ public class KichThuocController {
     @GetMapping("/all")
     ApiResponse<List<KichThuocDto>> getAll() {
 
-        List<KichThuocDto> lstKichThuocDto = TranferDatas.convertToListkichThuocDto(kichThuocService.getAll());
+        List<KichThuocDto> lstKichThuocDto = TranferDatas.convertListKichThuocToDto(kichThuocService.getAll());
         ApiResponse<List<KichThuocDto>> apiResponse = new ApiResponse<>();
 
         if (!lstKichThuocDto.isEmpty()) {
@@ -42,7 +42,7 @@ public class KichThuocController {
         if (id != null) {
             KichThuoc kichThuoc = kichThuocService.findById(id);
             if (kichThuoc != null) {
-                KichThuocDto mauSacDto = TranferDatas.convertKichThuocToDto(kichThuoc);
+                KichThuocDto mauSacDto = TranferDatas.convertToDto(kichThuoc);
                 apiResponse.setMessage("Lấy kích thước thành công!");
                 apiResponse.setResult(mauSacDto);
             } else {
@@ -58,7 +58,7 @@ public class KichThuocController {
     public ApiResponse<KichThuoc> add(@RequestBody @Valid KichThuocDto kichThuocDto) {
         ApiResponse<KichThuoc> apiResponse = new ApiResponse<>();
         if (kichThuocDto != null) {
-            apiResponse.setResult(kichThuocService.add(TranferDatas.convertToKichThuocEntity(kichThuocDto)));
+            apiResponse.setResult(kichThuocService.add(TranferDatas.convertToEntity(kichThuocDto)));
         }
         return apiResponse;
     }
@@ -70,7 +70,7 @@ public class KichThuocController {
             idKichthuoc = id;
         }
         if (idKichthuoc != null){
-            return kichThuocService.update(TranferDatas.convertToKichThuocEntity(kichThuocDto), idKichthuoc);
+            return kichThuocService.update(TranferDatas.convertToEntity(kichThuocDto), idKichthuoc);
         }
         return null;
     }

@@ -2,6 +2,7 @@ package fpl.but.datn.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 import java.util.UUID;
@@ -18,11 +19,9 @@ public class GioHang {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String ma;
-    private Date ngayTao;
-    private Date ngaySua;
-    private Boolean trangThai;
-
     @OneToOne
     private KhachHang khachHang;
-
+    private Date ngayTao;
+    private Date ngaySua;
+    private Integer trangThai;
 }

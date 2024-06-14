@@ -1,5 +1,7 @@
 package fpl.but.datn.service;
 
+import fpl.but.datn.entity.DanhMuc;
+import fpl.but.datn.entity.HoaDon;
 import fpl.but.datn.entity.HoaDonChiTiet;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

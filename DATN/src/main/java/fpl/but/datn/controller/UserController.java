@@ -19,9 +19,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
-//@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/users")
 @Slf4j
@@ -35,9 +35,9 @@ public class UserController {
         ApiResponse<TaiKhoan> apiResponse = new ApiResponse<>();
         if (request != null)
             apiResponse.setResult(taiKhoanService.createAccount(TranferDatas.convertToEntity(request)));
-
         return apiResponse;
     }
+
 
     @GetMapping("/all")
     ApiResponse<Page<TaiKhoanDto>> getAccounts(@RequestParam(defaultValue = "0") int page,
@@ -55,6 +55,7 @@ public class UserController {
         } else {
             throw new AppException(ErrorCode.NO_ACCOUNTS_FOUND);
         }
+
         return apiResponse;
     }
 
@@ -76,6 +77,8 @@ public class UserController {
         return apiResponse;
     }
 
+
+
     @GetMapping("/{id}")
     ApiResponse<TaiKhoanDto> getAccount(@PathVariable String id) {
         ApiResponse<TaiKhoanDto> apiResponse = new ApiResponse<>();
@@ -93,9 +96,9 @@ public class UserController {
                 .result(taiKhoanService.getMyInfo()).build();
     }
 
-
     @PutMapping("/{id}")
     ApiResponse<TaiKhoanDto> updateAccount(@PathVariable String id, @RequestBody TaiKhoanDto request) {
+        System.out.println(id);
         UUID idAccount = null;
         if (id != null) idAccount = UUID.fromString(id);
         TaiKhoan taiKhoan = new TaiKhoan();
@@ -112,4 +115,25 @@ public class UserController {
         taiKhoanService.delete(idAccount);
         return ApiResponse.<Void>builder().build();
     }
+
+    @PostMapping("/check-username")
+    public ApiResponse<TaiKhoanDto> findByTenDangNhap(@RequestParam String tenDangNhap) {
+        Optional<TaiKhoan> taiKhoanOptional = taiKhoanService.findByNguoiDungByTenDangNhap(tenDangNhap);
+
+        if (taiKhoanOptional.isPresent()) {
+            TaiKhoanDto taiKhoanDto = TranferDatas.convertToDto(taiKhoanOptional.get());
+            return ApiResponse.<TaiKhoanDto>builder()
+                    .message("Tìm thấy tài khoản")
+                    .result(taiKhoanDto)
+                    .build();
+        } else {
+            return ApiResponse.<TaiKhoanDto>builder()
+                    .message("Không tìm thấy tài khoản")
+                    .build();
+        }
+    }
+
+
+
+
 }
