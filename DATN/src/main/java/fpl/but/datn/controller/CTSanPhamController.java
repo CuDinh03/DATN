@@ -5,16 +5,14 @@ import fpl.but.datn.dto.request.DanhMucDto;
 import fpl.but.datn.dto.request.GioHangDto;
 import fpl.but.datn.dto.request.KichThuocDto;
 import fpl.but.datn.dto.response.ApiResponse;
-import fpl.but.datn.entity.ChiTietSanPham;
-import fpl.but.datn.entity.DanhMuc;
-import fpl.but.datn.entity.GioHangChiTiet;
-import fpl.but.datn.entity.KichThuoc;
+import fpl.but.datn.entity.*;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.service.ICTSanPhamService;
 import fpl.but.datn.service.IDanhMucService;
 import fpl.but.datn.tranferdata.TranferDatas;
 import jakarta.annotation.security.PermitAll;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -38,14 +36,10 @@ public class CTSanPhamController {
     @GetMapping("/all")
     ApiResponse<Page<ChiTietSanPhamDto>> getDanhMuc(@RequestParam(defaultValue = "0") int page,
                                                     @RequestParam(defaultValue = "5") int size) {
-
         Pageable pageable = PageRequest.of(page, size);
         Page<ChiTietSanPham> chiTietSanPhamPage = ctSanPhamService.getAllChiTietSanPhamPageable(pageable);
-
         List<ChiTietSanPhamDto> listDto = TranferDatas.convertListChiTietSanPhamToDto(chiTietSanPhamPage.getContent());
-
         ApiResponse<Page<ChiTietSanPhamDto>> apiResponse = new ApiResponse<>();
-
         if (!listDto.isEmpty()) {
             apiResponse.setMessage("Lấy danh sách sa pham thành công");
             apiResponse.setResult(new PageImpl<>(listDto, pageable, chiTietSanPhamPage.getTotalElements()));
@@ -55,8 +49,7 @@ public class CTSanPhamController {
         return apiResponse;
     }
 
-    @GetMapping("/getAll")
-        // Cho phép truy cập mà không cần phải xác thực
+    @GetMapping("/getAll")// Cho phép truy cập mà không cần phải xác thực
     ApiResponse<List<ChiTietSanPhamDto>> getAll() {
         List<ChiTietSanPhamDto> listDto = TranferDatas.convertListChiTietSanPhamToDto(ctSanPhamService.getAll());
         ApiResponse<List<ChiTietSanPhamDto>> apiResponse = new ApiResponse<>();
@@ -71,9 +64,14 @@ public class CTSanPhamController {
         return apiResponse;
     }
 
-    @PostMapping("/addNew")
-    public ResponseEntity<?> getAll(@RequestBody ChiTietSanPham ctSanPham){
-        return ResponseEntity.ok(ctSanPhamService.create(ctSanPham));
+    @PostMapping("/add")
+    public ApiResponse<ChiTietSanPham> add(@RequestBody @Valid ChiTietSanPhamDto chiTietSanPhamDto) {
+        ApiResponse<ChiTietSanPham> apiResponse = new ApiResponse<>();
+        if (chiTietSanPhamDto != null) {
+            apiResponse.setResult(ctSanPhamService.create(TranferDatas.convertToEntity(chiTietSanPhamDto)));
+            apiResponse.setMessage("Thêm chi tiết sản phẩm thành công");
+        }
+        return apiResponse;
     }
 
     @PutMapping("/update/{id}")
@@ -111,5 +109,4 @@ public class CTSanPhamController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Không tìm thấy chi tiết sản phẩm có id = " + id);
         }
     }
-
 }

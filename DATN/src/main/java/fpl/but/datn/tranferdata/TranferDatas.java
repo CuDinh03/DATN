@@ -697,7 +697,6 @@ public class TranferDatas {
         ChiTietSanPhamDto dto = new ChiTietSanPhamDto();
         if (entity.getId() != null) dto.setId(entity.getId());
         if (entity.getMa() != null) dto.setMa(entity.getMa());
-        if (entity.getMa() != null) dto.setMa(entity.getMa());
         if (entity.getSanPham() != null) dto.setSanPham(entity.getSanPham());
         if (entity.getHinhAnh() != null) dto.setHinhAnh(entity.getHinhAnh());
         if (entity.getThuongHieu() != null) dto.setThuongHieu(entity.getThuongHieu());
@@ -717,7 +716,6 @@ public class TranferDatas {
     public static ChiTietSanPham convertToEntity(ChiTietSanPhamDto dto){
         ChiTietSanPham entity = new ChiTietSanPham();
         if (dto.getId() != null) entity.setId(dto.getId());
-        if (dto.getMa() != null) entity.setMa(dto.getMa());
         if (dto.getMa() != null) entity.setMa(dto.getMa());
         if (dto.getSanPham() != null) entity.setSanPham(dto.getSanPham());
         if (dto.getHinhAnh() != null) entity.setHinhAnh(dto.getHinhAnh());

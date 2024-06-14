@@ -1,5 +1,7 @@
 package fpl.but.datn.entity;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,4 +23,9 @@ public class SanPham {
     private Date ngayTao;
     private Date ngaySua;
     private Integer trangThai;
+
+    @JsonCreator
+    public SanPham(@JsonProperty("id") UUID id) {
+        this.id = id;
+    }
 }

@@ -15,6 +15,8 @@ import java.util.UUID;
 @Repository
 public interface CTSanPhamRepository extends JpaRepository<ChiTietSanPham, UUID> {
 
+    boolean existsByMa(String ma);
+
     @Query("SELECT ctsp FROM ChiTietSanPham ctsp ORDER BY ctsp.ngayTao DESC ")
     Page<ChiTietSanPham> finAll(Pageable pageable);
 

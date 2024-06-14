@@ -65,6 +65,7 @@ public enum ErrorCode {
 
     NO_SANPHAM_FOUND(1043, "Không tìm thấy SP ",HttpStatus.NOT_FOUND),
     NO_LIST_SANPHAM_FOUND(1044, "Không tìm thấy danh sách sản phẩm nào ",HttpStatus.NOT_FOUND),
+    CTSP_EXISTED(1045, "Sản phẩm chi tiết này đã tồn tại", HttpStatus.BAD_REQUEST),
 
     ;
 

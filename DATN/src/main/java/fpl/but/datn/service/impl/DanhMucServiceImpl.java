@@ -29,6 +29,7 @@ public class DanhMucServiceImpl implements IDanhMucService {
 
         if (danhMucRepository.existsByMa(request.getMa()))
             throw new AppException(ErrorCode.CATEGORY_EXISTED);
+
         danhMuc.setMa("DM" + random.nextInt(1000));
         danhMuc.setTen(request.getTen());
         danhMuc.setNgayTao(new Date());
