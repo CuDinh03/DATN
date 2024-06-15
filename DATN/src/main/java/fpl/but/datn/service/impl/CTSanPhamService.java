@@ -61,7 +61,26 @@ public class CTSanPhamService implements ICTSanPhamService {
 
     @Override
     public ChiTietSanPham update(ChiTietSanPham request, UUID id) {
-        return null;
+
+        ChiTietSanPham chiTietSanPhamoldValue = ctSanPhamRepository.findById(id).get();
+
+        chiTietSanPhamoldValue.setMa(request.getMa());
+        chiTietSanPhamoldValue.setSanPham(request.getSanPham());
+        chiTietSanPhamoldValue.setThuongHieu(request.getThuongHieu());
+        chiTietSanPhamoldValue.setChatLieu(request.getChatLieu());
+        chiTietSanPhamoldValue.setDanhMuc(request.getDanhMuc());
+        chiTietSanPhamoldValue.setKichThuoc(request.getKichThuoc());
+        chiTietSanPhamoldValue.setMauSac(request.getMauSac());
+        chiTietSanPhamoldValue.setSoLuong(request.getSoLuong());
+        chiTietSanPhamoldValue.setGiaNhap(request.getGiaNhap());
+        chiTietSanPhamoldValue.setGiaBan(request.getGiaBan());
+        chiTietSanPhamoldValue.setNgayNhap(request.getNgayNhap());
+        chiTietSanPhamoldValue.setNgayTao(request.getNgayTao());
+        chiTietSanPhamoldValue.setNgaySua(new Date());
+        chiTietSanPhamoldValue.setTrangThai(1);
+        chiTietSanPhamoldValue.setHinhAnh(request.getHinhAnh());
+
+        return ctSanPhamRepository.save(chiTietSanPhamoldValue);
     }
 
     @Override
@@ -78,8 +97,6 @@ public class CTSanPhamService implements ICTSanPhamService {
     public Page<ChiTietSanPham> getAllChiTietSanPhamPageable(Pageable pageable) {
         return ctSanPhamRepository.findAll(pageable);
     }
-
-
 
     @Override
     @Transactional

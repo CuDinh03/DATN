@@ -91,8 +91,13 @@ public class CTSanPhamController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> update(@RequestBody ChiTietSanPham ctSanPham, @PathVariable UUID id){
-        return ResponseEntity.ok(ctSanPhamService.update(ctSanPham,id));
+    ChiTietSanPham update(@PathVariable UUID id,@RequestBody ChiTietSanPhamDto chiTietSanPhamDto) {
+        UUID idCTSP = null;
+        if (id != null){
+            idCTSP = id;
+            return ctSanPhamService.update(TranferDatas.convertToEntity(chiTietSanPhamDto), idCTSP);
+        }
+        return null;
     }
 
     @DeleteMapping("/delete/{id}")

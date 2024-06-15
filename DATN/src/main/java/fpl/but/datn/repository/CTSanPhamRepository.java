@@ -17,7 +17,8 @@ public interface CTSanPhamRepository extends JpaRepository<ChiTietSanPham, UUID>
 
     boolean existsByMa(String ma);
 
-    @Query("SELECT ctsp FROM ChiTietSanPham ctsp ORDER BY ctsp.ngayTao DESC ")
+    // LIST ChiTietSanPham với trạng thái = 1 và sắp xếp theo ngày tạo
+    @Query("SELECT ctsp FROM ChiTietSanPham ctsp WHERE ctsp.trangThai = 1 ORDER BY ctsp.ngayTao DESC")
     Page<ChiTietSanPham> findAllSapXepNgayTao(Pageable pageable);
 
     // chuyển trạng thái theo id SPCT
