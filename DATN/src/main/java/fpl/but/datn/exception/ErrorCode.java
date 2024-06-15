@@ -42,6 +42,8 @@ public enum ErrorCode {
 
     NO_IMAGES_FOUND(1026, "Không tìm thấy danh sách Hinh anh nào",HttpStatus.NOT_FOUND ),
     NO_LISTSP_FOUND(1028, "Không tìm thấy SP ",HttpStatus.NOT_FOUND),
+    NO_MAUSAC_FOUND(1029, "Không tìm thấy danh sách chất liệu nào ",HttpStatus.NOT_FOUND),
+    MAUSAC_EXISTED(1030, "Màu sắc đã ton tai",HttpStatus.BAD_REQUEST),
 
 
     ;
