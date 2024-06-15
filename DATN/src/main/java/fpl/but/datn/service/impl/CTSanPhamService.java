@@ -1,8 +1,7 @@
 package fpl.but.datn.service.impl;
 
-import fpl.but.datn.entity.ChiTietSanPham;
-import fpl.but.datn.entity.DanhMuc;
-import fpl.but.datn.entity.SanPham;
+
+import fpl.but.datn.entity.*;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.repository.CTSanPhamRepository;
@@ -112,5 +111,23 @@ public class CTSanPhamService implements ICTSanPhamService {
     @Override
     public Page<ChiTietSanPham> getAllChiTietSanPhamPageable(Pageable pageable) {
         return ctSanPhamRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<MauSac> findAllMauSacByMaCTSP(String maChiTietSanPham) {
+        return ctSanPhamRepository.findMauSacsByMaSanPhamChiTiet(maChiTietSanPham);
+    }@Override
+    public List<KichThuoc> findkichThuocsByMaSanPhamChiTiet(String maChiTietSanPham) {
+        return ctSanPhamRepository.findkichThuocsByMaSanPhamChiTiet(maChiTietSanPham);
+    }
+
+    @Override
+    public ChiTietSanPham findChiTietSanPhamByMauSacAndKichThuoc(String ma, UUID kichThuoc, UUID mauSac) {
+        return ctSanPhamRepository.findChiTietSanPhamByMauSacAndKichThuoc(ma,kichThuoc,mauSac);
+    }
+
+    @Override
+    public List<ChiTietSanPham> findSanPhamByKichThuoc(String ma, UUID kichThuoc) {
+        return ctSanPhamRepository.findChiTietSanPhamByMaAndKichThuoc(ma, kichThuoc);
     }
 }

@@ -1,8 +1,12 @@
 package fpl.but.datn.service.impl;
 
+import fpl.but.datn.entity.GioHangHoaDon;
 import fpl.but.datn.entity.HoaDon;
+import fpl.but.datn.entity.HoaDonChiTiet;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
+import fpl.but.datn.repository.GioHangHoaDonRepository;
+import fpl.but.datn.repository.HoaDonChiTietRepository;
 import fpl.but.datn.repository.HoaDonRepository;
 import fpl.but.datn.service.IHoaDonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +21,10 @@ public class HoaDonService implements IHoaDonService {
 
     @Autowired
     private HoaDonRepository hoaDonRepository;
+    @Autowired
+    private HoaDonChiTietRepository hoaDonChiTietRepository;
+    @Autowired
+    private GioHangHoaDonRepository hoaDonGioHangRepository;
     @Override
     public List getAll() {
         return hoaDonRepository.findAll();
@@ -66,7 +74,14 @@ public class HoaDonService implements IHoaDonService {
     @Override
     public boolean xoaCungHoaDon(UUID id) {
         Optional<HoaDon> optional = hoaDonRepository.findById(id);
+
         if (optional.isPresent()) {
+            List<HoaDonChiTiet> hoaDonChiTiets = hoaDonChiTietRepository.findAllHoaDonChiTietByIdHoaDon(id);
+            hoaDonChiTietRepository.deleteAll(hoaDonChiTiets);
+            GioHangHoaDon gioHangHoaDon = hoaDonGioHangRepository.findByIdHoaDon(id);
+            if (gioHangHoaDon != null) {
+                hoaDonGioHangRepository.delete(gioHangHoaDon);
+            }
             HoaDon hoaDon = optional.get();
             hoaDonRepository.delete(hoaDon);
             return true;
@@ -74,6 +89,14 @@ public class HoaDonService implements IHoaDonService {
             return false;
         }
     }
+
+    @Override
+    public HoaDon updateTrangThai(UUID id, Integer trangThai) {
+        HoaDon hoaDon = findById(id);
+        hoaDon.setTrangThai(trangThai);
+        return hoaDonRepository.save(hoaDon);
+    }
+
     public void open(UUID id) {
     }
     @Override
