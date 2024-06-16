@@ -1,6 +1,7 @@
 package fpl.but.datn.service.impl;
 
 import fpl.but.datn.entity.KhachHang;
+import fpl.but.datn.entity.TaiKhoan;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.repository.KhachHangRepository;
@@ -12,10 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class KhachHangService implements IService<KhachHang>, IKhachHangService {
@@ -51,6 +49,8 @@ public class KhachHangService implements IService<KhachHang>, IKhachHangService 
         return khachHangRepository.save(khachHang);
     }
 
+
+
     @Override
     public KhachHang update(UUID uuid, KhachHang khachHang) {
         return null;
@@ -81,6 +81,63 @@ public class KhachHangService implements IService<KhachHang>, IKhachHangService 
     @Override
     public KhachHang findKHByTenDangNhap(String tenDangNhap) {
         return this.khachHangRepository.findKHByTenDangNhap(tenDangNhap);
+    }
+
+
+
+//    trang thai:
+//        0: Khong hoat dong
+//        1: Khach hang da cap nhat thong tin
+//        2: khach hang chua cap nhat thong tin moi tao tk
+    @Transactional
+
+    @Override
+    public KhachHang createWhenTk(TaiKhoan taiKhoan) {
+
+        KhachHang khachHang = KhachHang.builder()
+                .ma("KH" + System.currentTimeMillis())
+                .taiKhoan(taiKhoan)
+                .ngayTao(new Date())
+                .ngaySua(new Date())
+                .trangThai(2)
+                .build();
+
+        return khachHangRepository.save(khachHang);
+    }
+
+    public static void main(String[] args) {
+        Random random = new Random();
+
+        for (int i = 1; i <= 10; i++) {
+            UUID id = UUID.randomUUID();
+            String ma = "KH" + String.format("%03d", random.nextInt(1000));
+            String ten = "Customer " + i;
+            String email = "customer" + i + "@example.com";
+            String sdt = "012345678" + (i-1);
+            Boolean gioiTinh = random.nextBoolean();
+            Date ngaySinh = new Date(System.currentTimeMillis() - (long)random.nextInt(1000000000));
+            String diaChi = "Address " + i;
+            Date ngaySua = new Date(System.currentTimeMillis());
+            Date ngayTao = new Date(System.currentTimeMillis());
+            Integer trangThai = random.nextInt(2); // Assuming 0 for inactive and 1 for active
+
+            String insertSQL = String.format(
+                    "INSERT INTO khachhang (id, ma, ten, email, sdt, gioi_tinh, ngay_sinh, dia_chi, ngay_sua, ngay_tao, trang_thai) VALUES ('%s', '%s', '%s', '%s', '%s', %b, '%s', '%s', '%s', '%s', %d);",
+                    id,
+                    ma,
+                    ten,
+                    email,
+                    sdt,
+                    gioiTinh,
+                    ngaySinh,
+                    diaChi,
+                    ngaySua,
+                    ngayTao,
+                    trangThai
+            );
+
+            System.out.println(insertSQL);
+        }
     }
 
 

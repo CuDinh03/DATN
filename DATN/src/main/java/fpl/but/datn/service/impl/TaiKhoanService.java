@@ -1,6 +1,4 @@
 package fpl.but.datn.service.impl;
-
-
 import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jwt.JWTClaimsSet;
@@ -8,6 +6,8 @@ import fpl.but.datn.dto.request.AuthenticationRequest;
 import fpl.but.datn.dto.response.AuthenticationResponse;
 import fpl.but.datn.dto.response.TaiKhoanResponse;
 import fpl.but.datn.entity.ChucVu;
+import fpl.but.datn.entity.GioHang;
+import fpl.but.datn.entity.KhachHang;
 import fpl.but.datn.entity.TaiKhoan;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
@@ -22,13 +22,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 @Service
-
 public class TaiKhoanService implements ITaiKhoanService {
 
     @Autowired
@@ -38,7 +37,13 @@ public class TaiKhoanService implements ITaiKhoanService {
     private ChucVuService chucVuService;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private KhachHangService khachHangService;
 
+    @Autowired
+    private GioHangService gioHangService;
+
+    @Transactional
     @Override
     public TaiKhoan createAccount(TaiKhoan request) {
         TaiKhoan taiKhoan = new TaiKhoan();
@@ -56,8 +61,22 @@ public class TaiKhoanService implements ITaiKhoanService {
         taiKhoan.setNgayTao(new Date());
         taiKhoan.setNgaySua(new Date());
         taiKhoan.setTrangThai(1);
+        TaiKhoan taiKhoan1 = taiKhoanRepository.save(taiKhoan);
 
-        return taiKhoanRepository.save(taiKhoan);
+        KhachHang khachHang = khachHangService.createWhenTk(taiKhoan1);
+
+        Random random = new Random();
+        // Tạo giỏ hàng
+        GioHang gioHang = new GioHang();
+        gioHang.setMa("GH" + random.nextInt(1000));
+        gioHang.setNgayTao(new Date());
+        gioHang.setNgaySua(new Date());
+        gioHang.setKhachHang(khachHang);
+        gioHang.setTrangThai(2);
+
+        gioHangService.create(gioHang);
+
+        return taiKhoan1;
     }
 
     @Override

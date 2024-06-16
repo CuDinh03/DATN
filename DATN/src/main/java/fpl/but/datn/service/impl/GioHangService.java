@@ -1,13 +1,10 @@
 package fpl.but.datn.service.impl;
-
 import fpl.but.datn.entity.GioHang;
 import fpl.but.datn.repository.GioHangRepository;
 import fpl.but.datn.service.IGioHangService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -23,6 +20,7 @@ public class GioHangService implements IGioHangService {
         return gioHangRepository.findAll();
     }
 
+    @Transactional
     @Override
     public GioHang create(GioHang gioHang) {
         return gioHangRepository.save(gioHang);
@@ -37,7 +35,6 @@ public class GioHangService implements IGioHangService {
             o.setTrangThai(gioHang.getTrangThai());
             return gioHangRepository.save(o);
         }).orElse(null);
-
     }
 
     @Override
@@ -51,8 +48,6 @@ public class GioHangService implements IGioHangService {
             return false;
         }
     }
-
-
     @Override
     public GioHang findById(UUID id) {
         return gioHangRepository.findById(id).get();
@@ -62,6 +57,4 @@ public class GioHangService implements IGioHangService {
     public GioHang findByIdKhachHang(UUID id) {
         return gioHangRepository.findGioHangByKhachHang(id);
     }
-
-
 }
