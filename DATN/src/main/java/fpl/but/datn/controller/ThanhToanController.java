@@ -48,29 +48,33 @@ public class ThanhToanController {
 
         return apiResponse;
     }
-    @PostMapping("/onl")
-    public ApiResponse<ThanhToanOnl> thanhtoanOnl(@RequestBody ThanhToanOnl thanhToanOnl) {
-        ApiResponse<ThanhToanOnl> apiResponse = new ApiResponse<>();
-        try {
-            if (thanhToanOnl.getGioHang() != null && thanhToanOnl.getGioHangChiTietDtoList() != null) {
-                thanhToanService.thanhToanSanPhamOnline(
-                        TranferDatas.convertToEntity(thanhToanOnl.getGioHang()),
-                        thanhToanOnl.getTongTien(),
-                        thanhToanOnl.getTongTienGiam(),
-                        TranferDatas.convertToEntity(thanhToanOnl.getVoucher()),
-                        thanhToanOnl.getNote(),
-                        TranferDatas.convertListGioHangChiTietToEntity(thanhToanOnl.getGioHangChiTietDtoList()));
-                apiResponse.setMessage("Thanh toán thành công");
-                apiResponse.setResult(thanhToanOnl);
-            } else {
-                apiResponse.setMessage("Thông tin thanh toán không hợp lệ");
+        @PostMapping("/onl")
+        public ApiResponse<ThanhToanOnl> thanhtoanOnl(@RequestBody ThanhToanOnl thanhToanOnl) {
+            ApiResponse<ThanhToanOnl> apiResponse = new ApiResponse<>();
+
+            try {
+                if (thanhToanOnl.getGioHang() != null && thanhToanOnl.getGioHangChiTietDtoList() != null) {
+                    thanhToanService.thanhToanSanPhamOnline(
+                            TranferDatas.convertToEntity(thanhToanOnl.getGioHang()),
+                            thanhToanOnl.getTongTien(),
+                            thanhToanOnl.getTongTienGiam(),
+                            TranferDatas.convertToEntity(thanhToanOnl.getVoucher()),
+                            thanhToanOnl.getNote(),
+                            TranferDatas.convertListGioHangChiTietToEntity(thanhToanOnl.getGioHangChiTietDtoList()));
+
+                    apiResponse.setMessage("Thanh toán thành công");
+                    apiResponse.setResult(thanhToanOnl);
+                } else {
+                    apiResponse.setMessage("Thông tin thanh toán không hợp lệ");
+                    apiResponse.setResult(null);
+                }
+            } catch (Exception e) {
+                apiResponse.setMessage("Đã xảy ra lỗi khi thanh toán: " + e.getMessage());
                 apiResponse.setResult(null);
             }
-        } catch (Exception e) {
-            apiResponse.setMessage("Đã xảy ra lỗi khi thanh toán: " + e.getMessage());
-            apiResponse.setResult(null);
+
+            return apiResponse;
         }
 
-        return apiResponse;
-    }
+
 }

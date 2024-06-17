@@ -1,7 +1,6 @@
 package fpl.but.datn.dto.request;
 
-import fpl.but.datn.entity.GioHang;
-import fpl.but.datn.entity.Voucher;
+
 import lombok.Data;
 
 import java.math.BigDecimal;

@@ -10,10 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class ThanhToanService implements IThanhToanService, IService<ThanhToan> {
@@ -112,54 +109,59 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
     }
 
     @Transactional
-    public void thanhToanSanPhamOnline( GioHang requestGh,
-                                        BigDecimal tongTien,
-                                        BigDecimal tongTienGiam,
-                                        Voucher voucher,
-                                        String ghiChu,
-                                 List<GioHangChiTiet> listGioHangCt) {
-        GioHang gioHang = this.gioHangService.findById(requestGh.getId());
-        if (gioHang != null) {
-            Random random = new Random();
-            HoaDon hoaDon = HoaDon.builder()
-                    .id(UUID.randomUUID())
-                    .ma("HD" + random.nextInt(1000))
-                    .nguoiDung(null)
-                    .khachHang(gioHang.getKhachHang())
-                    .tongTien(tongTien)
-                    .tongTienGiam(tongTienGiam)
-                    .ngayTao(new Date())
-                    .ngaySua(new Date())
-                    .voucher(voucher)
-                    .ghiChu(ghiChu)
-                    .trangThai(2)
-                    .build();
-            hoaDonRepository.save(hoaDon);
-                for (GioHangChiTiet ghCt : listGioHangCt) {
-                    System.out.println(ghCt);
-                    HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
-                    hoaDonChiTiet.setId(UUID.randomUUID());
-                    hoaDonChiTiet.setGiaBan(ghCt.getChiTietSanPham().getGiaBan());
-                    hoaDonChiTiet.setSoLuong(ghCt.getSoLuong());
-                    hoaDonChiTiet.setNgayTao(new Date());
-                    hoaDonChiTiet.setNgaySua(new Date());
-                    hoaDonChiTiet.setChiTietSanPham(ghCt.getChiTietSanPham());
-                    hoaDonChiTiet.setHoaDon(hoaDon);
-                    hoaDonChiTiet.setTrangThai(2);
-                    this.hoaDonChiTietService.create(hoaDonChiTiet);
-                }
-
-                List<HoaDonChiTiet> hoaDonChiTiets = this.hoaDonChiTietService.getHoaDonChiTietByIdHoaDon(hoaDon.getId());
-                for (HoaDonChiTiet hdct : hoaDonChiTiets) {
-                    hdct.setTrangThai(2);
-                    this.hoaDonChiTietService.update(hdct, hdct.getId());
-                }
-//                GioHangHoaDon gioHangHoaDon = this.hoaDonGioHangService.findByIdHoaDon(hoaDon.getId());
-//                GioHang gioHang = this.gioHangService.findById(gioHangHoaDon.getGioHang().getId());
-                gioHang.setTrangThai(1);
-                this.gioHangService.update(gioHang, gioHang.getId());
-            }
+    public void thanhToanSanPhamOnline(GioHang requestGh, BigDecimal tongTien, BigDecimal tongTienGiam,
+                                       Voucher voucher, String ghiChu, List<GioHangChiTiet> listGioHangCt) {
+        if (requestGh == null || requestGh.getId() == null) {
+            throw new IllegalArgumentException("GioHang request is invalid");
+        }
+        if (tongTien == null || tongTienGiam == null) {
+            throw new IllegalArgumentException("TongTien or TongTienGiam is invalid");
+        }
+        if (listGioHangCt == null || listGioHangCt.isEmpty()) {
+            throw new IllegalArgumentException("ListGioHangCt is empty or null");
         }
 
+        GioHang gioHang = Optional.ofNullable(this.gioHangService.findById(requestGh.getId()))
+                .orElseThrow(() -> new IllegalArgumentException("GioHang not found with id: " + requestGh.getId()));
+
+        Random random = new Random();
+        HoaDon hoaDon = HoaDon.builder()
+                .id(UUID.randomUUID())
+                .ma("HD" + random.nextInt(1000))
+                .nguoiDung(null)
+                .khachHang(gioHang.getKhachHang())
+                .tongTien(tongTien)
+                .tongTienGiam(tongTienGiam)
+                .ngayTao(new Date())
+                .ngaySua(new Date())
+                .voucher(voucher)
+                .ghiChu(ghiChu)
+                .trangThai(2)
+                .build();
+
+        hoaDonRepository.save(hoaDon);
+
+        for (GioHangChiTiet ghCt : listGioHangCt) {
+            HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
+            hoaDonChiTiet.setId(UUID.randomUUID());
+            hoaDonChiTiet.setGiaBan(ghCt.getChiTietSanPham().getGiaBan());
+            hoaDonChiTiet.setSoLuong(ghCt.getSoLuong());
+            hoaDonChiTiet.setNgayTao(new Date());
+            hoaDonChiTiet.setNgaySua(new Date());
+            hoaDonChiTiet.setChiTietSanPham(ghCt.getChiTietSanPham());
+            hoaDonChiTiet.setHoaDon(hoaDon);
+            hoaDonChiTiet.setTrangThai(2);
+            this.hoaDonChiTietService.create(hoaDonChiTiet);
+        }
+
+        List<HoaDonChiTiet> hoaDonChiTiets = this.hoaDonChiTietService.getHoaDonChiTietByIdHoaDon(hoaDon.getId());
+        for (HoaDonChiTiet hdct : hoaDonChiTiets) {
+            hdct.setTrangThai(2);
+            this.hoaDonChiTietService.update(hdct, hdct.getId());
+        }
+
+        gioHang.setTrangThai(2);
+        this.gioHangService.update(gioHang, gioHang.getId());
+    }
 }
 
