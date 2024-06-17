@@ -1,12 +1,8 @@
 package fpl.but.datn.controller;
 
-import fpl.but.datn.dto.request.ChiTietSanPhamDto;
-import fpl.but.datn.dto.request.DanhMucDto;
-import fpl.but.datn.dto.request.GioHangDto;
+import fpl.but.datn.dto.request.*;
 import fpl.but.datn.dto.response.ApiResponse;
-import fpl.but.datn.entity.ChiTietSanPham;
-import fpl.but.datn.entity.DanhMuc;
-import fpl.but.datn.entity.GioHangChiTiet;
+import fpl.but.datn.entity.*;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.service.ICTSanPhamService;
@@ -95,6 +91,58 @@ public class CTSanPhamController {
             ChiTietSanPhamDto dto = TranferDatas.convertToDto(ctSanPhamService.findById(idChiTietSanPham));
             apiResponse.setMessage("Lấy chi tiết sản phẩm thành công");
             apiResponse.setResult(dto);
+        }
+        return apiResponse;
+    }
+
+    @GetMapping("/findAllMauSacByMaCTSP/{ma}")
+    ApiResponse<List<MauSacDto>> finAllMauSacByMaCTSP(@PathVariable String ma){
+        List<MauSacDto> dto = TranferDatas.convertListMauSacToDto(ctSanPhamService.findAllMauSacByMaCTSP(ma));
+        ApiResponse<List<MauSacDto>> apiResponse = new ApiResponse<>();
+        if (!dto.isEmpty()){
+            apiResponse.setMessage("lay danh sach mau sac thanh cong");
+            apiResponse.setResult(dto);
+        }else {
+            throw new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION);
+        }
+        return apiResponse;
+    }
+
+    @GetMapping("/findAllKichThuocByMaCTSP/{ma}")
+    ApiResponse<List<KichThuocDto>> finAllKichThuocByMaCTSP(@PathVariable String ma){
+        List<KichThuocDto> dto = TranferDatas.convertListKichThuocToDto(ctSanPhamService.findkichThuocsByMaSanPhamChiTiet(ma));
+        ApiResponse<List<KichThuocDto>> apiResponse = new ApiResponse<>();
+        if (!dto.isEmpty()){
+            apiResponse.setMessage("lay danh sach kich thuoc thanh cong");
+            apiResponse.setResult(dto);
+        }else {
+            throw new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION);
+        }
+        return apiResponse;
+    }
+
+    @GetMapping("/findChiTietSanPhamByMauSacAndKichThuoc/{ma}")
+    ApiResponse<ChiTietSanPhamDto>  findAllByKichThuocAndMauSac(@PathVariable String ma, @RequestParam UUID kichThuoc, @RequestParam UUID mauSac){
+        ChiTietSanPhamDto dto = TranferDatas.convertToDto(ctSanPhamService.findChiTietSanPhamByMauSacAndKichThuoc(ma, kichThuoc, mauSac));
+        ApiResponse<ChiTietSanPhamDto>  apiResponse = new ApiResponse<>();
+        if (dto != null){
+            apiResponse.setMessage("lay danh sach san pham thanh cong");
+            apiResponse.setResult(dto);
+        }else {
+            throw new AppException(ErrorCode.NO_PRODUCT_DETAIL_FOUND);
+        }
+        return apiResponse;
+    }
+
+    @GetMapping("/findSanPhamByKichThuoc/{ma}")
+    ApiResponse<List<ChiTietSanPhamDto>> finAllMauSacByMaCTSP(@PathVariable String ma, @RequestParam UUID kichThuoc){
+        List<ChiTietSanPhamDto> dto = TranferDatas.convertListChiTietSanPhamToDto(ctSanPhamService.findSanPhamByKichThuoc(ma, kichThuoc));
+        ApiResponse<List<ChiTietSanPhamDto>> apiResponse = new ApiResponse<>();
+        if (!dto.isEmpty()){
+            apiResponse.setMessage("lay danh sach sản phẩm thanh cong");
+            apiResponse.setResult(dto);
+        }else {
+            throw new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION);
         }
         return apiResponse;
     }

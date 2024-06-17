@@ -1,15 +1,18 @@
 package fpl.but.datn.service.impl;
-
 import fpl.but.datn.entity.*;
+import fpl.but.datn.repository.HoaDonRepository;
 import fpl.but.datn.service.IService;
 import fpl.but.datn.service.IThanhToanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 @Service
@@ -17,6 +20,9 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
 
     @Autowired
     private HoaDonService hoaDonService;
+
+    @Autowired
+    private HoaDonRepository hoaDonRepository;
 
     @Autowired
     private GioHangChiTietService gioHangChiTietService;
@@ -70,7 +76,7 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
         if (request != null) {
             HoaDon hoaDon = hoaDonService.findById(request.getId());
             if (hoaDon != null) {
-                hoaDon.setTrangThai(1);
+                hoaDon.setTrangThai(3);
                 hoaDon.setTongTien(request.getTongTien());
                 hoaDon.setNgaySua(new Date());
                 hoaDon.setNgayTao(new Date());
@@ -104,5 +110,56 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
             }
         }
     }
+
+    @Transactional
+    public void thanhToanSanPhamOnline( GioHang requestGh,
+                                        BigDecimal tongTien,
+                                        BigDecimal tongTienGiam,
+                                        Voucher voucher,
+                                        String ghiChu,
+                                 List<GioHangChiTiet> listGioHangCt) {
+        GioHang gioHang = this.gioHangService.findById(requestGh.getId());
+        if (gioHang != null) {
+            Random random = new Random();
+            HoaDon hoaDon = HoaDon.builder()
+                    .id(UUID.randomUUID())
+                    .ma("HD" + random.nextInt(1000))
+                    .nguoiDung(null)
+                    .khachHang(gioHang.getKhachHang())
+                    .tongTien(tongTien)
+                    .tongTienGiam(tongTienGiam)
+                    .ngayTao(new Date())
+                    .ngaySua(new Date())
+                    .voucher(voucher)
+                    .ghiChu(ghiChu)
+                    .trangThai(2)
+                    .build();
+            hoaDonRepository.save(hoaDon);
+                for (GioHangChiTiet ghCt : listGioHangCt) {
+                    System.out.println(ghCt);
+                    HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
+                    hoaDonChiTiet.setId(UUID.randomUUID());
+                    hoaDonChiTiet.setGiaBan(ghCt.getChiTietSanPham().getGiaBan());
+                    hoaDonChiTiet.setSoLuong(ghCt.getSoLuong());
+                    hoaDonChiTiet.setNgayTao(new Date());
+                    hoaDonChiTiet.setNgaySua(new Date());
+                    hoaDonChiTiet.setChiTietSanPham(ghCt.getChiTietSanPham());
+                    hoaDonChiTiet.setHoaDon(hoaDon);
+                    hoaDonChiTiet.setTrangThai(2);
+                    this.hoaDonChiTietService.create(hoaDonChiTiet);
+                }
+
+                List<HoaDonChiTiet> hoaDonChiTiets = this.hoaDonChiTietService.getHoaDonChiTietByIdHoaDon(hoaDon.getId());
+                for (HoaDonChiTiet hdct : hoaDonChiTiets) {
+                    hdct.setTrangThai(2);
+                    this.hoaDonChiTietService.update(hdct, hdct.getId());
+                }
+//                GioHangHoaDon gioHangHoaDon = this.hoaDonGioHangService.findByIdHoaDon(hoaDon.getId());
+//                GioHang gioHang = this.gioHangService.findById(gioHangHoaDon.getGioHang().getId());
+                gioHang.setTrangThai(1);
+                this.gioHangService.update(gioHang, gioHang.getId());
+            }
+        }
+
 }
 
