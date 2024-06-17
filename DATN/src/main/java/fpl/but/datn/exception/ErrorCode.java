@@ -44,6 +44,8 @@ public enum ErrorCode {
     NO_LISTSP_FOUND(1028, "Không tìm thấy SP ",HttpStatus.NOT_FOUND),
     NO_MAUSAC_FOUND(1029, "Không tìm thấy danh sách chất liệu nào ",HttpStatus.NOT_FOUND),
     MAUSAC_EXISTED(1030, "Màu sắc đã ton tai",HttpStatus.BAD_REQUEST),
+    NO_KICHTHUOC_FOUND(1031, "Không tìm thấy danh sách kích thước nào ",HttpStatus.NOT_FOUND),
+    KICHTHUOC_EXISTED(1032, "Kích thước đã ton tai",HttpStatus.BAD_REQUEST),
 
 
     ;

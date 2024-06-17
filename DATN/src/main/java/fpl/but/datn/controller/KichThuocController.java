@@ -1,0 +1,114 @@
+package fpl.but.datn.controller;
+
+import fpl.but.datn.dto.request.KichThuocDto;
+import fpl.but.datn.dto.request.MauSacDto;
+import fpl.but.datn.dto.response.ApiResponse;
+import fpl.but.datn.entity.KichThuoc;
+import fpl.but.datn.entity.MauSac;
+import fpl.but.datn.exception.AppException;
+import fpl.but.datn.exception.ErrorCode;
+import fpl.but.datn.service.impl.KichThuocService;
+import fpl.but.datn.service.impl.MauSacService;
+import fpl.but.datn.tranferdata.TranferDatas;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.UUID;
+
+@RestController
+@RequestMapping("/api/kich-thuoc")
+public class KichThuocController {
+    @Autowired
+    private KichThuocService kichThuocService;
+
+    @GetMapping("/getAll")
+    ApiResponse<List<KichThuocDto>> getAll() {
+        List<KichThuocDto> listDto = TranferDatas.convertListKichThuocToDto(kichThuocService.getAll());
+        ApiResponse<List<KichThuocDto>> apiResponse = new ApiResponse<>();
+
+        if (!listDto.isEmpty()) {
+            apiResponse.setMessage("Lấy danh sách kích thước thành công");
+            apiResponse.setResult(listDto);
+        } else {
+            throw new AppException(ErrorCode.NO_KICHTHUOC_FOUND);
+        }
+        return apiResponse;
+    }
+
+    @GetMapping("/all")
+    ApiResponse<Page<KichThuocDto>> getKichThuoc(@RequestParam(defaultValue = "0") int page,
+                                           @RequestParam(defaultValue = "5") int size) {
+
+        Pageable pageable = PageRequest.of(page, size);
+        Page<KichThuoc> kichThuocPage = kichThuocService.getAllKichThuocPageable(pageable);
+        List<KichThuocDto> listDto = TranferDatas.convertListKichThuocToDto(kichThuocPage.getContent());
+
+        ApiResponse<Page<KichThuocDto>> apiResponse = new ApiResponse<>();
+
+        if (!listDto.isEmpty()) {
+            apiResponse.setMessage("Lấy danh sách kích thước thành công");
+            apiResponse.setResult(new PageImpl<>(listDto, pageable, kichThuocPage.getTotalElements()));
+        } else {
+            throw new AppException(ErrorCode.NO_ACCOUNTS_FOUND);
+        }
+
+        return apiResponse;
+    }
+
+    @PostMapping("/create")
+    ApiResponse<KichThuoc> create(@RequestBody @Valid KichThuocDto request) {
+        ApiResponse<KichThuoc> apiResponse = new ApiResponse<>();
+        if (request != null) {
+            apiResponse.setResult(kichThuocService.create(TranferDatas.convertToEntity(request)));
+        }
+        return apiResponse;
+    }
+
+    @PutMapping("/{id}")
+    KichThuoc update(@RequestBody KichThuocDto request, @PathVariable String id) {
+        UUID idKichThuoc = null;
+        if (id != null) {
+            idKichThuoc = UUID.fromString(id);
+        }
+        if (request != null) {
+            return kichThuocService.update(TranferDatas.convertToEntity(request), idKichThuoc);
+        }
+        return null;
+    }
+
+    @DeleteMapping("/{id}")
+    ApiResponse<Void> delete(@PathVariable String id) {
+        UUID idKichThuoc = null;
+        if (id != null) {
+            idKichThuoc = UUID.fromString(id);
+            kichThuocService.delete(idKichThuoc);
+        } return ApiResponse.<Void>builder().build();
+    }
+
+    @DeleteMapping("/open/{id}")
+    ApiResponse<Void> open(@PathVariable String id) {
+        UUID idKichThuoc = null;
+        if (id != null) {
+            idKichThuoc = UUID.fromString(id);
+            kichThuocService.open(idKichThuoc);
+        } return ApiResponse.<Void>builder().build();
+    }
+
+    @GetMapping("/{id}")
+    ApiResponse<KichThuocDto> detail(@PathVariable String id) {
+        ApiResponse<KichThuocDto> apiResponse = new ApiResponse<>();
+        UUID idKichThuoc = null;
+        if (id != null){
+            idKichThuoc = UUID.fromString(id);
+            KichThuocDto dto = TranferDatas.convertToDto(kichThuocService.findById(idKichThuoc));
+            apiResponse.setMessage("Lấy kích thước thành công");
+            apiResponse.setResult(dto);
+        }return apiResponse;
+    }
+}
