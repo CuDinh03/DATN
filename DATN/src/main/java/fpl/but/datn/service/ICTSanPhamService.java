@@ -21,6 +21,8 @@ public interface ICTSanPhamService {
 
     ChiTietSanPham findById(UUID id);
 
+    // ChiTietSanPham findByDuLieu(UUID id, ......);
+
     Page<ChiTietSanPham> getAllChiTietSanPhamPageable(Pageable pageable);
 
     Page<ChiTietSanPham> getAllChiTietSanPhamPageableSapXepNGayTao(Pageable pageable);

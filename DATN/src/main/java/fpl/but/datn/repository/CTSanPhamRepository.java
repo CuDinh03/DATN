@@ -15,10 +15,10 @@ import java.util.UUID;
 @Repository
 public interface CTSanPhamRepository extends JpaRepository<ChiTietSanPham, UUID> {
 
-    boolean existsByMa(String ma);
+    boolean existsByMa(String ma); // thay doi
 
     // LIST ChiTietSanPham với trạng thái = 1 và sắp xếp theo ngày tạo
-    @Query("SELECT ctsp FROM ChiTietSanPham ctsp WHERE ctsp.trangThai = 1 ORDER BY ctsp.ngayTao DESC")
+    @Query("SELECT ctsp FROM ChiTietSanPham ctsp ORDER BY ctsp.ngayTao DESC")
     Page<ChiTietSanPham> findAllSapXepNgayTao(Pageable pageable);
 
     // chuyển trạng thái theo id SPCT
@@ -28,4 +28,6 @@ public interface CTSanPhamRepository extends JpaRepository<ChiTietSanPham, UUID>
     @Transactional
     @Query("UPDATE ChiTietSanPham c SET c.trangThai = 0 WHERE c.id = :id")
     int updateTrangThai(@Param("id") UUID id);
+
+
 }

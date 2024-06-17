@@ -35,21 +35,26 @@ public class CTSanPhamService implements ICTSanPhamService {
     @Override
     public ChiTietSanPham create(ChiTietSanPham request) {
 
+        // 1. Tim san pham chi tiet du 8 du lieu duoi
+        // 2.
+
         ChiTietSanPham chiTietSanPham = new ChiTietSanPham();
 
         if (ctSanPhamRepository.existsByMa(request.getMa()))
             throw new AppException(ErrorCode.CTSP_EXISTED);
 
-        chiTietSanPham.setMa(request.getMa());
-        chiTietSanPham.setSanPham(request.getSanPham());
-        chiTietSanPham.setThuongHieu(request.getThuongHieu());
-        chiTietSanPham.setChatLieu(request.getChatLieu());
-        chiTietSanPham.setDanhMuc(request.getDanhMuc());
-        chiTietSanPham.setKichThuoc(request.getKichThuoc());
-        chiTietSanPham.setMauSac(request.getMauSac());
+        chiTietSanPham.setMa(request.getMa()); //
+        chiTietSanPham.setSanPham(request.getSanPham());//
+        chiTietSanPham.setThuongHieu(request.getThuongHieu());//
+        chiTietSanPham.setChatLieu(request.getChatLieu());//
+        chiTietSanPham.setDanhMuc(request.getDanhMuc());//
+        chiTietSanPham.setKichThuoc(request.getKichThuoc());//
+        chiTietSanPham.setMauSac(request.getMauSac());//
+
         chiTietSanPham.setSoLuong(request.getSoLuong());
         chiTietSanPham.setGiaNhap(request.getGiaNhap());
         chiTietSanPham.setGiaBan(request.getGiaBan());
+
         chiTietSanPham.setNgayNhap(new Date());
         chiTietSanPham.setNgayTao(new Date());
         chiTietSanPham.setNgaySua(new Date());
