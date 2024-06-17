@@ -47,6 +47,9 @@ public enum ErrorCode {
     NO_KICHTHUOC_FOUND(1031, "Không tìm thấy danh sách kích thước nào ",HttpStatus.NOT_FOUND),
     KICHTHUOC_EXISTED(1032, "Kích thước đã ton tai",HttpStatus.BAD_REQUEST),
 
+    NO_THUONGHIEU_FOUND(1031, "Không tìm thấy danh sách thương hiệu nào ",HttpStatus.NOT_FOUND),
+    THUONGHIEU_EXISTED(1032, "Thương hiệu đã ton tai",HttpStatus.BAD_REQUEST),
+
 
     ;
 
