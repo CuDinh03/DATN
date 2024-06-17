@@ -20,7 +20,7 @@ public class ThuongHieuController {
     @Autowired
     private ThuongHieuService thuongHieuService;
 
-    @GetMapping("/all")
+    @GetMapping("/getAll")
     ApiResponse<List<ThuongHieuDto>> getAll() {
         List<ThuongHieuDto> listDto = TranferDatas.convertListThuongHieuToDto(thuongHieuService.getAll());
         ApiResponse<List<ThuongHieuDto>> apiResponse = new ApiResponse<>();
@@ -35,7 +35,7 @@ public class ThuongHieuController {
     }
 
 
-    @GetMapping("/all/dang-hoat-dong")
+    @GetMapping("/getAll/dang-hoat-dong")
     ApiResponse<List<ThuongHieuDto>> getAllDangHoatDong() {
         List<ThuongHieuDto> listDto = TranferDatas.convertListThuongHieuToDto(thuongHieuService.getAllThuongHieuDangHoatDong());
         ApiResponse<List<ThuongHieuDto>> apiResponse = new ApiResponse<>();
@@ -48,4 +48,5 @@ public class ThuongHieuController {
         }
         return apiResponse;
     }
+
 }

@@ -17,7 +17,7 @@ public interface DanhMucRepository extends JpaRepository<DanhMuc, UUID> {
     Page<DanhMuc> findAll(Pageable pageable);
     Optional<DanhMuc> findByMa(String ma);
     boolean existsByMa(String ma);
-
+    
     //  Lấy ra danh mục có trạng thái đang hoạt động
     @Query("SELECT dm FROM DanhMuc dm WHERE dm.trangThai = 1")
     List<DanhMuc> findAllDanhMucDangHoatDong();

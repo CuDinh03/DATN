@@ -21,7 +21,7 @@ public class KichThuocController {
     @Autowired
     IKichThuocService kichThuocService;
 
-    @GetMapping("/all")
+    @GetMapping("/getAll")
     ApiResponse<List<KichThuocDto>> getAll() {
 
         List<KichThuocDto> lstKichThuocDto = TranferDatas.convertListKichThuocToDto(kichThuocService.getAll());
@@ -37,7 +37,7 @@ public class KichThuocController {
     }
 
 
-    @GetMapping("/all/dang-hoat-dong")
+    @GetMapping("/getAll/dang-hoat-dong")
     ApiResponse<List<KichThuocDto>> getAllDangHoatDong() {
 
         List<KichThuocDto> lstKichThuocDto = TranferDatas.convertListKichThuocToDto(kichThuocService.getAllKichThuocDangHoatDong());

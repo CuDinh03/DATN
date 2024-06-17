@@ -65,7 +65,7 @@ public class CTSanPhamController {
         return apiResponse;
     }
 
-    @GetMapping("/getAll")// Cho phép truy cập mà không cần phải xác thực
+    @GetMapping("/getAll")
     ApiResponse<List<ChiTietSanPhamDto>> getAll() {
         List<ChiTietSanPhamDto> listDto = TranferDatas.convertListChiTietSanPhamToDto(ctSanPhamService.getAll());
         ApiResponse<List<ChiTietSanPhamDto>> apiResponse = new ApiResponse<>();

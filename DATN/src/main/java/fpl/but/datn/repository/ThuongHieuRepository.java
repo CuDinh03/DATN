@@ -14,4 +14,5 @@ public interface ThuongHieuRepository extends JpaRepository<ThuongHieu, UUID> {
     //  Lấy ra thương hiệu có trạng thái đang hoạt động
     @Query("SELECT th FROM ThuongHieu th WHERE th.trangThai = 1")
     List<ThuongHieu> findAllThuongHieuDangHoatDong();
+
 }

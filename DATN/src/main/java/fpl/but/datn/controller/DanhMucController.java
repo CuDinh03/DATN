@@ -65,7 +65,7 @@ public class DanhMucController {
         return apiResponse;
     }
 
-    @GetMapping("/all/dang-hoat-dong")
+    @GetMapping("/getAll/dang-hoat-dong")
     ApiResponse<List<DanhMucDto>> getAllDangHoatDong() {
         List<DanhMucDto> listDto = TranferDatas.convertListDanhMucToDto(danhMucService.getAllDanhMucDangHoatDong());
         ApiResponse<List<DanhMucDto>> apiResponse = new ApiResponse<>();

@@ -20,7 +20,7 @@ public class SanPhamController {
     @Autowired
     private SanPhamService sanPhamService;
 
-    @GetMapping("/all")
+    @GetMapping("/getAll")
     ApiResponse<List<SanPhamDto>> getAll() {
         List<SanPhamDto> listDto = TranferDatas.convertListSanPhamToDto(sanPhamService.getAll());
         ApiResponse<List<SanPhamDto>> apiResponse = new ApiResponse<>();
@@ -35,7 +35,7 @@ public class SanPhamController {
     }
 
 
-    @GetMapping("/all/dang-hoat-dong")
+    @GetMapping("/getAll/dang-hoat-dong")
     ApiResponse<List<SanPhamDto>> getAllDangHoatDong() {
         List<SanPhamDto> listDto = TranferDatas.convertListSanPhamToDto(sanPhamService.getAllSanPhamDangHoatDong());
         ApiResponse<List<SanPhamDto>> apiResponse = new ApiResponse<>();

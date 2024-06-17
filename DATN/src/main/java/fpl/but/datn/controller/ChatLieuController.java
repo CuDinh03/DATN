@@ -20,7 +20,7 @@ public class ChatLieuController {
     @Autowired
     private ChatLieuService chatLieuService;
 
-    @GetMapping("/all")
+    @GetMapping("/getAll")
     ApiResponse<List<ChatLieuDto>> getAll() {
         List<ChatLieuDto> listDto = TranferDatas.convertListChatLieuToDto(chatLieuService.getAll());
         ApiResponse<List<ChatLieuDto>> apiResponse = new ApiResponse<>();
@@ -34,7 +34,7 @@ public class ChatLieuController {
         return apiResponse;
     }
 
-    @GetMapping("/all/dang-hoat-dong")
+    @GetMapping("/getAll/dang-hoat-dong")
     ApiResponse<List<ChatLieuDto>> getAllDangHoatDong() {
         List<ChatLieuDto> listDto = TranferDatas.convertListChatLieuToDto(chatLieuService.getAllChatLieuDangHoatDong());
         ApiResponse<List<ChatLieuDto>> apiResponse = new ApiResponse<>();

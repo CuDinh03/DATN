@@ -21,7 +21,7 @@ public class MauSacController {
     @Autowired
     IMauSacService mauSacService;
 
-    @GetMapping("/all")
+    @GetMapping("/getAll")
     ApiResponse<List<MauSacDto>> getAll() {
 
         List<MauSacDto> lstMauSacDtos = TranferDatas.convertListMauSacToDto(mauSacService.getAll());
@@ -38,7 +38,7 @@ public class MauSacController {
     }
 
 
-    @GetMapping("/all/dang-hoat-dong")
+    @GetMapping("/getAll/dang-hoat-dong")
     ApiResponse<List<MauSacDto>> getAllDangHoatDong() {
 
         List<MauSacDto> lstMauSacDtos = TranferDatas.convertListMauSacToDto(mauSacService.getAllMauSacDangHoatDong());
