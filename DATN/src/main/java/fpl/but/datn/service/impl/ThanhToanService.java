@@ -108,7 +108,6 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
         }
     }
 
-    @Transactional
     public void thanhToanSanPhamOnline(GioHang requestGh, BigDecimal tongTien, BigDecimal tongTienGiam,
                                        Voucher voucher, String ghiChu, List<GioHangChiTiet> listGioHangCt) {
         if (requestGh == null || requestGh.getId() == null) {
@@ -138,8 +137,15 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
                 .ghiChu(ghiChu)
                 .trangThai(2)
                 .build();
-
-        hoaDonRepository.save(hoaDon);
+        System.out.println("===================");
+        System.out.println(hoaDon.toString());
+        System.out.println("===================");
+        hoaDonService.create(hoaDon);
+        System.out.println("===================");
+        System.out.println("sau khi luu");
+        HoaDon hoaDon1 = hoaDonRepository.findById(hoaDon.getId()).get();
+        System.out.println(hoaDon1);
+        System.out.println("===================");
 
         for (GioHangChiTiet ghCt : listGioHangCt) {
             HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
@@ -151,14 +157,12 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
             hoaDonChiTiet.setChiTietSanPham(ghCt.getChiTietSanPham());
             hoaDonChiTiet.setHoaDon(hoaDon);
             hoaDonChiTiet.setTrangThai(2);
+            System.out.println("===================");
+            System.out.println(hoaDonChiTiet);
+            System.out.println("===================");
             this.hoaDonChiTietService.create(hoaDonChiTiet);
         }
 
-        List<HoaDonChiTiet> hoaDonChiTiets = this.hoaDonChiTietService.getHoaDonChiTietByIdHoaDon(hoaDon.getId());
-        for (HoaDonChiTiet hdct : hoaDonChiTiets) {
-            hdct.setTrangThai(2);
-            this.hoaDonChiTietService.update(hdct, hdct.getId());
-        }
 
         gioHang.setTrangThai(2);
         this.gioHangService.update(gioHang, gioHang.getId());
