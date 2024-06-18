@@ -32,5 +32,5 @@ public class HoaDon {
     @ManyToOne
     private Voucher voucher;
     private String ghiChu;
-    private Boolean trangThai;
+    private Integer trangThai;
 }

@@ -35,7 +35,6 @@ public class UserController {
         ApiResponse<TaiKhoan> apiResponse = new ApiResponse<>();
         if (request != null)
             apiResponse.setResult(taiKhoanService.createAccount(TranferDatas.convertToEntity(request)));
-
         return apiResponse;
     }
 
@@ -118,7 +117,7 @@ public class UserController {
     }
 
     @PostMapping("/check-username")
-    public ApiResponse<TaiKhoanDto> findByTenDangNhap(@RequestParam String tenDangNhap) {
+    public ApiResponse<TaiKhoanDto> findByTenDangNhap(@RequestBody String tenDangNhap) {
         Optional<TaiKhoan> taiKhoanOptional = taiKhoanService.findByNguoiDungByTenDangNhap(tenDangNhap);
 
         if (taiKhoanOptional.isPresent()) {

@@ -28,6 +28,6 @@ public class ChiTietSanPhamDto {
     private Date ngayNhap;
     private Date ngayTao;
     private Date ngaySua;
-    private Boolean trangThai;
+    private Integer trangThai;
     private List<HinhAnh> HinhAnh;
 }
