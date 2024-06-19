@@ -48,6 +48,9 @@ public class HoaDonService implements IHoaDonService {
         hoaDon.setTrangThai(1);
         return hoaDonRepository.save(hoaDon);
     }
+    public HoaDon createHoaDonOnl(HoaDon request) {
+        return hoaDonRepository.save(request);
+    }
 
     @Override
     public HoaDon update(HoaDon request, UUID id) {
@@ -88,6 +91,14 @@ public class HoaDonService implements IHoaDonService {
             return false;
         }
     }
+
+    @Override
+    public HoaDon updateTrangThai(UUID id, Integer trangThai) {
+        HoaDon hoaDon = findById(id);
+        hoaDon.setTrangThai(trangThai);
+        return hoaDonRepository.save(hoaDon);
+    }
+
     public void open(UUID id) {
     }
     @Override

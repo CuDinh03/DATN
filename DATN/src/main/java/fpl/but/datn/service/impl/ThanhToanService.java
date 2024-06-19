@@ -1,4 +1,5 @@
 package fpl.but.datn.service.impl;
+
 import fpl.but.datn.entity.*;
 import fpl.but.datn.repository.HoaDonRepository;
 import fpl.but.datn.service.IService;
@@ -35,6 +36,7 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
 
     @Autowired
     private HoaDonGioHangService hoaDonGioHangService;
+
     @Override
     public ThanhToan getByID(UUID id) {
         return null;
@@ -108,8 +110,11 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
         }
     }
 
+    @Transactional
     public void thanhToanSanPhamOnline(GioHang requestGh, BigDecimal tongTien, BigDecimal tongTienGiam,
                                        Voucher voucher, String ghiChu, List<GioHangChiTiet> listGioHangCt) {
+        System.out.println("============================");
+        System.out.println(listGioHangCt);
         if (requestGh == null || requestGh.getId() == null) {
             throw new IllegalArgumentException("GioHang request is invalid");
         }
@@ -123,31 +128,21 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
         GioHang gioHang = Optional.ofNullable(this.gioHangService.findById(requestGh.getId()))
                 .orElseThrow(() -> new IllegalArgumentException("GioHang not found with id: " + requestGh.getId()));
 
-        Random random = new Random();
         HoaDon hoaDon = HoaDon.builder()
-                .id(UUID.randomUUID())
-                .ma("HD" + random.nextInt(1000))
                 .nguoiDung(null)
                 .khachHang(gioHang.getKhachHang())
                 .tongTien(tongTien)
                 .tongTienGiam(tongTienGiam)
-                .ngayTao(new Date())
-                .ngaySua(new Date())
                 .voucher(voucher)
                 .ghiChu(ghiChu)
-                .trangThai(2)
                 .build();
         System.out.println("===================");
+        System.out.println("trc khi luu");
         System.out.println(hoaDon.toString());
         System.out.println("===================");
-        hoaDonService.create(hoaDon);
-        System.out.println("===================");
-        System.out.println("sau khi luu");
-        HoaDon hoaDon1 = hoaDonRepository.findById(hoaDon.getId()).get();
-        System.out.println(hoaDon1);
-        System.out.println("===================");
-
+        HoaDon hoaDon1 = hoaDonService.create(hoaDon);
         for (GioHangChiTiet ghCt : listGioHangCt) {
+            System.out.println(ghCt.toString());
             HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
             hoaDonChiTiet.setId(UUID.randomUUID());
             hoaDonChiTiet.setGiaBan(ghCt.getChiTietSanPham().getGiaBan());
@@ -155,15 +150,15 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
             hoaDonChiTiet.setNgayTao(new Date());
             hoaDonChiTiet.setNgaySua(new Date());
             hoaDonChiTiet.setChiTietSanPham(ghCt.getChiTietSanPham());
-            hoaDonChiTiet.setHoaDon(hoaDon);
+            hoaDonChiTiet.setHoaDon(hoaDon1);
             hoaDonChiTiet.setTrangThai(2);
             System.out.println("===================");
-            System.out.println(hoaDonChiTiet);
+            System.out.println("hoa don chi tiet");
+            System.out.println(hoaDonChiTiet.toString());
             System.out.println("===================");
+
             this.hoaDonChiTietService.create(hoaDonChiTiet);
         }
-
-
         gioHang.setTrangThai(2);
         this.gioHangService.update(gioHang, gioHang.getId());
     }

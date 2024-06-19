@@ -51,22 +51,16 @@ public class ThanhToanController {
         @PostMapping("/onl")
         public ApiResponse<ThanhToanOnl> thanhtoanOnl(@RequestBody ThanhToanOnl thanhToanOnl) {
             ApiResponse<ThanhToanOnl> apiResponse = new ApiResponse<>();
-            System.out.println(thanhToanOnl.getNote());
-            System.out.println(thanhToanOnl.getVoucher());
-            System.out.println(thanhToanOnl.getTongTien());
-            System.out.println(thanhToanOnl.getTongTienGiam());
-            System.out.println(thanhToanOnl.getGioHang());
-            System.out.println(thanhToanOnl.getGioHangChiTietDtoList());
 
             try {
-                if (thanhToanOnl.getGioHang() != null && thanhToanOnl.getGioHangChiTietDtoList() != null) {
+                if (thanhToanOnl.getGioHang() != null && thanhToanOnl.getGioHangChiTietList() != null) {
                     thanhToanService.thanhToanSanPhamOnline(
-                            TranferDatas.convertToEntity(thanhToanOnl.getGioHang()),
+                            thanhToanOnl.getGioHang(),
                             thanhToanOnl.getTongTien(),
                             thanhToanOnl.getTongTienGiam(),
-                            TranferDatas.convertToEntity(thanhToanOnl.getVoucher()),
+                            thanhToanOnl.getVoucher(),
                             thanhToanOnl.getNote(),
-                            TranferDatas.convertListGioHangChiTietToEntity(thanhToanOnl.getGioHangChiTietDtoList()));
+                            thanhToanOnl.getGioHangChiTietList());
 
                     apiResponse.setMessage("Thanh toán thành công");
                     apiResponse.setResult(thanhToanOnl);
