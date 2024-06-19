@@ -1,6 +1,10 @@
 package fpl.but.datn.service;
 
 import fpl.but.datn.entity.ChiTietSanPham;
+import fpl.but.datn.entity.DanhMuc;
+import fpl.but.datn.entity.KichThuoc;
+import fpl.but.datn.entity.MauSac;
+import fpl.but.datn.service.impl.MauSacService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -27,4 +31,9 @@ public interface ICTSanPhamService {
 
     Page<ChiTietSanPham> getAllChiTietSanPhamPageableSapXepNGayTao(Pageable pageable);
 
+    List<MauSac> findAllMauSacByMaCTSP(String maChiTietSanPham);
+    List<KichThuoc> findkichThuocsByMaSanPhamChiTiet(String maChiTietSanPham);
+    ChiTietSanPham findChiTietSanPhamByMauSacAndKichThuoc(String ma, UUID kichThuoc, UUID mauSac);
+
+    List<ChiTietSanPham> findSanPhamByKichThuoc(String ma, UUID kichThuoc);
 }

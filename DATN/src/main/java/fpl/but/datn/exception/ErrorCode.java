@@ -38,7 +38,17 @@ public enum ErrorCode {
     NO_PRODUCT_DETAIL_FOUND(1023, "Không tìm thấy danh sách chi tiet san pham nào",HttpStatus.NOT_FOUND),
     NO_ORDER_DETAIL_FOUND(1024, "Không tìm thấy danh sách chi tiet hoa don nào",HttpStatus.NOT_FOUND ),
     USER_NOT_EXISTED(1025, "Không tìm thấy người dùng ",HttpStatus.NOT_FOUND),
+    NO_LISTSPChiTiet_FOUND(1027, "Không tìm thấy SPCT ",HttpStatus.NOT_FOUND),
+
     NO_IMAGES_FOUND(1026, "Không tìm thấy danh sách Hinh anh nào",HttpStatus.NOT_FOUND ),
+    NO_LISTSP_FOUND(1028, "Không tìm thấy SP ",HttpStatus.NOT_FOUND),
+    NO_MAUSAC_FOUND(1029, "Không tìm thấy danh sách chất liệu nào ",HttpStatus.NOT_FOUND),
+    MAUSAC_EXISTED(1030, "Màu sắc đã ton tai",HttpStatus.BAD_REQUEST),
+    NO_KICHTHUOC_FOUND(1031, "Không tìm thấy danh sách kích thước nào ",HttpStatus.NOT_FOUND),
+    KICHTHUOC_EXISTED(1032, "Kích thước đã ton tai",HttpStatus.BAD_REQUEST),
+
+    NO_THUONGHIEU_FOUND(1031, "Không tìm thấy danh sách thương hiệu nào ",HttpStatus.NOT_FOUND),
+    THUONGHIEU_EXISTED(1032, "Thương hiệu đã ton tai",HttpStatus.BAD_REQUEST),
 
     MA_MAUSAC_TRUNG(1027, "Trùng mã màu sắc", HttpStatus.BAD_REQUEST),
     LIST_COLOR_NOT_FOUND(1028, "Không tìm thấy danh sách màu", HttpStatus.NOT_FOUND),
@@ -60,8 +70,6 @@ public enum ErrorCode {
     LIST_PTTHANHTOAN_NOT_FOUND(1040, "Không tìm thấy danh sách phương thức thanh toán", HttpStatus.NOT_FOUND),
 
     PTTHANHTOAN_NOT_FOUND(1041, "Phương thức thanh toán đang tìm không có", HttpStatus.NOT_FOUND),
-
-    NO_THUONGHIEU_FOUND(10142, "Không tìm thấy danh sách thương hiệu nào",HttpStatus.NOT_FOUND),
 
     NO_SANPHAM_FOUND(1043, "Không tìm thấy SP ",HttpStatus.NOT_FOUND),
     NO_LIST_SANPHAM_FOUND(1044, "Không tìm thấy danh sách sản phẩm nào ",HttpStatus.NOT_FOUND),

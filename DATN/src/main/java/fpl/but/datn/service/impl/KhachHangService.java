@@ -33,6 +33,7 @@ public class KhachHangService implements IService<KhachHang>, IKhachHangService 
     @Transactional
     public KhachHang create(KhachHang request) {
         Optional<KhachHang> existingKhachHang = khachHangRepository.getKhachHangBySdt(request.getSdt());
+
         if (existingKhachHang.isPresent()) {
             throw new AppException(ErrorCode.SDT_ALREADY_USED);
         }
@@ -50,6 +51,11 @@ public class KhachHangService implements IService<KhachHang>, IKhachHangService 
                 .trangThai(1)
                 .build();
         return khachHangRepository.save(khachHang);
+    }
+
+    @Override
+    public KhachHang update(KhachHang khachHang, UUID id) {
+        return null;
     }
 
     @Override
@@ -78,6 +84,11 @@ public class KhachHangService implements IService<KhachHang>, IKhachHangService 
     }
 
     @Override
+    public void open(UUID id) {
+
+    }
+
+    @Override
     public List<KhachHang> getAll() {
         return this.khachHangRepository.findAll();
     }
@@ -85,6 +96,11 @@ public class KhachHangService implements IService<KhachHang>, IKhachHangService 
     @Override
     public KhachHang findById(UUID id) {
         return khachHangRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION));
+    }
+
+    @Override
+    public Page<KhachHang> getAllKhachHangPageable(Pageable pageable) {
+        return null;
     }
 
     @Override

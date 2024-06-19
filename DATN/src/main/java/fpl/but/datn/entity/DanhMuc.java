@@ -5,11 +5,12 @@ import lombok.*;
 
 import java.util.Date;
 import java.util.UUID;
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table
 @Builder
 public class DanhMuc {
     @Id

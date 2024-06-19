@@ -11,12 +11,14 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Entity
+@Table
 public class NhanVien {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String ma;
     private String ten;
+
     private String email;
     private String sdt;
     private Boolean gioiTinh;

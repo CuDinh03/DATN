@@ -1,76 +1,84 @@
 package fpl.but.datn.service.impl;
 
+import fpl.but.datn.entity.ChatLieu;
 import fpl.but.datn.entity.MauSac;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.repository.MauSacRepository;
 import fpl.but.datn.service.IMauSacService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
+import java.util.Random;
 import java.util.UUID;
 
 @Service
 public class MauSacService implements IMauSacService {
 
     @Autowired
-    MauSacRepository mauSacRepository;
+    private MauSacRepository mauSacRepository;
 
     @Override
-    public List<MauSac> getAll() {
+    public List getAll() {
         return mauSacRepository.findAll();
     }
 
     @Override
-    public MauSac findById(UUID id) {
-        return mauSacRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION));
-    }
-
-    @Override
-    public MauSac add(MauSac request) {
-
+    public MauSac create(MauSac request) {
         MauSac mauSac = new MauSac();
-        if (mauSacRepository.existsByMa(request.getMa())) {
-            throw new AppException(ErrorCode.MA_MAUSAC_TRUNG);
-        }
+        Random random = new Random();
 
-        mauSac.setId(request.getId());
+        if (mauSacRepository.existsByMa(request.getMa()))
+            throw new AppException(ErrorCode.MAUSAC_EXISTED);
+        mauSac.setMa("MS" + random.nextInt(1000));
         mauSac.setTen(request.getTen());
-        mauSac.setMa(request.getMa());
         mauSac.setNgayTao(new Date());
         mauSac.setNgaySua(new Date());
         mauSac.setTrangThai(request.getTrangThai());
 
-        return mauSac;
+        return mauSacRepository.save(mauSac);
     }
 
     @Override
     public MauSac update(MauSac request, UUID id) {
         MauSac mauSac = new MauSac();
-
         mauSac.setId(id);
-        mauSac.setTen(request.getTen());
         mauSac.setMa(request.getMa());
-        mauSac.setNgayTao(request.getNgayTao());
+        mauSac.setTen(request.getTen());
+        mauSac.setNgayTao(new Date());
         mauSac.setNgaySua(new Date());
         mauSac.setTrangThai(request.getTrangThai());
-
-        return mauSac;
+        return mauSacRepository.save(mauSac);
     }
 
     @Override
-    public Boolean delete(UUID id) {
-        Optional<MauSac> optional = mauSacRepository.findById(id);
-        if (optional.isPresent()) {
-            MauSac mauSac = optional.get();
-            mauSacRepository.delete(mauSac);
-            return true;
-        } else {
-            return false;
-        }
+    public void delete(UUID id) {
+        MauSac taiKhoan = findById(id);
+        taiKhoan.setTrangThai(0);
+        mauSacRepository.save(taiKhoan);
+
+    }
+
+    @Override
+    public void open(UUID id) {
+        MauSac taiKhoan = findById(id);
+        taiKhoan.setTrangThai(1);
+        mauSacRepository.save(taiKhoan);
+
+    }
+
+    @Override
+    public MauSac findById(UUID id) {
+        return mauSacRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.NO_MAUSAC_FOUND));
+    }
+
+    @Override
+    public Page<MauSac> getAllMauSacPageable(Pageable pageable) {
+        return mauSacRepository.findAll(pageable);
     }
 
     @Override

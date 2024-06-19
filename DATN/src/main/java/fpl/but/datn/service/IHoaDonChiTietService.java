@@ -13,7 +13,7 @@ public interface IHoaDonChiTietService {
     List getAll();
     HoaDonChiTiet create(HoaDonChiTiet hoaDonChiTiet);
     HoaDonChiTiet update(HoaDonChiTiet hoaDonChiTiet, UUID id);
-    void delete(UUID id);
+    boolean delete(UUID id);
     void open(UUID id);
     HoaDonChiTiet findById(UUID id);
     Page<HoaDonChiTiet> getAllDanhMucPageable(Pageable pageable);

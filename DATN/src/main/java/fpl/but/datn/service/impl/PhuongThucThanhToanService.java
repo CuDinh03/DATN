@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class PhuongThucThanhToanSerivce implements IPhuongThucThanhToanService {
+public class PhuongThucThanhToanService implements IPhuongThucThanhToanService {
 
     @Autowired
     PhuongThucThanhToanRepository phuongThucThanhToanRepository;

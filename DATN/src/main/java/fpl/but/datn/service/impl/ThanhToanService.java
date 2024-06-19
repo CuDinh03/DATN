@@ -70,7 +70,7 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
         if (request != null) {
             HoaDon hoaDon = hoaDonService.findById(request.getId());
             if (hoaDon != null) {
-                hoaDon.setTrangThai(1);
+                hoaDon.setTrangThai(3);
                 hoaDon.setTongTien(request.getTongTien());
                 hoaDon.setNgaySua(new Date());
                 hoaDon.setNgayTao(new Date());

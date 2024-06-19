@@ -12,6 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table
 public class MauSac {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

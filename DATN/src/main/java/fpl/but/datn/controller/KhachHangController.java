@@ -5,6 +5,7 @@ import fpl.but.datn.dto.request.KhachHangDto;
 import fpl.but.datn.dto.request.KhachHangDto;
 import fpl.but.datn.dto.request.TaiKhoanDto;
 import fpl.but.datn.dto.response.ApiResponse;
+import fpl.but.datn.entity.DanhMuc;
 import fpl.but.datn.entity.KhachHang;
 import fpl.but.datn.entity.KhachHang;
 import fpl.but.datn.exception.AppException;
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -31,6 +33,21 @@ import java.util.UUID;
 public class KhachHangController {
     @Autowired
     KhachHangService khachHangService;
+
+    @GetMapping("/getAll")
+    ApiResponse<List<KhachHangDto>> getAll() {
+        List<KhachHangDto> listDto = TranferDatas.convertListKhachHangToDto(khachHangService.getAll());
+        ApiResponse<List<KhachHangDto>> apiResponse = new ApiResponse<>();
+
+        if (!listDto.isEmpty()) {
+            apiResponse.setMessage("Lấy danh sách khách hàng thành công");
+            apiResponse.setResult(listDto);
+        } else {
+            throw new AppException(ErrorCode.NO_CUSTOMERS_FOUND);
+        }
+
+        return apiResponse;
+    }
 
     @PostMapping("/create")
     ApiResponse<KhachHang> createKhachHang(@RequestBody @Valid KhachHangDto request){
@@ -60,6 +77,7 @@ public class KhachHangController {
         return apiResponse;
     }
 
+
     @GetMapping("/{sdt}")
     ApiResponse<KhachHangDto> getKHBySdt(@PathVariable String sdt){
         ApiResponse<KhachHangDto> apiResponse = new ApiResponse<>();
@@ -67,6 +85,32 @@ public class KhachHangController {
         apiResponse.setMessage("Lấy Khách hàng thành công");
         apiResponse.setResult(dto);
         return apiResponse;
+    }
+    @PutMapping("/{id}")
+    KhachHang update(@RequestBody KhachHangDto request, @PathVariable String id) {
+        UUID idKhachHang = null;
+        if (id != null) idKhachHang = UUID.fromString(id);
+        if (request != null)
+            return khachHangService.update(TranferDatas.convertToEntity(request), idKhachHang);
+        return null;
+    }
+
+    @DeleteMapping("/{id}")
+    ApiResponse<Void> delete(@PathVariable String id) {
+        UUID idKhachHang = null;
+        if (id != null) {
+            idKhachHang = UUID.fromString(id);
+            khachHangService.delete(idKhachHang);
+        } return ApiResponse.<Void>builder().build();
+    }
+
+    @DeleteMapping("/open/{id}")
+    ApiResponse<Void> open(@PathVariable String id) {
+        UUID idKhachHang = null;
+        if (id != null) {
+            idKhachHang = UUID.fromString(id);
+            khachHangService.open(idKhachHang);
+        } return ApiResponse.<Void>builder().build();
     }
 
     @GetMapping("/findUsername/{tenDangNhap}")

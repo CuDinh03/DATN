@@ -1,14 +1,21 @@
 package fpl.but.datn.controller;
 
 import fpl.but.datn.dto.request.KichThuocDto;
+import fpl.but.datn.dto.request.MauSacDto;
 import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.entity.KichThuoc;
+import fpl.but.datn.entity.MauSac;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
-import fpl.but.datn.service.IKichThuocService;
+import fpl.but.datn.service.impl.KichThuocService;
+import fpl.but.datn.service.impl.MauSacService;
 import fpl.but.datn.tranferdata.TranferDatas;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,9 +24,8 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/kich-thuoc")
 public class KichThuocController {
-
     @Autowired
-    IKichThuocService kichThuocService;
+    private KichThuocService kichThuocService;
 
     @GetMapping("/getAll")
     ApiResponse<List<KichThuocDto>> getAll() {
@@ -44,11 +50,29 @@ public class KichThuocController {
         ApiResponse<List<KichThuocDto>> apiResponse = new ApiResponse<>();
 
         if (!lstKichThuocDto.isEmpty()) {
-            apiResponse.setMessage("Tim thay danh sach kich thuoc");
+            apiResponse.setMessage("Lấy danh sách kích thước thành công");
             apiResponse.setResult(lstKichThuocDto);
         } else {
-            throw new AppException(ErrorCode.LIST_KICHTHUOC_NOT_FOUND);
+            throw new AppException(ErrorCode.NO_KICHTHUOC_FOUND);
         }
+        return apiResponse;
+    }
+
+    @GetMapping("/all")
+    ApiResponse<Page<KichThuocDto>> getKichThuoc(@RequestParam(defaultValue = "0") int page,
+                                           @RequestParam(defaultValue = "5") int size) {
+
+        Pageable pageable = PageRequest.of(page, size);
+        Page<KichThuoc> kichThuocPage = kichThuocService.getAllKichThuocPageable(pageable);
+        List<KichThuocDto> listDto = TranferDatas.convertListKichThuocToDto(kichThuocPage.getContent());
+
+        ApiResponse<Page<KichThuocDto>> apiResponse = new ApiResponse<>();
+
+        if (!listDto.isEmpty()) {
+            apiResponse.setMessage("Lấy danh sách kích thước thành công");
+            apiResponse.setResult(new PageImpl<>(listDto, pageable, kichThuocPage.getTotalElements()));
+        }
+
         return apiResponse;
     }
 
@@ -65,39 +89,48 @@ public class KichThuocController {
                 throw new AppException(ErrorCode.KICHTHUOC_NOT_FOUND);
             }
         } else {
-            apiResponse.setMessage("Id không hợp lệ!");
+            throw new AppException(ErrorCode.NO_ACCOUNTS_FOUND);
         }
+
         return apiResponse;
     }
 
-    @PostMapping("/add")
-    public ApiResponse<KichThuoc> add(@RequestBody @Valid KichThuocDto kichThuocDto) {
+    @PostMapping("/create")
+    ApiResponse<KichThuoc> create(@RequestBody @Valid KichThuocDto request) {
         ApiResponse<KichThuoc> apiResponse = new ApiResponse<>();
-        if (kichThuocDto != null) {
-            apiResponse.setResult(kichThuocService.add(TranferDatas.convertToEntity(kichThuocDto)));
+        if (request != null) {
+            apiResponse.setResult(kichThuocService.create(TranferDatas.convertToEntity(request)));
         }
         return apiResponse;
     }
 
-    @PutMapping("/update/{id}")
-    KichThuoc update(@PathVariable UUID id,@RequestBody KichThuocDto kichThuocDto) {
-        UUID idKichthuoc = null;
-        if (id != null){
-            idKichthuoc = id;
+    @PutMapping("/{id}")
+    KichThuoc update(@RequestBody KichThuocDto request, @PathVariable String id) {
+        UUID idKichThuoc = null;
+        if (id != null) {
+            idKichThuoc = UUID.fromString(id);
         }
-        if (idKichthuoc != null){
-            return kichThuocService.update(TranferDatas.convertToEntity(kichThuocDto), idKichthuoc);
+        if (request != null) {
+            return kichThuocService.update(TranferDatas.convertToEntity(request), idKichThuoc);
         }
         return null;
     }
 
-    @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable String id) {
-        UUID idKichthuoc = UUID.fromString(id);
-        if (kichThuocService.delete(idKichthuoc)){
-            return "Xoa thanh cong!";
-        } else {
-            return "Xoa that bai!";
-        }
+    @DeleteMapping("/{id}")
+    ApiResponse<Void> delete(@PathVariable String id) {
+        UUID idKichThuoc = null;
+        if (id != null) {
+            idKichThuoc = UUID.fromString(id);
+            kichThuocService.delete(idKichThuoc);
+        } return ApiResponse.<Void>builder().build();
+    }
+
+    @DeleteMapping("/open/{id}")
+    ApiResponse<Void> open(@PathVariable String id) {
+        UUID idKichThuoc = null;
+        if (id != null) {
+            idKichThuoc = UUID.fromString(id);
+            kichThuocService.open(idKichThuoc);
+        } return ApiResponse.<Void>builder().build();
     }
 }

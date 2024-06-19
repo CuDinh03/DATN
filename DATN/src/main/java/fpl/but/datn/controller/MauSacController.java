@@ -1,14 +1,20 @@
 package fpl.but.datn.controller;
 
+import fpl.but.datn.dto.request.ChatLieuDto;
 import fpl.but.datn.dto.request.MauSacDto;
 import fpl.but.datn.dto.response.ApiResponse;
+import fpl.but.datn.entity.ChatLieu;
 import fpl.but.datn.entity.MauSac;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
-import fpl.but.datn.service.IMauSacService;
+import fpl.but.datn.service.impl.MauSacService;
 import fpl.but.datn.tranferdata.TranferDatas;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,24 +25,41 @@ import java.util.UUID;
 public class MauSacController {
 
     @Autowired
-    IMauSacService mauSacService;
+    private MauSacService mauSacService;
 
     @GetMapping("/getAll")
     ApiResponse<List<MauSacDto>> getAll() {
-
-        List<MauSacDto> lstMauSacDtos = TranferDatas.convertListMauSacToDto(mauSacService.getAll());
+        List<MauSacDto> listDto = TranferDatas.convertListMauSacToDto(mauSacService.getAll());
         ApiResponse<List<MauSacDto>> apiResponse = new ApiResponse<>();
 
-        if (!lstMauSacDtos.isEmpty()) {
-            apiResponse.setMessage("Tim thay danh sach mau sac!");
-            apiResponse.setResult(lstMauSacDtos);
+        if (!listDto.isEmpty()) {
+            apiResponse.setMessage("Lấy danh sách màu sắc thành công");
+            apiResponse.setResult(listDto);
         } else {
-            throw new AppException(ErrorCode.LIST_COLOR_NOT_FOUND);
+            throw new AppException(ErrorCode.NO_MAUSAC_FOUND);
+        }
+        return apiResponse;
+    }
+
+    @GetMapping("/all")
+    ApiResponse<Page<MauSacDto>> getMauSac(@RequestParam(defaultValue = "0") int page,
+                                               @RequestParam(defaultValue = "5") int size) {
+
+        Pageable pageable = PageRequest.of(page, size);
+        Page<MauSac> mauSacPage = mauSacService.getAllMauSacPageable(pageable);
+        List<MauSacDto> listDto = TranferDatas.convertListMauSacToDto(mauSacPage.getContent());
+
+        ApiResponse<Page<MauSacDto>> apiResponse = new ApiResponse<>();
+
+        if (!listDto.isEmpty()) {
+            apiResponse.setMessage("Lấy danh sách màu sắc thành công");
+            apiResponse.setResult(new PageImpl<>(listDto, pageable, mauSacPage.getTotalElements()));
+        } else {
+            throw new AppException(ErrorCode.NO_ACCOUNTS_FOUND);
         }
 
         return apiResponse;
     }
-
 
     @GetMapping("/getAll/dang-hoat-dong")
     ApiResponse<List<MauSacDto>> getAllDangHoatDong() {
@@ -54,56 +77,56 @@ public class MauSacController {
         return apiResponse;
     }
 
-    @GetMapping("/{id}")
-    ApiResponse<MauSacDto> detail(@PathVariable UUID id) {
-        ApiResponse<MauSacDto> apiResponse = new ApiResponse<>();
-        if (id != null) {
-            MauSac mauSac = mauSacService.findById(id);
-            if (mauSac != null) {
-                MauSacDto mauSacDto = TranferDatas.convertToDto(mauSac);
-                apiResponse.setMessage("Lấy màu sắc thành công!");
-                apiResponse.setResult(mauSacDto);
-            } else {
-                throw new AppException(ErrorCode.COLOR_NOT_FOUND);
-            }
-        } else {
-            apiResponse.setMessage("Id không hợp lệ!");
+    @PostMapping("/create")
+    ApiResponse<MauSac> create(@RequestBody @Valid MauSacDto request) {
+        ApiResponse<MauSac> apiResponse = new ApiResponse<>();
+        if (request != null) {
+            apiResponse.setResult(mauSacService.create(TranferDatas.convertToEntity(request)));
         }
         return apiResponse;
     }
 
-    @PostMapping("/add")
-    ApiResponse<MauSac> add(@RequestBody @Valid MauSacDto mauSacDto) {
-
-        ApiResponse<MauSac> apiResponse = new ApiResponse<>();
-
-        if (mauSacDto != null) {
-            MauSac mauSac1 = mauSacService.add(TranferDatas.convertToEntity(mauSacDto));
-            apiResponse.setResult(mauSac1);
-        }
-
-        return apiResponse;
-    }
-
-    @PutMapping("/update/{id}")
-    ApiResponse<MauSac> update(@PathVariable UUID id, @RequestBody MauSacDto mauSacDto) {
-        ApiResponse<MauSac> apiResponse = new ApiResponse<>();
+    @PutMapping("/{id}")
+    MauSac update(@RequestBody MauSacDto request, @PathVariable String id) {
+        UUID idMauSac = null;
         if (id != null) {
-            UUID idMS = id;
-            MauSac mauSac1 = mauSacService.update(TranferDatas.convertToEntity(mauSacDto), idMS);
-            apiResponse.setMessage("Update màu sắc thành công!");
-            apiResponse.setResult(mauSac1);
-            return apiResponse;
+            idMauSac = UUID.fromString(id);
+        }
+        if (request != null) {
+            return mauSacService.update(TranferDatas.convertToEntity(request), idMauSac);
         }
         return null;
     }
 
-    @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable UUID id){
-        if (mauSacService.delete(id)){
-            return "Xoa thanh cong!";
-        } else {
-            return "Xoa that bai";
-        }
+    @DeleteMapping("/{id}")
+    ApiResponse<Void> delete(@PathVariable String id) {
+        UUID idMauSac = null;
+        if (id != null) {
+            idMauSac = UUID.fromString(id);
+            mauSacService.delete(idMauSac);
+        } return ApiResponse.<Void>builder().build();
     }
+
+    @DeleteMapping("/open/{id}")
+    ApiResponse<Void> open(@PathVariable String id) {
+        UUID idMauSac = null;
+        if (id != null) {
+            idMauSac = UUID.fromString(id);
+            mauSacService.open(idMauSac);
+        } return ApiResponse.<Void>builder().build();
+    }
+
+    @GetMapping("/{id}")
+    ApiResponse<MauSacDto> detail(@PathVariable String id) {
+        ApiResponse<MauSacDto> apiResponse = new ApiResponse<>();
+        UUID idMauSac = null;
+        if (id != null){
+            idMauSac = UUID.fromString(id);
+            MauSacDto dto = TranferDatas.convertToDto(mauSacService.findById(idMauSac));
+            apiResponse.setMessage("Lấy màu sắc thành công");
+            apiResponse.setResult(dto);
+        }return apiResponse;
+    }
+
+
 }

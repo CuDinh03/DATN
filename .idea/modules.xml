@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
+      <module fileurl="file://$PROJECT_DIR$/.idea/DATN.iml" filepath="$PROJECT_DIR$/.idea/DATN.iml" />
+=======
       <module fileurl="file://$PROJECT_DIR$/DATN/DATN.iml" filepath="$PROJECT_DIR$/DATN/DATN.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/DATN-main.iml" filepath="$PROJECT_DIR$/.idea/DATN-main.iml" />
+>>>>>>> vuong
     </modules>
   </component>
 </project>

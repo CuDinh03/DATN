@@ -14,6 +14,7 @@ import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.service.IHoaDonService;
 import fpl.but.datn.service.impl.HoaDonService;
 import fpl.but.datn.tranferdata.TranferDatas;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -30,6 +31,42 @@ public class HoaDonController {
 
     @Autowired
     private IHoaDonService hoaDonService;
+
+    @PostMapping("/create")
+    ApiResponse<HoaDon> createHoaDon(@RequestBody @Valid HoaDonDto request){
+        ApiResponse<HoaDon>  apiResponse = new ApiResponse<>();
+        if (request != null){
+            apiResponse.setResult(hoaDonService.create(TranferDatas.convertToEntity(request)));
+            apiResponse.setMessage("Tạo hóa đơn thành công");
+        }else {
+            throw new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION);
+        }
+        return apiResponse;
+    }
+
+    @PutMapping("/update/{id}")
+    ApiResponse<HoaDon> update(@RequestBody HoaDonDto request, @PathVariable UUID id) {
+        ApiResponse<HoaDon>  apiResponse = new ApiResponse<>();
+
+        if (request != null){
+            apiResponse.setResult(hoaDonService.update(TranferDatas.convertToEntity(request), id));
+            apiResponse.setMessage("Cập nhật thành công");
+        }
+        else{
+            throw new AppException(ErrorCode.UPDATE_FAILED);
+        }
+        return apiResponse;
+    }
+
+    @DeleteMapping("/delete/{id}")
+    ApiResponse<Boolean> deleteCungHoaDon(@PathVariable String id){
+        UUID idHoaDon = null;
+        if (id != null) {
+            idHoaDon = UUID.fromString(id);
+            hoaDonService.xoaCungHoaDon(idHoaDon);
+        }
+        return ApiResponse.<Boolean>builder().build();
+    }
 
     @GetMapping("/all")
     ApiResponse<List<HoaDonDto>> getAll(){
@@ -114,6 +151,20 @@ public class HoaDonController {
 
         return apiResponse;
     }
+
+    @PutMapping("/updateTrangThai/{id}")
+    public ApiResponse<HoaDon> updateTrangThai(@RequestParam Integer trangThai, @PathVariable UUID id) {
+        ApiResponse<HoaDon> apiResponse = new ApiResponse<>();
+
+        if (trangThai != null) {
+            apiResponse.setResult(hoaDonService.updateTrangThai(id, trangThai));
+            apiResponse.setMessage("Cập nhật thành công");
+        } else {
+            throw new AppException(ErrorCode.UPDATE_FAILED);
+        }
+        return apiResponse;
+    }
+
 
 
 }
