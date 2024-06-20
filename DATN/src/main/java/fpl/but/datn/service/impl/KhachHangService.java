@@ -20,15 +20,17 @@ public class KhachHangService implements IService<KhachHang>, IKhachHangService 
 
     @Autowired
     KhachHangRepository khachHangRepository;
+
     @Override
     public KhachHang getByID(UUID id) {
-        return this.khachHangRepository.findById(id).get();
+        return khachHangRepository.findById(id).get();
     }
 
     @Override
     @Transactional
     public KhachHang create(KhachHang request) {
         Optional<KhachHang> existingKhachHang = khachHangRepository.getKhachHangBySdt(request.getSdt());
+
         if (existingKhachHang.isPresent()) {
             throw new AppException(ErrorCode.SDT_ALREADY_USED);
         }
@@ -45,27 +47,83 @@ public class KhachHangService implements IService<KhachHang>, IKhachHangService 
                 .ngaySua(new Date())
                 .trangThai(1)
                 .build();
-
         return khachHangRepository.save(khachHang);
     }
 
 
 
     @Override
-    public KhachHang update(UUID uuid, KhachHang khachHang) {
+    public KhachHang update(KhachHang khachHang, UUID id) {
         return null;
     }
 
     @Override
+    public KhachHang update(UUID id, KhachHang request) {
+        KhachHang khachHang = KhachHang.builder()
+                .id(id)
+                .ma(request.getMa())
+                .ten(request.getTen())
+                .email(request.getEmail())
+                .sdt(request.getSdt())
+                .gioiTinh(request.getGioiTinh())
+                .ngaySinh(request.getNgaySinh())
+                .diaChi(request.getDiaChi())
+                .ngayTao(request.getNgayTao())
+                .ngaySua(new Date())
+                .trangThai(1)
+                .build();
+        return khachHangRepository.save(khachHang);
+    }
+
+    @Override
     public void delete(UUID id) {
-            KhachHang khachHang = this.khachHangRepository.findById(id).get();
-            khachHang.setTrangThai(0);
-            this.khachHangRepository.saveAndFlush(khachHang);
+        KhachHang khachHang = this.khachHangRepository.findById(id).get();
+        khachHang.setTrangThai(0);
+        this.khachHangRepository.saveAndFlush(khachHang);
+    }
+
+    @Override
+    public void open(UUID id) {
+
     }
 
     @Override
     public List<KhachHang> getAll() {
         return this.khachHangRepository.findAll();
+    }
+
+    @Override
+    public KhachHang findById(UUID id) {
+        return khachHangRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION));
+    }
+
+    @Override
+    public Page<KhachHang> getAllKhachHangPageable(Pageable pageable) {
+        return null;
+    }
+
+    @Override
+    public KhachHang add(KhachHang khachHang) {
+        return null;
+    }
+
+    @Override
+    public KhachHang updateKhachHangById(KhachHang request, UUID id) {
+        KhachHang khachHang = KhachHang.builder()
+                .id(id)
+                .ma(request.getMa())
+                .ten(request.getTen())
+                .email(request.getEmail())
+                .sdt(request.getSdt())
+                .gioiTinh(request.getGioiTinh())
+                .ngaySinh(request.getNgaySinh())
+                .diaChi(request.getDiaChi())
+                .ngayTao(request.getNgayTao())
+                .ngaySua(new Date())
+                .trangThai(1)
+                .taiKhoan(request.getTaiKhoan())
+                .build();
+        return khachHangRepository.save(khachHang);
     }
 
     @Override
@@ -76,6 +134,11 @@ public class KhachHangService implements IService<KhachHang>, IKhachHangService 
     @Override
     public KhachHang getKhachHangBySdt(String sdt) {
         return this.khachHangRepository.getKhachHangBySdt(sdt).get();
+    }
+
+    @Override
+    public KhachHang getKhachHangByIdTaiKhoan(UUID idTaiKhoan) {
+        return khachHangRepository.getKhachHangByIdTaiKhoan(idTaiKhoan).get();
     }
 
     @Override
@@ -142,3 +205,4 @@ public class KhachHangService implements IService<KhachHang>, IKhachHangService 
 
 
 }
+

@@ -12,12 +12,25 @@ import java.util.List;
 import java.util.UUID;
 
 public interface ICTSanPhamService {
+
     List getAll();
+
     ChiTietSanPham create(ChiTietSanPham chiTietSanPham);
+
     ChiTietSanPham update(ChiTietSanPham chiTietSanPham, UUID id);
+
+    boolean updateTrangThai(UUID id);
+
     boolean delete(UUID id);
+
     ChiTietSanPham findById(UUID id);
+
+    // ChiTietSanPham findByDuLieu(UUID id, ......);
+
     Page<ChiTietSanPham> getAllChiTietSanPhamPageable(Pageable pageable);
+
+    Page<ChiTietSanPham> getAllChiTietSanPhamPageableSapXepNGayTao(Pageable pageable);
+
     List<MauSac> findAllMauSacByMaCTSP(String maChiTietSanPham);
     List<KichThuoc> findkichThuocsByMaSanPhamChiTiet(String maChiTietSanPham);
     ChiTietSanPham findChiTietSanPhamByMauSacAndKichThuoc(String ma, UUID kichThuoc, UUID mauSac);

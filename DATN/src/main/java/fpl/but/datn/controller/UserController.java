@@ -1,5 +1,6 @@
 package fpl.but.datn.controller;
 
+import fpl.but.datn.dto.request.DanhMucDto;
 import fpl.but.datn.dto.request.TaiKhoanDto;
 import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.dto.response.TaiKhoanResponse;
@@ -16,6 +17,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,8 +39,7 @@ public class UserController {
             apiResponse.setResult(taiKhoanService.createAccount(TranferDatas.convertToEntity(request)));
         return apiResponse;
     }
-
-
+    
     @GetMapping("/all")
     ApiResponse<Page<TaiKhoanDto>> getAccounts(@RequestParam(defaultValue = "0") int page,
                                                @RequestParam(defaultValue = "5") int size) {
@@ -133,7 +134,19 @@ public class UserController {
         }
     }
 
+    @GetMapping("/getAll")
+    ApiResponse<List<TaiKhoanDto>> getAll() {
+        List<TaiKhoanDto> listDto = TranferDatas.convertListTaiKhoanToDto(taiKhoanService.getAllTk());
+        ApiResponse<List<TaiKhoanDto>> apiResponse = new ApiResponse<>();
 
+        if (!listDto.isEmpty()) {
+            apiResponse.setMessage("Lấy danh sách tai khoan thành công");
+            apiResponse.setResult(listDto);
+        } else {
+            throw new AppException(ErrorCode.NO_REPORT_FOUND);
+        }
 
+        return apiResponse;
+    }
 
 }
