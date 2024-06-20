@@ -5,6 +5,8 @@ import fpl.but.datn.service.IGioHangService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -30,9 +32,8 @@ public class GioHangService implements IGioHangService {
     public GioHang update(GioHang gioHang, UUID id) {
         Optional<GioHang> optional = gioHangRepository.findById(id);
         return optional.map(o -> {
-            o.setMa(gioHang.getMa());
-            o.setKhachHang(gioHang.getKhachHang());
             o.setTrangThai(gioHang.getTrangThai());
+            o.setNgaySua(new Date());
             return gioHangRepository.save(o);
         }).orElse(null);
     }

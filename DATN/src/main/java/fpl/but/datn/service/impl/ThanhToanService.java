@@ -141,6 +141,8 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
         System.out.println(hoaDon.toString());
         System.out.println("===================");
         HoaDon hoaDon1 = hoaDonService.create(hoaDon);
+        hoaDon1.setTrangThai(5);
+        HoaDon hoaDon2 = hoaDonService.update(hoaDon1,hoaDon1.getId());
         for (GioHangChiTiet ghCt : listGioHangCt) {
             System.out.println(ghCt.toString());
             HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
@@ -150,8 +152,8 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
             hoaDonChiTiet.setNgayTao(new Date());
             hoaDonChiTiet.setNgaySua(new Date());
             hoaDonChiTiet.setChiTietSanPham(ghCt.getChiTietSanPham());
-            hoaDonChiTiet.setHoaDon(hoaDon1);
-            hoaDonChiTiet.setTrangThai(2);
+            hoaDonChiTiet.setHoaDon(hoaDon2);
+            hoaDonChiTiet.setTrangThai(5);
             System.out.println("===================");
             System.out.println("hoa don chi tiet");
             System.out.println(hoaDonChiTiet.toString());
@@ -159,7 +161,6 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
 
             this.hoaDonChiTietService.create(hoaDonChiTiet);
         }
-        gioHang.setTrangThai(2);
         this.gioHangService.update(gioHang, gioHang.getId());
     }
 }
