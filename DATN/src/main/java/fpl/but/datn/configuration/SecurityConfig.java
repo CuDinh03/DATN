@@ -23,7 +23,9 @@ import javax.crypto.spec.SecretKeySpec;
 public class SecurityConfig {
     private final String[] PUBLIC_ENDPOINT = {"/api/auth/log-in", "/api/users/create", "/api/users/check-username",
             "/api/chi-tiet-san-pham/getAll","/api/chi-tiet-san-pham/all/{id}","/api/chi-tiet-san-pham/{id}","/api/chi-tiet-san-pham/findAllMauSacByMaCTSP/{ma}",
-            "/api/chi-tiet-san-pham/findAllKichThuocByMaCTSP/{ma}", "/api/chi-tiet-san-pham/findChiTietSanPhamByMauSacAndKichThuoc/{ma}","/api/chi-tiet-san-pham/findSanPhamByKichThuoc/{ma}"
+            "/api/chi-tiet-san-pham/findAllKichThuocByMaCTSP/{ma}", "/api/chi-tiet-san-pham/findChiTietSanPhamByMauSacAndKichThuoc/{ma}","/api/chi-tiet-san-pham/findSanPhamByKichThuoc/{ma}",
+            "/api/thanhtoan/onl", "/api/voucher/all", "/api/voucher/allVouchers", "/api/voucher/{id}",
+            "/api/hoa-don-chi-tiet/all/{id}"
 
     };
     private final String[] ADMIN_ENDPOINT_GET = {
@@ -50,7 +52,12 @@ public class SecurityConfig {
             "/api/danh-muc/{id}"
     };
 
-    private final String[] CUSTOMER_END_POINT = {};
+    private final String[] CUSTOMER_END_POINT = {
+            "/api/thanhtoan/onl",
+            "/api/hoa-don-chi-tiet/all/{id}"
+
+
+    };
 
     @Value("${jwt.signerKey}")
     private String signerKey;

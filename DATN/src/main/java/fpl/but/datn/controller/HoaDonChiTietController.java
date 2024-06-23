@@ -1,10 +1,13 @@
 package fpl.but.datn.controller;
 
 import fpl.but.datn.dto.request.DanhMucDto;
+import fpl.but.datn.dto.request.GioHangChiTietDto;
 import fpl.but.datn.dto.request.HoaDonChiTietDto;
 import fpl.but.datn.dto.request.HoaDonDto;
 import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.entity.DanhMuc;
+import fpl.but.datn.entity.GioHangChiTiet;
+import fpl.but.datn.entity.HinhAnh;
 import fpl.but.datn.entity.HoaDonChiTiet;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
@@ -15,6 +18,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,6 +48,34 @@ public class HoaDonChiTietController {
         if (request != null)
             apiResponse.setResult(hoaDonChiTietService.create(TranferDatas.convertToEntity(request)));
         return apiResponse;
+    }
+
+    @GetMapping("/allKh/{id}")
+    public ApiResponse<List<HoaDonChiTietDto>> getAllHoaDonCTByIdHoaDonKh(@PathVariable("id") UUID idHoaDon) {
+        List<HoaDonChiTiet> hoaDonChiTiets = hoaDonChiTietService.getHoaDonChiTietByIdHoaDon(idHoaDon);
+        List<HoaDonChiTietDto> dtoList = new ArrayList<>();
+
+        if (!hoaDonChiTiets.isEmpty()) {
+            for (HoaDonChiTiet hoaDonChiTiet : hoaDonChiTiets) {
+                HoaDonChiTietDto dto = TranferDatas.convertToDto(hoaDonChiTiet);
+
+                // Lấy danh sách hình ảnh của sản phẩm chi tiết
+                List<HinhAnh> hinhAnhList = hoaDonChiTiet.getChiTietSanPham().getHinhAnh();
+                List<String> hinhAnhUrls = new ArrayList<>();
+                for (HinhAnh hinhAnh : hinhAnhList) {
+                    hinhAnhUrls.add(hinhAnh.getUrl());
+                }
+                dto.setHinhAnhUrls(hinhAnhUrls);
+
+                dtoList.add(dto);
+            }
+            ApiResponse<List<HoaDonChiTietDto>> apiResponse = new ApiResponse<>();
+            apiResponse.setMessage("Lấy danh sách giỏ hàng chi tiết thành công");
+            apiResponse.setResult(dtoList);
+            return apiResponse;
+        } else {
+            throw new AppException(ErrorCode.NO_CARTDETAIl_FOUND);
+        }
     }
 
     @GetMapping("/all/{id}")
