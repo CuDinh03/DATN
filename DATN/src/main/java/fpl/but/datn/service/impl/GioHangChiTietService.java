@@ -150,8 +150,6 @@ public class GioHangChiTietService implements IGioHangChiTietService {
         // Cập nhật số lượng trong chi tiết sản phẩm
 //        chiTietSanPham.setSoLuong(chiTietSanPham.getSoLuong() - soLuong);
         ctSanPhamRepository.save(chiTietSanPham);
-
-        // Lưu chi tiết giỏ hàng
         return gioHangChiTietRepository.save(gioHangChiTiet);
     }
 
