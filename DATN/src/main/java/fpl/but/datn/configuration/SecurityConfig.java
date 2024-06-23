@@ -45,7 +45,7 @@ public class SecurityConfig {
             "/api/hoa-don/all", "/api/hoa-don/find/{ma}",
             "/api/hoa-don-gio-hang/all", "/api/hoa-don-gio-hang/all/{id}",
             "/api/voucher/all","/api/voucher/allVouchers","/api/voucher/{id}",
-            "/api/hoa-don/{ma}","/api/hoa-don/updateTrangThai/{id}"
+            "/api/hoa-don/{ma}"
     };
     private final String[] ADMIN_ENDPOINT_POST = {"/api/voucher/create",
             "/api/khs/create",
@@ -62,7 +62,7 @@ public class SecurityConfig {
     };
 
     private final String[] ADMIN_ENDPOINT_DELETE = {
-            "/api/voucher/{id}", "/api/users/{id}", "/api/danh-muc/{id}"
+            "/api/voucher/{id}", "/api/users/{id}", "/api/danh-muc/{id}","/api/hoa-don/updateTrangThai/{id}"
     };
 
     @Value("${jwt.signerKey}")
