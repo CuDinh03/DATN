@@ -54,7 +54,7 @@ public class ChatLieuController {
             apiResponse.setMessage("Lấy danh sách chất liệu thành công");
             apiResponse.setResult(new PageImpl<>(listDto, pageable, chatLieuPage.getTotalElements()));
         } else {
-            throw new AppException(ErrorCode.NO_ACCOUNTS_FOUND);
+            throw new AppException(ErrorCode.NO_CHATLIEU_FOUND);
         }
 
         return apiResponse;

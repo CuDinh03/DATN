@@ -60,7 +60,7 @@ public class HinhAnhController {
             apiResponse.setMessage("Lấy danh sách hình ảnnh thành công");
             apiResponse.setResult(new PageImpl<>(listDto, pageable, hinhAnhPage.getTotalElements()));
         } else {
-            throw new AppException(ErrorCode.NO_ACCOUNTS_FOUND);
+            throw new AppException(ErrorCode.NO_IMAGES_FOUND);
         }
 
         return apiResponse;

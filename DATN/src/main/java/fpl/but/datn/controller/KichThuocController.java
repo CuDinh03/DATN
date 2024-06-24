@@ -55,7 +55,7 @@ public class KichThuocController {
             apiResponse.setMessage("Lấy danh sách kích thước thành công");
             apiResponse.setResult(new PageImpl<>(listDto, pageable, kichThuocPage.getTotalElements()));
         } else {
-            throw new AppException(ErrorCode.NO_ACCOUNTS_FOUND);
+            throw new AppException(ErrorCode.NO_KICHTHUOC_FOUND);
         }
 
         return apiResponse;

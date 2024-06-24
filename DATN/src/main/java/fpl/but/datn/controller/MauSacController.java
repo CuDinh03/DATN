@@ -55,7 +55,7 @@ public class MauSacController {
             apiResponse.setMessage("Lấy danh sách màu sắc thành công");
             apiResponse.setResult(new PageImpl<>(listDto, pageable, mauSacPage.getTotalElements()));
         } else {
-            throw new AppException(ErrorCode.NO_ACCOUNTS_FOUND);
+            throw new AppException(ErrorCode.NO_MAUSAC_FOUND);
         }
 
         return apiResponse;

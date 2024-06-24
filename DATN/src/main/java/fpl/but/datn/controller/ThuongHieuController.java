@@ -55,7 +55,7 @@ public class ThuongHieuController {
             apiResponse.setMessage("Lấy danh sách thương hiệu thành công");
             apiResponse.setResult(new PageImpl<>(listDto, pageable, thuongHieuPage.getTotalElements()));
         } else {
-            throw new AppException(ErrorCode.NO_ACCOUNTS_FOUND);
+            throw new AppException(ErrorCode.NO_THUONGHIEU_FOUND);
         }
 
         return apiResponse;

@@ -22,7 +22,7 @@ public enum ErrorCode {
     NO_CHATLIEU_FOUND(1013, "Không tìm thấy danh sách chất liệu nào",HttpStatus.NOT_FOUND),
     REPORT_EXISTED(1014, "báo cáo đã ton tai",HttpStatus.BAD_REQUEST),
     CHATLIEU_EXISTED(1015, "Chất liệu đã ton tai",HttpStatus.BAD_REQUEST),
-    CATEGORY_NOT_EXISTED(1016, "Không tìm thấy chất liệu",HttpStatus.NOT_FOUND),
+    CATEGORY_NOT_EXISTED(1016, "Không tìm thấy danh sách danh mục nào",HttpStatus.NOT_FOUND),
     VOUCHER_NOT_EXISTED(1017, "Không tìm thấy Voucher này!",HttpStatus.NOT_FOUND),
     NO_VOUCHER_FOUND(1017, "Không tìm thấy Voucher nào!",HttpStatus.NOT_FOUND),
     SDT_ALREADY_USED(1018, "Số điện thoại này đã được đăng ký!",HttpStatus.NOT_FOUND),
@@ -42,13 +42,15 @@ public enum ErrorCode {
 
     NO_IMAGES_FOUND(1026, "Không tìm thấy danh sách Hinh anh nào",HttpStatus.NOT_FOUND ),
     NO_LISTSP_FOUND(1028, "Không tìm thấy SP ",HttpStatus.NOT_FOUND),
-    NO_MAUSAC_FOUND(1029, "Không tìm thấy danh sách chất liệu nào ",HttpStatus.NOT_FOUND),
+    NO_MAUSAC_FOUND(1029, "Không tìm thấy danh sách màu sắc nào ",HttpStatus.NOT_FOUND),
     MAUSAC_EXISTED(1030, "Màu sắc đã ton tai",HttpStatus.BAD_REQUEST),
     NO_KICHTHUOC_FOUND(1031, "Không tìm thấy danh sách kích thước nào ",HttpStatus.NOT_FOUND),
     KICHTHUOC_EXISTED(1032, "Kích thước đã ton tai",HttpStatus.BAD_REQUEST),
 
-    NO_THUONGHIEU_FOUND(1031, "Không tìm thấy danh sách thương hiệu nào ",HttpStatus.NOT_FOUND),
-    THUONGHIEU_EXISTED(1032, "Thương hiệu đã ton tai",HttpStatus.BAD_REQUEST),
+    NO_THUONGHIEU_FOUND(1033, "Không tìm thấy danh sách thương hiệu nào ",HttpStatus.NOT_FOUND),
+    THUONGHIEU_EXISTED(1034, "Thương hiệu đã ton tai",HttpStatus.BAD_REQUEST),
+    NO_SANPHAM_FOUND(1035, "Không tìm thấy danh sách sản phẩm nào ",HttpStatus.NOT_FOUND),
+    SANPHAM_EXISTED(1036, "Sản phẩm đã ton tai",HttpStatus.BAD_REQUEST),
 
 
     ;

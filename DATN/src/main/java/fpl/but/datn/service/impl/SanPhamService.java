@@ -30,7 +30,7 @@ public class SanPhamService implements ISanPhamService {
         Random random = new Random();
 
         if (sanPhamRepository.existsByMa(request.getMa()))
-            throw new AppException(ErrorCode.CATEGORY_EXISTED);
+            throw new AppException(ErrorCode.SANPHAM_EXISTED);
         sanPham.setMa("SP" + random.nextInt(1000));
         sanPham.setTen(request.getTen());
         sanPham.setNgayTao(new Date());
@@ -73,7 +73,7 @@ public class SanPhamService implements ISanPhamService {
 
     @Override
     public SanPham findById(UUID id) {
-        return sanPhamRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.NO_LISTSP_FOUND));
+        return sanPhamRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.NO_SANPHAM_FOUND));
     }
 
     @Override

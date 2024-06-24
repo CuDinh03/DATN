@@ -38,7 +38,7 @@ public class SanPhamController {
             apiResponse.setMessage("Lấy danh sách san pham thành công");
             apiResponse.setResult(listDto);
         } else {
-            throw new AppException(ErrorCode.NO_REPORT_FOUND);
+            throw new AppException(ErrorCode.NO_SANPHAM_FOUND);
         }
 
         return apiResponse;
@@ -57,7 +57,7 @@ public class SanPhamController {
             apiResponse.setMessage("Lấy danh sách san pham thành công");
             apiResponse.setResult(new PageImpl<>(listDto, pageable, sanPhamPage.getTotalElements()));
         } else {
-            throw new AppException(ErrorCode.NO_ACCOUNTS_FOUND);
+            throw new AppException(ErrorCode.NO_SANPHAM_FOUND);
         }
 
         return apiResponse;

@@ -38,7 +38,7 @@ public class DanhMucController {
             apiResponse.setMessage("Lấy danh sách hinh anh thành công");
             apiResponse.setResult(listDto);
         } else {
-            throw new AppException(ErrorCode.NO_REPORT_FOUND);
+            throw new AppException(ErrorCode.CATEGORY_NOT_EXISTED);
         }
 
         return apiResponse;
@@ -57,7 +57,7 @@ public class DanhMucController {
             apiResponse.setMessage("Lấy danh sách danh mục thành công");
             apiResponse.setResult(new PageImpl<>(listDto, pageable, danhMucPage.getTotalElements()));
         } else {
-            throw new AppException(ErrorCode.NO_ACCOUNTS_FOUND);
+            throw new AppException(ErrorCode.CATEGORY_NOT_EXISTED);
         }
 
         return apiResponse;
