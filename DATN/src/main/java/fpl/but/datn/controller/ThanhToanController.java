@@ -60,7 +60,8 @@ public class ThanhToanController {
                             thanhToanOnl.getTongTienGiam(),
                             thanhToanOnl.getVoucher(),
                             thanhToanOnl.getNote(),
-                            thanhToanOnl.getGioHangChiTietList());
+                            thanhToanOnl.getGioHangChiTietList(),
+                            thanhToanOnl.getDiaChiGiaoHang());
 
                     apiResponse.setMessage("Thanh toán thành công");
                     apiResponse.setResult(thanhToanOnl);

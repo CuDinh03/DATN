@@ -203,6 +203,12 @@ public class KhachHangService implements IService<KhachHang>, IKhachHangService 
         }
     }
 
+    public String diaChiKhach(String id){
+        String diaChi = "";
+       diaChi = this.khachHangRepository.findDiaChiKh(id);
+        return diaChi;
+    }
+
 
 }
 
