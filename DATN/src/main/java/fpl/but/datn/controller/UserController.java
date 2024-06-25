@@ -78,8 +78,6 @@ public class UserController {
         return apiResponse;
     }
 
-
-
     @GetMapping("/{id}")
     ApiResponse<TaiKhoanDto> getAccount(@PathVariable String id) {
         ApiResponse<TaiKhoanDto> apiResponse = new ApiResponse<>();

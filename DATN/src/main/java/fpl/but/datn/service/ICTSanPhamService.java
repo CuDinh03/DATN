@@ -1,10 +1,8 @@
 package fpl.but.datn.service;
 
 import fpl.but.datn.entity.ChiTietSanPham;
-import fpl.but.datn.entity.DanhMuc;
 import fpl.but.datn.entity.KichThuoc;
 import fpl.but.datn.entity.MauSac;
-import fpl.but.datn.service.impl.MauSacService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -36,4 +34,18 @@ public interface ICTSanPhamService {
     ChiTietSanPham findChiTietSanPhamByMauSacAndKichThuoc(String ma, UUID kichThuoc, UUID mauSac);
 
     List<ChiTietSanPham> findSanPhamByKichThuoc(String ma, UUID kichThuoc);
+
+//    // Tim Kiem
+//    List<ChiTietSanPham> findCTSPBySanPhamId(UUID id);
+//
+//    List<ChiTietSanPham> findCTSPByChatLieuId(UUID id);
+//
+//    List<ChiTietSanPham> findCTSPByDanhMucId(UUID id);
+//
+//    List<ChiTietSanPham> findCTSPByKichThuocId(UUID id);
+//
+//    List<ChiTietSanPham> findCTSPByMauSacId(UUID id);
+//
+//    List<ChiTietSanPham> findCTSPByThuongHieuId(UUID id);
+
 }

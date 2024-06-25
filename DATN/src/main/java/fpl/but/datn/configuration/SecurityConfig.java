@@ -21,13 +21,13 @@ import javax.crypto.spec.SecretKeySpec;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    private final String[] PUBLIC_ENDPOINT = {"/api/auth/log-in", "/api/users/create", "/api/users/check-username",
+    private final String[] PUBLIC_ENDPOINT = {"/api/auth/log-in", "/api/users/create", "/api/users/check-username", "/api/users/myInfo",
             "/api/chi-tiet-san-pham/getAll","/api/chi-tiet-san-pham/all/{id}","/api/chi-tiet-san-pham/{id}","/api/chi-tiet-san-pham/findAllMauSacByMaCTSP/{ma}",
             "/api/chi-tiet-san-pham/findAllKichThuocByMaCTSP/{ma}", "/api/chi-tiet-san-pham/findChiTietSanPhamByMauSacAndKichThuoc/{ma}","/api/chi-tiet-san-pham/findSanPhamByKichThuoc/{ma}"
 
     };
     private final String[] ADMIN_ENDPOINT_GET = {
-            "/api/users/all","/api/users/{id}", "/api/users/myInfo",
+            "/api/users/all","/api/users/{id}",
             "/api/voucher/all","/api/voucher/allVouchers","/api/voucher/{id}",
             "/api/khs/all","/api/khs/{sdt}",
             "/api/chi-tiet-san-pham/all", "/api/chi-tiet-san-pham/addNew", "/api/chi-tiet-san-pham/update/{id}", "/api/chi-tiet-san-pham/delete/{id}", "/api/chi-tiet-san-pham/detail/{id}",

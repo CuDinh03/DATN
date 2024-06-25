@@ -143,9 +143,11 @@ public class TaiKhoanService implements ITaiKhoanService {
         TaiKhoan byTenDangNhap = taiKhoanRepository.findByTenDangNhap(name).orElseThrow(() -> new AppException(ErrorCode.ACCOUNT_NOT_EXISTED));
 
         TaiKhoanResponse taiKhoanResponse = new TaiKhoanResponse();
+
         taiKhoanResponse.setUsername(byTenDangNhap.getTenDangNhap());
         taiKhoanResponse.setChucVu(byTenDangNhap.getChucVu().getTen());
         taiKhoanResponse.setId(String.valueOf(byTenDangNhap.getId()));
+
         return taiKhoanResponse;
     }
 
