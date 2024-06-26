@@ -32,6 +32,17 @@ public class HoaDonController {
     @Autowired
     private IHoaDonService hoaDonService;
 
+    @GetMapping("/findByKhachHang/{id}")
+    ApiResponse<List<HoaDonDto>> findByIdKhachHang(@PathVariable UUID id) {
+        ApiResponse<List<HoaDonDto>> apiResponse = new ApiResponse<>();
+        if (id != null){
+            List<HoaDonDto> dto = TranferDatas.convertListHoaDonToDto(hoaDonService.findHoaDonByKhachHang(id));
+            apiResponse.setMessage("Lấy Hóa đơn thành công");
+            apiResponse.setResult(dto);
+        }
+        return apiResponse;
+    }
+
     @PostMapping("/create")
     ApiResponse<HoaDon> createHoaDon(@RequestBody @Valid HoaDonDto request){
         ApiResponse<HoaDon>  apiResponse = new ApiResponse<>();

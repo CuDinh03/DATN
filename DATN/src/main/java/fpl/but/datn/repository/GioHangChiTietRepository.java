@@ -16,14 +16,14 @@ import java.util.UUID;
 @Repository
 public interface GioHangChiTietRepository extends JpaRepository<GioHangChiTiet, UUID> {
 
-    @Query(value = "SELECT ghct.* FROM gio_hang_chi_tiet ghct INNER JOIN gio_hang gh ON ghct.gio_hang_id = gh.id WHERE gh.id = :idGioHang ORDER BY ghct.ngay_tao DESC", nativeQuery = true)
+    @Query(value = "SELECT ghct.* FROM gio_hang_chi_tiet ghct INNER JOIN gio_hang gh ON ghct.gio_hang_id = gh.id WHERE gh.id = :idGioHang AND ghct.trang_thai = 1 ORDER BY ghct.ngay_tao DESC", nativeQuery = true)
     List<GioHangChiTiet> findAllByIdGioHang(@Param("idGioHang") UUID idGioHang);
 
     @Query(value = "SELECT ghct.*, ha.* FROM gio_hang_chi_tiet ghct " +
             "INNER JOIN gio_hang gh ON ghct.gio_hang_id = gh.id " +
             "INNER JOIN chi_tiet_san_pham ctsp ON ghct.chi_tiet_san_pham_id = ctsp.id " +
             "INNER JOIN hinh_anh ha ON ctsp.id = ha.chi_tiet_san_pham_id " +
-            "WHERE gh.id = :idGioHang ORDER BY ghct.ngay_tao DESC", nativeQuery = true)
+            "WHERE gh.id = :idGioHang AND ghct.trang_thai = 1 ORDER BY ghct.ngay_tao DESC", nativeQuery = true)
     List<Object[]> findAllChiTietAndHinhAnhByIdGioHang(@Param("idGioHang") UUID idGioHang);
 
     @Query(value = "SELECT g FROM GioHangChiTiet g WHERE g.gioHang = :gioHang AND g.chiTietSanPham = :chiTietSanPham ORDER BY g.ngayTao DESC")

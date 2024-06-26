@@ -64,4 +64,10 @@ public class HoaDonChiTietService implements IHoaDonChiTietService {
         return hoaDonChiTietRepository.findAllHoaDonChiTietByIdHoaDon(idHoaDon);
     }
 
+    @Override
+    public List<Object[]> findAllChiTietAndHinhAnhByIdHoaDon(UUID idGioHang) {
+
+        return hoaDonChiTietRepository.findAllChiTietAndHinhAnhByIdHoaDon(idGioHang);
+    }
+
 }
