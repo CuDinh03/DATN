@@ -19,3 +19,4 @@ public class ThanhToanOnl {
     private String note;
     private List<GioHangChiTiet> gioHangChiTietList;
 }
+
