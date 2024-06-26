@@ -116,7 +116,7 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
 
     @Transactional
     public void thanhToanSanPhamOnline(GioHang requestGh, BigDecimal tongTien, BigDecimal tongTienGiam,
-                                       Voucher voucher, String ghiChu, List<GioHangChiTiet> listGioHangCt, String diaChiGiaoHang) {
+                                       Voucher voucher, String diaChiGiaoHang, String ghiChu, List<GioHangChiTiet> listGioHangCt) {
         System.out.println("============================");
         System.out.println(listGioHangCt);
         if (requestGh == null || requestGh.getId() == null) {
@@ -132,8 +132,8 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
         GioHang gioHang = Optional.ofNullable(this.gioHangService.findById(requestGh.getId()))
                 .orElseThrow(() -> new IllegalArgumentException("GioHang not found with id: " + requestGh.getId()));
         GiaoHang giaoHang = new GiaoHang();
-        gioHang.setId(UUID.randomUUID());
-        gioHang.setKhachHang(requestGh.getKhachHang());
+        giaoHang.setId(UUID.randomUUID());
+        giaoHang.setKhachHang(requestGh.getKhachHang());
         HoaDon hoaDon = HoaDon.builder()
                 .nguoiDung(null)
                 .khachHang(gioHang.getKhachHang())
@@ -160,6 +160,7 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
         giaoHang.setNgayDuKienGiao(newDate);
         giaoHang.setTrangThai(1);
 
+        giaoHangService.create(giaoHang);
 
         for (GioHangChiTiet ghCt : listGioHangCt) {
             System.out.println(ghCt.toString());
