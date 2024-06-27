@@ -52,6 +52,30 @@ public enum ErrorCode {
     NO_SANPHAM_FOUND(1035, "Không tìm thấy danh sách sản phẩm nào ",HttpStatus.NOT_FOUND),
     SANPHAM_EXISTED(1036, "Sản phẩm đã ton tai",HttpStatus.BAD_REQUEST),
 
+    MA_MAUSAC_TRUNG(1027, "Trùng mã màu sắc", HttpStatus.BAD_REQUEST),
+    LIST_COLOR_NOT_FOUND(1028, "Không tìm thấy danh sách màu", HttpStatus.NOT_FOUND),
+    COLOR_NOT_FOUND(1029, "Màu sắc đang tìm không có", HttpStatus.NOT_FOUND),
+
+    MA_KICHTHUOC_TRUNG(1030, "Trùng mã kich thước", HttpStatus.BAD_REQUEST),
+    LIST_KICHTHUOC_NOT_FOUND(1031, "Không tìm thấy danh sách kích thước", HttpStatus.NOT_FOUND),
+    KICHTHUOC_NOT_FOUND(1032, "Kích thước đang tìm không có", HttpStatus.NOT_FOUND),
+
+    MA_NHANVIEN_TRUNG(1033, "Trùng mã nhân viên", HttpStatus.BAD_REQUEST),
+    LIST_NHANVIEN_NOT_FOUND(1034, "Không tìm thấy danh sách nhân viên", HttpStatus.NOT_FOUND),
+    NHANVIEN_NOT_FOUND(1035, "Nhân viên đang tìm không có", HttpStatus.NOT_FOUND),
+
+    MA_KHACHHANG_TRUNG(1036, "Trùng mã khach hang", HttpStatus.BAD_REQUEST),
+    LIST_KHACHHANG_NOT_FOUND(1037, "Không tìm thấy danh sách khach hang", HttpStatus.NOT_FOUND),
+    KHACHHANG_NOT_FOUND(1038, "khach hang đang tìm không có", HttpStatus.NOT_FOUND),
+
+    MA_PTTHANHTOAN_TRUNG(1039, "Trùng mã phương thức thanh toán", HttpStatus.BAD_REQUEST),
+    LIST_PTTHANHTOAN_NOT_FOUND(1040, "Không tìm thấy danh sách phương thức thanh toán", HttpStatus.NOT_FOUND),
+
+    PTTHANHTOAN_NOT_FOUND(1041, "Phương thức thanh toán đang tìm không có", HttpStatus.NOT_FOUND),
+
+    NO_SANPHAM_FOUND(1043, "Không tìm thấy SP ",HttpStatus.NOT_FOUND),
+    NO_LIST_SANPHAM_FOUND(1044, "Không tìm thấy danh sách sản phẩm nào ",HttpStatus.NOT_FOUND),
+    CTSP_EXISTED(1045, "Sản phẩm chi tiết này đã tồn tại", HttpStatus.BAD_REQUEST),
 
     ;
 

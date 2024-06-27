@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -18,4 +19,8 @@ public interface ThuongHieuRepository extends JpaRepository<ThuongHieu, UUID> {
 
     Optional<ThuongHieu> findByMa(String ma);
     boolean existsByMa(String ma);
+
+     //  Lấy ra thương hiệu có trạng thái đang hoạt động
+     @Query("SELECT th FROM ThuongHieu th WHERE th.trangThai = 1")
+     List<ThuongHieu> findAllThuongHieuDangHoatDong();
 }

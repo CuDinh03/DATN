@@ -20,14 +20,19 @@ public class HoaDonGioHangService implements IHoaDonGioHangService {
 
     @Autowired
     private GioHangHoaDonRepository gioHangHoaDonRepository;
+
     @Autowired
     private GioHangRepository gioHangRepository;
+
     @Autowired
     private GioHangChiTietRepository gioHangChiTietRepository;
+
     @Autowired
     private HoaDonRepository hoaDonRepository;
+
     @Autowired
     private KhachHangService khachHangService;
+
     @Autowired
     private NguoiDungService nguoiDungService;
 
@@ -59,8 +64,10 @@ public class HoaDonGioHangService implements IHoaDonGioHangService {
         hoaDon.setMa("HD" + random.nextInt(1000));
         hoaDon.setNgayTao(new Date());
         hoaDon.setNgaySua(new Date());
+
         hoaDon.setTrangThai(0);
-        NguoiDung nguoiDung = nguoiDungService.findById(UUID.fromString("e555686c-39d8-427d-a442-b4789cc57891"));
+        NguoiDung nguoiDung = nguoiDungService.findById(UUID.fromString("57CBAD49-D073-4583-81C5-A44EE6DF297F"));
+
         hoaDon.setNguoiDung(nguoiDung);
         hoaDon.setTongTien(tongTien);
         hoaDonRepository.save(hoaDon);

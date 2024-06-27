@@ -17,4 +17,6 @@ public interface IMauSacService {
 
     MauSac findById(UUID id);
     Page<MauSac> getAllMauSacPageable(Pageable pageable);
+
+    List<MauSac> getAllMauSacDangHoatDong();
 }

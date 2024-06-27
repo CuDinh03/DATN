@@ -35,7 +35,7 @@ public class ChatLieuService implements IChatLieuService {
         chatLieu.setTen(request.getTen());
         chatLieu.setNgayTao(new Date());
         chatLieu.setNgaySua(new Date());
-        chatLieu.setTrangThai(request.getTrangThai());
+        chatLieu.setTrangThai(1);
 
         return chatLieuRepository.save(chatLieu);
     }
@@ -76,5 +76,10 @@ public class ChatLieuService implements IChatLieuService {
     @Override
     public Page<ChatLieu> getAllChatLieuPageable(Pageable pageable) {
         return chatLieuRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<ChatLieu> getAllChatLieuDangHoatDong() {
+        return chatLieuRepository.findAllChatLieuDangHoatDong();
     }
 }

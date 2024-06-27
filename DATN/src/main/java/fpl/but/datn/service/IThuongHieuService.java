@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface IThuongHieuService {
-    List getAll();
+    List<ThuongHieu> getAll();
     ThuongHieu create(ThuongHieu thuongHieu);
     ThuongHieu update(ThuongHieu thuongHieu, UUID id);
     void delete(UUID id);
@@ -17,4 +17,6 @@ public interface IThuongHieuService {
 
     ThuongHieu findById(UUID id);
     Page<ThuongHieu> getAllThuongHieuPageable(Pageable pageable);
+
+    List<ThuongHieu> getAllThuongHieuDangHoatDong();
 }

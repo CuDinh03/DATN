@@ -1,24 +1,21 @@
-package fpl.but.datn.entity;
+package fpl.but.datn.dto.request;
 
-import jakarta.persistence.*;
+import fpl.but.datn.entity.TaiKhoan;
 import lombok.*;
 
 import java.util.Date;
 import java.util.UUID;
-@Getter
-@Setter
-@NoArgsConstructor
+
 @AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 @Builder
-@Entity
-@Table
-public class NhanVien {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+
+public class NhanVienDto {
     private UUID id;
     private String ma;
     private String ten;
-
     private String email;
     private String sdt;
     private Boolean gioiTinh;
@@ -27,7 +24,5 @@ public class NhanVien {
     private Date ngayTao;
     private Date ngaySua;
     private Boolean trangThai;
-
-    @OneToOne
-    private TaiKhoan taiKhoan;
+    private TaiKhoan idTaiKhoan;
 }

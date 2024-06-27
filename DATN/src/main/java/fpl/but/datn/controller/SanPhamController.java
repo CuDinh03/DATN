@@ -63,6 +63,20 @@ public class SanPhamController {
         return apiResponse;
     }
 
+    @GetMapping("/getAll/dang-hoat-dong")
+    ApiResponse<List<SanPhamDto>> getAllDangHoatDong() {
+        List<SanPhamDto> listDto = TranferDatas.convertListSanPhamToDto(sanPhamService.getAllSanPhamDangHoatDong());
+        ApiResponse<List<SanPhamDto>> apiResponse = new ApiResponse<>();
+
+        if (!listDto.isEmpty()) {
+            apiResponse.setMessage("Lấy danh sách sản phẩm thành công");
+            apiResponse.setResult(listDto);
+        } else {
+            throw new AppException(ErrorCode.NO_LIST_SANPHAM_FOUND);
+        }
+        return apiResponse;
+    }
+
     @PostMapping("/create")
     ApiResponse<SanPham> create(@RequestBody @Valid SanPhamDto request) {
         ApiResponse<SanPham> apiResponse = new ApiResponse<>();

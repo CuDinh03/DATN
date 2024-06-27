@@ -29,12 +29,29 @@ public class KichThuocController {
 
     @GetMapping("/getAll")
     ApiResponse<List<KichThuocDto>> getAll() {
-        List<KichThuocDto> listDto = TranferDatas.convertListKichThuocToDto(kichThuocService.getAll());
+
+        List<KichThuocDto> lstKichThuocDto = TranferDatas.convertListKichThuocToDto(kichThuocService.getAll());
         ApiResponse<List<KichThuocDto>> apiResponse = new ApiResponse<>();
 
-        if (!listDto.isEmpty()) {
+        if (!lstKichThuocDto.isEmpty()) {
+            apiResponse.setMessage("Tim thay danh sach kich thuoc");
+            apiResponse.setResult(lstKichThuocDto);
+        } else {
+            throw new AppException(ErrorCode.LIST_KICHTHUOC_NOT_FOUND);
+        }
+        return apiResponse;
+    }
+
+
+    @GetMapping("/getAll/dang-hoat-dong")
+    ApiResponse<List<KichThuocDto>> getAllDangHoatDong() {
+
+        List<KichThuocDto> lstKichThuocDto = TranferDatas.convertListKichThuocToDto(kichThuocService.getAllKichThuocDangHoatDong());
+        ApiResponse<List<KichThuocDto>> apiResponse = new ApiResponse<>();
+
+        if (!lstKichThuocDto.isEmpty()) {
             apiResponse.setMessage("Lấy danh sách kích thước thành công");
-            apiResponse.setResult(listDto);
+            apiResponse.setResult(lstKichThuocDto);
         } else {
             throw new AppException(ErrorCode.NO_KICHTHUOC_FOUND);
         }
@@ -54,6 +71,23 @@ public class KichThuocController {
         if (!listDto.isEmpty()) {
             apiResponse.setMessage("Lấy danh sách kích thước thành công");
             apiResponse.setResult(new PageImpl<>(listDto, pageable, kichThuocPage.getTotalElements()));
+        }
+
+        return apiResponse;
+    }
+
+    @GetMapping("{id}")
+    ApiResponse<KichThuocDto> detail(@PathVariable UUID id) {
+        ApiResponse<KichThuocDto> apiResponse = new ApiResponse<>();
+        if (id != null) {
+            KichThuoc kichThuoc = kichThuocService.findById(id);
+            if (kichThuoc != null) {
+                KichThuocDto mauSacDto = TranferDatas.convertToDto(kichThuoc);
+                apiResponse.setMessage("Lấy kích thước thành công!");
+                apiResponse.setResult(mauSacDto);
+            } else {
+                throw new AppException(ErrorCode.KICHTHUOC_NOT_FOUND);
+            }
         } else {
             throw new AppException(ErrorCode.NO_KICHTHUOC_FOUND);
         }
@@ -98,17 +132,5 @@ public class KichThuocController {
             idKichThuoc = UUID.fromString(id);
             kichThuocService.open(idKichThuoc);
         } return ApiResponse.<Void>builder().build();
-    }
-
-    @GetMapping("/{id}")
-    ApiResponse<KichThuocDto> detail(@PathVariable String id) {
-        ApiResponse<KichThuocDto> apiResponse = new ApiResponse<>();
-        UUID idKichThuoc = null;
-        if (id != null){
-            idKichThuoc = UUID.fromString(id);
-            KichThuocDto dto = TranferDatas.convertToDto(kichThuocService.findById(idKichThuoc));
-            apiResponse.setMessage("Lấy kích thước thành công");
-            apiResponse.setResult(dto);
-        }return apiResponse;
     }
 }

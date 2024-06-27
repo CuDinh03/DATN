@@ -80,4 +80,9 @@ public class MauSacService implements IMauSacService {
     public Page<MauSac> getAllMauSacPageable(Pageable pageable) {
         return mauSacRepository.findAll(pageable);
     }
+
+    @Override
+    public List<MauSac> getAllMauSacDangHoatDong() {
+        return mauSacRepository.findAllMauSacDangHoatDong();
+    }
 }

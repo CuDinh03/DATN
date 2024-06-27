@@ -18,6 +18,7 @@ import java.util.UUID;
 
 @Service
 public class KichThuocService implements IKichThuocService {
+
     @Autowired
     private KichThuocRepository kichThuocRepository;
     @Override
@@ -77,5 +78,10 @@ public class KichThuocService implements IKichThuocService {
     @Override
     public Page<KichThuoc> getAllKichThuocPageable(Pageable pageable) {
         return kichThuocRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<KichThuoc> getAllKichThuocDangHoatDong() {
+        return kichThuocRepository.findAllKichThuocDangHoatDong();
     }
 }

@@ -12,7 +12,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table
 public class PhuongThucThanhToan {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -22,4 +21,6 @@ public class PhuongThucThanhToan {
     private Date ngayTao;
     private Date ngaySua;
     private Integer trangThai;
+    private Integer code;
+    private String moTa;
 }
