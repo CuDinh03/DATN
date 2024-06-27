@@ -1,11 +1,21 @@
 package fpl.but.datn.dto.request;
 
 import fpl.but.datn.entity.*;
+<<<<<<< HEAD
 import lombok.Data;
+=======
+
+import lombok.Data;
+
+>>>>>>> master
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 @Data
 public class ChiTietSanPhamDto {
     private UUID id;

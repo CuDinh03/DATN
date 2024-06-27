@@ -1,6 +1,4 @@
 package fpl.but.datn.service.impl;
-
-
 import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jwt.JWTClaimsSet;
@@ -8,6 +6,8 @@ import fpl.but.datn.dto.request.AuthenticationRequest;
 import fpl.but.datn.dto.response.AuthenticationResponse;
 import fpl.but.datn.dto.response.TaiKhoanResponse;
 import fpl.but.datn.entity.ChucVu;
+import fpl.but.datn.entity.GioHang;
+import fpl.but.datn.entity.KhachHang;
 import fpl.but.datn.entity.TaiKhoan;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
@@ -22,13 +22,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 @Service
-
 public class TaiKhoanService implements ITaiKhoanService {
 
     @Autowired
@@ -38,7 +37,13 @@ public class TaiKhoanService implements ITaiKhoanService {
     private ChucVuService chucVuService;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private KhachHangService khachHangService;
 
+    @Autowired
+    private GioHangService gioHangService;
+
+    @Transactional
     @Override
     public TaiKhoan createAccount(TaiKhoan request) {
         TaiKhoan taiKhoan = new TaiKhoan();
@@ -46,7 +51,6 @@ public class TaiKhoanService implements ITaiKhoanService {
         if (taiKhoanRepository.existsByTenDangNhap(request.getTenDangNhap())){
                         throw new AppException(ErrorCode.ACCOUNT_EXISTED);
         }
-
         taiKhoan.setMa("TK0" + request.getTenDangNhap());
         taiKhoan.setId(UUID.randomUUID());
         taiKhoan.setTenDangNhap(request.getTenDangNhap());
@@ -56,8 +60,20 @@ public class TaiKhoanService implements ITaiKhoanService {
         taiKhoan.setNgayTao(new Date());
         taiKhoan.setNgaySua(new Date());
         taiKhoan.setTrangThai(1);
+        TaiKhoan taiKhoan1 = taiKhoanRepository.save(taiKhoan);
+        KhachHang khachHang = khachHangService.createWhenTk(taiKhoan1);
+        Random random = new Random();
+        // Tạo giỏ hàng
+        GioHang gioHang = new GioHang();
+        gioHang.setMa("GH" + random.nextInt(1000));
+        gioHang.setNgayTao(new Date());
+        gioHang.setNgaySua(new Date());
+        gioHang.setKhachHang(khachHang);
+        gioHang.setTrangThai(2);
 
-        return taiKhoanRepository.save(taiKhoan);
+        gioHangService.create(gioHang);
+
+        return taiKhoan1;
     }
 
     @Override
@@ -124,7 +140,6 @@ public class TaiKhoanService implements ITaiKhoanService {
 
     }
 
-
     private String buildScope(TaiKhoan taiKhoan) {
         StringJoiner stringJoiner = new StringJoiner(" ");
         if (taiKhoan.getChucVu() != null && taiKhoan.getChucVu().getTen() != null) {
@@ -135,21 +150,18 @@ public class TaiKhoanService implements ITaiKhoanService {
         }
         return stringJoiner.toString();
     }
-
-
     public TaiKhoanResponse getMyInfo(){
         var context = SecurityContextHolder.getContext();
         String name = context.getAuthentication().getName();
         TaiKhoan byTenDangNhap = taiKhoanRepository.findByTenDangNhap(name).orElseThrow(() -> new AppException(ErrorCode.ACCOUNT_NOT_EXISTED));
-
         TaiKhoanResponse taiKhoanResponse = new TaiKhoanResponse();
+
         taiKhoanResponse.setUsername(byTenDangNhap.getTenDangNhap());
         taiKhoanResponse.setChucVu(byTenDangNhap.getChucVu().getTen());
         taiKhoanResponse.setId(String.valueOf(byTenDangNhap.getId()));
+
         return taiKhoanResponse;
     }
-
-
     @Override
     public List<TaiKhoan> getAllTk() {
         return taiKhoanRepository.findAll();
@@ -166,20 +178,16 @@ public class TaiKhoanService implements ITaiKhoanService {
         taiKhoan.setMatKhau(request.getMatKhau());
         taiKhoan.setNgaySua(new Date());
         taiKhoan.setTrangThai(request.getTrangThai());
-
         taiKhoanRepository.save(taiKhoan);
-
         TaiKhoan updateTaiKhoan = getByID(uuid);
         if (updateTaiKhoan==null)
             throw new AppException(ErrorCode.UPDATE_FAILED);
-
-        return updateTaiKhoan;    }
-
+        return updateTaiKhoan;
+    }
     @Override
     public void delete(UUID id) {
         TaiKhoan taiKhoan = getByID(id);
         taiKhoan.setTrangThai(0);
         taiKhoanRepository.save(taiKhoan);
     }
-
 }
