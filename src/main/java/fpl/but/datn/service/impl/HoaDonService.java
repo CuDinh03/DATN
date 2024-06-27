@@ -89,6 +89,14 @@ public class HoaDonService implements IHoaDonService {
             return false;
         }
     }
+
+    @Override
+    public HoaDon updateTrangThai(UUID id, Integer trangThai) {
+        HoaDon hoaDon = findById(id);
+        hoaDon.setTrangThai(trangThai);
+        return hoaDonRepository.save(hoaDon);
+    }
+
     public void open(UUID id) {
     }
     @Override
@@ -108,6 +116,11 @@ public class HoaDonService implements IHoaDonService {
     @Override
     public Page<HoaDon> getHoaDonsByTrangThai(Pageable pageable, Integer trangThai) {
         return hoaDonRepository.findByTrangThai(pageable, trangThai);
+    }
+
+    @Override
+    public List<HoaDon> findHoaDonByKhachHang(UUID idKhachHang) {
+        return hoaDonRepository.findHoaDonByKhachHang(idKhachHang);
     }
 
 }

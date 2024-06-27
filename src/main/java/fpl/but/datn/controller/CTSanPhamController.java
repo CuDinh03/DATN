@@ -6,16 +6,13 @@ import fpl.but.datn.entity.*;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.service.ICTSanPhamService;
-import fpl.but.datn.service.IDanhMucService;
 import fpl.but.datn.tranferdata.TranferDatas;
-import jakarta.annotation.security.PermitAll;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,7 +27,7 @@ public class CTSanPhamController {
 
     @GetMapping("/all")
     ApiResponse<Page<ChiTietSanPhamDto>> getDanhMuc(@RequestParam(defaultValue = "0") int page,
-                                             @RequestParam(defaultValue = "5") int size) {
+                                                    @RequestParam(defaultValue = "5") int size) {
 
         Pageable pageable = PageRequest.of(page, size);
         Page<ChiTietSanPham> chiTietSanPhamPage = ctSanPhamService.getAllChiTietSanPhamPageable(pageable);
@@ -64,29 +61,41 @@ public class CTSanPhamController {
         return apiResponse;
     }
 
-    @PostMapping("/addNew")
-    public ResponseEntity<?> getAll(@RequestBody ChiTietSanPham ctSanPham){
-        return ResponseEntity.ok(ctSanPhamService.create(ctSanPham));
+
+    @PostMapping("/create")
+    ApiResponse<ChiTietSanPham> create(@RequestBody @Valid ChiTietSanPhamDto request) {
+        ApiResponse<ChiTietSanPham> apiResponse = new ApiResponse<>();
+        if (request != null)
+            apiResponse.setResult(ctSanPhamService.create(TranferDatas.convertToEntity(request)));
+        return apiResponse;
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<?> update(@RequestBody ChiTietSanPham ctSanPham, @PathVariable UUID id){
-        return ResponseEntity.ok(ctSanPhamService.update(ctSanPham,id));
+
+    @PutMapping("/{id}")
+    ChiTietSanPham update(@RequestBody ChiTietSanPhamDto request, @PathVariable String id) {
+        UUID idCTSP = null;
+        if (id != null) idCTSP = UUID.fromString(id);
+        if (request != null)
+            return ctSanPhamService.update(TranferDatas.convertToEntity(request), idCTSP);
+        return null;
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable UUID id){
-        if (ctSanPhamService.delete(id)){
-            return ResponseEntity.ok("xoa thanh cong");
-        }else
-            return ResponseEntity.ok("xoa that bai");
+
+    @DeleteMapping("/{id}")
+    ApiResponse<Void> delete(@PathVariable String id) {
+        UUID idCTSP = null;
+        if (id != null) {
+            idCTSP = UUID.fromString(id);
+            ctSanPhamService.delete(idCTSP);
+        }
+        return ApiResponse.<Void>builder().build();
     }
 
     @GetMapping("/{id}")
     ApiResponse<ChiTietSanPhamDto> detail(@PathVariable String id) {
         ApiResponse<ChiTietSanPhamDto> apiResponse = new ApiResponse<>();
         UUID idChiTietSanPham = null;
-        if (id != null){
+        if (id != null) {
             idChiTietSanPham = UUID.fromString(id);
             ChiTietSanPhamDto dto = TranferDatas.convertToDto(ctSanPhamService.findById(idChiTietSanPham));
             apiResponse.setMessage("Lấy chi tiết sản phẩm thành công");
@@ -96,52 +105,52 @@ public class CTSanPhamController {
     }
 
     @GetMapping("/findAllMauSacByMaCTSP/{ma}")
-    ApiResponse<List<MauSacDto>> finAllMauSacByMaCTSP(@PathVariable String ma){
+    ApiResponse<List<MauSacDto>> finAllMauSacByMaCTSP(@PathVariable String ma) {
         List<MauSacDto> dto = TranferDatas.convertListMauSacToDto(ctSanPhamService.findAllMauSacByMaCTSP(ma));
         ApiResponse<List<MauSacDto>> apiResponse = new ApiResponse<>();
-        if (!dto.isEmpty()){
+        if (!dto.isEmpty()) {
             apiResponse.setMessage("lay danh sach mau sac thanh cong");
             apiResponse.setResult(dto);
-        }else {
+        } else {
             throw new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION);
         }
         return apiResponse;
     }
 
     @GetMapping("/findAllKichThuocByMaCTSP/{ma}")
-    ApiResponse<List<KichThuocDto>> finAllKichThuocByMaCTSP(@PathVariable String ma){
+    ApiResponse<List<KichThuocDto>> finAllKichThuocByMaCTSP(@PathVariable String ma) {
         List<KichThuocDto> dto = TranferDatas.convertListKichThuocToDto(ctSanPhamService.findkichThuocsByMaSanPhamChiTiet(ma));
         ApiResponse<List<KichThuocDto>> apiResponse = new ApiResponse<>();
-        if (!dto.isEmpty()){
+        if (!dto.isEmpty()) {
             apiResponse.setMessage("lay danh sach kich thuoc thanh cong");
             apiResponse.setResult(dto);
-        }else {
+        } else {
             throw new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION);
         }
         return apiResponse;
     }
 
     @GetMapping("/findChiTietSanPhamByMauSacAndKichThuoc/{ma}")
-    ApiResponse<ChiTietSanPhamDto>  findAllByKichThuocAndMauSac(@PathVariable String ma, @RequestParam UUID kichThuoc, @RequestParam UUID mauSac){
+    ApiResponse<ChiTietSanPhamDto> findAllByKichThuocAndMauSac(@PathVariable String ma, @RequestParam UUID kichThuoc, @RequestParam UUID mauSac) {
         ChiTietSanPhamDto dto = TranferDatas.convertToDto(ctSanPhamService.findChiTietSanPhamByMauSacAndKichThuoc(ma, kichThuoc, mauSac));
-        ApiResponse<ChiTietSanPhamDto>  apiResponse = new ApiResponse<>();
-        if (dto != null){
+        ApiResponse<ChiTietSanPhamDto> apiResponse = new ApiResponse<>();
+        if (dto != null) {
             apiResponse.setMessage("lay danh sach san pham thanh cong");
             apiResponse.setResult(dto);
-        }else {
+        } else {
             throw new AppException(ErrorCode.NO_PRODUCT_DETAIL_FOUND);
         }
         return apiResponse;
     }
 
     @GetMapping("/findSanPhamByKichThuoc/{ma}")
-    ApiResponse<List<ChiTietSanPhamDto>> finAllMauSacByMaCTSP(@PathVariable String ma, @RequestParam UUID kichThuoc){
+    ApiResponse<List<ChiTietSanPhamDto>> finAllMauSacByMaCTSP(@PathVariable String ma, @RequestParam UUID kichThuoc) {
         List<ChiTietSanPhamDto> dto = TranferDatas.convertListChiTietSanPhamToDto(ctSanPhamService.findSanPhamByKichThuoc(ma, kichThuoc));
         ApiResponse<List<ChiTietSanPhamDto>> apiResponse = new ApiResponse<>();
-        if (!dto.isEmpty()){
+        if (!dto.isEmpty()) {
             apiResponse.setMessage("lay danh sach sản phẩm thanh cong");
             apiResponse.setResult(dto);
-        }else {
+        } else {
             throw new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION);
         }
         return apiResponse;
