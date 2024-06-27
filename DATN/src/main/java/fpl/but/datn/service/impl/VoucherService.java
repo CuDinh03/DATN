@@ -120,14 +120,15 @@ public class VoucherService implements IService<Voucher>, IVoucherService {
             String ma = "Voucher" + random.nextInt(1000); // Tạo mã ngẫu nhiên
             String ten = "Voucher " + i;
             String loaiGiamGia = "Loai " + i;
-            Date ngayBatDau = new Date(); // Ngày hiện tại
-            Date ngayKetThuc = new Date(); // Ngày hiện tại
-            BigDecimal giaTriGiam = BigDecimal.valueOf(random.nextInt(50)); // Giá trị giảm ngẫu nhiên từ 0 đến 500
+            java.util.Date currentDate = new java.util.Date();
+            java.sql.Date ngayBatDau = new java.sql.Date(currentDate.getTime()); // Ngày hiện tại
+            java.sql.Date ngayKetThuc = new java.sql.Date(currentDate.getTime()); // Ngày hiện tại
+            BigDecimal giaTriGiam = BigDecimal.valueOf(random.nextInt(50)); // Giá trị giảm ngẫu nhiên từ 0 đến 50
             BigDecimal giaTriToiThieu = BigDecimal.valueOf(random.nextInt(500)); // Giá trị tối thiểu giảm ngẫu nhiên từ 0 đến 500
             Integer soLuong = random.nextInt(20) + 1; // Số lượng ngẫu nhiên từ 1 đến 20
-            Date ngayTao = new Date(); // Ngày hiện tại
-            Date ngaySua = new Date(); // Ngày hiện tại
-            Boolean trangThai = true;
+            java.sql.Date ngayTao = new java.sql.Date(currentDate.getTime()); // Ngày hiện tại
+            java.sql.Date ngaySua = new java.sql.Date(currentDate.getTime()); // Ngày hiện tại
+            Integer trangThai = 1;
 
             System.out.println("INSERT INTO voucher (id, ma, ten, loai_giam_gia, ngay_bat_dau, ngay_ket_thuc, gia_tri_giam, gia_tri_toi_thieu, so_luong, ngay_tao, ngay_sua, trang_thai) VALUES ("
                     + "'" + UUID.randomUUID() + "',"

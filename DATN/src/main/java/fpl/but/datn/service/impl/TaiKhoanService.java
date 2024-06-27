@@ -1,6 +1,4 @@
 package fpl.but.datn.service.impl;
-
-
 import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jwt.JWTClaimsSet;
@@ -22,13 +20,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 @Service
-
 public class TaiKhoanService implements ITaiKhoanService {
 
     @Autowired
@@ -46,7 +42,6 @@ public class TaiKhoanService implements ITaiKhoanService {
         if (taiKhoanRepository.existsByTenDangNhap(request.getTenDangNhap())){
                         throw new AppException(ErrorCode.ACCOUNT_EXISTED);
         }
-
         taiKhoan.setMa("TK0" + request.getTenDangNhap());
         taiKhoan.setId(UUID.randomUUID());
         taiKhoan.setTenDangNhap(request.getTenDangNhap());
@@ -56,7 +51,6 @@ public class TaiKhoanService implements ITaiKhoanService {
         taiKhoan.setNgayTao(new Date());
         taiKhoan.setNgaySua(new Date());
         taiKhoan.setTrangThai(1);
-
         return taiKhoanRepository.save(taiKhoan);
     }
 
