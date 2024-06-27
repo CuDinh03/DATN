@@ -1,8 +1,6 @@
 package fpl.but.datn.service.impl;
 
 import fpl.but.datn.entity.*;
-import fpl.but.datn.exception.AppException;
-import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.repository.CTSanPhamRepository;
 import fpl.but.datn.repository.GioHangChiTietRepository;
 import fpl.but.datn.repository.GioHangRepository;
@@ -22,8 +20,10 @@ public class CTSanPhamService implements ICTSanPhamService {
 
     @Autowired
     private CTSanPhamRepository ctSanPhamRepository;
+
     @Autowired
     private GioHangChiTietRepository gioHangChiTietRepository;
+
     @Autowired
     private GioHangRepository gioHangRepository;
 
@@ -145,7 +145,6 @@ public class CTSanPhamService implements ICTSanPhamService {
         }else {
             return false;
         }
-
     }
 
     @Override

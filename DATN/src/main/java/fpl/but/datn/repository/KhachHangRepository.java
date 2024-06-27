@@ -27,11 +27,10 @@ public interface KhachHangRepository extends JpaRepository<KhachHang, UUID> {
 //    Optional<KhachHang> findByMa(String ma);
 //    boolean existsByMa(String ma);
 
-    @Query(value = "SELECT kh.* FROM tai_khoan tk JOIN khach_hang kh ON tk.id = kh.tai_khoan_id WHERE tk.ten_dang_nhap = :tenDangNhap", nativeQuery = true)
+    @Query(value = "SELECT kh.* FROM tai_khoan tk JOIN khach_hang kh ON tk.id = kh.id_tai_khoan_id WHERE tk.ten_dang_nhap = :tenDangNhap", nativeQuery = true)
     KhachHang findKHByTenDangNhap(@Param("tenDangNhap") String tenDangNhap );
 
     // Tim khach hang theo id_TaiKhoan
     @Query("select kh from KhachHang kh where kh.taiKhoan.id = :idTaiKhoan")
     Optional<KhachHang> getKhachHangByIdTaiKhoan(@Param("idTaiKhoan") UUID idTaiKhoan);
-
 }

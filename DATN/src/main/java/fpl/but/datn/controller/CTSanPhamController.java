@@ -44,7 +44,7 @@ public class CTSanPhamController {
             apiResponse.setMessage("Lấy danh sách sa pham thành công");
             apiResponse.setResult(new PageImpl<>(listDto, pageable, chiTietSanPhamPage.getTotalElements()));
         } else {
-            throw new AppException(ErrorCode.NO_PRODUCT_DETAIL_FOUND);
+            throw new AppException(ErrorCode.NO_LISTSPChiTiet_FOUND);
         }
         return apiResponse;
     }
@@ -130,4 +130,87 @@ public class CTSanPhamController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Không tìm thấy chi tiết sản phẩm có id = " + id);
         }
     }
+
+
+//    // TÌM KIẾM
+//    @GetMapping("/getBySanPhamId/{id}")
+//    ApiResponse<List<ChiTietSanPhamDto>> getCTSPBySanPhamId(@PathVariable UUID id) {
+//        ApiResponse<List<ChiTietSanPhamDto>> apiResponse = new ApiResponse<>();
+//        UUID sanPhamId = null;
+//        if (id != null){
+//            sanPhamId = id;
+//            List<ChiTietSanPhamDto> listDto = TranferDatas.convertListChiTietSanPhamToDto(ctSanPhamService.findCTSPBySanPhamId(sanPhamId));
+//            apiResponse.setMessage("Lấy danh sách chi tiết sản phẩm thành công");
+//            apiResponse.setResult(listDto);
+//        }else {
+//            throw new AppException(ErrorCode.NO_LISTSPChiTiet_FOUND);
+//        }
+//        return apiResponse;
+//    }
+//
+//    @GetMapping("/getByChatLieuId/{id}")
+//    ApiResponse<List<ChiTietSanPhamDto>> getCTSPByChatLieuId(@PathVariable UUID id) {
+//        ApiResponse<List<ChiTietSanPhamDto>> apiResponse = new ApiResponse<>();
+//        if (id != null) {
+//            List<ChiTietSanPhamDto> listDto = TranferDatas.convertListChiTietSanPhamToDto(ctSanPhamService.findCTSPByChatLieuId(id));
+//            apiResponse.setMessage("Lấy danh sách chi tiết sản phẩm thành công");
+//            apiResponse.setResult(listDto);
+//        } else {
+//            throw new AppException(ErrorCode.NO_LISTSPChiTiet_FOUND);
+//        }
+//        return apiResponse;
+//    }
+//
+//    @GetMapping("/getByDanhMucId/{id}")
+//    ApiResponse<List<ChiTietSanPhamDto>> getCTSPByDanhMucId(@PathVariable UUID id) {
+//        ApiResponse<List<ChiTietSanPhamDto>> apiResponse = new ApiResponse<>();
+//        if (id != null) {
+//            List<ChiTietSanPhamDto> listDto = TranferDatas.convertListChiTietSanPhamToDto(ctSanPhamService.findCTSPByDanhMucId(id));
+//            apiResponse.setMessage("Lấy danh sách chi tiết sản phẩm thành công");
+//            apiResponse.setResult(listDto);
+//        } else {
+//            throw new AppException(ErrorCode.NO_LISTSPChiTiet_FOUND);
+//        }
+//        return apiResponse;
+//    }
+//
+//    @GetMapping("/getByKichThuocId/{id}")
+//    ApiResponse<List<ChiTietSanPhamDto>> getCTSPByKichThuocId(@PathVariable UUID id) {
+//        ApiResponse<List<ChiTietSanPhamDto>> apiResponse = new ApiResponse<>();
+//        if (id != null) {
+//            List<ChiTietSanPhamDto> listDto = TranferDatas.convertListChiTietSanPhamToDto(ctSanPhamService.findCTSPByKichThuocId(id));
+//            apiResponse.setMessage("Lấy danh sách chi tiết sản phẩm thành công");
+//            apiResponse.setResult(listDto);
+//        } else {
+//            throw new AppException(ErrorCode.NO_LISTSPChiTiet_FOUND);
+//        }
+//        return apiResponse;
+//    }
+//
+//    @GetMapping("/getByMauSacId/{id}")
+//    ApiResponse<List<ChiTietSanPhamDto>> getCTSPByMauSacId(@PathVariable UUID id) {
+//        ApiResponse<List<ChiTietSanPhamDto>> apiResponse = new ApiResponse<>();
+//        if (id != null) {
+//            List<ChiTietSanPhamDto> listDto = TranferDatas.convertListChiTietSanPhamToDto(ctSanPhamService.findCTSPByMauSacId(id));
+//            apiResponse.setMessage("Lấy danh sách chi tiết sản phẩm thành công");
+//            apiResponse.setResult(listDto);
+//        } else {
+//            throw new AppException(ErrorCode.NO_LISTSPChiTiet_FOUND);
+//        }
+//        return apiResponse;
+//    }
+//
+//    @GetMapping("/getByThuongHieuId/{id}")
+//    ApiResponse<List<ChiTietSanPhamDto>> getCTSPByThuongHieuId(@PathVariable UUID id) {
+//        ApiResponse<List<ChiTietSanPhamDto>> apiResponse = new ApiResponse<>();
+//        if (id != null) {
+//            List<ChiTietSanPhamDto> listDto = TranferDatas.convertListChiTietSanPhamToDto(ctSanPhamService.findCTSPByThuongHieuId(id));
+//            apiResponse.setMessage("Lấy danh sách chi tiết sản phẩm thành công");
+//            apiResponse.setResult(listDto);
+//        } else {
+//            throw new AppException(ErrorCode.NO_LISTSPChiTiet_FOUND);
+//        }
+//        return apiResponse;
+//    }
+
 }
