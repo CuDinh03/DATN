@@ -28,8 +28,4 @@ public class HoaDonChiTiet {
     private Date ngaySua;
     private BigDecimal giaBan;
     private Integer trangThai;
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 }

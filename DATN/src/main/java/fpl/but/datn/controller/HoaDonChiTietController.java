@@ -26,7 +26,7 @@ import java.util.UUID;
 public class HoaDonChiTietController {
 
     @Autowired
-    private IHoaDonChiTietService hoaDonChiTietService;
+    private HoaDonChiTietService hoaDonChiTietService;
 
     @GetMapping("/all")
     ApiResponse<List<HoaDonChiTietDto>> getAll(){

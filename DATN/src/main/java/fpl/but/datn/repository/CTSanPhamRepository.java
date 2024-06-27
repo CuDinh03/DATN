@@ -101,4 +101,7 @@ public interface CTSanPhamRepository extends JpaRepository<ChiTietSanPham, UUID>
     List<ChiTietSanPham> findCTSPByThuongHieuId(@Param("thuongHieuId") UUID thuongHieuId);
 >>>>>>> master
 
+    @Query
+    ChiTietSanPham getCtsp();
+
 }
