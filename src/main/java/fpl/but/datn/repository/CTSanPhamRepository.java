@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -17,6 +18,7 @@ public interface CTSanPhamRepository extends JpaRepository<ChiTietSanPham, UUID>
 
     @Query("SELECT ctsp FROM ChiTietSanPham ctsp ORDER BY ctsp.ngayTao DESC ")
     Page<ChiTietSanPham> finAll(Pageable pageable);
+
 
     @Query("SELECT c.mauSac FROM ChiTietSanPham c WHERE c.ma = :maSanPhamChiTiet")
     List<MauSac> findMauSacsByMaSanPhamChiTiet(@Param("maSanPhamChiTiet") String maSanPhamChiTiet);
@@ -29,4 +31,6 @@ public interface CTSanPhamRepository extends JpaRepository<ChiTietSanPham, UUID>
 
     @Query("SELECT c FROM ChiTietSanPham c WHERE c.ma = :ma AND c.kichThuoc.id = :kichThuoc")
     List<ChiTietSanPham> findChiTietSanPhamByMaAndKichThuoc(@Param("ma") String ma, @Param("kichThuoc") UUID kichThuoc);
+    boolean existsByMa(String ma);
+
 }

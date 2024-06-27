@@ -16,6 +16,7 @@ public interface ICTSanPhamService {
     ChiTietSanPham create(ChiTietSanPham chiTietSanPham);
     ChiTietSanPham update(ChiTietSanPham chiTietSanPham, UUID id);
     boolean delete(UUID id);
+    void open(UUID id);
     ChiTietSanPham findById(UUID id);
     Page<ChiTietSanPham> getAllChiTietSanPhamPageable(Pageable pageable);
     List<MauSac> findAllMauSacByMaCTSP(String maChiTietSanPham);
