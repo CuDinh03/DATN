@@ -64,7 +64,7 @@ public class SecurityConfig {
             "/api/hoa-don/all", "/api/hoa-don/find/{ma}",
             "/api/hoa-don-gio-hang/all", "/api/hoa-don-gio-hang/all/{id}",
             "/api/voucher/all","/api/voucher/allVouchers","/api/voucher/{id}",
-            "/api/hoa-don/{ma}"
+            "/api/hoa-don/{ma}","/api/chi-tiet-san-pham/{id}"
     };
     private final String[] ADMIN_ENDPOINT_POST = {"/api/voucher/create",
             "/api/khs/create",

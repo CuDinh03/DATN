@@ -58,6 +58,36 @@ public class CTSanPhamService implements ICTSanPhamService {
     }
 
     @Override
+    public List<ChiTietSanPham> findCTSPBySanPhamId(UUID id) {
+        return null;
+    }
+
+    @Override
+    public List<ChiTietSanPham> findCTSPByChatLieuId(UUID id) {
+        return null;
+    }
+
+    @Override
+    public List<ChiTietSanPham> findCTSPByDanhMucId(UUID id) {
+        return null;
+    }
+
+    @Override
+    public List<ChiTietSanPham> findCTSPByKichThuocId(UUID id) {
+        return null;
+    }
+
+    @Override
+    public List<ChiTietSanPham> findCTSPByMauSacId(UUID id) {
+        return null;
+    }
+
+    @Override
+    public List<ChiTietSanPham> findCTSPByThuongHieuId(UUID id) {
+        return null;
+    }
+
+    @Override
     public ChiTietSanPham create(ChiTietSanPham request) {
 
         ChiTietSanPham chiTietSanPham;

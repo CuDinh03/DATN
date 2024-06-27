@@ -31,6 +31,6 @@ public class KhachHang {
     private Integer trangThai;
 
     @OneToOne
-    @JoinColumn(name = "id_tai_khoan_id")
+    @JoinColumn(name = "tai_khoan_id")
     private TaiKhoan taiKhoan;
 }

@@ -35,17 +35,17 @@ public interface ICTSanPhamService {
 
     List<ChiTietSanPham> findSanPhamByKichThuoc(String ma, UUID kichThuoc);
 
-//    // Tim Kiem
-//    List<ChiTietSanPham> findCTSPBySanPhamId(UUID id);
-//
-//    List<ChiTietSanPham> findCTSPByChatLieuId(UUID id);
-//
-//    List<ChiTietSanPham> findCTSPByDanhMucId(UUID id);
-//
-//    List<ChiTietSanPham> findCTSPByKichThuocId(UUID id);
-//
-//    List<ChiTietSanPham> findCTSPByMauSacId(UUID id);
-//
-//    List<ChiTietSanPham> findCTSPByThuongHieuId(UUID id);
+    // Tim Kiem
+    List<ChiTietSanPham> findCTSPBySanPhamId(UUID id);
+
+    List<ChiTietSanPham> findCTSPByChatLieuId(UUID id);
+
+    List<ChiTietSanPham> findCTSPByDanhMucId(UUID id);
+
+    List<ChiTietSanPham> findCTSPByKichThuocId(UUID id);
+
+    List<ChiTietSanPham> findCTSPByMauSacId(UUID id);
+
+    List<ChiTietSanPham> findCTSPByThuongHieuId(UUID id);
 
 }
