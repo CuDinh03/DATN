@@ -1,6 +1,5 @@
 package fpl.but.datn.controller;
 
-import fpl.but.datn.dto.request.ChatLieuDto;
 import fpl.but.datn.dto.request.DanhMucDto;
 import fpl.but.datn.dto.request.HinhAnhDto;
 import fpl.but.datn.dto.request.TaiKhoanDto;

@@ -12,10 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class HoaDonChiTietService implements IHoaDonChiTietService {
@@ -43,7 +40,15 @@ public class HoaDonChiTietService implements IHoaDonChiTietService {
     }
 
     @Override
-    public void delete(UUID id) {
+    public boolean delete(UUID id) {
+        Optional<HoaDonChiTiet> optional = hoaDonChiTietRepository.findById(id);
+        if (optional.isPresent()){
+            HoaDonChiTiet hoaDonChiTiet = optional.get();
+            hoaDonChiTietRepository.delete(hoaDonChiTiet);
+            return true;
+        }else {
+            return false;
+        }
 
     }
 
