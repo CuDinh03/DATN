@@ -1,6 +1,8 @@
 package fpl.but.datn.service.impl;
 
 import fpl.but.datn.entity.*;
+import fpl.but.datn.exception.AppException;
+import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.repository.HoaDonChiTietRepository;
 import fpl.but.datn.repository.HoaDonRepository;
 import fpl.but.datn.service.IHoaDonChiTietService;
@@ -57,7 +59,7 @@ public class HoaDonChiTietService implements IHoaDonChiTietService {
 
     @Override
     public HoaDonChiTiet findById(UUID id) {
-        return null;
+        return hoaDonChiTietRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.ORDER_NOT_EXISTED));
     }
 
     @Override

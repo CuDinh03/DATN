@@ -85,4 +85,7 @@ public interface CTSanPhamRepository extends JpaRepository<ChiTietSanPham, UUID>
     @Query("SELECT ctsp FROM ChiTietSanPham ctsp WHERE ctsp.thuongHieu.id = :thuongHieuId")
     List<ChiTietSanPham> findCTSPByThuongHieuId(@Param("thuongHieuId") UUID thuongHieuId);
 
+    @Query
+    ChiTietSanPham getCtsp();
+
 }
