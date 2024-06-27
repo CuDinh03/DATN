@@ -70,7 +70,7 @@ public class HoaDonChiTietController {
                 dtoList.add(dto);
             }
             ApiResponse<List<HoaDonChiTietDto>> apiResponse = new ApiResponse<>();
-            apiResponse.setMessage("Lấy danh sách giỏ hàng chi tiết thành công");
+            apiResponse.setMessage("Lấy danh sách HÓA ĐƠN chi tiết thành công");
             apiResponse.setResult(dtoList);
             return apiResponse;
         } else {
@@ -87,6 +87,19 @@ public class HoaDonChiTietController {
             apiResponse.setResult(dto);
         }else {
             throw new AppException(ErrorCode.NO_ORDER_FOUND);
+        }
+        return apiResponse;
+    }
+
+    @GetMapping("/{id}")
+    ApiResponse<HoaDonChiTietDto> detail(@PathVariable String id) {
+        ApiResponse<HoaDonChiTietDto> apiResponse = new ApiResponse<>();
+        UUID idHoaDonChiTiet = null;
+        if (id != null){
+            idHoaDonChiTiet = UUID.fromString(id);
+            HoaDonChiTietDto dto = TranferDatas.convertToDto(hoaDonChiTietService.findById(idHoaDonChiTiet));
+            apiResponse.setMessage("Lấy hóa đơn thành công");
+            apiResponse.setResult(dto);
         }
         return apiResponse;
     }

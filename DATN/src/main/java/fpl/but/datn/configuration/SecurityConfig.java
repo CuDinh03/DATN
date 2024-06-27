@@ -25,8 +25,8 @@ public class SecurityConfig {
             "/api/chi-tiet-san-pham/getAll","/api/chi-tiet-san-pham/all/{id}","/api/chi-tiet-san-pham/{id}","/api/chi-tiet-san-pham/findAllMauSacByMaCTSP/{ma}",
             "/api/chi-tiet-san-pham/findAllKichThuocByMaCTSP/{ma}", "/api/chi-tiet-san-pham/findChiTietSanPhamByMauSacAndKichThuoc/{ma}","/api/chi-tiet-san-pham/findSanPhamByKichThuoc/{ma}",
             "/api/thanhtoan/onl", "/api/voucher/all", "/api/voucher/allVouchers", "/api/voucher/{id}",
-            "/api/hoa-don-chi-tiet/all/{id}"
-
+            "/api/hoa-don-chi-tiet/all/{id}", "/api/hoa-don-chi-tiet/{id}",
+            "/api/hoa-don/{id}"
     };
     private final String[] ADMIN_ENDPOINT_GET = {
             "/api/users/all","/api/users/{id}", "/api/users/myInfo",
