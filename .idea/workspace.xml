@@ -2,30 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="85360360-6e47-429b-b577-a4f16be7088d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/controller/admin/AdminController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/tranferdata/TranferDatas.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/BaoCao.java" beforeDir="false" afterPath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/BaoCao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/ChatLieu.java" beforeDir="false" afterPath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/ChatLieu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/ChiTietSanPham.java" beforeDir="false" afterPath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/ChiTietSanPham.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/ChucVu.java" beforeDir="false" afterPath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/ChucVu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/DanhMuc.java" beforeDir="false" afterPath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/DanhMuc.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/GioHang.java" beforeDir="false" afterPath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/GioHang.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/GioHangChiTiet.java" beforeDir="false" afterPath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/GioHangChiTiet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/HinhAnh.java" beforeDir="false" afterPath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/HinhAnh.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/HoTro.java" beforeDir="false" afterPath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/HoTro.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/HoaDon.java" beforeDir="false" afterPath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/HoaDon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/HoaDonChiTiet.java" beforeDir="false" afterPath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/HoaDonChiTiet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/KhachHang.java" beforeDir="false" afterPath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/KhachHang.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/KichThuoc.java" beforeDir="false" afterPath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/KichThuoc.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/MauSac.java" beforeDir="false" afterPath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/MauSac.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/NhanVien.java" beforeDir="false" afterPath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/NhanVien.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/PhuongThucThanhToan.java" beforeDir="false" afterPath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/PhuongThucThanhToan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/SanPham.java" beforeDir="false" afterPath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/SanPham.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/TaiKhoan.java" beforeDir="false" afterPath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/TaiKhoan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/ThanhToan.java" beforeDir="false" afterPath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/ThanhToan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/ThuongHieu.java" beforeDir="false" afterPath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/ThuongHieu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/Voucher.java" beforeDir="false" afterPath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/Voucher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/DATN/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,25 +17,40 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2fuHGow8mwEHGnFVICTK8RIQvwk" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/anhtuanle/Desktop/DATN",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/anhtuanle/Desktop/DATN&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="DATN" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="DATN" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -66,6 +60,8 @@
       <option name="presentableId" value="Default" />
       <updated>1714643949215</updated>
       <workItem from="1714643950382" duration="18000" />
+      <workItem from="1719508404070" duration="8000" />
+      <workItem from="1719508419186" duration="1000" />
     </task>
     <servers />
   </component>
