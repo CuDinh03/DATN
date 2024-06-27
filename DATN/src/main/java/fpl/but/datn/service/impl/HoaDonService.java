@@ -34,7 +34,6 @@ public class HoaDonService implements IHoaDonService {
     public HoaDon create(HoaDon request) {
         HoaDon hoaDon = new HoaDon();
         Random random = new Random();
-
         hoaDon.setId(UUID.randomUUID());
         hoaDon.setMa("HD" + random.nextInt(1000));
         hoaDon.setVoucher(request.getVoucher());
@@ -48,6 +47,9 @@ public class HoaDonService implements IHoaDonService {
         hoaDon.setVoucher(request.getVoucher());
         hoaDon.setTrangThai(1);
         return hoaDonRepository.save(hoaDon);
+    }
+    public HoaDon createHoaDonOnl(HoaDon request) {
+        return hoaDonRepository.save(request);
     }
 
     @Override

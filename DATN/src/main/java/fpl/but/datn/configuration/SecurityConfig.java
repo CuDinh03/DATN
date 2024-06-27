@@ -1,5 +1,7 @@
 package fpl.but.datn.configuration;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,16 +20,32 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import javax.crypto.spec.SecretKeySpec;
 
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+    private static final Logger logger = LoggerFactory.getLogger(SecurityConfig.class);
+
+
     private final String[] PUBLIC_ENDPOINT = {"/api/auth/log-in", "/api/users/create", "/api/users/check-username", "/api/users/myInfo",
             "/api/chi-tiet-san-pham/getAll","/api/chi-tiet-san-pham/all/{id}","/api/chi-tiet-san-pham/{id}","/api/chi-tiet-san-pham/findAllMauSacByMaCTSP/{ma}",
             "/api/chi-tiet-san-pham/findAllKichThuocByMaCTSP/{ma}", "/api/chi-tiet-san-pham/findChiTietSanPhamByMauSacAndKichThuoc/{ma}","/api/chi-tiet-san-pham/findSanPhamByKichThuoc/{ma}",
             "/api/thanhtoan/onl", "/api/voucher/all", "/api/voucher/allVouchers", "/api/voucher/{id}",
-            "/api/hoa-don-chi-tiet/all/{id}"
+            "/api/hoa-don-chi-tiet/all/{id}",
+            "/api/auth/log-in", "/api/users/create", "/api/users/check-username", "/api/users/myInfo",
+            "/api/chi-tiet-san-pham/getAll", "/api/chi-tiet-san-pham/all/{id}", "/api/chi-tiet-san-pham/{id}",
+            "/api/chi-tiet-san-pham/findAllMauSacByMaCTSP/{ma}", "/api/chi-tiet-san-pham/findAllKichThuocByMaCTSP/{ma}",
+            "/api/chi-tiet-san-pham/findChiTietSanPhamByMauSacAndKichThuoc/{ma}", "/api/chi-tiet-san-pham/findSanPhamByKichThuoc/{ma}",
+            "/api/thanhtoan/onl", "/api/voucher/all", "/api/voucher/allVouchers", "/api/voucher/{id}",
+            "/api/thanhtoan/onl",
+            "/api/hoa-don-chi-tiet/all/{id}",
+            "/api/thanhtoan",
+            "/api/voucher/create", "/api/khs/create", "/api/danh-muc/create",
+            "/api/hoa-don-gio-hang/create", "/api/gio-hang-chi-tiet/create", "/api/thanhtoan"
+
 
     };
+
     private final String[] ADMIN_ENDPOINT_GET = {
             "/api/users/all","/api/users/{id}",
             "/api/voucher/all","/api/voucher/allVouchers","/api/voucher/{id}",
@@ -36,7 +54,17 @@ public class SecurityConfig {
             "/api/danh-muc/all","/api/danh-muc/{id}",
             "/api/hoa-don-chi-tiet/all/{id}","/api/hoa-don-chi-tiet/{id}",
             "/api/hoa-don/all", "/api/hoa-don/{ma}",
-            "/api/hoa-don-gio-hang/all", "/api/hoa-don-gio-hang/all/{id}"
+            "/api/hoa-don-gio-hang/all", "/api/hoa-don-gio-hang/all/{id}",
+            "/api/users/all", "/api/users/{id}",
+            "/api/voucher/all", "/api/voucher/allVouchers", "/api/voucher/{id}",
+            "/api/khs/all", "/api/khs/{sdt}",
+            "/api/chi-tiet-san-pham/all","/api/chi-tiet-san-pham/addNew", "/api/chi-tiet-san-pham/update/{id}", "/api/chi-tiet-san-pham/delete/{id}", "/api/chi-tiet-san-pham/detail/{id}",
+            "/api/danh-muc/all", "/api/danh-muc/{id}",
+            "/api/hoa-don-chi-tiet/all/{id}", "/api/hoa-don-chi-tiet/{id}", "/api/gio-hang-chi-tiet/all/{id}",
+            "/api/hoa-don/all", "/api/hoa-don/find/{ma}",
+            "/api/hoa-don-gio-hang/all", "/api/hoa-don-gio-hang/all/{id}",
+            "/api/voucher/all","/api/voucher/allVouchers","/api/voucher/{id}",
+            "/api/hoa-don/{ma}"
     };
     private final String[] ADMIN_ENDPOINT_POST = {"/api/voucher/create",
             "/api/khs/create",
@@ -50,40 +78,36 @@ public class SecurityConfig {
             ,"/api/hoa-don/updateTrangThai/{id}"
     };
     private final String[] ADMIN_ENDPOINT_DELETE = {"/api/voucher/{id}","/api/users/{id}",
-            "/api/danh-muc/{id}"
+            "/api/danh-muc/{id}",            "/api/voucher/{id}", "/api/users/{id}", "/api/danh-muc/{id}","/api/hoa-don/updateTrangThai/{id}"
+
     };
 
     private final String[] CUSTOMER_END_POINT = {
-            "/api/thanhtoan/onl",
-            "/api/hoa-don-chi-tiet/all/{id}"
+
     };
+
+
+
 
     @Value("${jwt.signerKey}")
     private String signerKey;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-        // cho phep cac patterns co endpoint duoc truy cap
         httpSecurity.authorizeHttpRequests(request -> request
                 .requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINT).permitAll()
                 .requestMatchers(HttpMethod.GET, PUBLIC_ENDPOINT).permitAll()
-                .requestMatchers(HttpMethod.GET, ADMIN_ENDPOINT_GET)
-                .hasRole("ADMIN")
-                .requestMatchers(HttpMethod.POST, ADMIN_ENDPOINT_POST)
-                .hasRole("ADMIN")
-                .requestMatchers(HttpMethod.DELETE, ADMIN_ENDPOINT_DELETE)
-                .hasRole("ADMIN")
-                .requestMatchers(HttpMethod.PUT, ADMIN_ENDPOINT_PUT)
-                .hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, ADMIN_ENDPOINT_GET).hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, ADMIN_ENDPOINT_POST).hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, ADMIN_ENDPOINT_DELETE).hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, ADMIN_ENDPOINT_PUT).hasRole("ADMIN")
                 .anyRequest().authenticated());
 
-        httpSecurity.oauth2ResourceServer(
-                oauth2 -> oauth2.jwt(jwtConfigurer -> jwtConfigurer.decoder(jwtDecoder())
-                                .jwtAuthenticationConverter(jwtAuthenticationConverter()))
-                        .authenticationEntryPoint(new JwtAuthenticationEntryPoint())
-        );
+        httpSecurity.oauth2ResourceServer(oauth2 -> oauth2
+                .jwt(jwtConfigurer -> jwtConfigurer.decoder(jwtDecoder())
+                        .jwtAuthenticationConverter(jwtAuthenticationConverter()))
+                .authenticationEntryPoint(new JwtAuthenticationEntryPoint()));
 
-        //huy cau hinh mac dinh bao ve endpoint cua security
         httpSecurity.csrf(AbstractHttpConfigurer::disable);
 
         return httpSecurity.build();

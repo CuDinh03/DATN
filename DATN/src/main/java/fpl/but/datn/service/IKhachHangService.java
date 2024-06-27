@@ -1,5 +1,6 @@
 package fpl.but.datn.service;
 import fpl.but.datn.entity.KhachHang;
+import fpl.but.datn.entity.TaiKhoan;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -35,4 +36,6 @@ public interface IKhachHangService {
     KhachHang getKhachHangByIdTaiKhoan(UUID idTaiKhoan);
 
     KhachHang findKHByTenDangNhap(String tenDangNhap);
+
+    KhachHang createWhenTk(TaiKhoan taiKhoan);
 }
