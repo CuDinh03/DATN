@@ -38,25 +38,27 @@ public class CTSanPhamService implements ICTSanPhamService {
     }
 
     @Override
-    public List<MauSac> findAllMauSacByMaCTSP(String maChiTietSanPham) {
-        return null;
+    public Page<ChiTietSanPham> getAllChiTietSanPhamPageable(Pageable pageable) {
+        return ctSanPhamRepository.findAll(pageable);
     }
 
     @Override
+    public List<MauSac> findAllMauSacByMaCTSP(String maChiTietSanPham) {
+        return ctSanPhamRepository.findMauSacsByMaSanPhamChiTiet(maChiTietSanPham);
+    }@Override
     public List<KichThuoc> findkichThuocsByMaSanPhamChiTiet(String maChiTietSanPham) {
-        return null;
+        return ctSanPhamRepository.findkichThuocsByMaSanPhamChiTiet(maChiTietSanPham);
     }
 
     @Override
     public ChiTietSanPham findChiTietSanPhamByMauSacAndKichThuoc(String ma, UUID kichThuoc, UUID mauSac) {
-        return null;
+        return ctSanPhamRepository.findChiTietSanPhamByMauSacAndKichThuoc(ma,kichThuoc,mauSac);
     }
 
     @Override
     public List<ChiTietSanPham> findSanPhamByKichThuoc(String ma, UUID kichThuoc) {
-        return null;
+        return ctSanPhamRepository.findChiTietSanPhamByMaAndKichThuoc(ma, kichThuoc);
     }
-
     @Override
     public List<ChiTietSanPham> findCTSPBySanPhamId(UUID id) {
         return null;
@@ -182,10 +184,6 @@ public class CTSanPhamService implements ICTSanPhamService {
         return ctSanPhamRepository.findById(id).get();
     }
 
-    @Override
-    public Page<ChiTietSanPham> getAllChiTietSanPhamPageable(Pageable pageable) {
-        return ctSanPhamRepository.findAll(pageable);
-    }
 
     @Override
     @Transactional

@@ -32,10 +32,5 @@ build/
 ### VS Code ###
 .vscode/
 
-<<<<<<< HEAD
-.DS_Store
-
-=======
-
 **/DS_Store
->>>>>>> origin/tuan
+

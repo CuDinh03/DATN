@@ -1,10 +1,12 @@
 package fpl.but.datn.service.impl;
 
+import fpl.but.datn.entity.ChiTietSanPham;
 import fpl.but.datn.entity.GioHangHoaDon;
 import fpl.but.datn.entity.HoaDon;
 import fpl.but.datn.entity.HoaDonChiTiet;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
+import fpl.but.datn.repository.CTSanPhamRepository;
 import fpl.but.datn.repository.GioHangHoaDonRepository;
 import fpl.but.datn.repository.HoaDonChiTietRepository;
 import fpl.but.datn.repository.HoaDonRepository;
@@ -25,6 +27,8 @@ public class HoaDonService implements IHoaDonService {
     private HoaDonChiTietRepository hoaDonChiTietRepository;
     @Autowired
     private GioHangHoaDonRepository hoaDonGioHangRepository;
+    @Autowired
+    private CTSanPhamRepository ctSanPhamRepository;
     @Override
     public List getAll() {
         return hoaDonRepository.findAll();
@@ -95,6 +99,22 @@ public class HoaDonService implements IHoaDonService {
     @Override
     public HoaDon updateTrangThai(UUID id, Integer trangThai) {
         HoaDon hoaDon = findById(id);
+        if (hoaDon.getTrangThai() == 1){
+            List<HoaDonChiTiet> list = hoaDonChiTietRepository.findAllHoaDonChiTietByIdHoaDon(hoaDon.getId());
+            List<ChiTietSanPham> listCt = ctSanPhamRepository.getCtspByHoaDon(hoaDon.getId());
+            for (ChiTietSanPham ctsp : listCt){
+                for (HoaDonChiTiet hoaDonChiTiet: list){
+                    if (ctsp.getId().equals(hoaDonChiTiet.getChiTietSanPham().getId())){
+                        Integer soLuong = ctsp.getSoLuong();
+                        if (soLuong >= hoaDonChiTiet.getSoLuong()){
+                            ctsp.setSoLuong(soLuong - hoaDonChiTiet.getSoLuong());
+                            ctsp.setNgaySua(new Date());
+                            ctSanPhamRepository.save(ctsp);
+                        }
+                    }
+                }
+            }
+        }
         hoaDon.setTrangThai(trangThai);
         return hoaDonRepository.save(hoaDon);
     }

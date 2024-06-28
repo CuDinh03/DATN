@@ -1,15 +1,13 @@
 package fpl.but.datn.controller;
 
-import fpl.but.datn.dto.request.ChiTietSanPhamDto;
-import fpl.but.datn.dto.request.DanhMucDto;
-import fpl.but.datn.dto.request.GioHangDto;
-import fpl.but.datn.dto.request.KichThuocDto;
+import fpl.but.datn.dto.request.*;
 import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.entity.*;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.service.ICTSanPhamService;
 import fpl.but.datn.service.IDanhMucService;
+import fpl.but.datn.service.impl.CTSanPhamService;
 import fpl.but.datn.tranferdata.TranferDatas;
 import jakarta.annotation.security.PermitAll;
 import jakarta.validation.Valid;
@@ -48,6 +46,19 @@ public class CTSanPhamController {
         }
         return apiResponse;
     }
+    @GetMapping("/findAllKichThuocByMaCTSP/{ma}")
+    ApiResponse<List<KichThuocDto>> finAllKichThuocByMaCTSP(@PathVariable String ma){
+        List<KichThuocDto> dto = TranferDatas.convertListKichThuocToDto(ctSanPhamService.findkichThuocsByMaSanPhamChiTiet(ma));
+        ApiResponse<List<KichThuocDto>> apiResponse = new ApiResponse<>();
+        if (!dto.isEmpty()){
+            apiResponse.setMessage("lay danh sach kich thuoc thanh cong");
+            apiResponse.setResult(dto);
+        }else {
+            throw new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION);
+        }
+        return apiResponse;
+    }
+
 
     @GetMapping("/all/sap-xep-ngay-tao")
     ApiResponse<Page<ChiTietSanPhamDto>> getCTSPSapXep(@RequestParam(defaultValue = "0") int page,
@@ -99,6 +110,33 @@ public class CTSanPhamController {
         }
         return null;
     }
+    @GetMapping("/findAllMauSacByMaCTSP/{ma}")
+    ApiResponse<List<MauSacDto>> finAllMauSacByMaCTSP(@PathVariable String ma){
+        List<MauSacDto> dto = TranferDatas.convertListMauSacToDto(ctSanPhamService.findAllMauSacByMaCTSP(ma));
+        ApiResponse<List<MauSacDto>> apiResponse = new ApiResponse<>();
+        if (!dto.isEmpty()){
+            apiResponse.setMessage("lay danh sach mau sac thanh cong");
+            apiResponse.setResult(dto);
+        }else {
+            throw new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION);
+        }
+        return apiResponse;
+    }
+
+    @GetMapping("/findChiTietSanPhamByMauSacAndKichThuoc/{ma}")
+    ApiResponse<ChiTietSanPhamDto>  findAllByKichThuocAndMauSac(@PathVariable String ma, @RequestParam UUID kichThuoc, @RequestParam UUID mauSac){
+        ChiTietSanPhamDto dto = TranferDatas.convertToDto(ctSanPhamService.findChiTietSanPhamByMauSacAndKichThuoc(ma, kichThuoc, mauSac));
+        ApiResponse<ChiTietSanPhamDto>  apiResponse = new ApiResponse<>();
+        if (dto != null){
+            apiResponse.setMessage("lay danh sach san pham thanh cong");
+            apiResponse.setResult(dto);
+        }else {
+            throw new AppException(ErrorCode.NO_PRODUCT_DETAIL_FOUND);
+        }
+        return apiResponse;
+    }
+
+
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable UUID id){

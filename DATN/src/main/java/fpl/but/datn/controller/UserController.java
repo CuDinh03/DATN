@@ -115,6 +115,15 @@ public class UserController {
         return ApiResponse.<Void>builder().build();
     }
 
+    @DeleteMapping("/open/{id}")
+    ApiResponse<Void> open(@PathVariable String id) {
+        UUID idTaiKhoan = null;
+        if (id != null) {
+            idTaiKhoan = UUID.fromString(id);
+            taiKhoanService.open(idTaiKhoan);
+        } return ApiResponse.<Void>builder().build();
+    }
+
     @PostMapping("/check-username")
     public ApiResponse<TaiKhoanDto> findByTenDangNhap(@RequestBody String tenDangNhap) {
         Optional<TaiKhoan> taiKhoanOptional = taiKhoanService.findByNguoiDungByTenDangNhap(tenDangNhap);

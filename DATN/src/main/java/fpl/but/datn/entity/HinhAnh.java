@@ -19,6 +19,9 @@ public class HinhAnh {
     private UUID id;
     @ManyToOne
     private ChiTietSanPham chiTietSanPham;
+
+    @ManyToOne
+    private SanPham sanPham;
     private String ma;
     private String url;
     private Date ngayTao;

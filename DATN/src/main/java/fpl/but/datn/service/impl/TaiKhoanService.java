@@ -5,10 +5,7 @@ import com.nimbusds.jwt.JWTClaimsSet;
 import fpl.but.datn.dto.request.AuthenticationRequest;
 import fpl.but.datn.dto.response.AuthenticationResponse;
 import fpl.but.datn.dto.response.TaiKhoanResponse;
-import fpl.but.datn.entity.ChucVu;
-import fpl.but.datn.entity.GioHang;
-import fpl.but.datn.entity.KhachHang;
-import fpl.but.datn.entity.TaiKhoan;
+import fpl.but.datn.entity.*;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.repository.TaiKhoanRepository;
@@ -189,5 +186,11 @@ public class TaiKhoanService implements ITaiKhoanService {
         TaiKhoan taiKhoan = getByID(id);
         taiKhoan.setTrangThai(0);
         taiKhoanRepository.save(taiKhoan);
+    }
+    public void open(UUID id) {
+        TaiKhoan taiKhoan = getByID(id);
+        taiKhoan.setTrangThai(1);
+        taiKhoanRepository.save(taiKhoan);
+
     }
 }

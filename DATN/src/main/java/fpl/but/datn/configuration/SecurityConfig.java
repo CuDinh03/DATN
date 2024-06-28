@@ -34,8 +34,8 @@ public class SecurityConfig {
             "/api/hoa-don-chi-tiet/all/{id}",
             "/api/auth/log-in", "/api/users/create", "/api/users/check-username", "/api/users/myInfo",
             "/api/chi-tiet-san-pham/getAll", "/api/chi-tiet-san-pham/all/{id}", "/api/chi-tiet-san-pham/{id}",
-            "/api/chi-tiet-san-pham/findAllMauSacByMaCTSP/{ma}", "/api/chi-tiet-san-pham/findAllKichThuocByMaCTSP/{ma}",
-            "/api/chi-tiet-san-pham/findChiTietSanPhamByMauSacAndKichThuoc/{ma}", "/api/chi-tiet-san-pham/findSanPhamByKichThuoc/{ma}",
+            "/api/chi-tiet-san-pham/findAllKichThuocByMaCTSP/{ma}",
+            "/api/chi-tiet-san-pham/", "/api/chi-tiet-san-pham/findSanPhamByKichThuoc/{ma}",
             "/api/thanhtoan/onl", "/api/voucher/all", "/api/voucher/allVouchers", "/api/voucher/{id}",
             "/api/thanhtoan/onl",
             "/api/hoa-don-chi-tiet/all/{id}",
@@ -79,7 +79,7 @@ public class SecurityConfig {
             "/api/danh-muc/{id}"
             ,"/api/hoa-don/updateTrangThai/{id}"
     };
-    private final String[] ADMIN_ENDPOINT_DELETE = {"/api/voucher/{id}","/api/users/{id}",
+    private final String[] ADMIN_ENDPOINT_DELETE = {"/api/voucher/{id}","/api/users/{id}", "/api/users//open/{id}",
             "/api/danh-muc/{id}",            "/api/voucher/{id}", "/api/users/{id}", "/api/danh-muc/{id}","/api/hoa-don/updateTrangThai/{id}"
 
     };

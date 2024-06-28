@@ -65,7 +65,8 @@ public interface CTSanPhamRepository extends JpaRepository<ChiTietSanPham, UUID>
 
     @Query("SELECT ctsp FROM ChiTietSanPham ctsp WHERE ctsp.ma = :ma AND ctsp.kichThuoc.id = :kichThuoc AND ctsp.mauSac.id = :mauSac")
     ChiTietSanPham findChiTietSanPhamByMauSacAndKichThuoc(@Param("ma") String ma,@Param("kichThuoc")UUID kichThuoc, @Param("mauSac") UUID mauSac );
-
+    @Query("SELECT c FROM ChiTietSanPham c WHERE c.ma = :ma AND c.kichThuoc.id = :kichThuoc")
+    List<ChiTietSanPham> findChiTietSanPhamByMaAndKichThuoc(@Param("ma") String ma, @Param("kichThuoc") UUID kichThuoc);
     // Tim kiem
     @Query("SELECT ctsp FROM ChiTietSanPham ctsp WHERE ctsp.sanPham.id = :sanPhamId")
     List<ChiTietSanPham> findCTSPBySanPhamId(@Param("sanPhamId") UUID sanPhamId);
@@ -85,7 +86,7 @@ public interface CTSanPhamRepository extends JpaRepository<ChiTietSanPham, UUID>
     @Query("SELECT ctsp FROM ChiTietSanPham ctsp WHERE ctsp.thuongHieu.id = :thuongHieuId")
     List<ChiTietSanPham> findCTSPByThuongHieuId(@Param("thuongHieuId") UUID thuongHieuId);
 
-    @Query
-    ChiTietSanPham getCtsp();
+    @Query("select hd.chiTietSanPham from HoaDonChiTiet hd where hd.hoaDon.id = :hoaDonId")
+    List<ChiTietSanPham> getCtspByHoaDon(@Param("hoaDonId") UUID hoaDonId);
 
 }
