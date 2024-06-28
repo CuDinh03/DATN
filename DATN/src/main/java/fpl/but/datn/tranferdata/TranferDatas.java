@@ -225,7 +225,7 @@ public class TranferDatas {
         return dtoList;
     }
 
-    // hinh anh
+    //  anh
     public static HinhAnhDto convertToDto(HinhAnh entity) {
         HinhAnhDto dto = new HinhAnhDto();
         if (entity.getId() != null) dto.setId(entity.getId());

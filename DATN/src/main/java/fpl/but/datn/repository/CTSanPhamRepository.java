@@ -43,7 +43,7 @@ public interface CTSanPhamRepository extends JpaRepository<ChiTietSanPham, UUID>
 
 
     // LIST ChiTietSanPham với trạng thái = 1 và sắp xếp theo ngày tạo
-    @Query("SELECT ctsp FROM ChiTietSanPham ctsp ORDER BY ctsp.ngayTao DESC")
+    @Query("SELECT ctsp FROM ChiTietSanPham ctsp where ctsp.trangThai = 1 ORDER BY ctsp.ngayTao DESC")
     Page<ChiTietSanPham> findAllSapXepNgayTao(Pageable pageable);
 
     // chuyển trạng thái theo id SPCT
@@ -88,5 +88,7 @@ public interface CTSanPhamRepository extends JpaRepository<ChiTietSanPham, UUID>
 
     @Query("select hd.chiTietSanPham from HoaDonChiTiet hd where hd.hoaDon.id = :hoaDonId")
     List<ChiTietSanPham> getCtspByHoaDon(@Param("hoaDonId") UUID hoaDonId);
+    @Query("SELECT ctsp FROM ChiTietSanPham ctsp WHERE ctsp.trangThai = :trangThai")
+    List<ChiTietSanPham> getAllByTrangThai(@Param("trangThai") Integer trangThai);
 
 }

@@ -46,14 +46,15 @@ public class CTSanPhamController {
         }
         return apiResponse;
     }
+
     @GetMapping("/findAllKichThuocByMaCTSP/{ma}")
-    ApiResponse<List<KichThuocDto>> finAllKichThuocByMaCTSP(@PathVariable String ma){
+    ApiResponse<List<KichThuocDto>> finAllKichThuocByMaCTSP(@PathVariable String ma) {
         List<KichThuocDto> dto = TranferDatas.convertListKichThuocToDto(ctSanPhamService.findkichThuocsByMaSanPhamChiTiet(ma));
         ApiResponse<List<KichThuocDto>> apiResponse = new ApiResponse<>();
-        if (!dto.isEmpty()){
+        if (!dto.isEmpty()) {
             apiResponse.setMessage("lay danh sach kich thuoc thanh cong");
             apiResponse.setResult(dto);
-        }else {
+        } else {
             throw new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION);
         }
         return apiResponse;
@@ -102,47 +103,47 @@ public class CTSanPhamController {
     }
 
     @PutMapping("/update/{id}")
-    ChiTietSanPham update(@PathVariable UUID id,@RequestBody ChiTietSanPhamDto chiTietSanPhamDto) {
+    ChiTietSanPham update(@PathVariable UUID id, @RequestBody ChiTietSanPhamDto chiTietSanPhamDto) {
         UUID idCTSP = null;
-        if (id != null){
+        if (id != null) {
             idCTSP = id;
             return ctSanPhamService.update(TranferDatas.convertToEntity(chiTietSanPhamDto), idCTSP);
         }
         return null;
     }
+
     @GetMapping("/findAllMauSacByMaCTSP/{ma}")
-    ApiResponse<List<MauSacDto>> finAllMauSacByMaCTSP(@PathVariable String ma){
+    ApiResponse<List<MauSacDto>> finAllMauSacByMaCTSP(@PathVariable String ma) {
         List<MauSacDto> dto = TranferDatas.convertListMauSacToDto(ctSanPhamService.findAllMauSacByMaCTSP(ma));
         ApiResponse<List<MauSacDto>> apiResponse = new ApiResponse<>();
-        if (!dto.isEmpty()){
+        if (!dto.isEmpty()) {
             apiResponse.setMessage("lay danh sach mau sac thanh cong");
             apiResponse.setResult(dto);
-        }else {
+        } else {
             throw new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION);
         }
         return apiResponse;
     }
 
     @GetMapping("/findChiTietSanPhamByMauSacAndKichThuoc/{ma}")
-    ApiResponse<ChiTietSanPhamDto>  findAllByKichThuocAndMauSac(@PathVariable String ma, @RequestParam UUID kichThuoc, @RequestParam UUID mauSac){
+    ApiResponse<ChiTietSanPhamDto> findAllByKichThuocAndMauSac(@PathVariable String ma, @RequestParam UUID kichThuoc, @RequestParam UUID mauSac) {
         ChiTietSanPhamDto dto = TranferDatas.convertToDto(ctSanPhamService.findChiTietSanPhamByMauSacAndKichThuoc(ma, kichThuoc, mauSac));
-        ApiResponse<ChiTietSanPhamDto>  apiResponse = new ApiResponse<>();
-        if (dto != null){
+        ApiResponse<ChiTietSanPhamDto> apiResponse = new ApiResponse<>();
+        if (dto != null) {
             apiResponse.setMessage("lay danh sach san pham thanh cong");
             apiResponse.setResult(dto);
-        }else {
+        } else {
             throw new AppException(ErrorCode.NO_PRODUCT_DETAIL_FOUND);
         }
         return apiResponse;
     }
 
 
-
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable UUID id){
-        if (ctSanPhamService.delete(id)){
+    public ResponseEntity<?> delete(@PathVariable UUID id) {
+        if (ctSanPhamService.delete(id)) {
             return ResponseEntity.ok("xoa thanh cong");
-        }else
+        } else
             return ResponseEntity.ok("xoa that bai");
     }
 
@@ -150,7 +151,7 @@ public class CTSanPhamController {
     ApiResponse<ChiTietSanPhamDto> detail(@PathVariable String id) {
         ApiResponse<ChiTietSanPhamDto> apiResponse = new ApiResponse<>();
         UUID idChiTietSanPham = null;
-        if (id != null){
+        if (id != null) {
             idChiTietSanPham = UUID.fromString(id);
             ChiTietSanPhamDto dto = TranferDatas.convertToDto(ctSanPhamService.findById(idChiTietSanPham));
             apiResponse.setMessage("Lấy chi tiết sản phẩm thành công");
@@ -175,12 +176,12 @@ public class CTSanPhamController {
     ApiResponse<List<ChiTietSanPhamDto>> getCTSPBySanPhamId(@PathVariable UUID id) {
         ApiResponse<List<ChiTietSanPhamDto>> apiResponse = new ApiResponse<>();
         UUID sanPhamId = null;
-        if (id != null){
+        if (id != null) {
             sanPhamId = id;
             List<ChiTietSanPhamDto> listDto = TranferDatas.convertListChiTietSanPhamToDto(ctSanPhamService.findCTSPBySanPhamId(sanPhamId));
             apiResponse.setMessage("Lấy danh sách chi tiết sản phẩm thành công");
             apiResponse.setResult(listDto);
-        }else {
+        } else {
             throw new AppException(ErrorCode.NO_LISTSPChiTiet_FOUND);
         }
         return apiResponse;
@@ -247,6 +248,46 @@ public class CTSanPhamController {
             apiResponse.setResult(listDto);
         } else {
             throw new AppException(ErrorCode.NO_LISTSPChiTiet_FOUND);
+        }
+        return apiResponse;
+    }
+
+    @PostMapping("/saveAllSp")
+    public ApiResponse<List<ChiTietSanPham>> saveChiTietSanPham(
+            @RequestBody SaveCtspRequest saveCtspRequest) {
+        ApiResponse<List<ChiTietSanPham>> apiResponse = new ApiResponse<>();
+        List<ChiTietSanPham> chiTietSanPhams = ctSanPhamService.saveCtsp(
+                saveCtspRequest.getSanPham(),
+                saveCtspRequest.getMauSacList(),
+                saveCtspRequest.getChatLieu(),
+                saveCtspRequest.getDanhMuc(),
+                saveCtspRequest.getThuongHieu(),
+                saveCtspRequest.getKichThuocList()
+        );
+        apiResponse.setMessage("Lưu chi tiết sản phẩm thành công");
+        apiResponse.setResult(chiTietSanPhams);
+        return apiResponse;
+    }
+
+    @GetMapping("/getCtsp")
+    public ApiResponse<List<ChiTietSanPham>> getCtsp(){
+        ApiResponse<List<ChiTietSanPham>> apiResponse = new ApiResponse<>();
+        List<ChiTietSanPham> chiTietSanPhams = ctSanPhamService.getCtsp();
+        apiResponse.setMessage("Show chi tiết sản phẩm thành công");
+        apiResponse.setResult(chiTietSanPhams);
+        return apiResponse;
+    }
+
+    @PostMapping("/saveListCt")
+    public ApiResponse<List<ChiTietSanPham>> saveListCt(@RequestBody List<ChiTietSanPham> list) {
+        ApiResponse<List<ChiTietSanPham>> apiResponse = new ApiResponse<>();
+        try {
+            List<ChiTietSanPham> savedList = ctSanPhamService.saveListCt(list);
+            apiResponse.setMessage("Lưu danh sách chi tiết sản phẩm thành công");
+            apiResponse.setResult(savedList);
+        } catch (Exception e) {
+            apiResponse.setMessage("Có lỗi xảy ra khi lưu danh sách chi tiết sản phẩm");
+            e.printStackTrace();
         }
         return apiResponse;
     }

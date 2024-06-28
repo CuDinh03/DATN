@@ -31,7 +31,6 @@ public class MauSacController {
     ApiResponse<List<MauSacDto>> getAll() {
         List<MauSacDto> listDto = TranferDatas.convertListMauSacToDto(mauSacService.getAll());
         ApiResponse<List<MauSacDto>> apiResponse = new ApiResponse<>();
-
         if (!listDto.isEmpty()) {
             apiResponse.setMessage("Lấy danh sách màu sắc thành công");
             apiResponse.setResult(listDto);

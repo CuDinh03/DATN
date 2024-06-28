@@ -1,8 +1,6 @@
 package fpl.but.datn.service;
 
-import fpl.but.datn.entity.ChiTietSanPham;
-import fpl.but.datn.entity.KichThuoc;
-import fpl.but.datn.entity.MauSac;
+import fpl.but.datn.entity.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -47,5 +45,14 @@ public interface ICTSanPhamService {
     List<ChiTietSanPham> findCTSPByMauSacId(UUID id);
 
     List<ChiTietSanPham> findCTSPByThuongHieuId(UUID id);
+    List<ChiTietSanPham> saveCtsp(SanPham sanPham,
+                                  List<MauSac> mauSacList,
+                                  ChatLieu chatLieu,
+                                  DanhMuc danhMuc,
+                                  ThuongHieu thuongHieu,
+                                  List<KichThuoc> kichThuocList);
+
+    List<ChiTietSanPham> getCtsp();
+    List<ChiTietSanPham> saveListCt(List<ChiTietSanPham> list);
 
 }

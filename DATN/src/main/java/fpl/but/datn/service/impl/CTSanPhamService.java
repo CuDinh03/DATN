@@ -11,10 +11,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.math.BigDecimal;
+import java.util.*;
+
 @Service
 public class CTSanPhamService implements ICTSanPhamService {
 
@@ -114,8 +113,20 @@ public class CTSanPhamService implements ICTSanPhamService {
                     request.getDanhMuc(),
                     request.getKichThuoc(),
                     request.getMauSac());
+            if (chiTietSanPham.getSoLuong()==null){
+                chiTietSanPham.setSoLuong(0);
+            }            if (chiTietSanPham.getGiaBan()==null){
+                chiTietSanPham.setGiaBan(BigDecimal.valueOf(0));
+            }            if (chiTietSanPham.getGiaNhap()==null){
+                chiTietSanPham.setGiaNhap(BigDecimal.valueOf(0));
+            }
+            if (chiTietSanPham.getTrangThai() == 2){
+                chiTietSanPham.setTrangThai(1);
+            }
 
             // Cập nhật số lượng của sản phẩm chi tiết
+            chiTietSanPham.setGiaNhap(request.getGiaNhap());
+            chiTietSanPham.setGiaBan(request.getGiaBan());
             chiTietSanPham.setSoLuong(chiTietSanPham.getSoLuong() + request.getSoLuong());
             chiTietSanPham.setNgaySua(new Date());
         } else {
@@ -134,7 +145,7 @@ public class CTSanPhamService implements ICTSanPhamService {
             chiTietSanPham.setNgayNhap(new Date());
             chiTietSanPham.setNgayTao(new Date());
             chiTietSanPham.setNgaySua(new Date());
-            chiTietSanPham.setTrangThai(1);
+            chiTietSanPham.setTrangThai(request.getTrangThai());
             chiTietSanPham.setHinhAnh(request.getHinhAnh());
         }
 
@@ -191,5 +202,52 @@ public class CTSanPhamService implements ICTSanPhamService {
         int updatedRecords = ctSanPhamRepository.updateTrangThai(id);
         return updatedRecords > 0;
     }
+
+    public List<ChiTietSanPham> saveCtsp(SanPham sanPham,
+                         List<MauSac> mauSacList,
+                         ChatLieu chatLieu,
+                         DanhMuc danhMuc,
+                         ThuongHieu thuongHieu,
+                         List<KichThuoc> kichThuocList){
+        List<ChiTietSanPham> chiTietSanPhamsList = new ArrayList<>();
+        for (MauSac ms : mauSacList){
+            for (KichThuoc kt: kichThuocList){
+                ChiTietSanPham chiTietSanPham = new ChiTietSanPham();
+                Random random = new Random();
+                chiTietSanPham.setMa("CTSP"+ random.nextInt(1000));
+                chiTietSanPham.setChatLieu(chatLieu);
+                chiTietSanPham.setThuongHieu(thuongHieu);
+                chiTietSanPham.setDanhMuc(danhMuc);
+                chiTietSanPham.setSanPham(sanPham);
+                chiTietSanPham.setMauSac(ms);
+                chiTietSanPham.setKichThuoc(kt);
+                chiTietSanPham.setNgayNhap(new Date());
+                chiTietSanPham.setNgayTao(new Date());
+                chiTietSanPham.setNgaySua(new Date());
+                chiTietSanPham.setTrangThai(2);
+                chiTietSanPhamsList.add(create(chiTietSanPham));
+            }
+        }
+
+        return chiTietSanPhamsList;
+
+    }
+    @Override
+    public List<ChiTietSanPham> getCtsp(){
+        return ctSanPhamRepository.getAllByTrangThai(2);
+    }
+
+    @Override
+    public List<ChiTietSanPham> saveListCt(List<ChiTietSanPham> list) {
+        List<ChiTietSanPham> chiTietSanPhamList = new ArrayList<>();
+        for (ChiTietSanPham ct:
+             list) {
+            ct.setNgaySua(new Date());
+            ct.setTrangThai(1);
+            chiTietSanPhamList.add(create(ct));
+        }
+        return chiTietSanPhamList;
+    }
+
 
 }
