@@ -17,173 +17,6 @@ import java.util.function.Function;
 
 public class TranferDatas {
 
-
-    static KhachHangRepository khachHangRepository = new KhachHangRepository() {
-        @Override
-        public Page<KhachHang> findAllPage(Pageable pageable) {
-            return null;
-        }
-
-        @Override
-        public Optional<KhachHang> getKhachHangBySdt(String sdt) {
-            return Optional.empty();
-        }
-
-        @Override
-        public KhachHang findKHByTenDangNhap(String tenDangNhap) {
-            return null;
-        }
-
-        @Override
-        public void flush() {
-
-        }
-
-        @Override
-        public <S extends KhachHang> S saveAndFlush(S entity) {
-            return null;
-        }
-
-        @Override
-        public <S extends KhachHang> List<S> saveAllAndFlush(Iterable<S> entities) {
-            return null;
-        }
-
-        @Override
-        public void deleteAllInBatch(Iterable<KhachHang> entities) {
-
-        }
-
-        @Override
-        public void deleteAllByIdInBatch(Iterable<UUID> uuids) {
-
-        }
-
-        @Override
-        public void deleteAllInBatch() {
-
-        }
-
-        @Override
-        public KhachHang getOne(UUID uuid) {
-            return null;
-        }
-
-        @Override
-        public KhachHang getById(UUID uuid) {
-            return null;
-        }
-
-        @Override
-        public KhachHang getReferenceById(UUID uuid) {
-            return null;
-        }
-
-        @Override
-        public <S extends KhachHang> List<S> findAll(Example<S> example) {
-            return null;
-        }
-
-        @Override
-        public <S extends KhachHang> List<S> findAll(Example<S> example, Sort sort) {
-            return null;
-        }
-
-        @Override
-        public <S extends KhachHang> List<S> saveAll(Iterable<S> entities) {
-            return null;
-        }
-
-        @Override
-        public List<KhachHang> findAll() {
-            return null;
-        }
-
-        @Override
-        public List<KhachHang> findAllById(Iterable<UUID> uuids) {
-            return null;
-        }
-
-        @Override
-        public <S extends KhachHang> S save(S entity) {
-            return null;
-        }
-
-        @Override
-        public Optional<KhachHang> findById(UUID uuid) {
-            return Optional.empty();
-        }
-
-        @Override
-        public boolean existsById(UUID uuid) {
-            return false;
-        }
-
-        @Override
-        public long count() {
-            return 0;
-        }
-
-        @Override
-        public void deleteById(UUID uuid) {
-
-        }
-
-        @Override
-        public void delete(KhachHang entity) {
-
-        }
-
-        @Override
-        public void deleteAllById(Iterable<? extends UUID> uuids) {
-
-        }
-
-        @Override
-        public void deleteAll(Iterable<? extends KhachHang> entities) {
-
-        }
-
-        @Override
-        public void deleteAll() {
-
-        }
-
-        @Override
-        public List<KhachHang> findAll(Sort sort) {
-            return null;
-        }
-
-        @Override
-        public Page<KhachHang> findAll(Pageable pageable) {
-            return null;
-        }
-
-        @Override
-        public <S extends KhachHang> Optional<S> findOne(Example<S> example) {
-            return Optional.empty();
-        }
-
-        @Override
-        public <S extends KhachHang> Page<S> findAll(Example<S> example, Pageable pageable) {
-            return null;
-        }
-
-        @Override
-        public <S extends KhachHang> long count(Example<S> example) {
-            return 0;
-        }
-
-        @Override
-        public <S extends KhachHang> boolean exists(Example<S> example) {
-            return false;
-        }
-
-        @Override
-        public <S extends KhachHang, R> R findBy(Example<S> example, Function<FluentQuery.FetchableFluentQuery<S>, R> queryFunction) {
-            return null;
-        }
-    };
     public static ChucVuDto convertToDto(ChucVu entity) {
         ChucVuDto dto = new ChucVuDto();
         if (entity.getId() != null) dto.setId(entity.getId());
@@ -917,6 +750,45 @@ public class TranferDatas {
     public static List<GioHangDto> convertListGioHangToDto(List<GioHang> entityList) {
         List<GioHangDto> dtoList = new ArrayList<>();
         for (GioHang entity : entityList) {
+            dtoList.add(convertToDto(entity));
+        }
+        return dtoList;
+    }
+
+
+    public static DanhGiaDto convertToDto(DanhGia entity) {
+        DanhGiaDto dto = new DanhGiaDto();
+        if (entity.getId() != null) dto.setId(entity.getId());
+        if (entity.getMa() != null) dto.setMa(entity.getMa());
+        if (entity.getDiem() != null) dto.setDiem(entity.getDiem());
+        if (entity.getTieuDe() != null) dto.setTieuDe(entity.getTieuDe());
+        if (entity.getNoiDung() != null) dto.setNoiDung(entity.getNoiDung());
+        if (entity.getHoaDonChiTiet() != null) dto.setHoaDonChiTiet(entity.getHoaDonChiTiet());
+        if (entity.getKhachHang() != null) dto.setKhachHang(entity.getKhachHang());
+        if (entity.getNgayTao() != null) dto.setNgayTao(entity.getNgayTao());
+        if (entity.getNgaySua() != null) dto.setNgaySua(entity.getNgaySua());
+        if (entity.getTrangThai() != null) dto.setTrangThai(entity.getTrangThai());
+        return dto;
+    }
+
+    public static DanhGia convertToEntity(DanhGiaDto dto) {
+        DanhGia entity = new DanhGia();
+        if (dto.getId() != null) entity.setId(dto.getId());
+        if (dto.getMa() != null) entity.setMa(dto.getMa());
+        if (dto.getDiem() != null) entity.setDiem(dto.getDiem());
+        if (dto.getTieuDe() != null) entity.setTieuDe(dto.getTieuDe());
+        if (dto.getNoiDung() != null) entity.setNoiDung(dto.getNoiDung());
+        if (dto.getHoaDonChiTiet() != null) entity.setHoaDonChiTiet(dto.getHoaDonChiTiet());
+        if (dto.getKhachHang() != null) entity.setKhachHang(dto.getKhachHang());
+        if (dto.getNgayTao() != null) entity.setNgayTao(dto.getNgayTao());
+        if (dto.getNgaySua() != null) entity.setNgaySua(dto.getNgaySua());
+        if (dto.getTrangThai() != null) entity.setTrangThai(dto.getTrangThai());
+        return entity;
+    }
+
+    public static List<DanhGiaDto> convertListDanhGiaToDto(List<DanhGia> entityList) {
+        List<DanhGiaDto> dtoList = new ArrayList<>();
+        for (DanhGia entity : entityList) {
             dtoList.add(convertToDto(entity));
         }
         return dtoList;

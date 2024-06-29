@@ -134,7 +134,7 @@ public class HoaDonController {
         ApiResponse<Page<HoaDonDto>> apiResponse = new ApiResponse<>();
 
         if (!listDto.isEmpty()) {
-            apiResponse.setMessage("Lấy danh sách danh mục thành công");
+            apiResponse.setMessage("Lấy danh sách hóa đơn thành công");
             apiResponse.setResult(new PageImpl<>(listDto, pageable, hoaDonPage.getTotalElements()));
         } else {
             throw new AppException(ErrorCode.NO_ACCOUNTS_FOUND);

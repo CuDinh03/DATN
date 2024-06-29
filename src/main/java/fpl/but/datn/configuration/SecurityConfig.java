@@ -26,7 +26,9 @@ public class SecurityConfig {
             "/api/chi-tiet-san-pham/findAllKichThuocByMaCTSP/{ma}", "/api/chi-tiet-san-pham/findChiTietSanPhamByMauSacAndKichThuoc/{ma}","/api/chi-tiet-san-pham/findSanPhamByKichThuoc/{ma}",
             "/api/thanhtoan/onl", "/api/voucher/all", "/api/voucher/allVouchers", "/api/voucher/{id}",
             "/api/hoa-don-chi-tiet/all/{id}", "/api/hoa-don-chi-tiet/{id}",
-            "/api/hoa-don/{id}"
+            "/api/hoa-don/{id}", "/api/hoa-don/updateTrangThai/{id}",
+            "/api/danh-gia/find-all", "/api/danh-gia/create",
+            "/api/danh-muc/getAll"
     };
     private final String[] ADMIN_ENDPOINT_GET = {
             "/api/users/all","/api/users/{id}", "/api/users/myInfo",
@@ -47,7 +49,6 @@ public class SecurityConfig {
     };
     private final String[] ADMIN_ENDPOINT_PUT = {"/api/voucher/{id}", "/api/users/{id}",
             "/api/danh-muc/{id}"
-            ,"/api/hoa-don/updateTrangThai/{id}"
     };
     private final String[] ADMIN_ENDPOINT_DELETE = {"/api/voucher/{id}","/api/users/{id}",
             "/api/danh-muc/{id}"
