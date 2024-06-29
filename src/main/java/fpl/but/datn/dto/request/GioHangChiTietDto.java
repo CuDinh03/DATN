@@ -1,8 +1,6 @@
 package fpl.but.datn.dto.request;
-
 import fpl.but.datn.entity.ChiTietSanPham;
 import fpl.but.datn.entity.GioHang;
-import fpl.but.datn.entity.HinhAnh;
 import lombok.Data;
 
 import java.util.Date;

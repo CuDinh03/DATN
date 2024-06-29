@@ -2,188 +2,89 @@ package fpl.but.datn.tranferdata;
 
 import fpl.but.datn.dto.request.*;
 import fpl.but.datn.entity.*;
-import fpl.but.datn.repository.KhachHangRepository;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.repository.query.FluentQuery;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
-import java.util.function.Function;
+
 
 public class TranferDatas {
 
+        public static NhanVienDto convertNhanVienToDto(NhanVien entity) {
+        NhanVienDto nhanVienDto = new NhanVienDto();
+        if (entity.getId() != null) nhanVienDto.setId(entity.getId());
+        if (entity.getMa() != null) nhanVienDto.setMa(entity.getMa());
+        if (entity.getTen() != null) nhanVienDto.setTen(entity.getTen());
+        if (entity.getEmail() != null) nhanVienDto.setEmail(entity.getEmail());
+        if (entity.getSdt() != null) nhanVienDto.setSdt(entity.getSdt());
+        if (entity.getGioiTinh() != null) nhanVienDto.setGioiTinh(entity.getGioiTinh());
+        if (entity.getNgaySinh() != null) nhanVienDto.setNgaySinh(entity.getNgaySinh());
+        if (entity.getDiaChi() != null) nhanVienDto.setDiaChi(entity.getDiaChi());
+        if (entity.getNgaySua() != null) nhanVienDto.setNgaySua(entity.getNgaySua());
+        if (entity.getNgayTao() != null) nhanVienDto.setNgayTao(entity.getNgayTao());
+        if (entity.getTrangThai() != null) nhanVienDto.setTrangThai(entity.getTrangThai());
+        if (entity.getTaiKhoan() != null) nhanVienDto.setIdTaiKhoan(entity.getTaiKhoan());
+        return nhanVienDto;
+    }
 
-    static KhachHangRepository khachHangRepository = new KhachHangRepository() {
-        @Override
-        public Page<KhachHang> findAllPage(Pageable pageable) {
-            return null;
+    public static NhanVien convertToNhanVienEntity(NhanVienDto dto) {
+        NhanVien nhanVien = new NhanVien();
+        if (dto.getId() != null) nhanVien.setId(dto.getId());
+        if (dto.getMa() != null) nhanVien.setMa(dto.getMa());
+        if (dto.getTen() != null) nhanVien.setTen(dto.getTen());
+        if (dto.getEmail() != null) nhanVien.setEmail(dto.getEmail());
+        if (dto.getSdt() != null) nhanVien.setSdt(dto.getSdt());
+        if (dto.getGioiTinh() != null) nhanVien.setGioiTinh(dto.getGioiTinh());
+        if (dto.getNgaySinh() != null) nhanVien.setNgaySinh(dto.getNgaySinh());
+        if (dto.getDiaChi() != null) nhanVien.setDiaChi(dto.getDiaChi());
+        if (dto.getNgaySua() != null) nhanVien.setNgaySua(dto.getNgaySua());
+        if (dto.getNgayTao() != null) nhanVien.setNgayTao(dto.getNgayTao());
+        if (dto.getTrangThai() != null) nhanVien.setTrangThai(dto.getTrangThai());
+        if (dto.getIdTaiKhoan() != null) nhanVien.setTaiKhoan(dto.getIdTaiKhoan());
+        return nhanVien;
+    }
+
+    public static List<NhanVienDto> convertToListNhanVienDto(List<NhanVien> lstNhanVien) {
+        List<NhanVienDto> lstNhanVienDto = new ArrayList<>();
+        for (NhanVien nhanVien : lstNhanVien) {
+            lstNhanVienDto.add(convertNhanVienToDto(nhanVien));
         }
+        return lstNhanVienDto;
+    }
 
-        @Override
-        public Optional<KhachHang> getKhachHangBySdt(String sdt) {
-            return Optional.empty();
+    // ---------- PhuongThucThanhToan
+    public static PhuongThucThanhToanDto convertPTThanhToanToDto(PhuongThucThanhToan entity) {
+        PhuongThucThanhToanDto dto = new PhuongThucThanhToanDto();
+        if (entity.getId() != null) dto.setId(entity.getId());
+        if (entity.getMa() != null) dto.setMa(entity.getMa());
+        if (entity.getTen() != null) dto.setTen(entity.getTen());
+        if (entity.getNgayTao() != null) dto.setNgayTao(entity.getNgayTao());
+        if (entity.getNgaySua() != null) dto.setNgaySua(entity.getNgaySua());
+        if (entity.getTrangThai() != null) dto.setTrangThai(entity.getTrangThai());
+        if (entity.getCode() != null) dto.setCode(entity.getCode());
+        if (entity.getMoTa() != null) dto.setMoTa(entity.getMoTa());
+        return dto;
+    }
+
+    public static PhuongThucThanhToan convertPPThanhToanToEntity(PhuongThucThanhToanDto dto) {
+        PhuongThucThanhToan entity = new PhuongThucThanhToan();
+        if (dto.getId() != null) entity.setId(dto.getId());
+        if (dto.getMa() != null) entity.setMa(dto.getMa());
+        if (dto.getTen() != null) entity.setTen(dto.getTen());
+        if (dto.getNgayTao() != null) entity.setNgayTao(dto.getNgayTao());
+        if (dto.getNgaySua() != null) entity.setNgaySua(dto.getNgaySua());
+        if (dto.getTrangThai() != null) entity.setTrangThai(dto.getTrangThai());
+        if (dto.getCode() != null) entity.setCode(entity.getCode());
+        if (dto.getMoTa() != null) entity.setMoTa(entity.getMoTa());
+        return entity;
+    }
+
+    public static List<PhuongThucThanhToanDto> convertListPTThanhToanToDto(List<PhuongThucThanhToan> entityList) {
+        List<PhuongThucThanhToanDto> dtoList = new ArrayList<>();
+        for (PhuongThucThanhToan entity : entityList) {
+            dtoList.add(convertPTThanhToanToDto(entity));
         }
+        return dtoList;
+    }
 
-        @Override
-        public KhachHang findKHByTenDangNhap(String tenDangNhap) {
-            return null;
-        }
-
-        @Override
-        public void flush() {
-
-        }
-
-        @Override
-        public <S extends KhachHang> S saveAndFlush(S entity) {
-            return null;
-        }
-
-        @Override
-        public <S extends KhachHang> List<S> saveAllAndFlush(Iterable<S> entities) {
-            return null;
-        }
-
-        @Override
-        public void deleteAllInBatch(Iterable<KhachHang> entities) {
-
-        }
-
-        @Override
-        public void deleteAllByIdInBatch(Iterable<UUID> uuids) {
-
-        }
-
-        @Override
-        public void deleteAllInBatch() {
-
-        }
-
-        @Override
-        public KhachHang getOne(UUID uuid) {
-            return null;
-        }
-
-        @Override
-        public KhachHang getById(UUID uuid) {
-            return null;
-        }
-
-        @Override
-        public KhachHang getReferenceById(UUID uuid) {
-            return null;
-        }
-
-        @Override
-        public <S extends KhachHang> List<S> findAll(Example<S> example) {
-            return null;
-        }
-
-        @Override
-        public <S extends KhachHang> List<S> findAll(Example<S> example, Sort sort) {
-            return null;
-        }
-
-        @Override
-        public <S extends KhachHang> List<S> saveAll(Iterable<S> entities) {
-            return null;
-        }
-
-        @Override
-        public List<KhachHang> findAll() {
-            return null;
-        }
-
-        @Override
-        public List<KhachHang> findAllById(Iterable<UUID> uuids) {
-            return null;
-        }
-
-        @Override
-        public <S extends KhachHang> S save(S entity) {
-            return null;
-        }
-
-        @Override
-        public Optional<KhachHang> findById(UUID uuid) {
-            return Optional.empty();
-        }
-
-        @Override
-        public boolean existsById(UUID uuid) {
-            return false;
-        }
-
-        @Override
-        public long count() {
-            return 0;
-        }
-
-        @Override
-        public void deleteById(UUID uuid) {
-
-        }
-
-        @Override
-        public void delete(KhachHang entity) {
-
-        }
-
-        @Override
-        public void deleteAllById(Iterable<? extends UUID> uuids) {
-
-        }
-
-        @Override
-        public void deleteAll(Iterable<? extends KhachHang> entities) {
-
-        }
-
-        @Override
-        public void deleteAll() {
-
-        }
-
-        @Override
-        public List<KhachHang> findAll(Sort sort) {
-            return null;
-        }
-
-        @Override
-        public Page<KhachHang> findAll(Pageable pageable) {
-            return null;
-        }
-
-        @Override
-        public <S extends KhachHang> Optional<S> findOne(Example<S> example) {
-            return Optional.empty();
-        }
-
-        @Override
-        public <S extends KhachHang> Page<S> findAll(Example<S> example, Pageable pageable) {
-            return null;
-        }
-
-        @Override
-        public <S extends KhachHang> long count(Example<S> example) {
-            return 0;
-        }
-
-        @Override
-        public <S extends KhachHang> boolean exists(Example<S> example) {
-            return false;
-        }
-
-        @Override
-        public <S extends KhachHang, R> R findBy(Example<S> example, Function<FluentQuery.FetchableFluentQuery<S>, R> queryFunction) {
-            return null;
-        }
-    };
     public static ChucVuDto convertToDto(ChucVu entity) {
         ChucVuDto dto = new ChucVuDto();
         if (entity.getId() != null) dto.setId(entity.getId());
@@ -324,7 +225,7 @@ public class TranferDatas {
         return dtoList;
     }
 
-    // hinh anh
+    //  anh
     public static HinhAnhDto convertToDto(HinhAnh entity) {
         HinhAnhDto dto = new HinhAnhDto();
         if (entity.getId() != null) dto.setId(entity.getId());
@@ -606,6 +507,15 @@ public class TranferDatas {
         if (entity.getId() != null) dto.setId(entity.getId());
         if (entity.getMa() != null) dto.setMa(entity.getMa());
         if (entity.getMa() != null) dto.setMa(entity.getMa());
+//<<<<<<<<< Temporary merge branch 1
+//        if (entity.getIdSanPham() != null) dto.setIdSanPham(entity.getIdSanPham());
+//        if (entity.getIdHinhAnh() != null) dto.setIdHinhAnh(entity.getIdHinhAnh());
+//        if (entity.getIdThuongHieu() != null) dto.setIdThuongHieu(entity.getIdThuongHieu());
+//        if (entity.getIdChatLieu() != null) dto.setIdChatLieu(entity.getIdChatLieu());
+//        if (entity.getIdDanhMuc() != null) dto.setIdDanhMuc(entity.getIdDanhMuc());
+//        if (entity.getIdKichThuoc() != null) dto.setIdKichThuoc(entity.getIdKichThuoc());
+//        if (entity.getIdMauSac() != null) dto.setIdMauSac(entity.getIdMauSac());
+//=========
         if (entity.getSanPham() != null) dto.setSanPham(entity.getSanPham());
         if (entity.getHinhAnh() != null) dto.setHinhAnh(entity.getHinhAnh());
         if (entity.getThuongHieu() != null) dto.setThuongHieu(entity.getThuongHieu());
@@ -627,6 +537,15 @@ public class TranferDatas {
         if (dto.getId() != null) entity.setId(dto.getId());
         if (dto.getMa() != null) entity.setMa(dto.getMa());
         if (dto.getMa() != null) entity.setMa(dto.getMa());
+//<<<<<<<<< Temporary merge branch 1
+//        if (dto.getIdSanPham() != null) entity.setIdSanPham(dto.getIdSanPham());
+//        if (dto.getIdHinhAnh() != null) entity.setIdHinhAnh(dto.getIdHinhAnh());
+//        if (dto.getIdThuongHieu() != null) entity.setIdThuongHieu(dto.getIdThuongHieu());
+//        if (dto.getIdChatLieu() != null) entity.setIdChatLieu(dto.getIdChatLieu());
+//        if (dto.getIdDanhMuc() != null) entity.setIdDanhMuc(dto.getIdDanhMuc());
+//        if (dto.getIdKichThuoc() != null) entity.setIdKichThuoc(dto.getIdKichThuoc());
+//        if (dto.getIdMauSac() != null) entity.setIdMauSac(dto.getIdMauSac());
+//=========
         if (dto.getSanPham() != null) entity.setSanPham(dto.getSanPham());
         if (dto.getHinhAnh() != null) entity.setHinhAnh(dto.getHinhAnh());
         if (dto.getThuongHieu() != null) entity.setThuongHieu(dto.getThuongHieu());

@@ -1,17 +1,23 @@
 package fpl.but.datn.controller;
 
-
+import fpl.but.datn.dto.request.DanhMucDto;
+import fpl.but.datn.dto.request.GioHangChiTietDto;
 import fpl.but.datn.dto.request.HoaDonChiTietDto;
+import fpl.but.datn.dto.request.HoaDonDto;
 import fpl.but.datn.dto.response.ApiResponse;
+import fpl.but.datn.entity.DanhMuc;
+import fpl.but.datn.entity.GioHangChiTiet;
 import fpl.but.datn.entity.HinhAnh;
 import fpl.but.datn.entity.HoaDonChiTiet;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.service.IHoaDonChiTietService;
+import fpl.but.datn.service.impl.HoaDonChiTietService;
 import fpl.but.datn.tranferdata.TranferDatas;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -21,7 +27,7 @@ import java.util.UUID;
 public class HoaDonChiTietController {
 
     @Autowired
-    private IHoaDonChiTietService hoaDonChiTietService;
+    private HoaDonChiTietService hoaDonChiTietService;
 
     @GetMapping("/all")
     ApiResponse<List<HoaDonChiTietDto>> getAll(){

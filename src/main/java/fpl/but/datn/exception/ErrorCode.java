@@ -65,7 +65,11 @@ public enum ErrorCode {
     LIST_PTTHANHTOAN_NOT_FOUND(1056, "Không tìm thấy danh sách phương thức thanh toán", HttpStatus.NOT_FOUND),
     PTTHANHTOAN_NOT_FOUND(1057, "Phương thức thanh toán đang tìm không có", HttpStatus.NOT_FOUND),
     NO_LIST_SANPHAM_FOUND(1058, "Không tìm thấy danh sách sản phẩm nào ",HttpStatus.NOT_FOUND),
+<<<<<<< HEAD
+    CTSP_EXISTED(1059, "Sản phẩm chi tiết này đã tồn tại", HttpStatus.BAD_REQUEST),
+=======
     CTSP_EXISTED(1059, "Sản phẩm chi tiết này đã tồn tại", HttpStatus.BAD_REQUEST)
+>>>>>>> 96155e1 (update)
 
     ;
 
