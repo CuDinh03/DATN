@@ -5,71 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="85360360-6e47-429b-b577-a4f16be7088d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/controller/CTSanPhamController.java" beforeDir="false" afterPath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/controller/CTSanPhamController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/controller/MauSacController.java" beforeDir="false" afterPath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/controller/MauSacController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/repository/CTSanPhamRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/repository/CTSanPhamRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/impl/CTSanPhamService.java" beforeDir="false" afterPath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/impl/CTSanPhamService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/configuration/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/configuration/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/controller/VoucherController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/controller/VoucherController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/request/HinhAnhDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/request/HinhAnhDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/request/SaveCtspRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/request/SaveCtspRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/entity/HinhAnh.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/entity/HinhAnh.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/repository/CTSanPhamRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/repository/CTSanPhamRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/repository/TaiKhoanRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/repository/TaiKhoanRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/repository/VoucherRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/repository/VoucherRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/ICTSanPhamService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/ICTSanPhamService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/HoaDonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/HoaDonService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/TaiKhoanService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/TaiKhoanService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/VoucherService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/VoucherService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/tranferdata/TranferDatas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/tranferdata/TranferDatas.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/configuration/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fpl/but/datn/configuration/SecurityConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/controller/ChatLieuController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/controller/ChucVuController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/controller/DanhMucController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/controller/GioHangChiTietController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/controller/HinhAnhController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/controller/HoTroController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/controller/HoaDonChiTietController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/controller/KhachHangController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/controller/UserController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/controller/VoucherController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fpl/but/datn/controller/VoucherController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/dto/request/HinhAnhDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fpl/but/datn/dto/request/HinhAnhDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/entity/HinhAnh$HinhAnhBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fpl/but/datn/entity/HinhAnh$HinhAnhBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/entity/HinhAnh.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fpl/but/datn/entity/HinhAnh.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/exception/AppException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/exception/ErrorCode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/exception/GlobalExceptionHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/repository/TaiKhoanRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fpl/but/datn/repository/TaiKhoanRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/repository/VoucherRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fpl/but/datn/repository/VoucherRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/service/ICTSanPhamService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fpl/but/datn/service/ICTSanPhamService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/service/IChatLieuService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/service/IDanhMucService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/service/IGioHangChiTietService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/service/IHinhAnhService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/service/IHoTroService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/service/IHoaDonChiTietService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/service/IKhachHangService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/service/INguoiDungService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/service/IThanhToanService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/service/impl/BaoCaoService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/service/impl/CTSanPhamService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/service/impl/ChatLieuService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/service/impl/DanhMucServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/service/impl/GioHangChiTietService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/service/impl/GioHangService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/service/impl/HinhAnhService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/service/impl/HoTroService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/service/impl/HoaDonChiTietService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/service/impl/HoaDonGioHangService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/service/impl/HoaDonService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/service/impl/KhachHangService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/service/impl/NguoiDungService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/service/impl/TaiKhoanService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fpl/but/datn/service/impl/TaiKhoanService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/service/impl/ThanhToanService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/service/impl/VoucherService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fpl/but/datn/service/impl/VoucherService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
