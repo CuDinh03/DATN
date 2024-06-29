@@ -204,11 +204,11 @@ public class CTSanPhamService implements ICTSanPhamService {
     }
 
     public List<ChiTietSanPham> saveCtsp(SanPham sanPham,
-                                         List<MauSac> mauSacList,
-                                         ChatLieu chatLieu,
-                                         DanhMuc danhMuc,
-                                         ThuongHieu thuongHieu,
-                                         List<KichThuoc> kichThuocList){
+                         List<MauSac> mauSacList,
+                         ChatLieu chatLieu,
+                         DanhMuc danhMuc,
+                         ThuongHieu thuongHieu,
+                         List<KichThuoc> kichThuocList){
         List<ChiTietSanPham> chiTietSanPhamsList = new ArrayList<>();
         for (MauSac ms : mauSacList){
             for (KichThuoc kt: kichThuocList){
@@ -241,7 +241,7 @@ public class CTSanPhamService implements ICTSanPhamService {
     public List<ChiTietSanPham> saveListCt(List<ChiTietSanPham> list) {
         List<ChiTietSanPham> chiTietSanPhamList = new ArrayList<>();
         for (ChiTietSanPham ct:
-                list) {
+             list) {
             ct.setNgaySua(new Date());
             ct.setTrangThai(1);
             chiTietSanPhamList.add(create(ct));

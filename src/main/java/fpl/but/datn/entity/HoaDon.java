@@ -16,6 +16,14 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+
+//Trang thai :
+//    0: Chua thanh toan
+//    1: Da thanh toan
+//    2: Da dat hang
+//    3: Da huy hang
+//    4: Dang giao
+//    5: Da nhan hang
 public class HoaDon {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
