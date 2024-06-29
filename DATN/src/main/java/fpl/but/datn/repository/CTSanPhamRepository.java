@@ -1,36 +1,22 @@
 package fpl.but.datn.repository;
 
 import fpl.but.datn.entity.*;
+import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.transaction.annotation.Transactional;
-
+import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
+@Repository
 public interface CTSanPhamRepository extends JpaRepository<ChiTietSanPham, UUID> {
 
-    @Query("SELECT ctsp FROM ChiTietSanPham ctsp ORDER BY ctsp.ngayTao DESC ")
-    Page<ChiTietSanPham> finAll(Pageable pageable);
-
-
-    @Query("SELECT c.mauSac FROM ChiTietSanPham c WHERE c.ma = :maSanPhamChiTiet")
-    List<MauSac> findMauSacsByMaSanPhamChiTiet(@Param("maSanPhamChiTiet") String maSanPhamChiTiet);
-
-    @Query("SELECT c.kichThuoc FROM ChiTietSanPham c WHERE c.ma = :maSanPhamChiTiet")
-    List<KichThuoc> findkichThuocsByMaSanPhamChiTiet(@Param("maSanPhamChiTiet") String maSanPhamChiTiet);
-
-    @Query("SELECT ctsp FROM ChiTietSanPham ctsp WHERE ctsp.ma = :ma AND ctsp.kichThuoc.id = :kichThuoc AND ctsp.mauSac.id = :mauSac")
-    ChiTietSanPham findChiTietSanPhamByMauSacAndKichThuoc(@Param("ma") String ma,@Param("kichThuoc")UUID kichThuoc, @Param("mauSac") UUID mauSac );
-
-    @Query("SELECT c FROM ChiTietSanPham c WHERE c.ma = :ma AND c.kichThuoc.id = :kichThuoc")
-    List<ChiTietSanPham> findChiTietSanPhamByMaAndKichThuoc(@Param("ma") String ma, @Param("kichThuoc") UUID kichThuoc);
     boolean existsByMa(String ma);
 
     @Query("SELECT COUNT(c) FROM ChiTietSanPham c WHERE c.ma = :ma AND c.sanPham = :sanPham AND c.thuongHieu = :thuongHieu AND c.chatLieu = :chatLieu AND c.danhMuc = :danhMuc AND c.kichThuoc = :kichThuoc AND c.mauSac = :mauSac")
@@ -67,6 +53,20 @@ public interface CTSanPhamRepository extends JpaRepository<ChiTietSanPham, UUID>
     @Transactional
     @Query("UPDATE ChiTietSanPham c SET c.trangThai = 0 WHERE c.id = :id")
     int updateTrangThai(@Param("id") UUID id);
+
+    @Query("SELECT ctsp FROM ChiTietSanPham ctsp ORDER BY ctsp.ngayTao DESC ")
+    Page<ChiTietSanPham> finAll(Pageable pageable);
+
+    @Query("SELECT c.mauSac FROM ChiTietSanPham c WHERE c.ma = :maSanPhamChiTiet")
+    List<MauSac> findMauSacsByMaSanPhamChiTiet(@Param("maSanPhamChiTiet") String maSanPhamChiTiet);
+
+    @Query("SELECT c.kichThuoc FROM ChiTietSanPham c WHERE c.ma = :maSanPhamChiTiet")
+    List<KichThuoc> findkichThuocsByMaSanPhamChiTiet(@Param("maSanPhamChiTiet") String maSanPhamChiTiet);
+
+    @Query("SELECT ctsp FROM ChiTietSanPham ctsp WHERE ctsp.ma = :ma AND ctsp.kichThuoc.id = :kichThuoc AND ctsp.mauSac.id = :mauSac")
+    ChiTietSanPham findChiTietSanPhamByMauSacAndKichThuoc(@Param("ma") String ma,@Param("kichThuoc")UUID kichThuoc, @Param("mauSac") UUID mauSac );
+    @Query("SELECT c FROM ChiTietSanPham c WHERE c.ma = :ma AND c.kichThuoc.id = :kichThuoc")
+    List<ChiTietSanPham> findChiTietSanPhamByMaAndKichThuoc(@Param("ma") String ma, @Param("kichThuoc") UUID kichThuoc);
     // Tim kiem
     @Query("SELECT ctsp FROM ChiTietSanPham ctsp WHERE ctsp.sanPham.id = :sanPhamId")
     List<ChiTietSanPham> findCTSPBySanPhamId(@Param("sanPhamId") UUID sanPhamId);

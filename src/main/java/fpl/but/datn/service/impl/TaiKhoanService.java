@@ -181,5 +181,10 @@ public class TaiKhoanService implements ITaiKhoanService {
         taiKhoan.setTrangThai(0);
         taiKhoanRepository.save(taiKhoan);
     }
+    public void open(UUID id) {
+        TaiKhoan taiKhoan = getByID(id);
+        taiKhoan.setTrangThai(1);
+        taiKhoanRepository.save(taiKhoan);
 
+    }
 }
