@@ -24,5 +24,6 @@ public interface IHoaDonService {
     HoaDon updateTrangThai(UUID id, Integer trangThai);
     Page<HoaDon> getHoaDonsByTrangThai(Pageable pageable, Integer trangThai);
     List<HoaDon> findHoaDonByKhachHang(UUID idKhachHang);
+    List<HoaDon> getHoaDonsByTrangThaiAndKhachHang(Integer trangThai, UUID khachHangId);
 
 }

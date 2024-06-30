@@ -1,8 +1,10 @@
 package fpl.but.datn.service.impl;
 
 import fpl.but.datn.entity.DanhGia;
+import fpl.but.datn.entity.HoaDon;
 import fpl.but.datn.repository.DanhGiaRepository;
 import fpl.but.datn.repository.HoaDonChiTietRepository;
+import fpl.but.datn.repository.HoaDonRepository;
 import fpl.but.datn.service.IDanhGiaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,6 +24,9 @@ public class DanhGiaService implements IDanhGiaService {
 
     @Autowired
     private HoaDonChiTietRepository hoaDonChiTietRepository;
+
+    @Autowired
+    private HoaDonRepository hoaDonRepository;
     @Override
     public List<DanhGia> getAll() {
         return danhGiaRepository.findAll();
@@ -42,10 +47,17 @@ public class DanhGiaService implements IDanhGiaService {
         danhGia.setNgayTao(new Date());
         danhGia.setNgaySua(new Date());
         danhGia.setTrangThai(request.getTrangThai());
-
+        danhGia = danhGiaRepository.save(danhGia);
         request.getHoaDonChiTiet().setTrangThai(5);
         hoaDonChiTietRepository.save(request.getHoaDonChiTiet());
-        return danhGiaRepository.save(danhGia);
+
+        HoaDon hoaDon = request.getHoaDonChiTiet().getHoaDon();
+        if (hoaDon != null) {
+            hoaDon.setTrangThai(5);
+            hoaDon.setNgaySua(new Date());
+            hoaDonRepository.save(hoaDon);
+        }
+        return danhGia;
     }
 
     @Override

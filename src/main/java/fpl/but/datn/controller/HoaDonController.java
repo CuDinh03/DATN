@@ -92,6 +92,23 @@ public class HoaDonController {
         return apiResponse;
     }
 
+    @GetMapping("/byTrangThaiAndKhachHang")
+    public ApiResponse<List<HoaDonDto>> getHoaDonsByTrangThaiAndKhachHang(
+            @RequestParam Integer trangThai, @RequestParam UUID khachHangId) {
+        List<HoaDon> hoaDons = hoaDonService.getHoaDonsByTrangThaiAndKhachHang(trangThai, khachHangId);
+        List<HoaDonDto> dto = TranferDatas.convertListHoaDonToDto(hoaDons);
+        ApiResponse<List<HoaDonDto>> apiResponse = new ApiResponse<>();
+
+        if (!dto.isEmpty()) {
+            apiResponse.setMessage("Lấy danh sách hóa đơn thành công");
+            apiResponse.setResult(dto);
+        } else {
+            throw new AppException(ErrorCode.NO_ORDER_FOUND);
+        }
+
+        return apiResponse;
+    }
+
     @GetMapping("/find/{ma}")
     ApiResponse<HoaDonDto> findByMa(@PathVariable String ma){
         ApiResponse<HoaDonDto> apiResponse =  new ApiResponse<>();
@@ -164,9 +181,8 @@ public class HoaDonController {
     }
 
     @PutMapping("/updateTrangThai/{id}")
-    public ApiResponse<HoaDon> updateTrangThai(@RequestParam Integer trangThai, @PathVariable UUID id) {
+    public ApiResponse<HoaDon> updateTrangThai(@PathVariable UUID id, @RequestParam Integer trangThai ) {
         ApiResponse<HoaDon> apiResponse = new ApiResponse<>();
-
         if (trangThai != null) {
             apiResponse.setResult(hoaDonService.updateTrangThai(id, trangThai));
             apiResponse.setMessage("Cập nhật thành công");

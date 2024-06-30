@@ -74,7 +74,7 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
         if (request != null) {
             HoaDon hoaDon = hoaDonService.findById(request.getId());
             if (hoaDon != null) {
-                hoaDon.setTrangThai(3);
+                hoaDon.setTrangThai(6);
                 hoaDon.setTongTien(request.getTongTien());
                 hoaDon.setNgaySua(new Date());
                 hoaDon.setNgayTao(new Date());
@@ -92,13 +92,13 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
                     hoaDonChiTiet.setNgaySua(new Date());
                     hoaDonChiTiet.setChiTietSanPham(ghCt.getChiTietSanPham());
                     hoaDonChiTiet.setHoaDon(hoaDon);
-                    hoaDonChiTiet.setTrangThai(1);
+                    hoaDonChiTiet.setTrangThai(6);
                     this.hoaDonChiTietService.create(hoaDonChiTiet);
                 }
 
                 List<HoaDonChiTiet> hoaDonChiTiets = this.hoaDonChiTietService.getHoaDonChiTietByIdHoaDon(hoaDon.getId());
                 for (HoaDonChiTiet hdct : hoaDonChiTiets) {
-                    hdct.setTrangThai(1);
+                    hdct.setTrangThai(6);
                     this.hoaDonChiTietService.update(hdct, hdct.getId());
                 }
                 GioHangHoaDon gioHangHoaDon = this.hoaDonGioHangService.findByIdHoaDon(hoaDon.getId());

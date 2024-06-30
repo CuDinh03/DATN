@@ -135,11 +135,14 @@ public class HoaDonService implements IHoaDonService {
         return hoaDonRepository.findByMa(ma);
     }
 
+
     @Override
     public Page<HoaDon> getHoaDonsByTrangThai(Pageable pageable, Integer trangThai) {
         return hoaDonRepository.findByTrangThai(pageable, trangThai);
     }
-
+    public List<HoaDon> getHoaDonsByTrangThaiAndKhachHang(Integer trangThai, UUID khachHangId) {
+        return hoaDonRepository.findByTrangThaiAndKhachHangId(trangThai, khachHangId);
+    }
     @Override
     public List<HoaDon> findHoaDonByKhachHang(UUID idKhachHang) {
         return hoaDonRepository.findHoaDonByKhachHang(idKhachHang);
