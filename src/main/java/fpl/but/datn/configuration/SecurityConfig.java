@@ -41,7 +41,7 @@ public class SecurityConfig {
             "/api/voucher/create", "/api/khs/create", "/api/danh-muc/create",
             "/api/hoa-don-gio-hang/create", "/api/gio-hang-chi-tiet/create", "/api/thanhtoan",
             "/api/hoa-don-chi-tiet/all/{id}", "/api/hoa-don-chi-tiet/{id}",
-            "/api/hoa-don/{id}", "api/hoa-don/byTrangThaiAndKhachHang", "/api/hoa-don/updateTrangThai/{id}","/api/hoa-don/findHd/{ma}",
+            "/api/hoa-don/{id}", "api/hoa-don/byTrangThaiAndKhachHang", "/api/hoa-don/updateTrangThai/{id}","/api/hoa-don/findHd/{ma}","/api/hoa-don/find-time"
     };
 
     private final String[] ADMIN_ENDPOINT_GET = {
