@@ -80,4 +80,8 @@ public class SanPhamService implements ISanPhamService {
     public Page<SanPham> getAllSanPhamPageable(Pageable pageable) {
         return sanPhamRepository.findAll(pageable);
     }
+
+
+
+
 }

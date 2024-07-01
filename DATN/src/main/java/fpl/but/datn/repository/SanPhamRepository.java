@@ -17,4 +17,5 @@ public interface SanPhamRepository extends JpaRepository<SanPham, UUID> {
     Page<SanPham> findAll(Pageable pageable);
     Optional<SanPham> findByMa(String ma);
     boolean existsByMa(String ma);
+
 }

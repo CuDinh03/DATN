@@ -17,4 +17,6 @@ public interface ISanPhamService {
     void open(UUID id);
     SanPham findById(UUID id);
     Page<SanPham> getAllSanPhamPageable(Pageable pageable);
+
+
 }
