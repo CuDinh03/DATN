@@ -41,7 +41,7 @@ public class SecurityConfig {
             "/api/voucher/create", "/api/khs/create", "/api/danh-muc/create",
             "/api/hoa-don-gio-hang/create", "/api/gio-hang-chi-tiet/create", "/api/thanhtoan",
             "/api/hoa-don-chi-tiet/all/{id}", "/api/hoa-don-chi-tiet/{id}",
-            "/api/hoa-don/{id}", "api/hoa-don/byTrangThaiAndKhachHang", "/api/hoa-don/updateTrangThai/{id}"
+            "/api/hoa-don/{id}", "api/hoa-don/byTrangThaiAndKhachHang", "/api/hoa-don/updateTrangThai/{id}","/api/hoa-don/findHd/{ma}",
     };
 
     private final String[] ADMIN_ENDPOINT_GET = {
@@ -59,7 +59,7 @@ public class SecurityConfig {
             "/api/chi-tiet-san-pham/all","/api/chi-tiet-san-pham/addNew", "/api/chi-tiet-san-pham/update/{id}", "/api/chi-tiet-san-pham/delete/{id}", "/api/chi-tiet-san-pham/detail/{id}",
             "/api/danh-muc/all", "/api/danh-muc/{id}",
             "/api/hoa-don-chi-tiet/all/{id}", "/api/hoa-don-chi-tiet/{id}", "/api/gio-hang-chi-tiet/all/{id}",
-            "/api/hoa-don/all", "/api/hoa-don/find/{ma}",
+            "/api/hoa-don/all",
             "/api/hoa-don-gio-hang/all", "/api/hoa-don-gio-hang/all/{id}",
             "/api/voucher/all","/api/voucher/allVouchers","/api/voucher/{id}",
             "/api/hoa-don/{ma}","/api/chi-tiet-san-pham/{id}"

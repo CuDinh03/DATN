@@ -24,4 +24,11 @@ public interface HoaDonChiTietRepository extends JpaRepository<HoaDonChiTiet, UU
             "WHERE hd.id = :idGioHang ORDER BY hdct.ngaySua DESC", nativeQuery = false)
     List<Object[]> findAllChiTietAndHinhAnhByIdHoaDon(@Param("idGioHang") UUID idGioHang);
 
+    @Query(value = "SELECT hdct, ha FROM HoaDonChiTiet hdct " +
+            "INNER JOIN HoaDon hd ON hdct.hoaDon.id = hd.id " +
+            "INNER JOIN ChiTietSanPham ctsp ON hdct.chiTietSanPham.id = ctsp.id " +
+            "INNER JOIN HinhAnh ha ON ctsp.id = ha.chiTietSanPham.id " +
+            "WHERE hd.id = :idGioHang ORDER BY hdct.ngaySua DESC")
+    List<Object[]> findAllChiTietAndHinhAnhByIdHoaDonKH(@Param("idGioHang") UUID idGioHang);
+
 }

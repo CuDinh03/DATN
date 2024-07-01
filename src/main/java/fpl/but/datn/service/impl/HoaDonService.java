@@ -134,8 +134,10 @@ public class HoaDonService implements IHoaDonService {
     public Optional<HoaDon> findByMa(String ma) {
         return hoaDonRepository.findByMa(ma);
     }
-
-
+    @Override
+    public List<HoaDon> getHoaDonBetweenDates(Date startDate, Date endDate) {
+        return hoaDonRepository.findByNgayTaoBetween(startDate, endDate);
+    }
     @Override
     public Page<HoaDon> getHoaDonsByTrangThai(Pageable pageable, Integer trangThai) {
         return hoaDonRepository.findByTrangThai(pageable, trangThai);
@@ -143,6 +145,12 @@ public class HoaDonService implements IHoaDonService {
     public List<HoaDon> getHoaDonsByTrangThaiAndKhachHang(Integer trangThai, UUID khachHangId) {
         return hoaDonRepository.findByTrangThaiAndKhachHangId(trangThai, khachHangId);
     }
+
+    @Override
+    public Optional<HoaDon> findByMaKH(String ma) {
+        return hoaDonRepository.findByMaKH(ma);
+    }
+
     @Override
     public List<HoaDon> findHoaDonByKhachHang(UUID idKhachHang) {
         return hoaDonRepository.findHoaDonByKhachHang(idKhachHang);

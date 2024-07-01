@@ -20,8 +20,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -31,6 +33,24 @@ public class HoaDonController {
 
     @Autowired
     private IHoaDonService hoaDonService;
+
+    @GetMapping("/find-time")
+    public ApiResponse<List<HoaDon>> getHoaDon(
+            @RequestParam("startDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date startDate,
+            @RequestParam("endDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date endDate) {
+        List<HoaDon> hoaDonList = hoaDonService.getHoaDonBetweenDates(startDate, endDate);
+        ApiResponse<List<HoaDon>> apiResponse = new ApiResponse<>();
+
+        if (!hoaDonList.isEmpty()) {
+            apiResponse.setMessage("Lấy danh sách hóa đơn thành công");
+            apiResponse.setResult(hoaDonList);
+        } else {
+            throw new AppException(ErrorCode.ORDER_NOT_EXISTED);
+        }
+
+        return apiResponse;
+    }
+
 
     @GetMapping("/findByKhachHang/{id}")
     ApiResponse<List<HoaDonDto>> findByIdKhachHang(@PathVariable UUID id) {
@@ -113,6 +133,15 @@ public class HoaDonController {
     ApiResponse<HoaDonDto> findByMa(@PathVariable String ma){
         ApiResponse<HoaDonDto> apiResponse =  new ApiResponse<>();
         HoaDonDto dto = TranferDatas.convertToDto(hoaDonService.findByMa(ma).get());
+        apiResponse.setMessage("Lấy hoa don thành công");
+        apiResponse.setResult(dto);
+        return apiResponse;
+    }
+
+    @GetMapping("/findHd/{ma}")
+    ApiResponse<HoaDonDto> findByMaKH(@PathVariable String ma){
+        ApiResponse<HoaDonDto> apiResponse =  new ApiResponse<>();
+        HoaDonDto dto = TranferDatas.convertToDto(hoaDonService.findByMaKH(ma).get());
         apiResponse.setMessage("Lấy hoa don thành công");
         apiResponse.setResult(dto);
         return apiResponse;
