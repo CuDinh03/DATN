@@ -16,5 +16,9 @@ public interface IChatLieuService {
     void open(UUID id);
 
     ChatLieu findById(UUID id);
+
+    List<ChatLieu> getAllChatLieuDangHoatDong();
+
+
     Page<ChatLieu> getAllChatLieuPageable(Pageable pageable);
 }

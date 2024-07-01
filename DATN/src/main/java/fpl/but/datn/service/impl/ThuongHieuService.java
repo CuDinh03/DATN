@@ -78,4 +78,9 @@ public class ThuongHieuService implements IThuongHieuService {
     public Page<ThuongHieu> getAllThuongHieuPageable(Pageable pageable) {
         return thuongHieuRepository.findAll(pageable);
     }
+
+    @Override
+    public List<ThuongHieu> getAllThuongHieuDangHoatDong() {
+        return thuongHieuRepository.findAllThuongHieuDangHoatDong();
+    }
 }

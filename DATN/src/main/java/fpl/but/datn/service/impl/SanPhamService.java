@@ -81,7 +81,8 @@ public class SanPhamService implements ISanPhamService {
         return sanPhamRepository.findAll(pageable);
     }
 
-
-
-
+    @Override
+    public List<SanPham> getAllSanPhamDangHoatDong() {
+        return sanPhamRepository.findAllSanPhamDangHoatDong();
+    }
 }

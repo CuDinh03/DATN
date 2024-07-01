@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 import java.util.Objects;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/khs")
@@ -112,24 +113,52 @@ public class KhachHangController {
         } return ApiResponse.<Void>builder().build();
     }
 
-    @GetMapping("/detail/{id}")
-    ApiResponse<KhachHangDto> detail(@PathVariable String id) {
-        ApiResponse<KhachHangDto> apiResponse = new ApiResponse<>();
-        UUID idKhachHang = null;
-        if (id != null){
-            idKhachHang = UUID.fromString(id);
-            KhachHangDto dto = TranferDatas.convertToDto(khachHangService.findById(idKhachHang));
-            apiResponse.setMessage("Lấy khách hàng thành công");
-            apiResponse.setResult(dto);
-        }
-        return apiResponse;
-    }
-
     @GetMapping("/findUsername/{tenDangNhap}")
     ApiResponse<KhachHangDto> findKHByTenDangNhapo(@PathVariable String tenDangNhap){
         ApiResponse<KhachHangDto> apiResponse =  new ApiResponse<>();
         KhachHangDto dto = TranferDatas.convertToDto(khachHangService.findKHByTenDangNhap(tenDangNhap));
         apiResponse.setMessage("Lấy Khách hàng thành công");
+        apiResponse.setResult(dto);
+        return apiResponse;
+    }
+
+    @PutMapping("/update/{id}")
+    ApiResponse<KhachHang> update(@PathVariable UUID id,
+                                  @RequestBody KhachHangDto khachHangDto) {
+        ApiResponse<KhachHang> apiResponse = new ApiResponse<>();
+        if (id != null) {
+            UUID idKH = id;
+            KhachHang khachHang = khachHangService.updateKhachHangById(TranferDatas.convertToEntity(khachHangDto), idKH);
+            apiResponse.setMessage("Update màu sắc thành công!");
+            apiResponse.setResult(khachHang);
+            return apiResponse;
+        }
+        return null;
+    }
+
+    @GetMapping("/detail/{id}")
+    ApiResponse<KhachHangDto> detail(@PathVariable UUID id) {
+        ApiResponse<KhachHangDto> apiResponse = new ApiResponse<>();
+        if (id != null) {
+            KhachHang khachHang = khachHangService.findById(id);
+            if (khachHang != null) {
+                KhachHangDto khachHangDto = TranferDatas.convertToDto(khachHang);
+                apiResponse.setMessage("Lấy khách hàng thành công!");
+                apiResponse.setResult(khachHangDto);
+            } else {
+//                throw new AppException(ErrorCode.COLOR_NOT_FOUND);
+            }
+        } else {
+            apiResponse.setMessage("Id không hợp lệ!");
+        }
+        return apiResponse;
+    }
+
+    @GetMapping("/getKHByIdTaiKhoan/{idTaiKhoan}")
+    ApiResponse<KhachHangDto> getKhachHangByIdTK(@PathVariable UUID idTaiKhoan) {
+        ApiResponse<KhachHangDto> apiResponse = new ApiResponse<>();
+        KhachHangDto dto = TranferDatas.convertToDto(khachHangService.getKhachHangByIdTaiKhoan(idTaiKhoan));
+        apiResponse.setMessage("Lấy Khách hàng từ id tài khoản thành công");
         apiResponse.setResult(dto);
         return apiResponse;
     }

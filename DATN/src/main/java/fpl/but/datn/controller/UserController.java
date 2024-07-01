@@ -39,8 +39,7 @@ public class UserController {
             apiResponse.setResult(taiKhoanService.createAccount(TranferDatas.convertToEntity(request)));
         return apiResponse;
     }
-
-
+    
     @GetMapping("/all")
     ApiResponse<Page<TaiKhoanDto>> getAccounts(@RequestParam(defaultValue = "0") int page,
                                                @RequestParam(defaultValue = "5") int size) {
@@ -61,23 +60,23 @@ public class UserController {
         return apiResponse;
     }
 
-    @GetMapping("/all/{role}")
-    public ApiResponse<Page<TaiKhoanDto>> getAccountsByRoles(@RequestParam(defaultValue = "0") int page,
-                                                             @RequestParam(defaultValue = "5") int size,
-                                                             @PathVariable String role) {
-        Pageable pageable = PageRequest.of(page, size);
-        Page<TaiKhoan> taiKhoanPage = taiKhoanService.findByRoles(role, pageable);
-        List<TaiKhoanDto> listDto = TranferDatas.convertListTaiKhoanToDto(taiKhoanPage.getContent());
-
-        ApiResponse<Page<TaiKhoanDto>> apiResponse = new ApiResponse<>();
-        if (!listDto.isEmpty()) {
-            apiResponse.setMessage("Lấy danh sách tài khoản thành công");
-            apiResponse.setResult(new PageImpl<>(listDto, pageable, taiKhoanPage.getTotalElements()));
-        } else {
-            throw new AppException(ErrorCode.NO_ACCOUNTS_FOUND);
-        }
-        return apiResponse;
-    }
+//    @GetMapping("/all/{role}")
+//    public ApiResponse<Page<TaiKhoanDto>> getAccountsByRoles(@RequestParam(defaultValue = "0") int page,
+//                                                             @RequestParam(defaultValue = "5") int size,
+//                                                             @PathVariable String role) {
+//        Pageable pageable = PageRequest.of(page, size);
+//        Page<TaiKhoan> taiKhoanPage = taiKhoanService.findByRoles(role, pageable);
+//        List<TaiKhoanDto> listDto = TranferDatas.convertListTaiKhoanToDto(taiKhoanPage.getContent());
+//
+//        ApiResponse<Page<TaiKhoanDto>> apiResponse = new ApiResponse<>();
+//        if (!listDto.isEmpty()) {
+//            apiResponse.setMessage("Lấy danh sách tài khoản thành công");
+//            apiResponse.setResult(new PageImpl<>(listDto, pageable, taiKhoanPage.getTotalElements()));
+//        } else {
+//            throw new AppException(ErrorCode.NO_ACCOUNTS_FOUND);
+//        }
+//        return apiResponse;
+//    }
 
 
 
