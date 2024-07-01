@@ -6,18 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="85360360-6e47-429b-b577-a4f16be7088d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/configuration/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/configuration/SecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/controller/HoaDonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/controller/HoaDonController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/repository/HoaDonChiTietRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/repository/HoaDonChiTietRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/repository/HoaDonRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/repository/HoaDonRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/IHoaDonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/IHoaDonService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/HoaDonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/HoaDonService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/configuration/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fpl/but/datn/configuration/SecurityConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/controller/HoaDonController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fpl/but/datn/controller/HoaDonController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/repository/HoaDonChiTietRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fpl/but/datn/repository/HoaDonChiTietRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/repository/HoaDonRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fpl/but/datn/repository/HoaDonRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/service/IHoaDonService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fpl/but/datn/service/IHoaDonService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fpl/but/datn/service/impl/HoaDonService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fpl/but/datn/service/impl/HoaDonService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +130,8 @@
       <workItem from="1719515761912" duration="4000" />
       <workItem from="1719516438223" duration="5752000" />
       <workItem from="1719550778488" duration="11611000" />
-      <workItem from="1719721451521" duration="20346000" />
+      <workItem from="1719721451521" duration="21005000" />
+      <workItem from="1719821417754" duration="4981000" />
     </task>
     <servers />
   </component>

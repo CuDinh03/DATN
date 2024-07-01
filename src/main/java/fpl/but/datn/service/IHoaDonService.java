@@ -28,6 +28,6 @@ public interface IHoaDonService {
     List<HoaDon> getHoaDonsByTrangThaiAndKhachHang(Integer trangThai, UUID khachHangId);
     Optional<HoaDon> findByMaKH(String ma);
     List<HoaDon> getHoaDonBetweenDates(Date startDate, Date endDate);
-
+    Optional<HoaDon> findByMaAndKhachHang(String ma, UUID khachHangId);
 
 }

@@ -142,8 +142,25 @@ public class HoaDonController {
     ApiResponse<HoaDonDto> findByMaKH(@PathVariable String ma){
         ApiResponse<HoaDonDto> apiResponse =  new ApiResponse<>();
         HoaDonDto dto = TranferDatas.convertToDto(hoaDonService.findByMaKH(ma).get());
-        apiResponse.setMessage("Lấy hoa don thành công");
+        if (dto != null){
+            apiResponse.setMessage("Lấy hoa don thành công");
+            apiResponse.setResult(dto);
+        }else {
+            throw new AppException(ErrorCode.NO_ORDER_FOUND);
+        }
+
+        return apiResponse;
+    }
+
+    @GetMapping("/findHDMaAndKhachHang/{ma}")
+    ApiResponse<HoaDonDto> findByMaAndKhachHang(@PathVariable String ma, @RequestParam UUID khachHangId){
+        ApiResponse<HoaDonDto> apiResponse = new ApiResponse<>();
+        HoaDonDto dto = TranferDatas.convertToDto(hoaDonService.findByMaAndKhachHang(ma, khachHangId)
+                .orElseThrow(() -> new AppException(ErrorCode.NO_ORDER_FOUND)));
+
+        apiResponse.setMessage("Lấy hóa đơn thành công");
         apiResponse.setResult(dto);
+
         return apiResponse;
     }
 
