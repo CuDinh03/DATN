@@ -1,32 +1,34 @@
 package fpl.but.datn.entity;
 
-import jakarta.persistence.*;
-import lombok.*;
 
-import java.math.BigDecimal;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.Date;
 import java.util.UUID;
 
-@Getter
-@Setter
+@Entity
+@Table
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Entity
-@Table
-public class HoaDonChiTiet {
+public class TaiKhoan {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    @ManyToOne
-    private HoaDon hoaDon;
-    @ManyToOne
-    private ChiTietSanPham chiTietSanPham;
-    private Integer soLuong;
+    private String ma;
+    private String tenDangNhap;
+    private String matKhau;
     private Date ngayTao;
     private Date ngaySua;
-    private BigDecimal giaBan;
     private Integer trangThai;
+
+    @ManyToOne
+    private ChucVu chucVu;
 
 }

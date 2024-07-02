@@ -9,24 +9,20 @@ import java.util.UUID;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity
-@Table
-public class HoaDonChiTiet {
-
+public class ThanhToan {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     @ManyToOne
     private HoaDon hoaDon;
     @ManyToOne
-    private ChiTietSanPham chiTietSanPham;
-    private Integer soLuong;
+    private PhuongThucThanhToan phuongThucThanhToan;
+    private BigDecimal tienThanhToan;
     private Date ngayTao;
     private Date ngaySua;
-    private BigDecimal giaBan;
     private Integer trangThai;
-
 }
