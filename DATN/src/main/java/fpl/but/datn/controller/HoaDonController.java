@@ -32,6 +32,17 @@ public class HoaDonController {
     @Autowired
     private IHoaDonService hoaDonService;
 
+    @GetMapping("/findByKhachHang/{id}")
+    ApiResponse<List<HoaDonDto>> findByIdKhachHang(@PathVariable UUID id) {
+        ApiResponse<List<HoaDonDto>> apiResponse = new ApiResponse<>();
+        if (id != null){
+            List<HoaDonDto> dto = TranferDatas.convertListHoaDonToDto(hoaDonService.findHoaDonByKhachHang(id));
+            apiResponse.setMessage("Lấy Hóa đơn thành công");
+            apiResponse.setResult(dto);
+        }
+        return apiResponse;
+    }
+
     @PostMapping("/create")
     ApiResponse<HoaDon> createHoaDon(@RequestBody @Valid HoaDonDto request){
         ApiResponse<HoaDon>  apiResponse = new ApiResponse<>();
@@ -151,6 +162,20 @@ public class HoaDonController {
 
         return apiResponse;
     }
+
+    @PutMapping("/updateTrangThai/{id}")
+    public ApiResponse<HoaDon> updateTrangThai(@RequestParam Integer trangThai, @PathVariable UUID id) {
+        ApiResponse<HoaDon> apiResponse = new ApiResponse<>();
+
+        if (trangThai != null) {
+            apiResponse.setResult(hoaDonService.updateTrangThai(id, trangThai));
+            apiResponse.setMessage("Cập nhật thành công");
+        } else {
+            throw new AppException(ErrorCode.UPDATE_FAILED);
+        }
+        return apiResponse;
+    }
+
 
 
 }

@@ -12,7 +12,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "HinhAnh")
 public class HinhAnh {
 
     @Id
@@ -20,6 +19,9 @@ public class HinhAnh {
     private UUID id;
     @ManyToOne
     private ChiTietSanPham chiTietSanPham;
+
+    @ManyToOne
+    private SanPham sanPham;
     private String ma;
     private String url;
     private Date ngayTao;

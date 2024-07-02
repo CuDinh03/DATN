@@ -12,5 +12,4 @@ public class TaiKhoanResponse {
     String id;
     String username;
     String chucVu;
-
 }

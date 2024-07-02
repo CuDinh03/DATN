@@ -13,7 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "HoaDonChiTiet")
+@Table
 public class HoaDonChiTiet {
 
     @Id
@@ -28,17 +28,4 @@ public class HoaDonChiTiet {
     private Date ngaySua;
     private BigDecimal giaBan;
     private Integer trangThai;
-    @Override
-    public String toString() {
-        return "GioHangChiTiet{" +
-                "id=" + id +
-                ", hoaDon=" + hoaDon +
-                ", chiTietSanPham=" + chiTietSanPham +
-                ", soLuong=" + soLuong +
-                ", ngayTao=" + ngayTao +
-                ", ngaySua=" + ngaySua +
-                ", giaBan=" + giaBan +
-                ", trangThai=" + trangThai +
-                '}';
-    }
 }

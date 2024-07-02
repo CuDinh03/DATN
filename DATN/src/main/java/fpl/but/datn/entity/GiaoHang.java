@@ -26,7 +26,6 @@ public class GiaoHang {
 
     @ManyToOne
     private HoaDon hoaDon;
-
     private String diaChiGiaoHang;
     private String phuongThucGiaoHang;
     private String donViVanChuyen;

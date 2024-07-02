@@ -5,6 +5,7 @@ import fpl.but.datn.entity.GioHang;
 import fpl.but.datn.entity.HoaDon;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +21,8 @@ public interface IHoaDonService {
     Page<HoaDon> getAllHoaDonPageable(Pageable pageable);
     Optional<HoaDon> findByMa(String ma);
     boolean xoaCungHoaDon(UUID id);
-
+    HoaDon updateTrangThai(UUID id, Integer trangThai);
     Page<HoaDon> getHoaDonsByTrangThai(Pageable pageable, Integer trangThai);
+    List<HoaDon> findHoaDonByKhachHang(UUID idKhachHang);
 
 }

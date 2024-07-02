@@ -108,6 +108,16 @@ public class VoucherController {
         return ApiResponse.<Void>builder().build();
     }
 
+    @DeleteMapping("/open/{id}")
+    ApiResponse<Void> open(@PathVariable String id) {
+        UUID idVoucher = null;
+        if (id != null) {
+            idVoucher = UUID.fromString(id);
+            voucherService.open(idVoucher);
+        } return ApiResponse.<Void>builder().build();
+    }
+
+
     @GetMapping("/{id}")
     ApiResponse<VoucherDto> selecVoucher(@PathVariable String id){
         UUID idVoucher = null;

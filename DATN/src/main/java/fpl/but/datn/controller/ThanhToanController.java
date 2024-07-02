@@ -1,6 +1,7 @@
 package fpl.but.datn.controller;
 
 import fpl.but.datn.dto.request.ThanhToanDto;
+import fpl.but.datn.dto.request.ThanhToanOnl;
 import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.service.impl.*;
 import fpl.but.datn.tranferdata.TranferDatas;
@@ -47,4 +48,35 @@ public class ThanhToanController {
 
         return apiResponse;
     }
+        @PostMapping("/onl")
+        public ApiResponse<ThanhToanOnl> thanhtoanOnl(@RequestBody ThanhToanOnl thanhToanOnl) {
+            ApiResponse<ThanhToanOnl> apiResponse = new ApiResponse<>();
+
+            try {
+                if (thanhToanOnl.getGioHang() != null && thanhToanOnl.getGioHangChiTietList() != null) {
+                    thanhToanService.thanhToanSanPhamOnline(
+                            thanhToanOnl.getGioHang(),
+                            thanhToanOnl.getTongTien(),
+                            thanhToanOnl.getTongTienGiam(),
+                            thanhToanOnl.getVoucher(),
+                            thanhToanOnl.getDiaChiGiaoHang(),
+                            thanhToanOnl.getNote(),
+                            thanhToanOnl.getGioHangChiTietList()
+                            );
+
+                    apiResponse.setMessage("Thanh toán thành công");
+                    apiResponse.setResult(thanhToanOnl);
+                } else {
+                    apiResponse.setMessage("Thông tin thanh toán không hợp lệ");
+                    apiResponse.setResult(null);
+                }
+            } catch (Exception e) {
+                apiResponse.setMessage("Đã xảy ra lỗi khi thanh toán: " + e.getMessage());
+                apiResponse.setResult(null);
+            }
+
+            return apiResponse;
+        }
+
+
 }

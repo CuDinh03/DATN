@@ -1,5 +1,6 @@
 package fpl.but.datn.service.impl;
 
+import fpl.but.datn.entity.SanPham;
 import fpl.but.datn.entity.Voucher;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
@@ -92,6 +93,14 @@ public class VoucherService implements IService<Voucher>, IVoucherService {
         } else {
             throw new AppException(ErrorCode.VOUCHER_NOT_EXISTED);
         }
+    }
+
+    public void open(UUID id) {
+        Voucher voucher = getByID(id);
+        voucher.setTrangThai(1);
+        voucher.setNgaySua(new Date());
+        voucherRepository.save(voucher);
+
     }
 
     @Override

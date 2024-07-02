@@ -12,7 +12,7 @@ public interface ITaiKhoanService {
 
     List<TaiKhoan> getAllTk();
     TaiKhoan getByID(UUID id);
-    TaiKhoan createAccount( TaiKhoan taiKhoan);
+    TaiKhoan createAccount( TaiKhoan taiKhoan, String mail);
 
     TaiKhoan update (UUID uuid, TaiKhoan taiKhoan);
 
