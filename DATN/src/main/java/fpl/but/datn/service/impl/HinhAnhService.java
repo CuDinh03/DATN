@@ -1,5 +1,6 @@
 package fpl.but.datn.service.impl;
 
+import fpl.but.datn.entity.ChiTietSanPham;
 import fpl.but.datn.entity.HinhAnh;
 import fpl.but.datn.entity.ThuongHieu;
 import fpl.but.datn.exception.AppException;
@@ -83,5 +84,17 @@ public class HinhAnhService implements IHinhAnhService {
 
     public List finAllByChiTietSanPham(UUID id){
         return hinhAnhRepository.findAllByChiTietSanPham(id);
+    }
+
+    @Override
+    public HinhAnh saveHinhAnh(String url, ChiTietSanPham chiTietSanPham) {
+        HinhAnh hinhAnh = HinhAnh.builder()
+                .url(url)
+                .chiTietSanPham(chiTietSanPham)
+                .ngayTao(new Date())
+                .ngaySua(new Date())
+                .trangThai(1)
+                .build();
+        return hinhAnhRepository.save(hinhAnh);
     }
 }
