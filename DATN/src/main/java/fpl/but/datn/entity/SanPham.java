@@ -1,7 +1,5 @@
 package fpl.but.datn.entity;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,8 +12,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table
 public class SanPham {
-
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -24,10 +22,4 @@ public class SanPham {
     private Date ngayTao;
     private Date ngaySua;
     private Integer trangThai;
-
-//  @JsonCreator và @JsonProperty, bạn cần cấu hình SanPham để có thể được khởi tạo từ UUID.
-    @JsonCreator
-    public SanPham(@JsonProperty("id") UUID id) {
-        this.id = id;
-    }
 }

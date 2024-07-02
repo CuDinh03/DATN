@@ -1,23 +1,17 @@
 package fpl.but.datn.controller;
 
-import fpl.but.datn.dto.request.DanhMucDto;
-import fpl.but.datn.dto.request.GioHangChiTietDto;
+
 import fpl.but.datn.dto.request.HoaDonChiTietDto;
-import fpl.but.datn.dto.request.HoaDonDto;
 import fpl.but.datn.dto.response.ApiResponse;
-import fpl.but.datn.entity.DanhMuc;
-import fpl.but.datn.entity.GioHangChiTiet;
 import fpl.but.datn.entity.HinhAnh;
 import fpl.but.datn.entity.HoaDonChiTiet;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.service.IHoaDonChiTietService;
-import fpl.but.datn.service.impl.HoaDonChiTietService;
 import fpl.but.datn.tranferdata.TranferDatas;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -27,7 +21,7 @@ import java.util.UUID;
 public class HoaDonChiTietController {
 
     @Autowired
-    private HoaDonChiTietService hoaDonChiTietService;
+    private IHoaDonChiTietService hoaDonChiTietService;
 
     @GetMapping("/all")
     ApiResponse<List<HoaDonChiTietDto>> getAll(){
@@ -37,7 +31,7 @@ public class HoaDonChiTietController {
             apiResponse.setMessage("Lấy danh sách hoa don thành công");
             apiResponse.setResult(dto);
         }else {
-            throw new AppException(ErrorCode.NO_ORDER_FOUND);
+            throw new AppException(ErrorCode.LIST_ORDER_FOUND);
         }
         return apiResponse;
     }
@@ -74,7 +68,7 @@ public class HoaDonChiTietController {
             apiResponse.setResult(dtoList);
             return apiResponse;
         } else {
-            throw new AppException(ErrorCode.NO_CARTDETAIl_FOUND);
+            throw new AppException(ErrorCode.LIST_ORDER_FOUND);
         }
     }
 
@@ -86,7 +80,7 @@ public class HoaDonChiTietController {
             apiResponse.setMessage("Lấy danh sách hoa don thành công");
             apiResponse.setResult(dto);
         }else {
-            throw new AppException(ErrorCode.NO_ORDER_FOUND);
+            throw new AppException(ErrorCode.LIST_ORDER_FOUND);
         }
         return apiResponse;
     }
@@ -98,6 +92,13 @@ public class HoaDonChiTietController {
         if (id != null){
             idHoaDonChiTiet = UUID.fromString(id);
             HoaDonChiTietDto dto = TranferDatas.convertToDto(hoaDonChiTietService.findById(idHoaDonChiTiet));
+
+            List<HinhAnh> hinhAnhList = dto.getChiTietSanPham().getHinhAnh();
+            List<String> hinhAnhUrls = new ArrayList<>();
+            for (HinhAnh hinhAnh : hinhAnhList) {
+                hinhAnhUrls.add(hinhAnh.getUrl());
+            }
+            dto.setHinhAnhUrls(hinhAnhUrls);
             apiResponse.setMessage("Lấy hóa đơn thành công");
             apiResponse.setResult(dto);
         }

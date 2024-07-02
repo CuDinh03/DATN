@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -24,5 +25,9 @@ public interface IHoaDonService {
     HoaDon updateTrangThai(UUID id, Integer trangThai);
     Page<HoaDon> getHoaDonsByTrangThai(Pageable pageable, Integer trangThai);
     List<HoaDon> findHoaDonByKhachHang(UUID idKhachHang);
+    List<HoaDon> getHoaDonsByTrangThaiAndKhachHang(Integer trangThai, UUID khachHangId);
+    Optional<HoaDon> findByMaKH(String ma);
+    List<HoaDon> getHoaDonBetweenDates(Date startDate, Date endDate);
+    Optional<HoaDon> findByMaAndKhachHang(String ma, UUID khachHangId);
 
 }

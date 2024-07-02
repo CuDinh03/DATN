@@ -15,37 +15,24 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table
 public class ChiTietSanPham {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-
     private String ma;
-
     @ManyToOne
-    @JoinColumn(name = "san_pham_id", referencedColumnName = "id")
     private SanPham sanPham;
-
     @ManyToOne
-    @JoinColumn(name = "thuong_hieu_id", referencedColumnName = "id")
     private ThuongHieu thuongHieu;
-
     @ManyToOne
-    @JoinColumn(name = "chat_lieu_id", referencedColumnName = "id")
     private ChatLieu chatLieu;
-
     @ManyToOne
-    @JoinColumn(name = "danh_muc_id", referencedColumnName = "id")
     private DanhMuc danhMuc;
-
     @ManyToOne
-    @JoinColumn(name = "kich_thuoc_id", referencedColumnName = "id")
     private KichThuoc kichThuoc;
-
     @ManyToOne
-    @JoinColumn(name = "mau_sac_id", referencedColumnName = "id")
     private MauSac mauSac;
-
     @JsonIgnore
     @OneToMany(mappedBy = "chiTietSanPham", fetch = FetchType.EAGER)
     private List<HinhAnh> hinhAnh;
@@ -56,4 +43,7 @@ public class ChiTietSanPham {
     private Date ngaySua;
     private Date ngayTao;
     private Integer trangThai;
+
+
+
 }

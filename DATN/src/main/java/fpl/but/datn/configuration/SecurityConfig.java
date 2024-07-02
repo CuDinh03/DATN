@@ -37,15 +37,11 @@ public class SecurityConfig {
             "/api/chi-tiet-san-pham/findAllKichThuocByMaCTSP/{ma}",
             "/api/chi-tiet-san-pham/", "/api/chi-tiet-san-pham/findSanPhamByKichThuoc/{ma}",
             "/api/thanhtoan/onl", "/api/voucher/all", "/api/voucher/allVouchers", "/api/voucher/{id}",
-            "/api/thanhtoan/onl",
             "/api/hoa-don-chi-tiet/all/{id}",
-            "/api/thanhtoan",
             "/api/voucher/create", "/api/khs/create", "/api/danh-muc/create",
             "/api/hoa-don-gio-hang/create", "/api/gio-hang-chi-tiet/create", "/api/thanhtoan",
-
-
             "/api/hoa-don-chi-tiet/all/{id}", "/api/hoa-don-chi-tiet/{id}",
-            "/api/hoa-don/{id}"
+            "/api/hoa-don/{id}", "api/hoa-don/byTrangThaiAndKhachHang", "/api/hoa-don/updateTrangThai/{id}","/api/hoa-don/findHd/{ma}","/api/hoa-don/find-time"
     };
 
     private final String[] ADMIN_ENDPOINT_GET = {
@@ -63,7 +59,7 @@ public class SecurityConfig {
             "/api/chi-tiet-san-pham/all","/api/chi-tiet-san-pham/addNew", "/api/chi-tiet-san-pham/update/{id}", "/api/chi-tiet-san-pham/delete/{id}", "/api/chi-tiet-san-pham/detail/{id}",
             "/api/danh-muc/all", "/api/danh-muc/{id}",
             "/api/hoa-don-chi-tiet/all/{id}", "/api/hoa-don-chi-tiet/{id}", "/api/gio-hang-chi-tiet/all/{id}",
-            "/api/hoa-don/all", "/api/hoa-don/find/{ma}",
+            "/api/hoa-don/all",
             "/api/hoa-don-gio-hang/all", "/api/hoa-don-gio-hang/all/{id}",
             "/api/voucher/all","/api/voucher/allVouchers","/api/voucher/{id}",
             "/api/hoa-don/{ma}","/api/chi-tiet-san-pham/{id}"
@@ -77,7 +73,6 @@ public class SecurityConfig {
     };
     private final String[] ADMIN_ENDPOINT_PUT = {"/api/voucher/{id}", "/api/users/{id}",
             "/api/danh-muc/{id}"
-            ,"/api/hoa-don/updateTrangThai/{id}"
     };
     private final String[] ADMIN_ENDPOINT_DELETE = {"/api/voucher/{id}","/api/users/{id}", "/api/users//open/{id}",
             "/api/danh-muc/{id}",            "/api/voucher/{id}", "/api/users/{id}", "/api/danh-muc/{id}","/api/hoa-don/updateTrangThai/{id}"
