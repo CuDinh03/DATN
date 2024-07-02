@@ -9,8 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.math.BigDecimal;
+import java.time.*;
 import java.util.*;
 
 @Service
@@ -20,10 +20,10 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
     private HoaDonService hoaDonService;
 
     @Autowired
-    private HoaDonRepository hoaDonRepository;
-
+    private GiaoHangService giaoHangService;
     @Autowired
-    private GioHangChiTietService gioHangChiTietService;
+    private EmailSenderService emailSenderService;
+
 
     @Autowired
     private HoaDonChiTietService hoaDonChiTietService;
@@ -36,6 +36,7 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
 
     @Autowired
     private HoaDonGioHangService hoaDonGioHangService;
+
     @Override
     public ThanhToan getByID(UUID id) {
         return null;
@@ -74,7 +75,7 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
         if (request != null) {
             HoaDon hoaDon = hoaDonService.findById(request.getId());
             if (hoaDon != null) {
-                hoaDon.setTrangThai(6);
+                hoaDon.setTrangThai(3);
                 hoaDon.setTongTien(request.getTongTien());
                 hoaDon.setNgaySua(new Date());
                 hoaDon.setNgayTao(new Date());
@@ -92,13 +93,13 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
                     hoaDonChiTiet.setNgaySua(new Date());
                     hoaDonChiTiet.setChiTietSanPham(ghCt.getChiTietSanPham());
                     hoaDonChiTiet.setHoaDon(hoaDon);
-                    hoaDonChiTiet.setTrangThai(6);
+                    hoaDonChiTiet.setTrangThai(1);
                     this.hoaDonChiTietService.create(hoaDonChiTiet);
                 }
 
                 List<HoaDonChiTiet> hoaDonChiTiets = this.hoaDonChiTietService.getHoaDonChiTietByIdHoaDon(hoaDon.getId());
                 for (HoaDonChiTiet hdct : hoaDonChiTiets) {
-                    hdct.setTrangThai(6);
+                    hdct.setTrangThai(1);
                     this.hoaDonChiTietService.update(hdct, hdct.getId());
                 }
                 GioHangHoaDon gioHangHoaDon = this.hoaDonGioHangService.findByIdHoaDon(hoaDon.getId());
@@ -111,7 +112,9 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
 
     @Transactional
     public void thanhToanSanPhamOnline(GioHang requestGh, BigDecimal tongTien, BigDecimal tongTienGiam,
-                                       Voucher voucher, String ghiChu, List<GioHangChiTiet> listGioHangCt) {
+                                       Voucher voucher, String diaChiGiaoHang, String ghiChu, List<GioHangChiTiet> listGioHangCt) {
+        System.out.println("============================");
+        System.out.println(listGioHangCt);
         if (requestGh == null || requestGh.getId() == null) {
             throw new IllegalArgumentException("GioHang request is invalid");
         }
@@ -124,7 +127,9 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
 
         GioHang gioHang = Optional.ofNullable(this.gioHangService.findById(requestGh.getId()))
                 .orElseThrow(() -> new IllegalArgumentException("GioHang not found with id: " + requestGh.getId()));
-
+        GiaoHang giaoHang = new GiaoHang();
+        giaoHang.setId(UUID.randomUUID());
+        giaoHang.setKhachHang(requestGh.getKhachHang());
         HoaDon hoaDon = HoaDon.builder()
                 .nguoiDung(null)
                 .khachHang(gioHang.getKhachHang())
@@ -133,9 +138,25 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
                 .voucher(voucher)
                 .ghiChu(ghiChu)
                 .build();
+        System.out.println("===================");
+        System.out.println("trc khi luu");
+        System.out.println(hoaDon.toString());
+        System.out.println("===================");
         HoaDon hoaDon1 = hoaDonService.create(hoaDon);
         hoaDon1.setTrangThai(1);
         HoaDon hoaDon2 = hoaDonService.update(hoaDon1,hoaDon1.getId());
+        giaoHang.setHoaDon(hoaDon2);
+        giaoHang.setDiaChiGiaoHang(diaChiGiaoHang);
+        giaoHang.setPhuongThucGiaoHang("tienmat");
+        giaoHang.setDonViVanChuyen("CPN");
+        giaoHang.setNgayTao(new Date());
+        giaoHang.setNgaySua(new Date());
+        LocalDate localDate = LocalDate.now().plusDays(3);
+        Date newDate = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        giaoHang.setNgayDuKienGiao(newDate);
+        giaoHang.setTrangThai(1);
+
+        giaoHangService.create(giaoHang);
         for (GioHangChiTiet ghCt : listGioHangCt) {
             System.out.println(ghCt.toString());
             HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
@@ -148,8 +169,45 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
             hoaDonChiTiet.setHoaDon(hoaDon2);
             hoaDonChiTiet.setTrangThai(1);
             gioHangChiTietRepository.delete(ghCt);
+
             this.hoaDonChiTietService.create(hoaDonChiTiet);
         }
+        String toMail = requestGh.getKhachHang().getEmail();
+        String subject = "Xác nhận đơn hàng thành công";
+        String body = "Cửa hàng MT-Shirt\n" +
+                "\n" +
+                "Xin chào! Đơn hàng của bạn đang được chuẩn bị. Chi tiết đơn hàng của bạn như sau:\n" +
+                "\n" +
+                "THEO DÕI ĐƠN HÀNG [liên kết]\n" +
+                "\n" +
+                "TÓM TẮT ĐƠN HÀNG:\n" +
+                "\n" +
+                "Số đơn hàng: "+hoaDon2.getMa()+"\n" +
+                "Ngày đặt hàng: " + giaoHang.getNgayTao() + "\n" +
+                "Tổng số tiền: "+hoaDon2.getTongTien()+"\n" +
+                "\n" +
+                "ĐỊA CHỈ GIAO HÀNG: "+giaoHang.getDiaChiGiaoHang()+"\n" +
+                "\n" +
+                "DANH SÁCH ĐƠN HÀNG:\n" +
+                "\n";
+
+// Thêm danh sách sản phẩm
+        body += "| Sản phẩm                | Số lượng | Giá      |\n";
+        body += "|-------------------------|----------|----------|\n";
+
+        for (GioHangChiTiet ghCt : listGioHangCt) {
+            body += "| " + ghCt.getChiTietSanPham().getSanPham().getTen() + "(" + ghCt.getChiTietSanPham().getKichThuoc().getTen()+")" + " | " +
+                    ghCt.getSoLuong() + " | " +
+                    ghCt.getChiTietSanPham().getGiaBan() + " |\n";
+        }
+
+        body += "\nCảm ơn bạn đã mua hàng tại cửa hàng của chúng tôi!\n";
+
+        emailSenderService.sendMail(toMail, subject, body);
         this.gioHangService.update(gioHang, gioHang.getId());
+
     }
+
+
+
 }

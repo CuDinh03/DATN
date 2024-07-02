@@ -37,5 +37,7 @@ public interface IKhachHangService {
 
     KhachHang findKHByTenDangNhap(String tenDangNhap);
 
-    KhachHang createWhenTk(TaiKhoan taiKhoan);
+    KhachHang createWhenTk(TaiKhoan taiKhoan, String mail);
+
+    boolean existsByEmail(String mail);
 }

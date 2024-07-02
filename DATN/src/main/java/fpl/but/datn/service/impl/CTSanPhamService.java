@@ -244,7 +244,7 @@ public class CTSanPhamService implements ICTSanPhamService {
              list) {
             ct.setNgaySua(new Date());
             ct.setTrangThai(1);
-            chiTietSanPhamList.add(create(ct));
+            chiTietSanPhamList.add(update(ct,ct.getId()));
         }
         return chiTietSanPhamList;
     }

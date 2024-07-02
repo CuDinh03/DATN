@@ -36,17 +36,22 @@ public class TaiKhoanService implements ITaiKhoanService {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private KhachHangService khachHangService;
+    @Autowired
+    private EmailSenderService emailSenderService;
 
     @Autowired
     private GioHangService gioHangService;
 
     @Transactional
     @Override
-    public TaiKhoan createAccount(TaiKhoan request) {
+    public TaiKhoan createAccount(TaiKhoan request, String mail) {
         TaiKhoan taiKhoan = new TaiKhoan();
 
         if (taiKhoanRepository.existsByTenDangNhap(request.getTenDangNhap())){
                         throw new AppException(ErrorCode.ACCOUNT_EXISTED);
+        }
+        if (khachHangService.existsByEmail(mail)){
+            throw new AppException(ErrorCode.KH_EXISTED_MAIL);
         }
         taiKhoan.setMa("TK0" + request.getTenDangNhap());
         taiKhoan.setId(UUID.randomUUID());
@@ -58,7 +63,7 @@ public class TaiKhoanService implements ITaiKhoanService {
         taiKhoan.setNgaySua(new Date());
         taiKhoan.setTrangThai(1);
         TaiKhoan taiKhoan1 = taiKhoanRepository.save(taiKhoan);
-        KhachHang khachHang = khachHangService.createWhenTk(taiKhoan1);
+        KhachHang khachHang = khachHangService.createWhenTk(taiKhoan1, mail);
         Random random = new Random();
         // Tạo giỏ hàng
         GioHang gioHang = new GioHang();
@@ -69,6 +74,9 @@ public class TaiKhoanService implements ITaiKhoanService {
         gioHang.setTrangThai(2);
 
         gioHangService.create(gioHang);
+
+        emailSenderService.sendAccountCreationEmail(mail, taiKhoan1.getTenDangNhap());
+
 
         return taiKhoan1;
     }

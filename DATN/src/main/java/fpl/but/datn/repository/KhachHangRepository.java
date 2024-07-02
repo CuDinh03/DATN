@@ -36,5 +36,6 @@ public interface KhachHangRepository extends JpaRepository<KhachHang, UUID> {
 
     @Query("select kh.diaChi from  KhachHang kh where kh.id = :idKh")
     String findDiaChiKh(@Param("idKh") String id);
+    boolean existsByEmail(String email);
 
 }
