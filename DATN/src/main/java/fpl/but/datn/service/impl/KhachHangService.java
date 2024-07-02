@@ -155,17 +155,23 @@ public class KhachHangService implements IService<KhachHang>, IKhachHangService 
     @Transactional
 
     @Override
-    public KhachHang createWhenTk(TaiKhoan taiKhoan) {
+    public KhachHang createWhenTk(TaiKhoan taiKhoan, String mail) {
 
         KhachHang khachHang = KhachHang.builder()
                 .ma("KH" + System.currentTimeMillis())
                 .taiKhoan(taiKhoan)
+                .email(mail)
                 .ngayTao(new Date())
                 .ngaySua(new Date())
                 .trangThai(2)
                 .build();
 
         return khachHangRepository.save(khachHang);
+    }
+
+    @Override
+    public boolean existsByEmail(String mail) {
+        return khachHangRepository.existsByEmail(mail);
     }
 
     public static void main(String[] args) {

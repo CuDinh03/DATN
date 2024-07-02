@@ -67,7 +67,7 @@ public enum ErrorCode {
     NO_LIST_SANPHAM_FOUND(1058, "Không tìm thấy danh sách sản phẩm nào ",HttpStatus.NOT_FOUND),
     CTSP_EXISTED(1059, "Sản phẩm chi tiết này đã tồn tại", HttpStatus.BAD_REQUEST),
 
-    ;
+    KH_EXISTED_MAIL( 1060,"Mail này đã được sử dụng", HttpStatus.BAD_REQUEST );
 
     ErrorCode(int code, String message, HttpStatusCode httpStatusCode) {
         this.code = code;

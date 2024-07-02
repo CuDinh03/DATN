@@ -21,6 +21,8 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
 
     @Autowired
     private GiaoHangService giaoHangService;
+    @Autowired
+    private EmailSenderService emailSenderService;
 
 
     @Autowired
@@ -155,7 +157,6 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
         giaoHang.setTrangThai(1);
 
         giaoHangService.create(giaoHang);
-
         for (GioHangChiTiet ghCt : listGioHangCt) {
             System.out.println(ghCt.toString());
             HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
@@ -168,16 +169,45 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
             hoaDonChiTiet.setHoaDon(hoaDon2);
             hoaDonChiTiet.setTrangThai(1);
             gioHangChiTietRepository.delete(ghCt);
-            System.out.println("===================");
-            System.out.println("hoa don chi tiet");
-            System.out.println(hoaDonChiTiet.toString());
-            System.out.println("===================");
 
             this.hoaDonChiTietService.create(hoaDonChiTiet);
         }
+        String toMail = requestGh.getKhachHang().getEmail();
+        String subject = "Xác nhận đơn hàng thành công";
+        String body = "Cửa hàng MT-Shirt\n" +
+                "\n" +
+                "Xin chào! Đơn hàng của bạn đang được chuẩn bị. Chi tiết đơn hàng của bạn như sau:\n" +
+                "\n" +
+                "THEO DÕI ĐƠN HÀNG [liên kết]\n" +
+                "\n" +
+                "TÓM TẮT ĐƠN HÀNG:\n" +
+                "\n" +
+                "Số đơn hàng: "+hoaDon2.getMa()+"\n" +
+                "Ngày đặt hàng: " + giaoHang.getNgayTao() + "\n" +
+                "Tổng số tiền: "+hoaDon2.getTongTien()+"\n" +
+                "\n" +
+                "ĐỊA CHỈ GIAO HÀNG: "+giaoHang.getDiaChiGiaoHang()+"\n" +
+                "\n" +
+                "DANH SÁCH ĐƠN HÀNG:\n" +
+                "\n";
+
+// Thêm danh sách sản phẩm
+        body += "| Sản phẩm                | Số lượng | Giá      |\n";
+        body += "|-------------------------|----------|----------|\n";
+
+        for (GioHangChiTiet ghCt : listGioHangCt) {
+            body += "| " + ghCt.getChiTietSanPham().getSanPham().getTen() + "(" + ghCt.getChiTietSanPham().getKichThuoc().getTen()+")" + " | " +
+                    ghCt.getSoLuong() + " | " +
+                    ghCt.getChiTietSanPham().getGiaBan() + " |\n";
+        }
+
+        body += "\nCảm ơn bạn đã mua hàng tại cửa hàng của chúng tôi!\n";
+
+        emailSenderService.sendMail(toMail, subject, body);
         this.gioHangService.update(gioHang, gioHang.getId());
 
-
     }
+
+
 
 }

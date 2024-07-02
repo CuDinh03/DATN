@@ -1,5 +1,6 @@
 package fpl.but.datn.controller;
 
+import fpl.but.datn.dto.request.DangNhapDto;
 import fpl.but.datn.dto.request.DanhMucDto;
 import fpl.but.datn.dto.request.TaiKhoanDto;
 import fpl.but.datn.dto.response.ApiResponse;
@@ -33,10 +34,10 @@ public class UserController {
     private TaiKhoanService taiKhoanService;
 
     @PostMapping("/create")
-    ApiResponse<TaiKhoan> createAccount(@RequestBody @Valid TaiKhoanDto request) {
+    ApiResponse<TaiKhoan> createAccount(@RequestBody @Valid DangNhapDto request) {
         ApiResponse<TaiKhoan> apiResponse = new ApiResponse<>();
         if (request != null)
-            apiResponse.setResult(taiKhoanService.createAccount(TranferDatas.convertToEntity(request)));
+            apiResponse.setResult(taiKhoanService.createAccount(TranferDatas.convertToEntity(request.getTaiKhoanDto()), request.getMail()));
         return apiResponse;
     }
     
