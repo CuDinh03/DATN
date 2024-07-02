@@ -1,6 +1,5 @@
 package fpl.but.datn.controller;
 
-import fpl.but.datn.dto.request.DanhMucDto;
 import fpl.but.datn.dto.request.TaiKhoanDto;
 import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.dto.response.TaiKhoanResponse;
@@ -17,7 +16,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,6 +29,7 @@ public class UserController {
 
     @Autowired
     private TaiKhoanService taiKhoanService;
+
     @PostMapping("/create")
     ApiResponse<TaiKhoan> createAccount(@RequestBody @Valid TaiKhoanDto request) {
         ApiResponse<TaiKhoan> apiResponse = new ApiResponse<>();
@@ -38,7 +37,8 @@ public class UserController {
             apiResponse.setResult(taiKhoanService.createAccount(TranferDatas.convertToEntity(request)));
         return apiResponse;
     }
-    
+
+
     @GetMapping("/all")
     ApiResponse<Page<TaiKhoanDto>> getAccounts(@RequestParam(defaultValue = "0") int page,
                                                @RequestParam(defaultValue = "5") int size) {
@@ -59,23 +59,25 @@ public class UserController {
         return apiResponse;
     }
 
-//    @GetMapping("/all/{role}")
-//    public ApiResponse<Page<TaiKhoanDto>> getAccountsByRoles(@RequestParam(defaultValue = "0") int page,
-//                                                             @RequestParam(defaultValue = "5") int size,
-//                                                             @PathVariable String role) {
-//        Pageable pageable = PageRequest.of(page, size);
-//        Page<TaiKhoan> taiKhoanPage = taiKhoanService.findByRoles(role, pageable);
-//        List<TaiKhoanDto> listDto = TranferDatas.convertListTaiKhoanToDto(taiKhoanPage.getContent());
-//
-//        ApiResponse<Page<TaiKhoanDto>> apiResponse = new ApiResponse<>();
-//        if (!listDto.isEmpty()) {
-//            apiResponse.setMessage("Lấy danh sách tài khoản thành công");
-//            apiResponse.setResult(new PageImpl<>(listDto, pageable, taiKhoanPage.getTotalElements()));
-//        } else {
-//            throw new AppException(ErrorCode.NO_ACCOUNTS_FOUND);
-//        }
-//        return apiResponse;
-//    }
+    @GetMapping("/all/{role}")
+    public ApiResponse<Page<TaiKhoanDto>> getAccountsByRoles(@RequestParam(defaultValue = "0") int page,
+                                                             @RequestParam(defaultValue = "5") int size,
+                                                             @PathVariable String role) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<TaiKhoan> taiKhoanPage = taiKhoanService.findByRoles(role, pageable);
+        List<TaiKhoanDto> listDto = TranferDatas.convertListTaiKhoanToDto(taiKhoanPage.getContent());
+
+        ApiResponse<Page<TaiKhoanDto>> apiResponse = new ApiResponse<>();
+        if (!listDto.isEmpty()) {
+            apiResponse.setMessage("Lấy danh sách tài khoản thành công");
+            apiResponse.setResult(new PageImpl<>(listDto, pageable, taiKhoanPage.getTotalElements()));
+        } else {
+            throw new AppException(ErrorCode.NO_ACCOUNTS_FOUND);
+        }
+        return apiResponse;
+    }
+
+
 
     @GetMapping("/{id}")
     ApiResponse<TaiKhoanDto> getAccount(@PathVariable String id) {
@@ -114,15 +116,6 @@ public class UserController {
         return ApiResponse.<Void>builder().build();
     }
 
-    @DeleteMapping("/open/{id}")
-    ApiResponse<Void> open(@PathVariable String id) {
-        UUID idTaiKhoan = null;
-        if (id != null) {
-            idTaiKhoan = UUID.fromString(id);
-            taiKhoanService.open(idTaiKhoan);
-        } return ApiResponse.<Void>builder().build();
-    }
-
     @PostMapping("/check-username")
     public ApiResponse<TaiKhoanDto> findByTenDangNhap(@RequestBody String tenDangNhap) {
         Optional<TaiKhoan> taiKhoanOptional = taiKhoanService.findByNguoiDungByTenDangNhap(tenDangNhap);
@@ -140,19 +133,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/getAll")
-    ApiResponse<List<TaiKhoanDto>> getAll() {
-        List<TaiKhoanDto> listDto = TranferDatas.convertListTaiKhoanToDto(taiKhoanService.getAllTk());
-        ApiResponse<List<TaiKhoanDto>> apiResponse = new ApiResponse<>();
 
-        if (!listDto.isEmpty()) {
-            apiResponse.setMessage("Lấy danh sách tai khoan thành công");
-            apiResponse.setResult(listDto);
-        } else {
-            throw new AppException(ErrorCode.NO_REPORT_FOUND);
-        }
 
-        return apiResponse;
-    }
 
 }

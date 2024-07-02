@@ -16,15 +16,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
-//Trang thai :
-//    0: Chua thanh toan
-//    1: Đang xác nhận
-//    2: Đã xử lý
-//    3: Dang giao
-//    4: Da nhan hang
-//    5: Hoàn thành
-//    6: Da huy hang
 public class HoaDon {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

@@ -1,12 +1,10 @@
 package fpl.but.datn.service.impl;
 
-import fpl.but.datn.entity.ChiTietSanPham;
 import fpl.but.datn.entity.GioHangHoaDon;
 import fpl.but.datn.entity.HoaDon;
 import fpl.but.datn.entity.HoaDonChiTiet;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
-import fpl.but.datn.repository.CTSanPhamRepository;
 import fpl.but.datn.repository.GioHangHoaDonRepository;
 import fpl.but.datn.repository.HoaDonChiTietRepository;
 import fpl.but.datn.repository.HoaDonRepository;
@@ -27,8 +25,6 @@ public class HoaDonService implements IHoaDonService {
     private HoaDonChiTietRepository hoaDonChiTietRepository;
     @Autowired
     private GioHangHoaDonRepository hoaDonGioHangRepository;
-    @Autowired
-    private CTSanPhamRepository ctSanPhamRepository;
     @Override
     public List getAll() {
         return hoaDonRepository.findAll();
@@ -38,6 +34,7 @@ public class HoaDonService implements IHoaDonService {
     public HoaDon create(HoaDon request) {
         HoaDon hoaDon = new HoaDon();
         Random random = new Random();
+
         hoaDon.setId(UUID.randomUUID());
         hoaDon.setMa("HD" + random.nextInt(1000));
         hoaDon.setVoucher(request.getVoucher());
@@ -51,9 +48,6 @@ public class HoaDonService implements IHoaDonService {
         hoaDon.setVoucher(request.getVoucher());
         hoaDon.setTrangThai(1);
         return hoaDonRepository.save(hoaDon);
-    }
-    public HoaDon createHoaDonOnl(HoaDon request) {
-        return hoaDonRepository.save(request);
     }
 
     @Override
@@ -99,22 +93,6 @@ public class HoaDonService implements IHoaDonService {
     @Override
     public HoaDon updateTrangThai(UUID id, Integer trangThai) {
         HoaDon hoaDon = findById(id);
-        if (hoaDon.getTrangThai() == 1){
-            List<HoaDonChiTiet> list = hoaDonChiTietRepository.findAllHoaDonChiTietByIdHoaDon(hoaDon.getId());
-            List<ChiTietSanPham> listCt = ctSanPhamRepository.getCtspByHoaDon(hoaDon.getId());
-            for (ChiTietSanPham ctsp : listCt){
-                for (HoaDonChiTiet hoaDonChiTiet: list){
-                    if (ctsp.getId().equals(hoaDonChiTiet.getChiTietSanPham().getId())){
-                        Integer soLuong = ctsp.getSoLuong();
-                        if (soLuong >= hoaDonChiTiet.getSoLuong()){
-                            ctsp.setSoLuong(soLuong - hoaDonChiTiet.getSoLuong());
-                            ctsp.setNgaySua(new Date());
-                            ctSanPhamRepository.save(ctsp);
-                        }
-                    }
-                }
-            }
-        }
         hoaDon.setTrangThai(trangThai);
         return hoaDonRepository.save(hoaDon);
     }
@@ -134,27 +112,10 @@ public class HoaDonService implements IHoaDonService {
     public Optional<HoaDon> findByMa(String ma) {
         return hoaDonRepository.findByMa(ma);
     }
-    @Override
-    public List<HoaDon> getHoaDonBetweenDates(Date startDate, Date endDate) {
-        return hoaDonRepository.findByNgayTaoBetween(startDate, endDate);
-    }
-
-    @Override
-    public Optional<HoaDon> findByMaAndKhachHang(String ma, UUID khachHangId) {
-        return hoaDonRepository.findByMaAndKhachHang(ma, khachHangId);
-    }
 
     @Override
     public Page<HoaDon> getHoaDonsByTrangThai(Pageable pageable, Integer trangThai) {
         return hoaDonRepository.findByTrangThai(pageable, trangThai);
-    }
-    public List<HoaDon> getHoaDonsByTrangThaiAndKhachHang(Integer trangThai, UUID khachHangId) {
-        return hoaDonRepository.findByTrangThaiAndKhachHangId(trangThai, khachHangId);
-    }
-
-    @Override
-    public Optional<HoaDon> findByMaKH(String ma) {
-        return hoaDonRepository.findByMaKH(ma);
     }
 
     @Override

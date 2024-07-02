@@ -31,7 +31,7 @@ public class HoaDonChiTietController {
             apiResponse.setMessage("Lấy danh sách hoa don thành công");
             apiResponse.setResult(dto);
         }else {
-            throw new AppException(ErrorCode.LIST_ORDER_FOUND);
+            throw new AppException(ErrorCode.NO_ORDER_FOUND);
         }
         return apiResponse;
     }
@@ -68,7 +68,7 @@ public class HoaDonChiTietController {
             apiResponse.setResult(dtoList);
             return apiResponse;
         } else {
-            throw new AppException(ErrorCode.LIST_ORDER_FOUND);
+            throw new AppException(ErrorCode.NO_CARTDETAIl_FOUND);
         }
     }
 
@@ -80,7 +80,7 @@ public class HoaDonChiTietController {
             apiResponse.setMessage("Lấy danh sách hoa don thành công");
             apiResponse.setResult(dto);
         }else {
-            throw new AppException(ErrorCode.LIST_ORDER_FOUND);
+            throw new AppException(ErrorCode.NO_ORDER_FOUND);
         }
         return apiResponse;
     }
@@ -92,13 +92,6 @@ public class HoaDonChiTietController {
         if (id != null){
             idHoaDonChiTiet = UUID.fromString(id);
             HoaDonChiTietDto dto = TranferDatas.convertToDto(hoaDonChiTietService.findById(idHoaDonChiTiet));
-
-            List<HinhAnh> hinhAnhList = dto.getChiTietSanPham().getHinhAnh();
-            List<String> hinhAnhUrls = new ArrayList<>();
-            for (HinhAnh hinhAnh : hinhAnhList) {
-                hinhAnhUrls.add(hinhAnh.getUrl());
-            }
-            dto.setHinhAnhUrls(hinhAnhUrls);
             apiResponse.setMessage("Lấy hóa đơn thành công");
             apiResponse.setResult(dto);
         }
