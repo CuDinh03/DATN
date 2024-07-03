@@ -107,7 +107,9 @@ public class CTSanPhamService implements ICTSanPhamService {
         } else {
             // Tạo mới sản phẩm chi tiết
             ChiTietSanPham chiTietSanPham = new ChiTietSanPham();
-            chiTietSanPham.setMa(request.getMa());
+            Random random = new Random();
+
+            chiTietSanPham.setMa("CTSP" + random.nextInt(1000));
             chiTietSanPham.setSanPham(request.getSanPham());
             chiTietSanPham.setThuongHieu(request.getThuongHieu());
             chiTietSanPham.setChatLieu(request.getChatLieu());
@@ -219,7 +221,7 @@ public class CTSanPhamService implements ICTSanPhamService {
              list) {
             ct.setNgaySua(new Date());
             ct.setTrangThai(1);
-            chiTietSanPhamList.add(update(ct,ct.getId()));
+            chiTietSanPhamList.add(create(ct));
         }
         return chiTietSanPhamList;
     }
