@@ -6,6 +6,7 @@ import fpl.but.datn.dto.request.HoaDonChiTietDto;
 import fpl.but.datn.dto.request.ThuongHieuDto;
 import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.entity.BaoCao;
+import fpl.but.datn.entity.ChiTietSanPham;
 import fpl.but.datn.entity.HinhAnh;
 import fpl.but.datn.entity.ThuongHieu;
 import fpl.but.datn.exception.AppException;
@@ -21,6 +22,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.UUID;
@@ -128,4 +130,28 @@ public class HinhAnhController {
         }
         return apiResponse;
     }
+
+//    @PostMapping("/upload")
+//    public ApiResponse<String> uploadImage(@RequestParam("file") MultipartFile file,
+//                                                           @RequestParam("chiTietSanPhamId") Long chiTietSanPhamId) {
+//        try {
+//            // Upload file lên Firebase Storage
+//
+//            // Lấy chi tiết sản phẩm từ ID
+//            ChiTietSanPham chiTietSanPham = chiTietSanPhamService.findById(chiTietSanPhamId);
+//
+//            // Lưu thông tin ảnh vào cơ sở dữ liệu
+//            hinhAnhService.saveHinhAnh(imageUrl, chiTietSanPham);
+//
+//            ApiResponse<String> apiResponse = new ApiResponse<>();
+//            apiResponse.setMessage("Upload ảnh thành công!");
+//            apiResponse.setResult(imageUrl);
+//
+//            return apiResponse;
+//        } catch (Exception e) {
+//            ApiResponse<String> errorResponse = new ApiResponse<>();
+//            errorResponse.setMessage("Không thể upload ảnh: " + e.getMessage());
+//            return errorResponse;
+//        }
+//    }
 }

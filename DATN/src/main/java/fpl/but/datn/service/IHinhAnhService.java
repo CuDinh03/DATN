@@ -1,9 +1,6 @@
 package fpl.but.datn.service;
 
-import fpl.but.datn.entity.GioHang;
-import fpl.but.datn.entity.HinhAnh;
-import fpl.but.datn.entity.TaiKhoan;
-import fpl.but.datn.entity.ThuongHieu;
+import fpl.but.datn.entity.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -19,5 +16,7 @@ public interface IHinhAnhService {
     HinhAnh findById(UUID id);
     Page<HinhAnh> getAllHinhAnhPageable(Pageable pageable);
     List finAllByChiTietSanPham(UUID id);
+    HinhAnh saveHinhAnh(String url, ChiTietSanPham chiTietSanPham);
+
 
 }

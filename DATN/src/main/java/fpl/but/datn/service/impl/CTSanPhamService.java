@@ -91,8 +91,6 @@ public class CTSanPhamService implements ICTSanPhamService {
     @Override
     public ChiTietSanPham create(ChiTietSanPham request) {
 
-        ChiTietSanPham chiTietSanPham;
-
         // Kiểm tra xem sản phẩm chi tiết đã tồn tại chưa
         long count = ctSanPhamRepository.countByCriteria(
                 request.getMa(),
@@ -104,34 +102,11 @@ public class CTSanPhamService implements ICTSanPhamService {
                 request.getMauSac());
 
         if (count > 0) {
-            // Tìm sản phẩm chi tiết đã tồn tại
-            chiTietSanPham = ctSanPhamRepository.findByCriteria(
-                    request.getMa(),
-                    request.getSanPham(),
-                    request.getThuongHieu(),
-                    request.getChatLieu(),
-                    request.getDanhMuc(),
-                    request.getKichThuoc(),
-                    request.getMauSac());
-            if (chiTietSanPham.getSoLuong()==null){
-                chiTietSanPham.setSoLuong(0);
-            }            if (chiTietSanPham.getGiaBan()==null){
-                chiTietSanPham.setGiaBan(BigDecimal.valueOf(0));
-            }            if (chiTietSanPham.getGiaNhap()==null){
-                chiTietSanPham.setGiaNhap(BigDecimal.valueOf(0));
-            }
-            if (chiTietSanPham.getTrangThai() == 2){
-                chiTietSanPham.setTrangThai(1);
-            }
-
-            // Cập nhật số lượng của sản phẩm chi tiết
-            chiTietSanPham.setGiaNhap(request.getGiaNhap());
-            chiTietSanPham.setGiaBan(request.getGiaBan());
-            chiTietSanPham.setSoLuong(chiTietSanPham.getSoLuong() + request.getSoLuong());
-            chiTietSanPham.setNgaySua(new Date());
+            // Nếu sản phẩm chi tiết đã tồn tại, không làm gì cả và trả về null
+            return null;
         } else {
             // Tạo mới sản phẩm chi tiết
-            chiTietSanPham = new ChiTietSanPham();
+            ChiTietSanPham chiTietSanPham = new ChiTietSanPham();
             chiTietSanPham.setMa(request.getMa());
             chiTietSanPham.setSanPham(request.getSanPham());
             chiTietSanPham.setThuongHieu(request.getThuongHieu());
@@ -147,10 +122,10 @@ public class CTSanPhamService implements ICTSanPhamService {
             chiTietSanPham.setNgaySua(new Date());
             chiTietSanPham.setTrangThai(request.getTrangThai());
             chiTietSanPham.setHinhAnh(request.getHinhAnh());
-        }
 
-        // Lưu sản phẩm chi tiết
-        return ctSanPhamRepository.save(chiTietSanPham);
+            // Lưu sản phẩm chi tiết
+            return ctSanPhamRepository.save(chiTietSanPham);
+        }
     }
 
 
