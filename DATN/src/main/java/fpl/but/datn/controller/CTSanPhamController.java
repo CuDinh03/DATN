@@ -39,7 +39,7 @@ public class CTSanPhamController {
         List<ChiTietSanPhamDto> listDto = TranferDatas.convertListChiTietSanPhamToDto(chiTietSanPhamPage.getContent());
         ApiResponse<Page<ChiTietSanPhamDto>> apiResponse = new ApiResponse<>();
         if (!listDto.isEmpty()) {
-            apiResponse.setMessage("Lấy danh sách sa pham thành công");
+            apiResponse.setMessage("Lấy danh sách sản pham thành công");
             apiResponse.setResult(new PageImpl<>(listDto, pageable, chiTietSanPhamPage.getTotalElements()));
         } else {
             throw new AppException(ErrorCode.NO_LISTSPChiTiet_FOUND);
@@ -102,12 +102,10 @@ public class CTSanPhamController {
         return apiResponse;
     }
 
-    @PutMapping("/update/{id}")
-    ChiTietSanPham update(@PathVariable UUID id, @RequestBody ChiTietSanPhamDto chiTietSanPhamDto) {
-        UUID idCTSP = null;
-        if (id != null) {
-            idCTSP = id;
-            return ctSanPhamService.update(TranferDatas.convertToEntity(chiTietSanPhamDto), idCTSP);
+    @PutMapping("/update")
+    ChiTietSanPham update( @RequestBody ChiTietSanPhamDto chiTietSanPhamDto) {
+        if (chiTietSanPhamDto.getId() != null) {
+            return ctSanPhamService.update(TranferDatas.convertToEntity(chiTietSanPhamDto), chiTietSanPhamDto.getId());
         }
         return null;
     }
@@ -279,10 +277,10 @@ public class CTSanPhamController {
     }
 
     @PostMapping("/saveListCt")
-    public ApiResponse<List<ChiTietSanPham>> saveListCt(@RequestBody List<ChiTietSanPham> list) {
+    public ApiResponse<List<ChiTietSanPham>> saveListCt(@RequestBody IMG imgs) {
         ApiResponse<List<ChiTietSanPham>> apiResponse = new ApiResponse<>();
         try {
-            List<ChiTietSanPham> savedList = ctSanPhamService.saveListCt(list);
+            List<ChiTietSanPham> savedList = ctSanPhamService.saveListCt(TranferDatas.convertListChiTietSanPhamEntity(imgs.getChiTietSanPhamDto()),TranferDatas.convertListHinhAnhToEntity(imgs.getAnhDtoListt()));
             apiResponse.setMessage("Lưu danh sách chi tiết sản phẩm thành công");
             apiResponse.setResult(savedList);
         } catch (Exception e) {

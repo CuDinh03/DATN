@@ -9,9 +9,11 @@ import java.util.UUID;
 
 public interface ICTSanPhamService {
 
-    List getAll();
+    List<ChiTietSanPham> getAll();
 
     ChiTietSanPham create(ChiTietSanPham chiTietSanPham);
+
+    ChiTietSanPham create(ChiTietSanPham request, List<HinhAnh> hinhAnhs);
 
     ChiTietSanPham update(ChiTietSanPham chiTietSanPham, UUID id);
 
@@ -55,4 +57,5 @@ public interface ICTSanPhamService {
     List<ChiTietSanPham> getCtsp();
     List<ChiTietSanPham> saveListCt(List<ChiTietSanPham> list);
 
+    List<ChiTietSanPham> saveListCt(List<ChiTietSanPham> list, List<HinhAnh> hinhAnhs);
 }

@@ -2,7 +2,6 @@ package fpl.but.datn.service.impl;
 
 import fpl.but.datn.entity.ChiTietSanPham;
 import fpl.but.datn.entity.HinhAnh;
-import fpl.but.datn.entity.ThuongHieu;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.repository.HinhAnhRepository;
@@ -22,7 +21,7 @@ public class HinhAnhService implements IHinhAnhService {
     @Autowired
     private HinhAnhRepository hinhAnhRepository;
     @Override
-    public List getAll() {
+    public List<HinhAnh> getAll() {
         return hinhAnhRepository.findAll();
     }
 
@@ -33,6 +32,7 @@ public class HinhAnhService implements IHinhAnhService {
 
         if (hinhAnhRepository.existsByMa(request.getMa()))
             throw new AppException(ErrorCode.HINHANH_EXISTED);
+        hinhAnh.setId(UUID.randomUUID());
         hinhAnh.setMa("HA" + random.nextInt(1000));
         hinhAnh.setUrl(request.getUrl());
         hinhAnh.setChiTietSanPham(request.getChiTietSanPham());
@@ -52,7 +52,7 @@ public class HinhAnhService implements IHinhAnhService {
         hinhAnh.setChiTietSanPham(request.getChiTietSanPham());
         hinhAnh.setNgayTao(new Date());
         hinhAnh.setNgaySua(new Date());
-        hinhAnh.setTrangThai(request.getTrangThai());
+        hinhAnh.setTrangThai(2);
         return hinhAnhRepository.save(hinhAnh);
     }
 
@@ -87,14 +87,10 @@ public class HinhAnhService implements IHinhAnhService {
     }
 
     @Override
-    public HinhAnh saveHinhAnh(String url, ChiTietSanPham chiTietSanPham) {
-        HinhAnh hinhAnh = HinhAnh.builder()
-                .url(url)
-                .chiTietSanPham(chiTietSanPham)
-                .ngayTao(new Date())
-                .ngaySua(new Date())
-                .trangThai(1)
-                .build();
-        return hinhAnhRepository.save(hinhAnh);
+    public List<HinhAnh> saveHinhAnh(List <HinhAnh> list) {
+        for (HinhAnh img: list){
+            create(img);
+        }
+        return list;
     }
 }

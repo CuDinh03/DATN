@@ -18,6 +18,8 @@ import java.util.UUID;
 public interface CTSanPhamRepository extends JpaRepository<ChiTietSanPham, UUID> {
 
     boolean existsByMa(String ma);
+    @Query("SELECT ctsp FROM ChiTietSanPham ctsp ORDER BY ctsp.ngayTao DESC")
+    List<ChiTietSanPham> findByNgayTao();
 
     @Query("SELECT COUNT(c) FROM ChiTietSanPham c WHERE c.ma = :ma AND c.sanPham = :sanPham AND c.thuongHieu = :thuongHieu AND c.chatLieu = :chatLieu AND c.danhMuc = :danhMuc AND c.kichThuoc = :kichThuoc AND c.mauSac = :mauSac")
     long countByCriteria(

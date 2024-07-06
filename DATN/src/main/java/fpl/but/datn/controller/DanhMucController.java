@@ -100,6 +100,18 @@ public class DanhMucController {
         return null;
     }
 
+    @PutMapping()
+    ApiResponse<DanhMuc> updateTrangThai(@RequestBody DanhMucDto request) {
+        ApiResponse<DanhMuc> apiResponse = new ApiResponse<>();
+        if (request != null && request.getId() != null) {
+            DanhMuc updatedDanhMuc = danhMucService.updateDm(TranferDatas.convertToEntity(request), request.getId());
+
+            apiResponse.setCode(1000);
+            apiResponse.setResult(updatedDanhMuc);
+        }
+        return apiResponse;
+    }
+
     @DeleteMapping("/{id}")
     ApiResponse<Void> delete(@PathVariable String id) {
         UUID idDanhMuc = null;

@@ -1,9 +1,6 @@
 package fpl.but.datn.controller;
 
-import fpl.but.datn.dto.request.BaoCaoDto;
-import fpl.but.datn.dto.request.HinhAnhDto;
-import fpl.but.datn.dto.request.HoaDonChiTietDto;
-import fpl.but.datn.dto.request.ThuongHieuDto;
+import fpl.but.datn.dto.request.*;
 import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.entity.BaoCao;
 import fpl.but.datn.entity.ChiTietSanPham;
@@ -131,27 +128,20 @@ public class HinhAnhController {
         return apiResponse;
     }
 
-//    @PostMapping("/upload")
-//    public ApiResponse<String> uploadImage(@RequestParam("file") MultipartFile file,
-//                                                           @RequestParam("chiTietSanPhamId") Long chiTietSanPhamId) {
-//        try {
-//            // Upload file lên Firebase Storage
-//
-//            // Lấy chi tiết sản phẩm từ ID
-//            ChiTietSanPham chiTietSanPham = chiTietSanPhamService.findById(chiTietSanPhamId);
-//
-//            // Lưu thông tin ảnh vào cơ sở dữ liệu
-//            hinhAnhService.saveHinhAnh(imageUrl, chiTietSanPham);
-//
-//            ApiResponse<String> apiResponse = new ApiResponse<>();
-//            apiResponse.setMessage("Upload ảnh thành công!");
-//            apiResponse.setResult(imageUrl);
-//
-//            return apiResponse;
-//        } catch (Exception e) {
-//            ApiResponse<String> errorResponse = new ApiResponse<>();
-//            errorResponse.setMessage("Không thể upload ảnh: " + e.getMessage());
-//            return errorResponse;
-//        }
-//    }
+    @PostMapping("/save-img")
+    public ApiResponse<List<HinhAnhDto>> saveImg(@RequestBody List<HinhAnhDto> request) {
+        try {
+
+            hinhAnhService.saveHinhAnh(TranferDatas.convertListHinhAnhToEntity(request));
+            ApiResponse<List<HinhAnhDto>> apiResponse = new ApiResponse<>();
+            apiResponse.setMessage("Save ảnh thành công!");
+            apiResponse.setResult(request);
+
+            return apiResponse;
+        } catch (Exception e) {
+            ApiResponse<List<HinhAnhDto>> errorResponse = new ApiResponse<>();
+            errorResponse.setMessage("Không thể save ảnh: " + e.getMessage());
+            return errorResponse;
+        }
+    }
 }

@@ -231,6 +231,8 @@ public class TranferDatas {
         if (entity.getId() != null) dto.setId(entity.getId());
         if (entity.getUrl() != null) dto.setUrl(entity.getUrl());
         if (entity.getMa() != null) dto.setMa(entity.getMa());
+        if (entity.getChiTietSanPham() != null) dto.setChiTietSanPham(entity.getChiTietSanPham());
+        if (entity.getSanPham() != null) dto.setSanPham(entity.getSanPham());
         if (entity.getNgayTao() != null) dto.setNgayTao(entity.getNgayTao());
         if (entity.getNgaySua() != null) dto.setNgaySua(entity.getNgaySua());
         if (entity.getTrangThai() != null) dto.setTrangThai(entity.getTrangThai());
@@ -242,6 +244,8 @@ public class TranferDatas {
         if (dto.getId() != null) entity.setId(dto.getId());
         if (dto.getUrl() != null) entity.setUrl(dto.getUrl());
         if (dto.getMa() != null) entity.setMa(dto.getMa());
+        if (dto.getChiTietSanPham() != null) entity.setChiTietSanPham(dto.getChiTietSanPham());
+        if (dto.getSanPham() != null) entity.setSanPham(dto.getSanPham());
         if (dto.getNgayTao() != null) entity.setNgayTao(dto.getNgayTao());
         if (dto.getNgaySua() != null) entity.setNgaySua(dto.getNgaySua());
         if (dto.getTrangThai() != null) entity.setTrangThai(dto.getTrangThai());
@@ -254,6 +258,14 @@ public class TranferDatas {
             dtoList.add(convertToDto(entity));
         }
         return dtoList;
+    }
+
+    public static List<HinhAnh> convertListHinhAnhToEntity(List<HinhAnhDto> dtoList) {
+        List<HinhAnh> entityList = new ArrayList<>();
+        for (HinhAnhDto dto : dtoList) {
+            entityList.add(convertToEntity(dto));
+        }
+        return entityList;
     }
 
     // Kich thuoc
@@ -506,16 +518,6 @@ public class TranferDatas {
         ChiTietSanPhamDto dto = new ChiTietSanPhamDto();
         if (entity.getId() != null) dto.setId(entity.getId());
         if (entity.getMa() != null) dto.setMa(entity.getMa());
-        if (entity.getMa() != null) dto.setMa(entity.getMa());
-//<<<<<<<<< Temporary merge branch 1
-//        if (entity.getIdSanPham() != null) dto.setIdSanPham(entity.getIdSanPham());
-//        if (entity.getIdHinhAnh() != null) dto.setIdHinhAnh(entity.getIdHinhAnh());
-//        if (entity.getIdThuongHieu() != null) dto.setIdThuongHieu(entity.getIdThuongHieu());
-//        if (entity.getIdChatLieu() != null) dto.setIdChatLieu(entity.getIdChatLieu());
-//        if (entity.getIdDanhMuc() != null) dto.setIdDanhMuc(entity.getIdDanhMuc());
-//        if (entity.getIdKichThuoc() != null) dto.setIdKichThuoc(entity.getIdKichThuoc());
-//        if (entity.getIdMauSac() != null) dto.setIdMauSac(entity.getIdMauSac());
-//=========
         if (entity.getSanPham() != null) dto.setSanPham(entity.getSanPham());
         if (entity.getHinhAnh() != null) dto.setHinhAnh(entity.getHinhAnh());
         if (entity.getThuongHieu() != null) dto.setThuongHieu(entity.getThuongHieu());
@@ -536,16 +538,6 @@ public class TranferDatas {
         ChiTietSanPham entity = new ChiTietSanPham();
         if (dto.getId() != null) entity.setId(dto.getId());
         if (dto.getMa() != null) entity.setMa(dto.getMa());
-        if (dto.getMa() != null) entity.setMa(dto.getMa());
-//<<<<<<<<< Temporary merge branch 1
-//        if (dto.getIdSanPham() != null) entity.setIdSanPham(dto.getIdSanPham());
-//        if (dto.getIdHinhAnh() != null) entity.setIdHinhAnh(dto.getIdHinhAnh());
-//        if (dto.getIdThuongHieu() != null) entity.setIdThuongHieu(dto.getIdThuongHieu());
-//        if (dto.getIdChatLieu() != null) entity.setIdChatLieu(dto.getIdChatLieu());
-//        if (dto.getIdDanhMuc() != null) entity.setIdDanhMuc(dto.getIdDanhMuc());
-//        if (dto.getIdKichThuoc() != null) entity.setIdKichThuoc(dto.getIdKichThuoc());
-//        if (dto.getIdMauSac() != null) entity.setIdMauSac(dto.getIdMauSac());
-//=========
         if (dto.getSanPham() != null) entity.setSanPham(dto.getSanPham());
         if (dto.getHinhAnh() != null) entity.setHinhAnh(dto.getHinhAnh());
         if (dto.getThuongHieu() != null) entity.setThuongHieu(dto.getThuongHieu());
@@ -568,6 +560,14 @@ public class TranferDatas {
             dtoList.add(convertToDto(entity));
         }
         return dtoList;
+    }
+
+    public static List<ChiTietSanPham> convertListChiTietSanPhamEntity(List<ChiTietSanPhamDto> dtoList) {
+        List<ChiTietSanPham> entity = new ArrayList<>();
+        for (ChiTietSanPhamDto tietSanPhamDto : dtoList) {
+            entity.add(convertToEntity(tietSanPhamDto));
+        }
+        return entity;
     }
 
     //hoa don
