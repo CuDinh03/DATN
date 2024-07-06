@@ -1,5 +1,6 @@
 package fpl.but.datn.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,6 +21,7 @@ public class HoaDonChiTiet {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     @ManyToOne
+    @JsonBackReference
     private HoaDon hoaDon;
     @ManyToOne
     private ChiTietSanPham chiTietSanPham;

@@ -1,5 +1,6 @@
 package fpl.but.datn.service;
 
+import fpl.but.datn.dto.request.HoaDonChiTietDto;
 import fpl.but.datn.entity.DanhMuc;
 import fpl.but.datn.entity.HoaDon;
 import fpl.but.datn.entity.HoaDonChiTiet;
@@ -19,4 +20,6 @@ public interface IHoaDonChiTietService {
     Page<HoaDonChiTiet> getAllDanhMucPageable(Pageable pageable);
     List<HoaDonChiTiet> getHoaDonChiTietByIdHoaDon(UUID idHoaDon);
     List<Object[]> findAllChiTietAndHinhAnhByIdHoaDon(UUID idGioHang);
+    List<HoaDonChiTietDto> thongKeSanPhamBanNhieuNhat();
+
 }

@@ -23,9 +23,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.Year;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/hoa-don")
@@ -63,7 +64,16 @@ public class HoaDonController {
         return apiResponse;
     }
 
+    @GetMapping("/doanhthu")
+    public ApiResponse<BigDecimal> tinhDoanhThu() {
+        BigDecimal doanhThu = hoaDonService.tinhTongDoanhThu();
+        ApiResponse<BigDecimal> apiResponse = new ApiResponse<>();
 
+        apiResponse.setMessage("Tính tổng doanh thu thành công");
+        apiResponse.setResult(doanhThu);
+
+        return apiResponse;
+    }
 
     @PostMapping("/create")
     ApiResponse<HoaDon> createHoaDon(@RequestBody @Valid HoaDonDto request){
@@ -111,6 +121,17 @@ public class HoaDonController {
         }else {
             throw new AppException(ErrorCode.NO_ORDER_FOUND);
         }
+        return apiResponse;
+    }
+
+    @GetMapping("/soluong")
+    public ApiResponse<Integer> tinhTongSoLuongSanPham() {
+        int tongSoLuong = hoaDonService.tinhTongSoLuongSanPham();
+        ApiResponse<Integer> apiResponse = new ApiResponse<>();
+
+        apiResponse.setMessage("Tính tổng số lượng sản phẩm thành công");
+        apiResponse.setResult(tongSoLuong);
+
         return apiResponse;
     }
 
@@ -239,6 +260,88 @@ public class HoaDonController {
         } else {
             throw new AppException(ErrorCode.UPDATE_FAILED);
         }
+        return apiResponse;
+    }
+
+    @GetMapping("/thongke/doanhthu/ngay")
+    public ApiResponse<Map<LocalDate, BigDecimal>> thongKeDoanhThuTheoNgay() {
+        Map<LocalDate, BigDecimal> doanhThuTheoNgay = hoaDonService.thongKeDoanhThuTheoNgay();
+        ApiResponse<Map<LocalDate, BigDecimal>> apiResponse = new ApiResponse<>();
+
+        apiResponse.setMessage("Thống kê doanh thu theo ngày thành công");
+        apiResponse.setResult(doanhThuTheoNgay);
+
+        return apiResponse;
+    }
+
+    @GetMapping("/thongke/soluong/ngay")
+    public ApiResponse<Map<LocalDate, Integer>> thongKeSoLuongTheoNgay() {
+        Map<LocalDate, Integer> soLuongTheoNgay = hoaDonService.thongKeSoLuongTheoNgay();
+        ApiResponse<Map<LocalDate, Integer>> apiResponse = new ApiResponse<>();
+
+        apiResponse.setMessage("Thống kê số lượng sản phẩm theo ngày thành công");
+        apiResponse.setResult(soLuongTheoNgay);
+
+        return apiResponse;
+    }
+
+    @GetMapping("/thongke/doanhthu/tuan")
+    public ApiResponse<Map<Integer, BigDecimal>> thongKeDoanhThuTheoTuan() {
+        Map<Integer, BigDecimal> doanhThuTheoTuan = hoaDonService.thongKeDoanhThuTheoTuan();
+        ApiResponse<Map<Integer, BigDecimal>> apiResponse = new ApiResponse<>();
+
+        apiResponse.setMessage("Thống kê doanh thu theo tuần thành công");
+        apiResponse.setResult(doanhThuTheoTuan);
+
+        return apiResponse;
+    }
+
+    @GetMapping("/thongke/soluong/tuan")
+    public ApiResponse<Map<Integer, Integer>> thongKeSoLuongTheoTuan() {
+        Map<Integer, Integer> soLuongTheoTuan = hoaDonService.thongKeSoLuongTheoTuan();
+        ApiResponse<Map<Integer, Integer>> apiResponse = new ApiResponse<>();
+
+        apiResponse.setMessage("Thống kê số lượng sản phẩm theo tuần thành công");
+        apiResponse.setResult(soLuongTheoTuan);
+
+        return apiResponse;
+    }
+
+    @GetMapping("/thongke/doanhthu/thang")
+    public ApiResponse<Map<Integer, BigDecimal>> thongKeDoanhThuTheoThang() {
+        Map<Integer, BigDecimal> doanhThuTheoThang = hoaDonService.thongKeDoanhThuTheoThang();
+        ApiResponse<Map<Integer, BigDecimal>> apiResponse = new ApiResponse<>();
+
+        apiResponse.setMessage("Thống kê doanh thu theo tháng thành công");
+        apiResponse.setResult(doanhThuTheoThang);
+
+        return apiResponse;
+    }
+
+    @GetMapping("/thongke/soluong/thang")
+    public ApiResponse<Map<Integer, Integer>> thongKeSoLuongTheoThang() {
+        Map<Integer, Integer> soLuongTheoThang = hoaDonService.thongKeSoLuongTheoThang();
+        ApiResponse<Map<Integer, Integer>> apiResponse = new ApiResponse<>();
+
+        apiResponse.setMessage("Thống kê số lượng sản phẩm theo tháng thành công");
+        apiResponse.setResult(soLuongTheoThang);
+
+        return apiResponse;
+    }
+
+    @GetMapping("/tangtruong/doanhthu")
+    public ApiResponse<Map<String, BigDecimal>> tinhTangTruongDoanhThu() {
+        int namNay = Year.now().getValue();
+
+        BigDecimal tangTruong = hoaDonService.tinhPhanTramTangTruongDoanhThu(namNay);
+
+        Map<String, BigDecimal> result = new HashMap<>();
+        result.put("tangTruongPhanTram", tangTruong);
+
+        ApiResponse<Map<String, BigDecimal>> apiResponse = new ApiResponse<>();
+        apiResponse.setMessage("Tính phần trăm tăng trưởng doanh thu thành công");
+        apiResponse.setResult(result);
+
         return apiResponse;
     }
 

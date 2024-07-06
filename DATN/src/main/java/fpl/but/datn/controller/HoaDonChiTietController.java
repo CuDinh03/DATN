@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/hoa-don-chi-tiet")
@@ -102,6 +103,29 @@ public class HoaDonChiTietController {
             apiResponse.setMessage("Lấy hóa đơn thành công");
             apiResponse.setResult(dto);
         }
+        return apiResponse;
+    }
+
+    @GetMapping("/thong-ke-san-pham-ban-nhieu-nhat")
+    public ApiResponse<List<HoaDonChiTietDto>> thongKeSanPhamBanNhieuNhat() {
+        List<HoaDonChiTietDto> danhSachHoaDonChiTiet = hoaDonChiTietService.thongKeSanPhamBanNhieuNhat();
+        ApiResponse<List<HoaDonChiTietDto>> apiResponse = new ApiResponse<>();
+
+        if (!danhSachHoaDonChiTiet.isEmpty()) {
+            danhSachHoaDonChiTiet.forEach(dto -> {
+                List<String> hinhAnhUrls = dto.getChiTietSanPham().getHinhAnh().stream()
+                        .map(hinhAnh -> hinhAnh.getUrl())
+                        .collect(Collectors.toList());
+                dto.setHinhAnhUrls(hinhAnhUrls);
+            });
+
+            apiResponse.setMessage("Thống kê sản phẩm bán nhiều nhất thành công");
+            apiResponse.setResult(danhSachHoaDonChiTiet);
+        } else {
+            apiResponse.setMessage("Không tìm thấy dữ liệu thống kê");
+            apiResponse.setResult(null); // or handle differently as per your requirement
+        }
+
         return apiResponse;
     }
 }

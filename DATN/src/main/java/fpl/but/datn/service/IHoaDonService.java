@@ -1,5 +1,6 @@
 package fpl.but.datn.service;
 
+import fpl.but.datn.dto.request.HoaDonChiTietDto;
 import fpl.but.datn.entity.DanhMuc;
 import fpl.but.datn.entity.GioHang;
 import fpl.but.datn.entity.HoaDon;
@@ -7,10 +8,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.*;
 
 public interface IHoaDonService {
     List getAll();
@@ -29,5 +29,14 @@ public interface IHoaDonService {
     Optional<HoaDon> findByMaKH(String ma);
     List<HoaDon> getHoaDonBetweenDates(Date startDate, Date endDate);
     Optional<HoaDon> findByMaAndKhachHang(String ma, UUID khachHangId);
+     BigDecimal tinhTongDoanhThu();
+    int tinhTongSoLuongSanPham();
+     Map<LocalDate, BigDecimal> thongKeDoanhThuTheoNgay();
+    Map<LocalDate, Integer> thongKeSoLuongTheoNgay();
+    Map<Integer, BigDecimal> thongKeDoanhThuTheoTuan();
+    Map<Integer, Integer> thongKeSoLuongTheoTuan();
+    Map<Integer, BigDecimal> thongKeDoanhThuTheoThang();
+    Map<Integer, Integer> thongKeSoLuongTheoThang();
+    BigDecimal tinhPhanTramTangTruongDoanhThu(int namNay);
 
 }

@@ -16,7 +16,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoField;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class HoaDonService implements IHoaDonService {
@@ -162,4 +167,105 @@ public class HoaDonService implements IHoaDonService {
         return hoaDonRepository.findHoaDonByKhachHang(idKhachHang);
     }
 
+    @Override
+    public BigDecimal tinhTongDoanhThu() {
+        List<HoaDon> hoaDonList = hoaDonRepository.findByTrangThai1(5);
+        return hoaDonList.stream()
+                .map(HoaDon::getTongTien)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    @Override
+    public int tinhTongSoLuongSanPham() {
+        List<HoaDon> hoaDonList = hoaDonRepository.findByTrangThai1(5);
+        return hoaDonList.stream()
+                .flatMap(hoaDon -> hoaDon.getHoaDonChiTietList().stream())
+                .mapToInt(HoaDonChiTiet::getSoLuong)
+                .sum();
+    }
+
+    public Map<LocalDate, BigDecimal> thongKeDoanhThuTheoNgay() {
+        List<HoaDon> hoaDonList = hoaDonRepository.findByTrangThai1(5);
+        return hoaDonList.stream()
+                .collect(Collectors.groupingBy(
+                        hoaDon -> hoaDon.getNgayTao().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+                        Collectors.reducing(BigDecimal.ZERO, HoaDon::getTongTien, BigDecimal::add)
+                ));
+    }
+
+    public Map<LocalDate, Integer> thongKeSoLuongTheoNgay() {
+        List<HoaDon> hoaDonList = hoaDonRepository.findByTrangThai1(5);
+        return hoaDonList.stream()
+                .flatMap(hoaDon -> hoaDon.getHoaDonChiTietList().stream())
+                .collect(Collectors.groupingBy(
+                        hoaDonChiTiet -> hoaDonChiTiet.getNgayTao().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+                        Collectors.summingInt(HoaDonChiTiet::getSoLuong)
+                ));
+    }
+
+    public Map<Integer, BigDecimal> thongKeDoanhThuTheoTuan() {
+        List<HoaDon> hoaDonList = hoaDonRepository.findByTrangThai1(5);
+        return hoaDonList.stream()
+                .collect(Collectors.groupingBy(
+                        hoaDon -> hoaDon.getNgayTao().toInstant().atZone(ZoneId.systemDefault()).get(ChronoField.ALIGNED_WEEK_OF_YEAR),
+                        Collectors.reducing(BigDecimal.ZERO, HoaDon::getTongTien, BigDecimal::add)
+                ));
+    }
+
+    public Map<Integer, Integer> thongKeSoLuongTheoTuan() {
+        List<HoaDon> hoaDonList = hoaDonRepository.findByTrangThai1(5);
+        return hoaDonList.stream()
+                .flatMap(hoaDon -> hoaDon.getHoaDonChiTietList().stream())
+                .collect(Collectors.groupingBy(
+                        hoaDonChiTiet -> hoaDonChiTiet.getNgayTao().toInstant().atZone(ZoneId.systemDefault()).get(ChronoField.ALIGNED_WEEK_OF_YEAR),
+                        Collectors.summingInt(HoaDonChiTiet::getSoLuong)
+                ));
+    }
+
+    public Map<Integer, BigDecimal> thongKeDoanhThuTheoThang() {
+        List<HoaDon> hoaDonList = hoaDonRepository.findByTrangThai1(5);
+        return hoaDonList.stream()
+                .collect(Collectors.groupingBy(
+                        hoaDon -> hoaDon.getNgayTao().toInstant().atZone(ZoneId.systemDefault()).getMonthValue(),
+                        Collectors.reducing(BigDecimal.ZERO, HoaDon::getTongTien, BigDecimal::add)
+                ));
+    }
+
+    public Map<Integer, Integer> thongKeSoLuongTheoThang() {
+        List<HoaDon> hoaDonList = hoaDonRepository.findByTrangThai1(5);
+        return hoaDonList.stream()
+                .flatMap(hoaDon -> hoaDon.getHoaDonChiTietList().stream())
+                .collect(Collectors.groupingBy(
+                        hoaDonChiTiet -> hoaDonChiTiet.getNgayTao().toInstant().atZone(ZoneId.systemDefault()).getMonthValue(),
+                        Collectors.summingInt(HoaDonChiTiet::getSoLuong)
+                ));
+    }
+
+    public BigDecimal tinhTongDoanhThuTheoNam(int nam) {
+        LocalDate fromDate = LocalDate.of(nam, 1, 1);
+        LocalDate toDate = LocalDate.of(nam, 12, 31);
+
+        Date startDate = Date.from(fromDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        Date endDate = Date.from(toDate.atStartOfDay(ZoneId.systemDefault()).plusDays(1).minusSeconds(1).toInstant());
+
+        List<HoaDon> hoaDonList = hoaDonRepository.findByNgayTaoBetween(startDate, endDate);
+        return hoaDonList.stream()
+                .map(HoaDon::getTongTien)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    public BigDecimal tinhPhanTramTangTruongDoanhThu(int namNay) {
+        int namTruoc = namNay - 1;
+
+        BigDecimal doanhThuNamNay = tinhTongDoanhThuTheoNam(namNay);
+        BigDecimal doanhThuNamTruoc = tinhTongDoanhThuTheoNam(namTruoc);
+
+        BigDecimal tangTruong = BigDecimal.ZERO;
+        if (!doanhThuNamTruoc.equals(BigDecimal.ZERO)) {
+            tangTruong = doanhThuNamNay.subtract(doanhThuNamTruoc)
+                    .divide(doanhThuNamTruoc, 4, BigDecimal.ROUND_HALF_UP)
+                    .multiply(BigDecimal.valueOf(100));
+        }
+        return tangTruong;
+    }
 }

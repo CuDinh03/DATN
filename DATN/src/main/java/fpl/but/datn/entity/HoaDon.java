@@ -1,5 +1,6 @@
 package fpl.but.datn.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -42,4 +44,7 @@ public class HoaDon {
     private Voucher voucher;
     private String ghiChu;
     private Integer trangThai;
+    @OneToMany(mappedBy = "hoaDon")
+    @JsonManagedReference
+    private List<HoaDonChiTiet> hoaDonChiTietList;
 }

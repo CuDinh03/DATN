@@ -33,4 +33,7 @@ public interface HoaDonChiTietRepository extends JpaRepository<HoaDonChiTiet, UU
             "WHERE hd.id = :idGioHang ORDER BY hdct.ngaySua DESC")
     List<Object[]> findAllChiTietAndHinhAnhByIdHoaDonKH(@Param("idGioHang") UUID idGioHang);
 
+    @Query("SELECT h FROM HoaDonChiTiet h ORDER BY h.soLuong DESC")
+    List<HoaDonChiTiet> findTopSellingProducts();
+
 }

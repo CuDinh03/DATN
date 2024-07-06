@@ -26,6 +26,8 @@ public interface HoaDonRepository extends JpaRepository<HoaDon, UUID> {
     Optional<HoaDon> findByMaAndKhachHang(@Param("ma") String ma, @Param("khachHangId") UUID khachHangId);
     @Query("SELECT hd FROM HoaDon hd WHERE hd.trangThai = :trangThai ORDER BY hd.ngaySua DESC")
     Page<HoaDon> findByTrangThai(Pageable pageable, Integer trangThai);
+    @Query("SELECT hd FROM HoaDon hd WHERE hd.trangThai = :trangThai ORDER BY hd.ngaySua DESC")
+    List<HoaDon> findByTrangThai1(Integer trangThai);
     @Query(value = "SELECT hd.* FROM hoa_don hd WHERE hd.trang_thai = :trangThai AND hd.khach_hang_id = :khachHangId ORDER BY hd.ngay_sua DESC", nativeQuery = true)
     List<HoaDon> findByTrangThaiAndKhachHangId(@Param("trangThai") Integer trangThai,@Param("khachHangId") UUID khachHangId);
     @Query(value = "SELECT hd.* FROM hoa_don hd INNER JOIN khach_hang kh ON hd.khach_hang_id = kh.id WHERE kh.id = :idKhachHang ORDER BY hd.ngay_sua DESC", nativeQuery = true)
