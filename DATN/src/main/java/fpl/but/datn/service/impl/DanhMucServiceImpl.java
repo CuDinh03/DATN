@@ -82,4 +82,16 @@ public class DanhMucServiceImpl implements IDanhMucService {
     public List<DanhMuc> getAllDanhMucDangHoatDong() {
         return danhMucRepository.findAllDanhMucDangHoatDong();
     }
+
+    @Override
+    public DanhMuc updateDm(DanhMuc danhMuc, UUID id) {
+        Optional<DanhMuc> existingDanhMucOpt = danhMucRepository.findById(id);
+        if (existingDanhMucOpt.isPresent()) {
+            DanhMuc existingDanhMuc = existingDanhMucOpt.get();
+            existingDanhMuc.setTrangThai(danhMuc.getTrangThai());
+            // Cập nhật các thuộc tính khác nếu cần
+            return danhMucRepository.save(existingDanhMuc);
+        }
+        return null;
+    }
 }

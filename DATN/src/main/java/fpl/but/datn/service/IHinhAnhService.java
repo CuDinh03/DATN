@@ -16,7 +16,7 @@ public interface IHinhAnhService {
     HinhAnh findById(UUID id);
     Page<HinhAnh> getAllHinhAnhPageable(Pageable pageable);
     List finAllByChiTietSanPham(UUID id);
-    HinhAnh saveHinhAnh(String url, ChiTietSanPham chiTietSanPham);
+    List<HinhAnh> saveHinhAnh(List<HinhAnh> url);
 
 
 }

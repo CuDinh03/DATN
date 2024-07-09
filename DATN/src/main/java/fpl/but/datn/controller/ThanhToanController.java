@@ -29,6 +29,7 @@ public class ThanhToanController {
 
     @Autowired
     private ThanhToanService thanhToanService;
+
     @PostMapping()
     public ApiResponse<ThanhToanDto> thanhtoan(@RequestBody ThanhToanDto thanhToanDto) {
         ApiResponse<ThanhToanDto> apiResponse = new ApiResponse<>();
@@ -63,7 +64,6 @@ public class ThanhToanController {
                         thanhToanOnl.getNote(),
                         thanhToanOnl.getGioHangChiTietList()
                 );
-
                 apiResponse.setMessage("Thanh toán thành công");
                 apiResponse.setResult(thanhToanOnl);
             } else {
@@ -77,6 +77,4 @@ public class ThanhToanController {
 
         return apiResponse;
     }
-
-
 }

@@ -18,8 +18,8 @@ public interface HinhAnhRepository extends JpaRepository<HinhAnh, UUID> {
     @Query(value = "SELECT ha.* FROM hinh_anh ha INNER JOIN chi_tiet_san_pham ctsp ON ha.chi_tiet_san_pham_id = ctsp.id WHERE ctsp.id = :idChiTietSanPham", nativeQuery = true)
     List<HinhAnh> findAllByChiTietSanPham(@Param("idChiTietSanPham") UUID idChiTietSanPham);
 
-    @Query("SELECT ha FROM HinhAnh ha ORDER BY ha.ngayTao DESC")
-    Page<HinhAnh> findAll(Pageable pageable);
+//    @Query("SELECT ha FROM HinhAnh ha ORDER BY ha.ngayTao DESC")
+//    Page<HinhAnh> findAll(Pageable pageable);
 
     Optional<HinhAnh> findByMa(String ma);
     boolean existsByMa(String ma);

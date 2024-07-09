@@ -19,4 +19,6 @@ public interface IDanhMucService {
     Page<DanhMuc> getAllDanhMucPageable(Pageable pageable);
 
     List<DanhMuc> getAllDanhMucDangHoatDong();
+
+    DanhMuc updateDm(DanhMuc danhMuc, UUID id);
 }
