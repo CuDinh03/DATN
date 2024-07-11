@@ -84,4 +84,14 @@ public class DanhGiaService implements IDanhGiaService {
     public Page<DanhGia> getAllDanhGiaPageable(Pageable pageable) {
         return null;
     }
+
+    @Override
+    public long countByChiTietSanPhamId(UUID productId) {
+        return danhGiaRepository.countByChiTietSanPhamId(productId);
+    }
+
+    @Override
+    public Double averageDiemByChiTietSanPhamId(UUID productId) {
+        return danhGiaRepository.averageDiemByChiTietSanPhamId(productId);
+    }
 }

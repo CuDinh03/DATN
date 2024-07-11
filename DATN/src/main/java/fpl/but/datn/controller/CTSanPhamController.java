@@ -290,4 +290,24 @@ public class CTSanPhamController {
         return apiResponse;
     }
 
+    @GetMapping("/filterSanPham")
+    public ApiResponse<List<ChiTietSanPhamDto>> filterSanPham(
+            @RequestParam(value = "kichThuoc", required = false) UUID kichThuoc,
+            @RequestParam(value = "mauSac", required = false) UUID mauSac,
+            @RequestParam(value = "danhMuc", required = false) UUID danhMuc) {
+
+        List<ChiTietSanPham> chiTietSanPhamList = ctSanPhamService.findByFilter(kichThuoc, mauSac, danhMuc);
+        List<ChiTietSanPhamDto> dto = TranferDatas.convertListChiTietSanPhamToDto(chiTietSanPhamList);
+        ApiResponse<List<ChiTietSanPhamDto>> apiResponse = new ApiResponse<>();
+
+        if (!dto.isEmpty()) {
+            apiResponse.setMessage("Lấy danh sách sản phẩm thành công");
+            apiResponse.setResult(dto);
+        } else {
+            throw new AppException(ErrorCode.NO_PRODUCT_DETAIL_FOUND);
+        }
+
+        return apiResponse;
+    }
+
 }

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/danh-gia")
@@ -43,6 +44,22 @@ public class DanhGiaController {
         }else {
             throw new AppException(ErrorCode.ADD_RATING_NOT_FOUND);
         }
+        return apiResponse;
+    }
+
+    @GetMapping("/count/{productId}")
+    public ApiResponse<Long> countDanhGiaByProductId(@PathVariable UUID productId) {
+        ApiResponse<Long> apiResponse = new ApiResponse<>();
+        long count = danhGiaService.countByChiTietSanPhamId(productId);
+        apiResponse.setResult(count);
+        return apiResponse;
+    }
+
+    @GetMapping("/average/{productId}")
+    public ApiResponse<Double> averageDiemByProductId(@PathVariable UUID productId) {
+        ApiResponse<Double> apiResponse = new ApiResponse<>();
+        Double averageDiem = danhGiaService.averageDiemByChiTietSanPhamId(productId);
+        apiResponse.setResult(averageDiem);
         return apiResponse;
     }
 

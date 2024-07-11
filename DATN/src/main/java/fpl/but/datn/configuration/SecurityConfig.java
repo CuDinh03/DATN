@@ -42,7 +42,7 @@ public class SecurityConfig {
             "/api/hoa-don-gio-hang/create", "/api/gio-hang-chi-tiet/create", "/api/thanhtoan",
             "/api/hoa-don-chi-tiet/all/{id}", "/api/hoa-don-chi-tiet/{id}",
             "/api/hoa-don/{id}", "api/hoa-don/byTrangThaiAndKhachHang", "/api/hoa-don/updateTrangThai/{id}","/api/hoa-don/findHd/{ma}","/api/hoa-don/find-time",
-
+            "/api/danh-gia/count/{productId}", "/api/danh-gia/average/{productId}"
     };
 
     private final String[] ADMIN_ENDPOINT_GET = {

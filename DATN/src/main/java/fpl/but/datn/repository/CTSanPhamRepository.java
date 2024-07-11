@@ -93,4 +93,13 @@ public interface CTSanPhamRepository extends JpaRepository<ChiTietSanPham, UUID>
     @Query("SELECT ctsp FROM ChiTietSanPham ctsp WHERE ctsp.trangThai = :trangThai")
     List<ChiTietSanPham> getAllByTrangThai(@Param("trangThai") Integer trangThai);
 
+    @Query("SELECT c FROM ChiTietSanPham c WHERE " +
+            "(:mauSacId IS NULL OR c.mauSac.id = :mauSacId) AND " +
+            "(:kichThuocId IS NULL OR c.kichThuoc.id = :kichThuocId) AND " +
+            "(:danhMucId IS NULL OR c.danhMuc.id = :danhMucId)")
+    List<ChiTietSanPham> findByFilter(
+            @Param("mauSacId") UUID mauSacId,
+            @Param("kichThuocId") UUID kichThuocId,
+            @Param("danhMucId") UUID danhMucId);
+
 }

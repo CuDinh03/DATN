@@ -58,4 +58,6 @@ public interface ICTSanPhamService {
     List<ChiTietSanPham> saveListCt(List<ChiTietSanPham> list);
 
     List<ChiTietSanPham> saveListCt(List<ChiTietSanPham> list, List<HinhAnh> hinhAnhs);
+    List<ChiTietSanPham> findByFilter(UUID mauSac, UUID kichThuoc, UUID danhMuc);
+
 }

@@ -249,5 +249,10 @@ public class CTSanPhamService implements ICTSanPhamService {
         return chiTietSanPhamList;
     }
 
+    @Override
+    public List<ChiTietSanPham> findByFilter(UUID mauSac, UUID kichThuoc, UUID danhMuc) {
+        return ctSanPhamRepository.findByFilter(mauSac, kichThuoc, danhMuc);
+    }
+
 
 }
