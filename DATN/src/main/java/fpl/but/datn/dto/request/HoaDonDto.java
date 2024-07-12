@@ -21,5 +21,6 @@ public class HoaDonDto {
     private Date ngayTao;
     private Date ngaySua;
     private Voucher voucher;
+    private String ghiChu;
     private Integer trangThai;
 }

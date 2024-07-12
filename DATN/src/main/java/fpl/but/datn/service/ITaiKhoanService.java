@@ -26,6 +26,7 @@ public interface ITaiKhoanService {
 
 
 
+    Optional<TaiKhoan> findByTenDangNhap(String tenDangNhap);
 
 
 }

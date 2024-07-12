@@ -1,6 +1,7 @@
 package fpl.but.datn.service.impl;
 
 import fpl.but.datn.entity.NguoiDung;
+import fpl.but.datn.entity.TaiKhoan;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.repository.NguoiDungRepository;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -54,4 +56,11 @@ public class NguoiDungService implements INguoiDungService {
     public Page<NguoiDung> getAllDanhMucPageable(Pageable pageable) {
         return null;
     }
+
+    @Override
+    public Optional<NguoiDung> findByTaiKhoanid(UUID id) {
+        return nguoiDungRepository.findByTaiKhoanid(id);
+    }
+
+
 }
