@@ -21,12 +21,12 @@ import java.util.UUID;
 
 //Trang thai :
 //    0: Chua thanh toan
-//    1: Đang xác nhận
+//    1: Chưa xác nhận
 //    2: Đã xử lý
 //    3: Dang giao
-//    4: Da nhan hang
-//    5: Hoàn thành
-//    6: Da huy hang
+//    4: Hoàn thành
+//    5: Da huy hang
+//    6: Yêu cầu hủy đơn
 public class HoaDon {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

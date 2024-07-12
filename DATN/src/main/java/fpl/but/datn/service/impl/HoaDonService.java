@@ -76,6 +76,16 @@ public class HoaDonService implements IHoaDonService {
     }
 
     @Override
+    public HoaDon yeuCauSuaHoaDon(HoaDon request, UUID id) {
+        HoaDon hoaDon = findById(id);
+        hoaDon.setNgaySua(new Date());
+        hoaDon.setId(id);
+        hoaDon.setGhiChu(request.getGhiChu());
+        hoaDon.setTrangThai(6); // trang thai yeu câu sửa hóa đơn
+        return hoaDonRepository.save(hoaDon);
+    }
+
+    @Override
     public void delete(UUID id) {
         HoaDon hoaDon = findById(id);
         hoaDon.setTrangThai(1);

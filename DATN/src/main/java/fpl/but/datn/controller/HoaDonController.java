@@ -101,6 +101,20 @@ public class HoaDonController {
         return apiResponse;
     }
 
+    @PutMapping("/yeuCauSuaHoaDon/{id}")
+    ApiResponse<HoaDon> yeuCauSuaHoaDon(@RequestBody HoaDonDto request, @PathVariable UUID id) {
+        ApiResponse<HoaDon>  apiResponse = new ApiResponse<>();
+
+        if (request != null){
+            apiResponse.setResult(hoaDonService.yeuCauSuaHoaDon(TranferDatas.convertToEntity(request), id));
+            apiResponse.setMessage("Yêu cầu sửa thành công");
+        }
+        else{
+            throw new AppException(ErrorCode.UPDATE_FAILED);
+        }
+        return apiResponse;
+    }
+
     @DeleteMapping("/delete/{id}")
     ApiResponse<Boolean> deleteCungHoaDon(@PathVariable String id){
         UUID idHoaDon = null;

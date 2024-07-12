@@ -533,13 +533,14 @@ public class TranferDatas {
         HoaDonDto dto = new HoaDonDto();
         if (entity.getId() != null) dto.setId(entity.getId());
         if (entity.getMa() != null) dto.setMa(entity.getMa());
-        if (entity.getNguoiDung() != null) dto.setNhanVien(entity.getNguoiDung());
+        if (entity.getNguoiDung() != null) dto.setNguoiDung(entity.getNguoiDung());
         if (entity.getKhachHang() != null) dto.setKhachHang(entity.getKhachHang());
         if (entity.getTongTien() != null) dto.setTongTien(entity.getTongTien());
         if (entity.getTongTienGiam() != null) dto.setTongTienGiam(entity.getTongTienGiam());
         if (entity.getNgayTao() != null) dto.setNgayTao(entity.getNgayTao());
         if (entity.getNgaySua() != null) dto.setNgaySua(entity.getNgaySua());
         if (entity.getVoucher() != null) dto.setVoucher(entity.getVoucher());
+        if (entity.getGhiChu() != null) dto.setGhiChu(entity.getGhiChu());
         if (entity.getTrangThai() != null) dto.setTrangThai(entity.getTrangThai());
         return dto;
     }
@@ -547,13 +548,14 @@ public class TranferDatas {
         HoaDon entity = new HoaDon();
         if (dto.getId() != null) entity.setId(dto.getId());
         if (dto.getMa() != null) entity.setMa(dto.getMa());
-        if (dto.getNhanVien() != null) entity.setNguoiDung(dto.getNhanVien());
+        if (dto.getNguoiDung() != null) entity.setNguoiDung(dto.getNguoiDung());
         if (dto.getKhachHang() != null) entity.setKhachHang(dto.getKhachHang());
         if (dto.getTongTien() != null) entity.setTongTien(dto.getTongTien());
         if (dto.getTongTienGiam() != null) entity.setTongTienGiam(dto.getTongTienGiam());
         if (dto.getNgayTao() != null) entity.setNgayTao(dto.getNgayTao());
         if (dto.getNgaySua() != null) entity.setNgaySua(dto.getNgaySua());
         if (dto.getVoucher() != null) entity.setVoucher(dto.getVoucher());
+        if (dto.getGhiChu() != null) entity.setGhiChu(dto.getGhiChu());
         if (dto.getTrangThai() != null) entity.setTrangThai(dto.getTrangThai());
         return entity;
     }

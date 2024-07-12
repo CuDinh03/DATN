@@ -48,12 +48,12 @@ public class DanhGiaService implements IDanhGiaService {
         danhGia.setNgaySua(new Date());
         danhGia.setTrangThai(request.getTrangThai());
         danhGia = danhGiaRepository.save(danhGia);
-        request.getHoaDonChiTiet().setTrangThai(5);
+        request.getHoaDonChiTiet().setTrangThai(4);
         hoaDonChiTietRepository.save(request.getHoaDonChiTiet());
 
         HoaDon hoaDon = request.getHoaDonChiTiet().getHoaDon();
         if (hoaDon != null) {
-            hoaDon.setTrangThai(5);
+            hoaDon.setTrangThai(4);
             hoaDon.setNgaySua(new Date());
             hoaDonRepository.save(hoaDon);
         }

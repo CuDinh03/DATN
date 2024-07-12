@@ -38,5 +38,6 @@ public interface IHoaDonService {
     Map<Integer, BigDecimal> thongKeDoanhThuTheoThang();
     Map<Integer, Integer> thongKeSoLuongTheoThang();
     BigDecimal tinhPhanTramTangTruongDoanhThu(int namNay);
-
+    HoaDon yeuCauSuaHoaDon(HoaDon request, UUID id);
 }
+   
