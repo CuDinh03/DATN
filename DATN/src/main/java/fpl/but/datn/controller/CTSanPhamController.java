@@ -310,4 +310,14 @@ public class CTSanPhamController {
         return apiResponse;
     }
 
+    @PostMapping("/filter")
+    public ResponseEntity<ApiResponse<Page<ChiTietSanPham>>> filterSanPham(@RequestBody FilterSanPhamRequest request,
+                                                                           @RequestParam(defaultValue = "0") int page,
+                                                                           @RequestParam(defaultValue = "10") int size) {
+        ApiResponse<Page<ChiTietSanPham>> apiResponse = new ApiResponse<>();
+        Page<ChiTietSanPham> result = ctSanPhamService.filterSanPham(request, page, size);
+        apiResponse.setResult(result);
+        return ResponseEntity.ok(apiResponse);
+    }
+
 }

@@ -34,7 +34,7 @@ public class SecurityConfig {
             "/api/hoa-don-chi-tiet/all/{id}",
             "/api/auth/log-in", "/api/users/create", "/api/users/check-username", "/api/users/myInfo",
             "/api/chi-tiet-san-pham/getAll", "/api/chi-tiet-san-pham/all/{id}", "/api/chi-tiet-san-pham/{id}",
-            "/api/chi-tiet-san-pham/findAllKichThuocByMaCTSP/{ma}",
+            "/api/chi-tiet-san-pham/findAllKichThuocByMaCTSP/{ma}","/api/chi-tiet-san-pham/findChiTietSanPhamByMauSacAndKichThuoc/{ma}",
             "/api/chi-tiet-san-pham/", "/api/chi-tiet-san-pham/findSanPhamByKichThuoc/{ma}",
             "/api/voucher/all", "/api/voucher/allVouchers", "/api/voucher/{id}",
             "/api/hoa-don-chi-tiet/all/{id}",
@@ -42,7 +42,8 @@ public class SecurityConfig {
             "/api/hoa-don-gio-hang/create", "/api/gio-hang-chi-tiet/create", "/api/thanhtoan",
             "/api/hoa-don-chi-tiet/all/{id}", "/api/hoa-don-chi-tiet/{id}",
             "/api/hoa-don/{id}", "api/hoa-don/byTrangThaiAndKhachHang", "/api/hoa-don/updateTrangThai/{id}","/api/hoa-don/findHd/{ma}","/api/hoa-don/find-time",
-            "/api/danh-gia/count/{productId}", "/api/danh-gia/average/{productId}"
+            "/api/danh-gia/count/{productId}", "/api/danh-gia/average/{productId}",
+            "api/hoa-don/yeuCauSuaHoaDon/{id}"
     };
 
     private final String[] ADMIN_ENDPOINT_GET = {

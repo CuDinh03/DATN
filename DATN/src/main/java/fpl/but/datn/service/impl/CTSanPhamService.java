@@ -1,5 +1,7 @@
 package fpl.but.datn.service.impl;
 
+import fpl.but.datn.dto.request.ChiTietSanPhamDto;
+import fpl.but.datn.dto.request.FilterSanPhamRequest;
 import fpl.but.datn.entity.*;
 import fpl.but.datn.repository.CTSanPhamRepository;
 import fpl.but.datn.repository.GioHangChiTietRepository;
@@ -9,7 +11,10 @@ import fpl.but.datn.service.ICTSanPhamService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -42,6 +47,8 @@ public class CTSanPhamService implements ICTSanPhamService {
     public Page<ChiTietSanPham> getAllChiTietSanPhamPageable(Pageable pageable) {
         return ctSanPhamRepository.findAll(pageable);
     }
+
+
 
     @Override
     public List<MauSac> findAllMauSacByMaCTSP(String maChiTietSanPham) {
@@ -252,6 +259,28 @@ public class CTSanPhamService implements ICTSanPhamService {
     @Override
     public List<ChiTietSanPham> findByFilter(UUID mauSac, UUID kichThuoc, UUID danhMuc) {
         return ctSanPhamRepository.findByFilter(mauSac, kichThuoc, danhMuc);
+    }
+
+
+
+    public Page<ChiTietSanPham> filterSanPham(FilterSanPhamRequest request, int page, int size) {
+        Specification<ChiTietSanPham> spec = Specification.where(null);
+
+        if (request.getMauSac() != null) {
+            spec = spec.and(ChiTietSanPhamSpecification.hasMauSac(request.getMauSac().getTen()));
+        }
+
+        if (request.getKichThuoc() != null) {
+            spec = spec.and(ChiTietSanPhamSpecification.hasKichThuoc(request.getKichThuoc().getTen()));
+        }
+
+        if (request.getDanhMuc() != null) {
+            spec = spec.and(ChiTietSanPhamSpecification.hasDanhMuc(request.getDanhMuc().getTen()));
+        }
+
+        Pageable pageable = PageRequest.of(page, size);
+
+        return ctSanPhamRepository.findAll(spec, pageable);
     }
 
 
