@@ -311,13 +311,20 @@ public class CTSanPhamController {
     }
 
     @PostMapping("/filter")
-    public ResponseEntity<ApiResponse<Page<ChiTietSanPham>>> filterSanPham(@RequestBody FilterSanPhamRequest request,
+    public ApiResponse<Page<ChiTietSanPhamDto>> filterSanPham(@RequestBody FilterSanPhamRequest request,
                                                                            @RequestParam(defaultValue = "0") int page,
                                                                            @RequestParam(defaultValue = "10") int size) {
-        ApiResponse<Page<ChiTietSanPham>> apiResponse = new ApiResponse<>();
-        Page<ChiTietSanPham> result = ctSanPhamService.filterSanPham(request, page, size);
-        apiResponse.setResult(result);
-        return ResponseEntity.ok(apiResponse);
+        Pageable pageable = PageRequest.of(page, size);
+        Page<ChiTietSanPham> chiTietSanPhamPage = ctSanPhamService.filterSanPham(request, page, size);
+        List<ChiTietSanPhamDto> listDto = TranferDatas.convertListChiTietSanPhamToDto(chiTietSanPhamPage.getContent());
+        ApiResponse<Page<ChiTietSanPhamDto>> apiResponse = new ApiResponse<>();
+        if (!listDto.isEmpty()) {
+            apiResponse.setMessage("Lấy danh sách sản pham thành công");
+            apiResponse.setResult(new PageImpl<>(listDto, pageable, chiTietSanPhamPage.getTotalElements()));
+        } else {
+            throw new AppException(ErrorCode.NO_LISTSPChiTiet_FOUND);
+        }
+        return apiResponse;
     }
 
 }
