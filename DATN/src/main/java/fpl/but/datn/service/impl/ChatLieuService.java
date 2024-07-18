@@ -1,7 +1,6 @@
 package fpl.but.datn.service.impl;
 
 import fpl.but.datn.entity.ChatLieu;
-import fpl.but.datn.entity.SanPham;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.repository.ChatLieuRepository;
@@ -31,6 +30,7 @@ public class ChatLieuService implements IChatLieuService {
 
         if (chatLieuRepository.existsByMa(request.getMa()))
             throw new AppException(ErrorCode.CHATLIEU_EXISTED);
+
         chatLieu.setMa("CL" + random.nextInt(1000));
         chatLieu.setTen(request.getTen());
         chatLieu.setNgayTao(new Date());
@@ -42,29 +42,44 @@ public class ChatLieuService implements IChatLieuService {
 
     @Override
     public ChatLieu update(ChatLieu request, UUID id) {
-        ChatLieu chatLieu = new ChatLieu();
-        chatLieu.setId(id);
-        chatLieu.setMa(request.getMa());
-        chatLieu.setTen(request.getTen());
-        chatLieu.setNgayTao(new Date());
-        chatLieu.setNgaySua(new Date());
-        chatLieu.setTrangThai(request.getTrangThai());
-        return chatLieuRepository.save(chatLieu);
+        Optional<ChatLieu> optionalChatLieu = chatLieuRepository.findById(id);
+
+        if (optionalChatLieu.isPresent()) {
+            ChatLieu chatLieu = optionalChatLieu.get();
+            chatLieu.setMa(request.getMa());
+            chatLieu.setTen(request.getTen());
+            chatLieu.setNgaySua(new Date());
+            chatLieu.setTrangThai(request.getTrangThai());
+            return chatLieuRepository.save(chatLieu);
+        } else {
+            throw new AppException(ErrorCode.CATEGORY_NOT_EXISTED);
+        }
     }
 
     @Override
     public void delete(UUID id) {
-        ChatLieu taiKhoan = findById(id);
-        taiKhoan.setTrangThai(0);
-        chatLieuRepository.save(taiKhoan);
+        Optional<ChatLieu> optionalChatLieu = chatLieuRepository.findById(id);
 
+        if (optionalChatLieu.isPresent()) {
+            ChatLieu chatLieu = optionalChatLieu.get();
+            chatLieu.setTrangThai(0);
+            chatLieuRepository.save(chatLieu);
+        } else {
+            throw new AppException(ErrorCode.CATEGORY_NOT_EXISTED);
+        }
     }
 
     @Override
     public void open(UUID id) {
-        ChatLieu taiKhoan = findById(id);
-        taiKhoan.setTrangThai(1);
-        chatLieuRepository.save(taiKhoan);
+        Optional<ChatLieu> optionalChatLieu = chatLieuRepository.findById(id);
+
+        if (optionalChatLieu.isPresent()) {
+            ChatLieu chatLieu = optionalChatLieu.get();
+            chatLieu.setTrangThai(1);
+            chatLieuRepository.save(chatLieu);
+        } else {
+            throw new AppException(ErrorCode.CATEGORY_NOT_EXISTED);
+        }
 
     }
 

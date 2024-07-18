@@ -554,6 +554,7 @@ public class TranferDatas {
         if (dto.getTongTienGiam() != null) entity.setTongTienGiam(dto.getTongTienGiam());
         if (dto.getNgayTao() != null) entity.setNgayTao(dto.getNgayTao());
         if (dto.getNgaySua() != null) entity.setNgaySua(dto.getNgaySua());
+        if (dto.getGhiChu() != null) entity.setGhiChu(dto.getGhiChu());
         if (dto.getVoucher() != null) entity.setVoucher(dto.getVoucher());
         if (dto.getGhiChu() != null) entity.setGhiChu(dto.getGhiChu());
         if (dto.getTrangThai() != null) entity.setTrangThai(dto.getTrangThai());

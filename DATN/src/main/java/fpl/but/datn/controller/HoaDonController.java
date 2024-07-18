@@ -37,8 +37,8 @@ public class HoaDonController {
 
     @GetMapping("/find-time")
     public ApiResponse<List<HoaDon>> getHoaDon(
-            @RequestParam("startDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date startDate,
-            @RequestParam("endDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date endDate) {
+            @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+            @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
         List<HoaDon> hoaDonList = hoaDonService.getHoaDonBetweenDates(startDate, endDate);
         ApiResponse<List<HoaDon>> apiResponse = new ApiResponse<>();
 
@@ -56,7 +56,7 @@ public class HoaDonController {
     @GetMapping("/findByKhachHang/{id}")
     ApiResponse<List<HoaDonDto>> findByIdKhachHang(@PathVariable UUID id) {
         ApiResponse<List<HoaDonDto>> apiResponse = new ApiResponse<>();
-        if (id != null){
+        if (id != null) {
             List<HoaDonDto> dto = TranferDatas.convertListHoaDonToDto(hoaDonService.findHoaDonByKhachHang(id));
             apiResponse.setMessage("Lấy Hóa đơn thành công");
             apiResponse.setResult(dto);
@@ -76,12 +76,12 @@ public class HoaDonController {
     }
 
     @PostMapping("/create")
-    ApiResponse<HoaDon> createHoaDon(@RequestBody @Valid HoaDonDto request){
-        ApiResponse<HoaDon>  apiResponse = new ApiResponse<>();
-        if (request != null){
+    ApiResponse<HoaDon> createHoaDon(@RequestBody @Valid HoaDonDto request) {
+        ApiResponse<HoaDon> apiResponse = new ApiResponse<>();
+        if (request != null) {
             apiResponse.setResult(hoaDonService.create(TranferDatas.convertToEntity(request)));
             apiResponse.setMessage("Tạo hóa đơn thành công");
-        }else {
+        } else {
             throw new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION);
         }
         return apiResponse;
@@ -89,13 +89,12 @@ public class HoaDonController {
 
     @PutMapping("/update/{id}")
     ApiResponse<HoaDon> update(@RequestBody HoaDonDto request, @PathVariable UUID id) {
-        ApiResponse<HoaDon>  apiResponse = new ApiResponse<>();
+        ApiResponse<HoaDon> apiResponse = new ApiResponse<>();
 
-        if (request != null){
+        if (request != null) {
             apiResponse.setResult(hoaDonService.update(TranferDatas.convertToEntity(request), id));
             apiResponse.setMessage("Cập nhật thành công");
-        }
-        else{
+        } else {
             throw new AppException(ErrorCode.UPDATE_FAILED);
         }
         return apiResponse;
@@ -103,20 +102,19 @@ public class HoaDonController {
 
     @PutMapping("/yeuCauSuaHoaDon/{id}")
     ApiResponse<HoaDon> yeuCauSuaHoaDon(@RequestBody HoaDonDto request, @PathVariable UUID id) {
-        ApiResponse<HoaDon>  apiResponse = new ApiResponse<>();
+        ApiResponse<HoaDon> apiResponse = new ApiResponse<>();
 
-        if (request != null){
+        if (request != null) {
             apiResponse.setResult(hoaDonService.yeuCauSuaHoaDon(TranferDatas.convertToEntity(request), id));
             apiResponse.setMessage("Yêu cầu sửa thành công");
-        }
-        else{
+        } else {
             throw new AppException(ErrorCode.UPDATE_FAILED);
         }
         return apiResponse;
     }
 
     @DeleteMapping("/delete/{id}")
-    ApiResponse<Boolean> deleteCungHoaDon(@PathVariable String id){
+    ApiResponse<Boolean> deleteCungHoaDon(@PathVariable String id) {
         UUID idHoaDon = null;
         if (id != null) {
             idHoaDon = UUID.fromString(id);
@@ -126,13 +124,13 @@ public class HoaDonController {
     }
 
     @GetMapping("/all")
-    ApiResponse<List<HoaDonDto>> getAll(){
+    ApiResponse<List<HoaDonDto>> getAll() {
         List<HoaDonDto> dto = TranferDatas.convertListHoaDonToDto(hoaDonService.getAll());
         ApiResponse<List<HoaDonDto>> apiResponse = new ApiResponse<>();
-        if (!dto.isEmpty()){
+        if (!dto.isEmpty()) {
             apiResponse.setMessage("Lấy danh sách hoa don thành công");
             apiResponse.setResult(dto);
-        }else {
+        } else {
             throw new AppException(ErrorCode.NO_ORDER_FOUND);
         }
         return apiResponse;
@@ -167,8 +165,8 @@ public class HoaDonController {
     }
 
     @GetMapping("/find/{ma}")
-    ApiResponse<HoaDonDto> findByMa(@PathVariable String ma){
-        ApiResponse<HoaDonDto> apiResponse =  new ApiResponse<>();
+    ApiResponse<HoaDonDto> findByMa(@PathVariable String ma) {
+        ApiResponse<HoaDonDto> apiResponse = new ApiResponse<>();
         HoaDonDto dto = TranferDatas.convertToDto(hoaDonService.findByMa(ma).get());
         apiResponse.setMessage("Lấy hoa don thành công");
         apiResponse.setResult(dto);
@@ -176,13 +174,13 @@ public class HoaDonController {
     }
 
     @GetMapping("/findHd/{ma}")
-    ApiResponse<HoaDonDto> findByMaKH(@PathVariable String ma){
-        ApiResponse<HoaDonDto> apiResponse =  new ApiResponse<>();
+    ApiResponse<HoaDonDto> findByMaKH(@PathVariable String ma) {
+        ApiResponse<HoaDonDto> apiResponse = new ApiResponse<>();
         HoaDonDto dto = TranferDatas.convertToDto(hoaDonService.findByMaKH(ma).get());
-        if (dto != null){
+        if (dto != null) {
             apiResponse.setMessage("Lấy hoa don thành công");
             apiResponse.setResult(dto);
-        }else {
+        } else {
             throw new AppException(ErrorCode.NO_ORDER_FOUND);
         }
 
@@ -190,13 +188,13 @@ public class HoaDonController {
     }
 
     @GetMapping("/findHDMaAndKhachHang/{ma}")
-    ApiResponse<HoaDonDto> findByMaAndKhachHang(@PathVariable String ma, @RequestParam UUID khachHangId){
-        ApiResponse<HoaDonDto> apiResponse =  new ApiResponse<>();
-        HoaDonDto dto = TranferDatas.convertToDto(hoaDonService.findByMaAndKhachHang(ma,khachHangId).get());
-        if (dto != null){
+    ApiResponse<HoaDonDto> findByMaAndKhachHang(@PathVariable String ma, @RequestParam UUID khachHangId) {
+        ApiResponse<HoaDonDto> apiResponse = new ApiResponse<>();
+        HoaDonDto dto = TranferDatas.convertToDto(hoaDonService.findByMaAndKhachHang(ma, khachHangId).get());
+        if (dto != null) {
             apiResponse.setMessage("Lấy hoa don thành công");
             apiResponse.setResult(dto);
-        }else {
+        } else {
             throw new AppException(ErrorCode.NO_ORDER_FOUND);
         }
 
@@ -207,7 +205,7 @@ public class HoaDonController {
     ApiResponse<HoaDonDto> detail(@PathVariable String id) {
         ApiResponse<HoaDonDto> apiResponse = new ApiResponse<>();
         UUID idHoaDon = null;
-        if (id != null){
+        if (id != null) {
             idHoaDon = UUID.fromString(id);
             HoaDonDto dto = TranferDatas.convertToDto(hoaDonService.findById(idHoaDon));
             apiResponse.setMessage("Lấy Hóa đơn thành công");
@@ -222,12 +220,13 @@ public class HoaDonController {
         if (id != null) {
             idHoaDon = UUID.fromString(id);
             hoaDonService.delete(idHoaDon);
-        } return ApiResponse.<Void>builder().build();
+        }
+        return ApiResponse.<Void>builder().build();
     }
 
     @GetMapping("/allPage")
     ApiResponse<Page<HoaDonDto>> getDanhMuc(@RequestParam(defaultValue = "0") int page,
-                                             @RequestParam(defaultValue = "5") int size) {
+                                            @RequestParam(defaultValue = "5") int size) {
 
         Pageable pageable = PageRequest.of(page, size);
         Page<HoaDon> hoaDonPage = hoaDonService.getAllHoaDonPageable(pageable);
@@ -247,8 +246,8 @@ public class HoaDonController {
 
     @GetMapping("/getHoaDonsByTranThai/{trangThai}")
     ApiResponse<Page<HoaDonDto>> getDanhMuc(@RequestParam(defaultValue = "0") int page,
-                                             @RequestParam(defaultValue = "5") int size,
-                                             @PathVariable Integer trangThai) {
+                                            @RequestParam(defaultValue = "5") int size,
+                                            @PathVariable Integer trangThai) {
 
         Pageable pageable = PageRequest.of(page, size);
         Page<HoaDon> hoaDonPage = hoaDonService.getHoaDonsByTrangThai(pageable, trangThai);
@@ -266,14 +265,26 @@ public class HoaDonController {
     }
 
     @PutMapping("/updateTrangThai/{id}")
-    public ApiResponse<HoaDon> updateTrangThai(@PathVariable UUID id, @RequestParam Integer trangThai ) {
+    public ApiResponse<HoaDon> updateTrangThai(
+            @PathVariable UUID id,
+            @RequestParam Integer trangThai,
+            @RequestBody HoaDonDto hoaDonDto) {
+        HoaDon exsitHoaDon = hoaDonService.findById(id);
         ApiResponse<HoaDon> apiResponse = new ApiResponse<>();
-        if (trangThai != null) {
-            apiResponse.setResult(hoaDonService.updateTrangThai(id, trangThai));
-            apiResponse.setMessage("Cập nhật thành công");
-        } else {
+
+
+        if (exsitHoaDon == null) {
+            throw new AppException(ErrorCode.NO_ORDER_FOUND);
+        }
+
+        boolean canUpdate = hoaDonService.canUpdateTrangThai(exsitHoaDon.getTrangThai(), trangThai, hoaDonDto.getGhiChu());
+
+        if (!canUpdate) {
             throw new AppException(ErrorCode.UPDATE_FAILED);
         }
+
+        apiResponse.setResult(hoaDonService.updateTrangThai(id, trangThai));
+        apiResponse.setMessage("Cập nhật thành công");
         return apiResponse;
     }
 
@@ -358,7 +369,6 @@ public class HoaDonController {
 
         return apiResponse;
     }
-
 
 
 }

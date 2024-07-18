@@ -96,6 +96,11 @@ public class TaiKhoanService implements ITaiKhoanService {
         return taiKhoanRepository.findByNguoiDungByTenDangNhap(tenDangNhap);
     }
 
+    @Override
+    public Optional<TaiKhoan> findByTenDangNhap(String tenDangNhap) {
+        return taiKhoanRepository.findByTenDangNhap(tenDangNhap);
+    }
+
     //    //author
     @NonFinal
 

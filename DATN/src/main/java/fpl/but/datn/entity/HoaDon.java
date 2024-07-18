@@ -1,6 +1,7 @@
 package fpl.but.datn.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import fpl.but.datn.listener.HoaDonListener;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,7 +19,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
+//@EntityListeners(HoaDonListener.class)
 //Trang thai :
 //    0: Chua thanh toan
 //    1: Chưa xác nhận
@@ -47,4 +48,12 @@ public class HoaDon {
     @OneToMany(mappedBy = "hoaDon")
     @JsonManagedReference
     private List<HoaDonChiTiet> hoaDonChiTietList;
+
+//    @Transient
+//    private int ngaySuaChangeCount = 0;
+//
+//    public void incrementNgaySuaChangeCount() {
+//        this.ngaySuaChangeCount++;
+//    }
+
 }
