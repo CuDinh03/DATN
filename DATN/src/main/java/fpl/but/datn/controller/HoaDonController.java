@@ -276,14 +276,14 @@ public class HoaDonController {
         if (exsitHoaDon == null) {
             throw new AppException(ErrorCode.NO_ORDER_FOUND);
         }
-
+        System.out.println(hoaDonDto.getGhiChu());
         boolean canUpdate = hoaDonService.canUpdateTrangThai(exsitHoaDon.getTrangThai(), trangThai, hoaDonDto.getGhiChu());
 
         if (!canUpdate) {
             throw new AppException(ErrorCode.UPDATE_FAILED);
         }
 
-        apiResponse.setResult(hoaDonService.updateTrangThai(id, trangThai));
+        apiResponse.setResult(hoaDonService.updateTrangThai(id, trangThai, hoaDonDto.getGhiChu()));
         apiResponse.setMessage("Cập nhật thành công");
         return apiResponse;
     }
