@@ -88,6 +88,27 @@ public class HoaDonService implements IHoaDonService {
     }
 
     @Override
+    public boolean canUpdateTrangThai(int currentTrangThai, int newTrangThai, String ghiChu) {
+        if (newTrangThai == 5 && ghiChu == null) {
+            return false;
+        }
+
+        switch (currentTrangThai) {
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+                return newTrangThai == 5 || (newTrangThai == currentTrangThai + 1 && ghiChu != null);
+            case 6:
+                return newTrangThai == 2 || (newTrangThai == 5 && ghiChu != null);
+            case 5:
+            default:
+                return false;
+        }
+    }
+
+    @Override
     public void delete(UUID id) {
         HoaDon hoaDon = findById(id);
         hoaDon.setTrangThai(5);
@@ -134,6 +155,7 @@ public class HoaDonService implements IHoaDonService {
             }
         }
         hoaDon.setTrangThai(trangThai);
+        hoaDon.setNgaySua(new Date());
         return hoaDonRepository.save(hoaDon);
     }
 

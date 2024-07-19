@@ -1,5 +1,7 @@
 package fpl.but.datn.service.impl;
 import fpl.but.datn.entity.*;
+import fpl.but.datn.exception.AppException;
+import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.repository.GioHangChiTietRepository;
 import fpl.but.datn.repository.HoaDonRepository;
 import fpl.but.datn.service.IService;
@@ -36,6 +38,9 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
 
     @Autowired
     private HoaDonGioHangService hoaDonGioHangService;
+
+    @Autowired
+    private VoucherService voucherService;
 
     @Override
     public ThanhToan getByID(UUID id) {
@@ -75,8 +80,12 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
         if (request != null) {
             HoaDon hoaDon = hoaDonService.findById(request.getId());
             if (hoaDon != null) {
-                hoaDon.setTrangThai(4); // sai status
+                hoaDon.setTrangThai(4);
+                hoaDon.setVoucher(request.getVoucher());
+                hoaDon.setTongTienGiam(request.getTongTienGiam());
+                hoaDon.setGhiChu(request.getGhiChu());
                 hoaDon.setTongTien(request.getTongTien());
+                hoaDon.setNguoiDung(request.getNguoiDung());
                 hoaDon.setNgaySua(new Date());
                 hoaDon.setNgayTao(new Date());
                 if (request.getKhachHang() != null) {
@@ -106,6 +115,19 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
                 GioHang gioHang = this.gioHangService.findById(gioHangHoaDon.getGioHang().getId());
                 gioHang.setTrangThai(4);
                 this.gioHangService.update(gioHang, gioHang.getId());
+
+                if (hoaDon.getVoucher() != null) {
+                    Voucher voucher = hoaDon.getVoucher();
+                    int soLuongConLai = voucher.getSoLuong() - 1;
+                    if (soLuongConLai < 0) {
+                        throw new AppException(ErrorCode.NO_VOUCHER_FOUND); // tam de vay
+                    }
+                    voucher.setSoLuong(soLuongConLai);
+                    if (soLuongConLai < 10 && soLuongConLai > 0) {
+                        System.out.println("Voucher sắp hết, chỉ còn lại " + soLuongConLai + " voucher!");
+                    }
+                    voucherService.update(voucher.getId(),voucher);
+                }
             }
         }
     }
@@ -124,6 +146,8 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
         if (listGioHangCt == null || listGioHangCt.isEmpty()) {
             throw new IllegalArgumentException("ListGioHangCt is empty or null");
         }
+
+
 
         GioHang gioHang = Optional.ofNullable(this.gioHangService.findById(requestGh.getId()))
                 .orElseThrow(() -> new IllegalArgumentException("GioHang not found with id: " + requestGh.getId()));
@@ -191,7 +215,7 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
                 "DANH SÁCH ĐƠN HÀNG:\n" +
                 "\n";
 
-// Thêm danh sách sản phẩm
+            // Thêm danh sách sản phẩm
         body += "| Sản phẩm                | Số lượng | Giá      |\n";
         body += "|-------------------------|----------|----------|\n";
 
@@ -205,6 +229,18 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
 
         emailSenderService.sendMail(toMail, subject, body);
         this.gioHangService.update(gioHang, gioHang.getId());
+
+        if (voucher != null) {
+            int soLuongConLai = voucher.getSoLuong() - 1;
+            voucher.setSoLuong(soLuongConLai);
+            voucher.setNgaySua(new Date());
+            if (soLuongConLai < 0) {
+                throw new IllegalArgumentException("Voucher đã hết số lượng");
+            } else if (soLuongConLai < 10) {
+                System.out.println("Voucher sắp hết số lượng, còn lại: " + soLuongConLai);
+            }
+            voucherService.update(voucher.getId(), voucher);
+        }
 
     }
 

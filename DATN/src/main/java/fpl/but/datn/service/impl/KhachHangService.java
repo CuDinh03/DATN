@@ -1,15 +1,19 @@
 package fpl.but.datn.service.impl;
 
+import fpl.but.datn.dto.request.KhachHangDto;
+import fpl.but.datn.dto.response.TaiKhoanResponse;
 import fpl.but.datn.entity.KhachHang;
 import fpl.but.datn.entity.TaiKhoan;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.repository.KhachHangRepository;
+import fpl.but.datn.repository.TaiKhoanRepository;
 import fpl.but.datn.service.IKhachHangService;
 import fpl.but.datn.service.IService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +24,9 @@ public class KhachHangService implements IService<KhachHang>, IKhachHangService 
 
     @Autowired
     KhachHangRepository khachHangRepository;
+
+    @Autowired
+    TaiKhoanRepository taiKhoanRepository;
 
     @Override
     public KhachHang getByID(UUID id) {
@@ -216,5 +223,14 @@ public class KhachHangService implements IService<KhachHang>, IKhachHangService 
     }
 
 
+    public KhachHang getMyInfo() {
+        var context = SecurityContextHolder.getContext();
+        String name = context.getAuthentication().getName();
+        TaiKhoan byTenDangNhap = taiKhoanRepository.findByTenDangNhap(name).orElseThrow(() -> new AppException(ErrorCode.ACCOUNT_NOT_EXISTED));
+
+        KhachHang khachHang = khachHangRepository.getKhachHangByIdTaiKhoan(byTenDangNhap.getId()).get();
+
+        return khachHang;
+    }
 }
 

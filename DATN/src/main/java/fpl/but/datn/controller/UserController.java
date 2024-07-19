@@ -2,12 +2,14 @@ package fpl.but.datn.controller;
 
 import fpl.but.datn.dto.request.DangNhapDto;
 import fpl.but.datn.dto.request.DanhMucDto;
+import fpl.but.datn.dto.request.KhachHangDto;
 import fpl.but.datn.dto.request.TaiKhoanDto;
 import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.dto.response.TaiKhoanResponse;
 import fpl.but.datn.entity.TaiKhoan;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
+import fpl.but.datn.service.impl.KhachHangService;
 import fpl.but.datn.service.impl.TaiKhoanService;
 import fpl.but.datn.tranferdata.TranferDatas;
 import jakarta.validation.Valid;
@@ -32,6 +34,9 @@ public class UserController {
 
     @Autowired
     private TaiKhoanService taiKhoanService;
+
+    @Autowired
+    private KhachHangService khachHangService;
     @PostMapping("/create")
     ApiResponse<TaiKhoan> createAccount(@RequestBody @Valid DangNhapDto request) {
         ApiResponse<TaiKhoan> apiResponse = new ApiResponse<>();
@@ -90,9 +95,9 @@ public class UserController {
     }
 
     @GetMapping("/myInfo")
-    ApiResponse<TaiKhoanResponse> getMyinfo() {
-        return ApiResponse.<TaiKhoanResponse>builder()
-                .result(taiKhoanService.getMyInfo()).build();
+    ApiResponse<KhachHangDto> getMyinfo() {
+        return ApiResponse.<KhachHangDto>builder()
+                .result(TranferDatas.convertToDto(khachHangService.getMyInfo())).build();
     }
 
     @PutMapping("/{id}")

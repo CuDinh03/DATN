@@ -39,5 +39,7 @@ public interface IHoaDonService {
     Map<Integer, Integer> thongKeSoLuongTheoThang();
     BigDecimal tinhPhanTramTangTruongDoanhThu(int namNay);
     HoaDon yeuCauSuaHoaDon(HoaDon request, UUID id);
-}
+    boolean canUpdateTrangThai(int currentTrangThai, int newTrangThai, String ghiChu);
+
+    }
    
