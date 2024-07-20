@@ -1,14 +1,24 @@
 package fpl.but.datn.service.impl;
 
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import java.util.Map;
+
 
 @Service
 public class EmailSenderService {
     @Autowired
     private JavaMailSender mailSender;
+
+    @Autowired
+    private TemplateEngine templateEngine;
     public void sendMail(String toMail, String subject, String body) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setFrom("ithuongngoai@gmail.com");
@@ -29,6 +39,24 @@ public class EmailSenderService {
                 + "Đội ngũ hỗ trợ khách hàng";
 
         sendMail(toMail, subject, body);
+    }
+
+
+    public void sendHtmlMail(String to, String subject, Map<String, Object> templateModel) throws MessagingException {
+        Context context = new Context();
+        context.setVariables(templateModel);
+
+        String htmlContent = templateEngine.process("mail-xacNhan", context);
+
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+
+        helper.setFrom("ithuongngoai@gmail.com");
+        helper.setTo(to);
+        helper.setSubject(subject);
+        helper.setText(htmlContent, true); // true để chỉ định rằng nội dung là HTML
+
+        mailSender.send(message);
     }
 
 

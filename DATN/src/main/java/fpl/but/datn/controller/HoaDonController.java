@@ -283,7 +283,7 @@ public class HoaDonController {
             throw new AppException(ErrorCode.UPDATE_FAILED);
         }
 
-        apiResponse.setResult(hoaDonService.updateTrangThai(id, trangThai));
+        apiResponse.setResult(hoaDonService.updateTrangThai(id, trangThai, hoaDonDto.getGhiChu()));
         apiResponse.setMessage("Cập nhật thành công");
         return apiResponse;
     }

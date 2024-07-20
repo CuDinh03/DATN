@@ -6,6 +6,7 @@ import fpl.but.datn.repository.GioHangChiTietRepository;
 import fpl.but.datn.repository.HoaDonRepository;
 import fpl.but.datn.service.IService;
 import fpl.but.datn.service.IThanhToanService;
+import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -196,39 +197,65 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
 
             this.hoaDonChiTietService.create(hoaDonChiTiet);
         }
+//        String toMail = requestGh.getKhachHang().getEmail();
+//        String subject = "Xác nhận đơn hàng thành công";
+//        String body = "Cửa hàng MT-Shirt\n" +
+//                "\n" +
+//                "Xin chào! Đơn hàng của bạn đang được chuẩn bị. Chi tiết đơn hàng của bạn như sau:\n" +
+//                "\n" +
+//                "THEO DÕI ĐƠN HÀNG [liên kết]\n" +
+//                "\n" +
+//                "TÓM TẮT ĐƠN HÀNG:\n" +
+//                "\n" +
+//                "Số đơn hàng: "+hoaDon2.getMa()+"\n" +
+//                "Ngày đặt hàng: " + giaoHang.getNgayTao() + "\n" +
+//                "Tổng số tiền: "+hoaDon2.getTongTien()+"\n" +
+//                "\n" +
+//                "ĐỊA CHỈ GIAO HÀNG: "+giaoHang.getDiaChiGiaoHang()+"\n" +
+//                "\n" +
+//                "DANH SÁCH ĐƠN HÀNG:\n" +
+//                "\n";
+//
+//            // Thêm danh sách sản phẩm
+//        body += "| Sản phẩm                | Số lượng | Giá      |\n";
+//        body += "|-------------------------|----------|----------|\n";
+//
+//        for (GioHangChiTiet ghCt : listGioHangCt) {
+//            body += "| " + ghCt.getChiTietSanPham().getSanPham().getTen() + "(" + ghCt.getChiTietSanPham().getKichThuoc().getTen()+")" + " | " +
+//                    ghCt.getSoLuong() + " | " +
+//                    ghCt.getChiTietSanPham().getGiaBan() + " |\n";
+//        }
+//
+//        body += "\nCảm ơn bạn đã mua hàng tại cửa hàng của chúng tôi!\n";
+//
+//        emailSenderService.sendMail(toMail, subject, body);
+//        this.gioHangService.update(gioHang, gioHang.getId());
+
         String toMail = requestGh.getKhachHang().getEmail();
         String subject = "Xác nhận đơn hàng thành công";
-        String body = "Cửa hàng MT-Shirt\n" +
-                "\n" +
-                "Xin chào! Đơn hàng của bạn đang được chuẩn bị. Chi tiết đơn hàng của bạn như sau:\n" +
-                "\n" +
-                "THEO DÕI ĐƠN HÀNG [liên kết]\n" +
-                "\n" +
-                "TÓM TẮT ĐƠN HÀNG:\n" +
-                "\n" +
-                "Số đơn hàng: "+hoaDon2.getMa()+"\n" +
-                "Ngày đặt hàng: " + giaoHang.getNgayTao() + "\n" +
-                "Tổng số tiền: "+hoaDon2.getTongTien()+"\n" +
-                "\n" +
-                "ĐỊA CHỈ GIAO HÀNG: "+giaoHang.getDiaChiGiaoHang()+"\n" +
-                "\n" +
-                "DANH SÁCH ĐƠN HÀNG:\n" +
-                "\n";
 
-            // Thêm danh sách sản phẩm
-        body += "| Sản phẩm                | Số lượng | Giá      |\n";
-        body += "|-------------------------|----------|----------|\n";
+        Map<String, Object> templateModel = new HashMap<>();
+        templateModel.put("orderNumber", hoaDon2.getMa());
+        templateModel.put("orderDate", giaoHang.getNgayTao());
+        templateModel.put("totalAmount", hoaDon2.getTongTien());
+        templateModel.put("deliveryAddress", giaoHang.getDiaChiGiaoHang());
 
+        List<Map<String, Object>> orderItems = new ArrayList<>();
         for (GioHangChiTiet ghCt : listGioHangCt) {
-            body += "| " + ghCt.getChiTietSanPham().getSanPham().getTen() + "(" + ghCt.getChiTietSanPham().getKichThuoc().getTen()+")" + " | " +
-                    ghCt.getSoLuong() + " | " +
-                    ghCt.getChiTietSanPham().getGiaBan() + " |\n";
+            Map<String, Object> item = new HashMap<>();
+            item.put("name", ghCt.getChiTietSanPham().getSanPham().getTen() + " (" + ghCt.getChiTietSanPham().getKichThuoc().getTen() + ")");
+            item.put("quantity", ghCt.getSoLuong());
+            item.put("price", ghCt.getChiTietSanPham().getGiaBan());
+            orderItems.add(item);
         }
+        templateModel.put("orderItems", orderItems);
 
-        body += "\nCảm ơn bạn đã mua hàng tại cửa hàng của chúng tôi!\n";
-
-        emailSenderService.sendMail(toMail, subject, body);
-        this.gioHangService.update(gioHang, gioHang.getId());
+        try {
+            emailSenderService.sendHtmlMail(toMail, subject, templateModel);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            // Xử lý lỗi gửi email
+        }
 
         if (voucher != null) {
             int soLuongConLai = voucher.getSoLuong() - 1;

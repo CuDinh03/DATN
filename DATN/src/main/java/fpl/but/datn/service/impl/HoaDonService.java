@@ -136,7 +136,7 @@ public class HoaDonService implements IHoaDonService {
     }
 
     @Override
-    public HoaDon updateTrangThai(UUID id, Integer trangThai) {
+    public HoaDon updateTrangThai(UUID id, Integer trangThai, String ghiChu) {
         HoaDon hoaDon = findById(id);
         if (hoaDon.getTrangThai() == 1) {
             List<HoaDonChiTiet> list = hoaDonChiTietRepository.findAllHoaDonChiTietByIdHoaDon(hoaDon.getId());
@@ -155,6 +155,7 @@ public class HoaDonService implements IHoaDonService {
             }
         }
         hoaDon.setTrangThai(trangThai);
+        hoaDon.setGhiChu(ghiChu);
         hoaDon.setNgaySua(new Date());
         return hoaDonRepository.save(hoaDon);
     }
