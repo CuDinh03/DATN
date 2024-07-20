@@ -69,7 +69,8 @@ public enum ErrorCode {
     LIST_RATING_NOT_FOUND(2001, "Không tìm thấy danh sách đánh giá nào", HttpStatus.BAD_REQUEST),
     ADD_RATING_NOT_FOUND(2002, "Thêm đánh giá thất bại", HttpStatus.BAD_REQUEST),
     LIST_ORDER_FOUND(2003, "Không tìm thấy danh sách đánh giá nào", HttpStatus.BAD_REQUEST),
-    KH_EXISTED_MAIL( 1060,"Mail này đã được sử dụng", HttpStatus.BAD_REQUEST );
+    KH_EXISTED_MAIL( 1060,"Mail này đã được sử dụng", HttpStatus.BAD_REQUEST ),
+    DIACHI_NOT_FOUND( 2004,"Khong tim thay danh sach dia chi", HttpStatus.BAD_REQUEST );
 
     ErrorCode(int code, String message, HttpStatusCode httpStatusCode) {
         this.code = code;

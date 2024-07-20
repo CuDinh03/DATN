@@ -276,7 +276,7 @@ public class HoaDonController {
         if (exsitHoaDon == null) {
             throw new AppException(ErrorCode.NO_ORDER_FOUND);
         }
-
+        System.out.println(hoaDonDto.getGhiChu());
         boolean canUpdate = hoaDonService.canUpdateTrangThai(exsitHoaDon.getTrangThai(), trangThai, hoaDonDto.getGhiChu());
 
         if (!canUpdate) {

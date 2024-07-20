@@ -28,19 +28,63 @@ public class SecurityConfig {
 
 
     private final String[] PUBLIC_ENDPOINT = {"/api/auth/log-in", "/api/users/create", "/api/users/check-username", "/api/users/myInfo",
-            "/api/chi-tiet-san-pham/getAll"
+            "/api/chi-tiet-san-pham/getAll","/api/chi-tiet-san-pham/all/{id}","/api/chi-tiet-san-pham/findAllMauSacByMaCTSP/{ma}",
+            "/api/chi-tiet-san-pham/findAllKichThuocByMaCTSP/{ma}", "/api/chi-tiet-san-pham/findChiTietSanPhamByMauSacAndKichThuoc/{ma}","/api/chi-tiet-san-pham/findSanPhamByKichThuoc/{ma}",
+            "/api/thanhtoan/onl", "/api/voucher/all", "/api/voucher/allVouchers", "/api/voucher/{id}",
+            "/api/hoa-don-chi-tiet/all/{id}",
+            "/api/auth/log-in", "/api/users/create", "/api/users/check-username", "/api/users/myInfo",
+            "/api/chi-tiet-san-pham/all/{id}", "/api/chi-tiet-san-pham/{id}","/api/chi-tiet-san-pham/findChiTietSanPhamByMauSacAndKichThuoc/{ma}",
+            "/api/chi-tiet-san-pham/", "/api/chi-tiet-san-pham/findSanPhamByKichThuoc/{ma}",
+            "/api/voucher/all", "/api/voucher/allVouchers", "/api/voucher/{id}",
+            "/api/hoa-don-chi-tiet/all/{id}",
+            "/api/voucher/create", "/api/khs/create", "/api/danh-muc/create",
+            "/api/hoa-don-gio-hang/create", "/api/gio-hang-chi-tiet/create", "/api/thanhtoan",
+            "/api/hoa-don-chi-tiet/all/{id}", "/api/hoa-don-chi-tiet/{id}",
+            "/api/hoa-don/{id}", "api/hoa-don/byTrangThaiAndKhachHang", "/api/hoa-don/updateTrangThai/{id}","/api/hoa-don/findHd/{ma}","/api/hoa-don/find-time",
+            "/api/danh-gia/count/{productId}", "/api/danh-gia/average/{productId}",
+            "api/hoa-don/yeuCauSuaHoaDon/{id}",
+            "api/mau-sac/getAll",
+            "api/kich-thuoc/getAll",
+            "api/danh-muc/getAll",
+            "/api/chi-tiet-san-pham/filter"
+    };
+
+    private final String[] ADMIN_ENDPOINT_GET = {
+            "/api/users/all","/api/users/{id}",
+            "/api/voucher/all","/api/voucher/allVouchers","/api/voucher/{id}",
+            "/api/khs/all","/api/khs/{sdt}",
+            "/api/chi-tiet-san-pham/all", "/api/chi-tiet-san-pham/addNew", "/api/chi-tiet-san-pham/update/{id}", "/api/chi-tiet-san-pham/delete/{id}", "/api/chi-tiet-san-pham/detail/{id}",
+            "/api/hoa-don-chi-tiet/all/{id}","/api/hoa-don-chi-tiet/{id}",
+            "/api/hoa-don/all", "/api/hoa-don/{ma}",
+            "/api/hoa-don-gio-hang/all", "/api/hoa-don-gio-hang/all/{id}",
+            "/api/users/all", "/api/users/{id}",
+            "/api/voucher/all", "/api/voucher/allVouchers", "/api/voucher/{id}",
+            "/api/khs/all", "/api/khs/{sdt}",
+            "/api/chi-tiet-san-pham/all","/api/chi-tiet-san-pham/addNew", "/api/chi-tiet-san-pham/update/{id}", "/api/chi-tiet-san-pham/delete/{id}", "/api/chi-tiet-san-pham/detail/{id}",
+            "/api/hoa-don-chi-tiet/all/{id}", "/api/hoa-don-chi-tiet/{id}", "/api/gio-hang-chi-tiet/all/{id}",
+            "/api/hoa-don/all",
+            "/api/hoa-don-gio-hang/all", "/api/hoa-don-gio-hang/all/{id}",
+            "/api/voucher/all","/api/voucher/allVouchers","/api/voucher/{id}",
+            "/api/hoa-don/{ma}",
+            "/api/hoa-don/thongke/doanhthu/ngay", "/api/hoa-don/thongke/soluong/ngay", "/api/hoa-don/thongke/doanhthu/tuan", "/api/hoa-don/thongke/soluong/tuan", "/api/hoa-don/thongke/doanhthu/thang", "/api/hoa-don/thongke/soluong/thang", "/api/hoa-don/tangtruong/doanhthu", "/api/hoa-don/soluong",
+            "/api/hoa-don/doanhthu",
+    };
+    private final String[] ADMIN_ENDPOINT_POST = {"/api/voucher/create",
+            "/api/khs/create",
+            "/api/danh-muc/create",
+            "/api/hoa-don-gio-hang/create",
+            "/api/gio-hang-chi-tiet/create",
+            "/api/thanhtoan"
+    };
+    private final String[] ADMIN_ENDPOINT_PUT = {"/api/voucher/{id}", "/api/users/{id}",
+            "/api/danh-muc/{id}"
+    };
+    private final String[] ADMIN_ENDPOINT_DELETE = {"/api/voucher/{id}","/api/users/{id}", "/api/users//open/{id}",
+            "/api/danh-muc/{id}",            "/api/voucher/{id}", "/api/users/{id}", "/api/danh-muc/{id}","/api/hoa-don/updateTrangThai/{id}"
 
     };
 
-    private final String[] CUSTOMER_ENDPOINT_GET = {
-            "/api/users/myInfo"
-    };
-    private final String[] CUSTOMER_ENDPOINT_POST = {
-            "/api/thanhtoan/onl"
-    };
-    private final String[] CUSTOMER_ENDPOINT_PUT = {
-    };
-    private final String[] CUSTOMER_ENDPOINT_DELETE = {
+    private final String[] CUSTOMER_END_POINT = {
 
     };
 
@@ -55,10 +99,10 @@ public class SecurityConfig {
         httpSecurity.authorizeHttpRequests(request -> request
                 .requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINT).permitAll()
                 .requestMatchers(HttpMethod.GET, PUBLIC_ENDPOINT).permitAll()
-                .requestMatchers(HttpMethod.GET, CUSTOMER_ENDPOINT_GET).hasRole("CUSTOMER")
-                .requestMatchers(HttpMethod.POST, CUSTOMER_ENDPOINT_POST).hasRole("CUSTOMER")
-                .requestMatchers(HttpMethod.DELETE, CUSTOMER_ENDPOINT_DELETE).hasRole("CUSTOMER")
-                .requestMatchers(HttpMethod.PUT, CUSTOMER_ENDPOINT_PUT).hasRole("CUSTOMER")
+                .requestMatchers(HttpMethod.GET, ADMIN_ENDPOINT_GET).hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, ADMIN_ENDPOINT_POST).hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, ADMIN_ENDPOINT_DELETE).hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, ADMIN_ENDPOINT_PUT).hasRole("ADMIN")
                 .anyRequest().authenticated());
 
         httpSecurity.oauth2ResourceServer(oauth2 -> oauth2

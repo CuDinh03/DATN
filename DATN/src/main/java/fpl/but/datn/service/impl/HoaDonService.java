@@ -209,7 +209,7 @@ public class HoaDonService implements IHoaDonService {
 
     @Override
     public BigDecimal tinhTongDoanhThu() {
-        List<HoaDon> hoaDonList = hoaDonRepository.findByTrangThai1(5);
+        List<HoaDon> hoaDonList = hoaDonRepository.findByTrangThai1(4);
         return hoaDonList.stream()
                 .map(HoaDon::getTongTien)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
@@ -217,7 +217,7 @@ public class HoaDonService implements IHoaDonService {
 
     @Override
     public int tinhTongSoLuongSanPham() {
-        List<HoaDon> hoaDonList = hoaDonRepository.findByTrangThai1(5);
+        List<HoaDon> hoaDonList = hoaDonRepository.findByTrangThai1(4);
         return hoaDonList.stream()
                 .flatMap(hoaDon -> hoaDon.getHoaDonChiTietList().stream())
                 .mapToInt(HoaDonChiTiet::getSoLuong)
@@ -225,7 +225,7 @@ public class HoaDonService implements IHoaDonService {
     }
 
     public Map<LocalDate, BigDecimal> thongKeDoanhThuTheoNgay() {
-        List<HoaDon> hoaDonList = hoaDonRepository.findByTrangThai1(5);
+        List<HoaDon> hoaDonList = hoaDonRepository.findByTrangThai1(4);
         return hoaDonList.stream()
                 .collect(Collectors.groupingBy(
                         hoaDon -> hoaDon.getNgayTao().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
@@ -234,7 +234,7 @@ public class HoaDonService implements IHoaDonService {
     }
 
     public Map<LocalDate, Integer> thongKeSoLuongTheoNgay() {
-        List<HoaDon> hoaDonList = hoaDonRepository.findByTrangThai1(5);
+        List<HoaDon> hoaDonList = hoaDonRepository.findByTrangThai1(4);
         return hoaDonList.stream()
                 .flatMap(hoaDon -> hoaDon.getHoaDonChiTietList().stream())
                 .collect(Collectors.groupingBy(
@@ -244,7 +244,7 @@ public class HoaDonService implements IHoaDonService {
     }
 
     public Map<Integer, BigDecimal> thongKeDoanhThuTheoTuan() {
-        List<HoaDon> hoaDonList = hoaDonRepository.findByTrangThai1(5);
+        List<HoaDon> hoaDonList = hoaDonRepository.findByTrangThai1(4);
         return hoaDonList.stream()
                 .collect(Collectors.groupingBy(
                         hoaDon -> hoaDon.getNgayTao().toInstant().atZone(ZoneId.systemDefault()).get(ChronoField.ALIGNED_WEEK_OF_YEAR),
@@ -253,7 +253,7 @@ public class HoaDonService implements IHoaDonService {
     }
 
     public Map<Integer, Integer> thongKeSoLuongTheoTuan() {
-        List<HoaDon> hoaDonList = hoaDonRepository.findByTrangThai1(5);
+        List<HoaDon> hoaDonList = hoaDonRepository.findByTrangThai1(4);
         return hoaDonList.stream()
                 .flatMap(hoaDon -> hoaDon.getHoaDonChiTietList().stream())
                 .collect(Collectors.groupingBy(
@@ -263,7 +263,7 @@ public class HoaDonService implements IHoaDonService {
     }
 
     public Map<Integer, BigDecimal> thongKeDoanhThuTheoThang() {
-        List<HoaDon> hoaDonList = hoaDonRepository.findByTrangThai1(5);
+        List<HoaDon> hoaDonList = hoaDonRepository.findByTrangThai1(4);
         return hoaDonList.stream()
                 .collect(Collectors.groupingBy(
                         hoaDon -> hoaDon.getNgayTao().toInstant().atZone(ZoneId.systemDefault()).getMonthValue(),
@@ -272,7 +272,7 @@ public class HoaDonService implements IHoaDonService {
     }
 
     public Map<Integer, Integer> thongKeSoLuongTheoThang() {
-        List<HoaDon> hoaDonList = hoaDonRepository.findByTrangThai1(5);
+        List<HoaDon> hoaDonList = hoaDonRepository.findByTrangThai1(4);
         return hoaDonList.stream()
                 .flatMap(hoaDon -> hoaDon.getHoaDonChiTietList().stream())
                 .collect(Collectors.groupingBy(
