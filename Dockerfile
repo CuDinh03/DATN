@@ -1,5 +1,5 @@
 # Sử dụng hình ảnh Maven với JDK 17
-FROM maven:3.9.3-openjdk-17 as build
+FROM maven:3.8.6-openjdk-17 AS build
 
 # Sao chép mã nguồn vào hình ảnh
 COPY . /app
