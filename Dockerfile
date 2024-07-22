@@ -22,7 +22,7 @@ FROM openjdk:17-jdk-slim
 EXPOSE 8080
 
 # Sao chép file JAR từ bước build
-COPY --from=build /app/target/DATN.jar app.jar
+COPY --from=build /app/target/DATN-0.0.1-SNAPSHOT.jar app.jar
 
 # Chạy ứng dụng
 ENTRYPOINT ["java", "-jar", "app.jar"]
