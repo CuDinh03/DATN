@@ -239,6 +239,7 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
         templateModel.put("orderDate", giaoHang.getNgayTao());
         templateModel.put("totalAmount", hoaDon2.getTongTien());
         templateModel.put("deliveryAddress", giaoHang.getDiaChiGiaoHang());
+        templateModel.put("trackingUrl", "https://cudinh03.github.io/FE_DATN/customer/order-detail/" + giaoHang.getHoaDon().getId());
 
         List<Map<String, Object>> orderItems = new ArrayList<>();
         for (GioHangChiTiet ghCt : listGioHangCt) {
