@@ -60,14 +60,14 @@ public interface CTSanPhamRepository extends JpaRepository<ChiTietSanPham, UUID>
     @Query("SELECT ctsp FROM ChiTietSanPham ctsp ORDER BY ctsp.ngayTao DESC ")
     Page<ChiTietSanPham> finAll(Pageable pageable);
 
-    @Query("SELECT c.mauSac FROM ChiTietSanPham c WHERE c.ma = :maSanPhamChiTiet")
+    @Query("SELECT c.mauSac FROM ChiTietSanPham c WHERE c.sanPham.ma = :maSanPhamChiTiet")
     List<MauSac> findMauSacsByMaSanPhamChiTiet(@Param("maSanPhamChiTiet") String maSanPhamChiTiet);
 
-    @Query("SELECT c.kichThuoc FROM ChiTietSanPham c WHERE c.ma = :maSanPhamChiTiet")
+    @Query("SELECT c.kichThuoc FROM ChiTietSanPham c WHERE c.sanPham.ma = :maSanPhamChiTiet")
     List<KichThuoc> findkichThuocsByMaSanPhamChiTiet(@Param("maSanPhamChiTiet") String maSanPhamChiTiet);
 
-    @Query("SELECT ctsp FROM ChiTietSanPham ctsp WHERE ctsp.ma = :ma AND ctsp.kichThuoc.id = :kichThuoc AND ctsp.mauSac.id = :mauSac")
-    ChiTietSanPham findChiTietSanPhamByMauSacAndKichThuoc(@Param("ma") String ma,@Param("kichThuoc")UUID kichThuoc, @Param("mauSac") UUID mauSac );
+    @Query("SELECT ctsp FROM ChiTietSanPham ctsp WHERE ctsp.sanPham.ma = :ma AND ctsp.kichThuoc.id = :kichThuoc AND ctsp.mauSac.id = :mauSac")
+    ChiTietSanPham findChiTietSanPhamByMauSacAndKichThuoc(@Param("ma") String ma, @Param("kichThuoc") UUID kichThuoc, @Param("mauSac") UUID mauSac);
     @Query("SELECT c FROM ChiTietSanPham c WHERE c.ma = :ma AND c.kichThuoc.id = :kichThuoc")
     List<ChiTietSanPham> findChiTietSanPhamByMaAndKichThuoc(@Param("ma") String ma, @Param("kichThuoc") UUID kichThuoc);
     // Tim kiem
