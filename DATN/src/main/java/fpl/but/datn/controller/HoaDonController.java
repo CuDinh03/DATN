@@ -1,9 +1,6 @@
 package fpl.but.datn.controller;
 
-import fpl.but.datn.dto.request.ChucVuDto;
-import fpl.but.datn.dto.request.DanhMucDto;
-import fpl.but.datn.dto.request.GioHangDto;
-import fpl.but.datn.dto.request.HoaDonDto;
+import fpl.but.datn.dto.request.*;
 import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.entity.DanhMuc;
 import fpl.but.datn.entity.GioHang;
@@ -369,6 +366,23 @@ public class HoaDonController {
 
         return apiResponse;
     }
+    @PutMapping("/suaHoaDon")
+    public ApiResponse<HoaDon> updateHoaDon(@RequestBody HoaDonSua request) {
+        ApiResponse<HoaDon> apiResponse = new ApiResponse<>();
+
+        try {
+            HoaDon updatedHoaDon = hoaDonService.updateHoaDon(request.getChiTietList(), request.getHoaDon(), request.getNguoiDung());
+            apiResponse.setMessage("Cập nhật hoá đơn thành công");
+            apiResponse.setResult(updatedHoaDon);
+        } catch (AppException e) {
+            apiResponse.setMessage("Có lỗi xảy ra khi cập nhật hoá đơn:" + e.getMessage());
+        } catch (Exception e) {
+            apiResponse.setMessage("Có lỗi không mong muốn xảy ra khi cập nhật hoá đơn:" + e.getMessage());
+        }
+
+        return apiResponse;
+    }
+
 
 
 }
