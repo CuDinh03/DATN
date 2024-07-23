@@ -124,8 +124,15 @@ public class CTSanPhamController {
     }
 
     @GetMapping("/findChiTietSanPhamByMauSacAndKichThuoc/{ma}")
-    ApiResponse<ChiTietSanPhamDto> findAllByKichThuocAndMauSac(@PathVariable String ma, @RequestParam UUID kichThuoc, @RequestParam UUID mauSac) {
-        ChiTietSanPhamDto dto = TranferDatas.convertToDto(ctSanPhamService.findChiTietSanPhamByMauSacAndKichThuoc(ma, kichThuoc, mauSac));
+    public ApiResponse<ChiTietSanPhamDto> findAllByKichThuocAndMauSac(@PathVariable String ma, @RequestParam UUID kichThuoc, @RequestParam UUID mauSac) {
+        ChiTietSanPham chiTietSanPham = ctSanPhamService.findChiTietSanPhamByMauSacAndKichThuoc(ma, kichThuoc, mauSac);
+
+        if (chiTietSanPham == null) {
+            throw new AppException(ErrorCode.NO_PRODUCT_DETAIL_FOUND);
+        }
+
+        ChiTietSanPhamDto dto = TranferDatas.convertToDto(chiTietSanPham);
+
         ApiResponse<ChiTietSanPhamDto> apiResponse = new ApiResponse<>();
         if (dto != null) {
             apiResponse.setMessage("lay danh sach san pham thanh cong");
@@ -135,6 +142,7 @@ public class CTSanPhamController {
         }
         return apiResponse;
     }
+
 
 
     @DeleteMapping("/delete/{id}")
