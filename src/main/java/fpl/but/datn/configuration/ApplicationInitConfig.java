@@ -1,10 +1,12 @@
 package fpl.but.datn.configuration;
 
 import fpl.but.datn.entity.ChucVu;
+import fpl.but.datn.entity.NguoiDung;
 import fpl.but.datn.entity.TaiKhoan;
 import fpl.but.datn.repository.ChucVuRepository;
 import fpl.but.datn.repository.TaiKhoanRepository;
 import fpl.but.datn.service.impl.ChucVuService;
+import fpl.but.datn.service.impl.NguoiDungService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -27,6 +29,7 @@ public class ApplicationInitConfig {
     PasswordEncoder passwordEncoder;
     ChucVuService chucVuService;
     ChucVuRepository chucVuRepository;
+    NguoiDungService nguoiDungService;
 
     @Bean
     ApplicationRunner applicationRunner(TaiKhoanRepository repository) {
@@ -80,7 +83,16 @@ public class ApplicationInitConfig {
                         .matKhau(passwordEncoder.encode("admin"))
                         .build();
 
-                repository.save(taiKhoan);
+
+                NguoiDung nguoiDung = NguoiDung.builder()
+                        .taiKhoan(repository.save(taiKhoan))
+                        .email("idhuongngoai@gmail.com")
+                        .sdt("0782399550")
+                        .trangThai(1)
+                        .ma("ADMIN")
+                        .ngayTao(new Date())
+                        .build();
+                nguoiDungService.create(nguoiDung);
                 log.warn("admin user has been created with default password: admin, change it !! ");
             }
         };
