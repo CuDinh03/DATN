@@ -12,6 +12,7 @@ WORKDIR /app
 # Kiểm tra rằng tệp pom.xml có mặt trong thư mục làm việc
 RUN ls -l /app
 
+
 # Xây dựng ứng dụng bằng Maven
 RUN mvn clean package
 
@@ -23,6 +24,8 @@ EXPOSE 8080
 
 # Sao chép file JAR từ bước build
 COPY --from=build /app/target/DATN-0.0.1-SNAPSHOT.jar app.jar
+EXPOSE 9091
+
 
 # Chạy ứng dụng
 ENTRYPOINT ["java", "-jar", "app.jar"]

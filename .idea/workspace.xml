@@ -12,6 +12,13 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -39,6 +46,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/maccuacu/Desktop/Nhom-DATN/DATN&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -53,6 +61,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
   <component name="RunManager" selected="Spring Boot.DatnApplication">
     <configuration name="All in DATN" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="DATN" />
@@ -70,6 +83,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="JUnit.All in DATN" />
+      <item itemvalue="Spring Boot.DatnApplication" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.All in DATN" />
@@ -95,5 +112,21 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/controller/HoaDonController.java</url>
+          <line>374</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="SpringBootApplicationConfigurationType">
+        <watch expression="optionalChiTietSanPhamN" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

@@ -1,9 +1,6 @@
 package fpl.but.datn.service.impl;
 
-import fpl.but.datn.entity.ChiTietSanPham;
-import fpl.but.datn.entity.GioHangHoaDon;
-import fpl.but.datn.entity.HoaDon;
-import fpl.but.datn.entity.HoaDonChiTiet;
+import fpl.but.datn.entity.*;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.repository.CTSanPhamRepository;
@@ -34,6 +31,7 @@ public class HoaDonService implements IHoaDonService {
     private GioHangHoaDonRepository hoaDonGioHangRepository;
     @Autowired
     private CTSanPhamRepository ctSanPhamRepository;
+
 
     @Override
     public List getAll() {
@@ -92,7 +90,6 @@ public class HoaDonService implements IHoaDonService {
         if (newTrangThai == 5 && ghiChu == null) {
             return false;
         }
-
         switch (currentTrangThai) {
             case 0:
             case 1:
@@ -308,4 +305,81 @@ public class HoaDonService implements IHoaDonService {
         }
         return tangTruong;
     }
+
+    public HoaDon updateHoaDon(List<HoaDonChiTiet> chiTietList, HoaDon hoaDon, NguoiDung nguoiDung) {
+        // Tìm hóa đơn cũ
+        Optional<HoaDon> optionalHoaDonCu = hoaDonRepository.findById(hoaDon.getId());
+        if (!optionalHoaDonCu.isPresent()) {
+            throw new AppException(ErrorCode.NO_ORDER_FOUND);
+        }
+
+        HoaDon hoaDonCu = optionalHoaDonCu.get();
+        List<HoaDonChiTiet> hoaDonChiTiets = hoaDonChiTietRepository.findAllHoaDonChiTietByIdHoaDon(hoaDon.getId());
+
+        for (HoaDonChiTiet hdDta : hoaDonChiTiets) {
+            for (HoaDonChiTiet hdNew : chiTietList) {
+                if (hdNew.getId().equals(hdDta.getId())) {
+                    // Xử lý chi tiết sản phẩm cũ
+                    ChiTietSanPham chiTietSanPhamCu = hdDta.getChiTietSanPham();
+                    ChiTietSanPham chiTietSanPhamMoi = hdNew.getChiTietSanPham();
+
+                    Optional<ChiTietSanPham> optionalChiTietSanPham = ctSanPhamRepository.findById(chiTietSanPhamCu.getId());
+                    if (!optionalChiTietSanPham.isPresent()) {
+                        throw new AppException(ErrorCode.NO_PRODUCT_DETAIL_FOUND);
+                    }
+
+                    ChiTietSanPham chiTietSanPham = optionalChiTietSanPham.get();
+                    int soLuongCu = chiTietSanPham.getSoLuong();
+                    int soLuongThayDoi;
+
+                    if (chiTietSanPhamCu.equals(chiTietSanPhamMoi)) {
+                        // Cập nhật số lượng sản phẩm nếu không thay đổi chi tiết
+                        if (hdNew.getSoLuong() > hdDta.getSoLuong()) {
+                            soLuongThayDoi = hdNew.getSoLuong() - hdDta.getSoLuong();
+                            chiTietSanPham.setSoLuong(soLuongCu - soLuongThayDoi);
+                        } else if (hdNew.getSoLuong() < hdDta.getSoLuong()) {
+                            soLuongThayDoi = hdDta.getSoLuong() - hdNew.getSoLuong();
+                            chiTietSanPham.setSoLuong(soLuongCu + soLuongThayDoi);
+                        } else {
+                            continue; // Số lượng không thay đổi, không cần cập nhật
+                        }
+
+                        chiTietSanPham.setNgaySua(new Date());
+                        ctSanPhamRepository.save(chiTietSanPham);
+                        hdNew.setNgaySua(new Date());
+                        hoaDonChiTietRepository.save(hdNew);
+
+                    } else {
+                        // Cập nhật khi  thay đổi chi tiết sản phẩm về size và màu
+                        Optional<ChiTietSanPham> optionalChiTietSanPhamN = ctSanPhamRepository.findById(chiTietSanPhamMoi.getId());
+                        if (!optionalChiTietSanPhamN.isPresent()) {
+                            throw new AppException(ErrorCode.NO_PRODUCT_DETAIL_FOUND);
+                        }
+
+                        ChiTietSanPham chiTietSanPhamN = optionalChiTietSanPhamN.get();
+                        chiTietSanPhamN.setSoLuong(chiTietSanPhamN.getSoLuong() - hdNew.getSoLuong());
+                        chiTietSanPhamN.setNgaySua(new Date());
+                        ctSanPhamRepository.save(chiTietSanPhamN);
+
+                        chiTietSanPham.setSoLuong(chiTietSanPham.getSoLuong() + hdDta.getSoLuong());
+                        chiTietSanPham.setNgaySua(new Date());
+                        ctSanPhamRepository.save(chiTietSanPham);
+
+                        hdNew.setNgaySua(new Date());
+                        hoaDonChiTietRepository.save(hdNew);
+                    }
+                }
+            }
+        }
+
+        // Cập nhật thông tin hóa đơn
+        hoaDonCu.setGhiChu(hoaDon.getGhiChu());
+        hoaDonCu.setNgaySua(new Date());
+        hoaDonCu.setNguoiDung(nguoiDung);
+        hoaDonCu.setTongTien(hoaDon.getTongTien());
+        hoaDonCu.setTongTienGiam(hoaDon.getTongTienGiam());
+
+        return hoaDonRepository.save(hoaDonCu);
+    }
+
 }
