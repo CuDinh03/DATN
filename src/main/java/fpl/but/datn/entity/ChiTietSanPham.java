@@ -2,6 +2,7 @@ package fpl.but.datn.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,6 +18,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Table
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ChiTietSanPham {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

@@ -1,5 +1,5 @@
 package fpl.but.datn.dto.request;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import fpl.but.datn.entity.*;
 
 import lombok.Data;
@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ChiTietSanPhamDto {
     private UUID id;
     private String ma;
@@ -26,5 +27,5 @@ public class ChiTietSanPhamDto {
     private Date ngayTao;
     private Date ngaySua;
     private Integer trangThai;
-    private List<HinhAnh> HinhAnh;
+    private List<HinhAnh> hinhAnh;
 }

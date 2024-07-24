@@ -6,6 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="85360360-6e47-429b-b577-a4f16be7088d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/request/ChiTietSanPhamDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/request/ChiTietSanPhamDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/request/HinhAnhDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/request/HinhAnhDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/request/IMG.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/request/IMG.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/entity/BaoCao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/entity/BaoCao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/entity/ChiTietSanPham.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/entity/ChiTietSanPham.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,6 +127,16 @@
           <url>file://$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/controller/HoaDonController.java</url>
           <line>374</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/CTSanPhamService.java</url>
+          <line>248</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/fpl/but/datn/controller/CTSanPhamController.java</url>
+          <line>288</line>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
