@@ -27,17 +27,20 @@ public class SecurityConfig {
     private static final Logger logger = LoggerFactory.getLogger(SecurityConfig.class);
 
     private final String[] PUBLIC_ENDPOINT = {"/api/auth/log-in", "/api/users/create", "/api/users/check-username", "/api/users/myInfo",
-            "/api/chi-tiet-san-pham/getAll"
+            "/api/chi-tiet-san-pham/getAll/sap-xep-ngay-tao","/api/hinh-anh/**"
 
     };
 
     private final String[] CUSTOMER_ENDPOINT_GET = {
-            "/api/users/myInfo"
+            "/api/users/myInfo/","/api/chi-tiet-san-pham/getAll/sap-xep-ngay-tao",
+            "/api/chi-tiet-san-pham/**","/api/hoa-don/**","/api/hoa-don-gio-hang/**","/api/hinh-anh/**",
+            "/api/gio-hang-chi-tiet/**"
     };
     private final String[] CUSTOMER_ENDPOINT_POST = {
-            "/api/thanhtoan/onl"
+            "/api/thanhtoan/onl","/api/hoa-don/**","/api/voucher/**","/api/hoa-don-gio-hang/**","/api/hinh-anh/**","/api/gio-hang-chi-tiet/**"
     };
     private final String[] CUSTOMER_ENDPOINT_PUT = {
+
     };
     private final String[] CUSTOMER_ENDPOINT_DELETE = {
 
