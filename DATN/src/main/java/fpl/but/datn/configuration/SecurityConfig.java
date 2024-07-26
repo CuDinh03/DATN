@@ -65,7 +65,7 @@ public class SecurityConfig {
             "/api/hoa-don/all",
             "/api/hoa-don-gio-hang/all", "/api/hoa-don-gio-hang/all/{id}",
             "/api/voucher/all","/api/voucher/allVouchers","/api/voucher/{id}",
-            "/api/hoa-don/{ma}",
+            "/api/hoa-don/{ma}","/api/hoa-don/getHoaDonsByTranThai/{trangThai}",
             "/api/hoa-don/thongke/doanhthu/ngay", "/api/hoa-don/thongke/soluong/ngay", "/api/hoa-don/thongke/doanhthu/tuan", "/api/hoa-don/thongke/soluong/tuan", "/api/hoa-don/thongke/doanhthu/thang", "/api/hoa-don/thongke/soluong/thang", "/api/hoa-don/tangtruong/doanhthu", "/api/hoa-don/soluong",
             "/api/hoa-don/doanhthu",
     };

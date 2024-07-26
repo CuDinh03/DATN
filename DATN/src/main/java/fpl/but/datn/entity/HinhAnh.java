@@ -1,5 +1,6 @@
 package fpl.but.datn.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,7 +26,11 @@ public class HinhAnh {
     private SanPham sanPham;
     private String ma;
     private String url;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS")
+
     private Date ngayTao;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS")
+
     private Date ngaySua;
     private Integer trangThai;
 
