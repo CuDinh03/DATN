@@ -367,13 +367,13 @@ public class HoaDonController {
         return apiResponse;
     }
     @PutMapping("/suaHoaDon")
-    public ApiResponse<HoaDon> updateHoaDon(@RequestBody HoaDonSua request) {
-        ApiResponse<HoaDon> apiResponse = new ApiResponse<>();
+    public ApiResponse<HoaDonDto> updateHoaDon(@RequestBody HoaDonSua request) {
+        ApiResponse<HoaDonDto> apiResponse = new ApiResponse<>();
 
         try {
-            HoaDon updatedHoaDon = hoaDonService.updateHoaDon(request.getChiTietList(), request.getHoaDon(), request.getNguoiDung());
+            HoaDonDto updatedHoaDonDto = hoaDonService.updateHoaDon(request.getChiTietList(), request.getHoaDon(), request.getNguoiDung());
             apiResponse.setMessage("Cập nhật hoá đơn thành công");
-            apiResponse.setResult(updatedHoaDon);
+            apiResponse.setResult(updatedHoaDonDto);
         } catch (AppException e) {
             apiResponse.setMessage("Có lỗi xảy ra khi cập nhật hoá đơn:" + e.getMessage());
         } catch (Exception e) {
@@ -382,6 +382,7 @@ public class HoaDonController {
 
         return apiResponse;
     }
+
 
 
 

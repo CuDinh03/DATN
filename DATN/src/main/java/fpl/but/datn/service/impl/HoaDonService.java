@@ -1,6 +1,7 @@
 package fpl.but.datn.service.impl;
 
 import fpl.but.datn.dto.request.HoaDonChiTietDto;
+import fpl.but.datn.dto.request.HoaDonDto;
 import fpl.but.datn.entity.*;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
@@ -309,7 +310,7 @@ public class HoaDonService implements IHoaDonService {
         return tangTruong;
     }
 
-    public HoaDon updateHoaDon(List<HoaDonChiTietDto> chiTietList, HoaDon hoaDon, NguoiDung nguoiDung) {
+    public HoaDonDto updateHoaDon(List<HoaDonChiTietDto> chiTietList, HoaDon hoaDon, NguoiDung nguoiDung) {
         // Tìm hóa đơn cũ
         Optional<HoaDon> optionalHoaDonCu = hoaDonRepository.findById(hoaDon.getId());
         if (!optionalHoaDonCu.isPresent()) {
@@ -353,7 +354,7 @@ public class HoaDonService implements IHoaDonService {
                         hoaDonChiTietRepository.save(TranferDatas.convertToEntity(hdNew));
 
                     } else {
-                        // Cập nhật khi  thay đổi chi tiết sản phẩm về size và màu
+                        // Cập nhật khi thay đổi chi tiết sản phẩm về size và màu
                         Optional<ChiTietSanPham> optionalChiTietSanPhamN = ctSanPhamRepository.findById(chiTietSanPhamMoi.getId());
                         if (!optionalChiTietSanPhamN.isPresent()) {
                             throw new AppException(ErrorCode.NO_PRODUCT_DETAIL_FOUND);
@@ -382,7 +383,9 @@ public class HoaDonService implements IHoaDonService {
         hoaDonCu.setTongTien(hoaDon.getTongTien());
         hoaDonCu.setTongTienGiam(hoaDon.getTongTienGiam());
 
-        return hoaDonRepository.save(hoaDonCu);
+        hoaDonCu = hoaDonRepository.save(hoaDonCu);
+
+        return TranferDatas.convertToDto(hoaDonCu);
     }
 
 }

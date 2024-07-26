@@ -40,6 +40,6 @@ public interface IHoaDonService {
     BigDecimal tinhPhanTramTangTruongDoanhThu(int namNay);
     HoaDon yeuCauSuaHoaDon(HoaDon request, UUID id);
     boolean canUpdateTrangThai(int currentTrangThai, int newTrangThai, String ghiChu);
-    HoaDon updateHoaDon(List<HoaDonChiTietDto> chiTietList, HoaDon hoaDon, NguoiDung nguoiDung);
+    HoaDonDto updateHoaDon(List<HoaDonChiTietDto> chiTietList, HoaDon hoaDon, NguoiDung nguoiDung);
 }
    
