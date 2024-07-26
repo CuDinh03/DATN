@@ -21,5 +21,6 @@ public interface IHoaDonChiTietService {
     List<HoaDonChiTiet> getHoaDonChiTietByIdHoaDon(UUID idHoaDon);
     List<Object[]> findAllChiTietAndHinhAnhByIdHoaDon(UUID idGioHang);
     List<HoaDonChiTietDto> thongKeSanPhamBanNhieuNhat();
+    List<HoaDonChiTiet> updateHoaDonChiTiet(List<HoaDonChiTiet> chiTietList);
 
 }

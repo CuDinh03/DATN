@@ -1,5 +1,6 @@
 package fpl.but.datn.service.impl;
 
+import fpl.but.datn.dto.request.HoaDonChiTietDto;
 import fpl.but.datn.entity.*;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
@@ -8,6 +9,7 @@ import fpl.but.datn.repository.GioHangHoaDonRepository;
 import fpl.but.datn.repository.HoaDonChiTietRepository;
 import fpl.but.datn.repository.HoaDonRepository;
 import fpl.but.datn.service.IHoaDonService;
+import fpl.but.datn.tranferdata.TranferDatas;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -65,6 +67,7 @@ public class HoaDonService implements IHoaDonService {
     public HoaDon update(HoaDon request, UUID id) {
         HoaDon hoaDon = findById(id);
         hoaDon.setVoucher(request.getVoucher());
+        hoaDon.setId(id);
         hoaDon.setNgaySua(new Date());
         hoaDon.setNgayTao(new Date());
         hoaDon.setTongTien(request.getTongTien());
@@ -306,7 +309,7 @@ public class HoaDonService implements IHoaDonService {
         return tangTruong;
     }
 
-    public HoaDon updateHoaDon(List<HoaDonChiTiet> chiTietList, HoaDon hoaDon, NguoiDung nguoiDung) {
+    public HoaDon updateHoaDon(List<HoaDonChiTietDto> chiTietList, HoaDon hoaDon, NguoiDung nguoiDung) {
         // Tìm hóa đơn cũ
         Optional<HoaDon> optionalHoaDonCu = hoaDonRepository.findById(hoaDon.getId());
         if (!optionalHoaDonCu.isPresent()) {
@@ -317,7 +320,7 @@ public class HoaDonService implements IHoaDonService {
         List<HoaDonChiTiet> hoaDonChiTiets = hoaDonChiTietRepository.findAllHoaDonChiTietByIdHoaDon(hoaDon.getId());
 
         for (HoaDonChiTiet hdDta : hoaDonChiTiets) {
-            for (HoaDonChiTiet hdNew : chiTietList) {
+            for (HoaDonChiTietDto hdNew : chiTietList) {
                 if (hdNew.getId().equals(hdDta.getId())) {
                     // Xử lý chi tiết sản phẩm cũ
                     ChiTietSanPham chiTietSanPhamCu = hdDta.getChiTietSanPham();
@@ -347,7 +350,7 @@ public class HoaDonService implements IHoaDonService {
                         chiTietSanPham.setNgaySua(new Date());
                         ctSanPhamRepository.save(chiTietSanPham);
                         hdNew.setNgaySua(new Date());
-                        hoaDonChiTietRepository.save(hdNew);
+                        hoaDonChiTietRepository.save(TranferDatas.convertToEntity(hdNew));
 
                     } else {
                         // Cập nhật khi  thay đổi chi tiết sản phẩm về size và màu
@@ -366,7 +369,7 @@ public class HoaDonService implements IHoaDonService {
                         ctSanPhamRepository.save(chiTietSanPham);
 
                         hdNew.setNgaySua(new Date());
-                        hoaDonChiTietRepository.save(hdNew);
+                        hoaDonChiTietRepository.save(TranferDatas.convertToEntity(hdNew));
                     }
                 }
             }

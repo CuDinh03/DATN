@@ -1,6 +1,7 @@
 package fpl.but.datn.service;
 
 import fpl.but.datn.dto.request.HoaDonChiTietDto;
+import fpl.but.datn.dto.request.HoaDonDto;
 import fpl.but.datn.entity.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -39,7 +40,6 @@ public interface IHoaDonService {
     BigDecimal tinhPhanTramTangTruongDoanhThu(int namNay);
     HoaDon yeuCauSuaHoaDon(HoaDon request, UUID id);
     boolean canUpdateTrangThai(int currentTrangThai, int newTrangThai, String ghiChu);
-
-    HoaDon updateHoaDon(List<HoaDonChiTiet> chiTietList, HoaDon hoaDon, NguoiDung nguoiDung);
+    HoaDon updateHoaDon(List<HoaDonChiTietDto> chiTietList, HoaDon hoaDon, NguoiDung nguoiDung);
 }
    

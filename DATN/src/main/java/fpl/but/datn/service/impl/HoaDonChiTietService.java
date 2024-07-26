@@ -38,8 +38,40 @@ public class HoaDonChiTietService implements IHoaDonChiTietService {
     }
 
     @Override
-    public HoaDonChiTiet update(HoaDonChiTiet hoaDonChiTiet, UUID id) {
-        return null;
+    public HoaDonChiTiet update(HoaDonChiTiet request, UUID id) {
+        HoaDonChiTiet hoaDonChiTiet = findById(id);
+        hoaDonChiTiet.setHoaDon(request.getHoaDon());
+        hoaDonChiTiet.setSoLuong(request.getSoLuong());
+        hoaDonChiTiet.setId(id);
+        hoaDonChiTiet.setNgayTao(request.getNgayTao());
+        hoaDonChiTiet.setNgaySua(new Date());
+        hoaDonChiTiet.setGiaBan(request.getGiaBan());
+        hoaDonChiTiet.setChiTietSanPham(request.getChiTietSanPham());
+        request.setTrangThai(request.getTrangThai());
+        return hoaDonChiTietRepository.save(hoaDonChiTiet);
+    }
+
+    public List<HoaDonChiTiet> updateHoaDonChiTiet(List<HoaDonChiTiet> chiTietList) {
+        List<HoaDonChiTiet> updatedChiTietList = new ArrayList<>();
+
+        for (HoaDonChiTiet chiTiet : chiTietList) {
+            Optional<HoaDonChiTiet> optionalChiTiet = hoaDonChiTietRepository.findById(chiTiet.getId());
+
+            if (optionalChiTiet.isPresent()) {
+                HoaDonChiTiet chiTietCu = optionalChiTiet.get();
+
+                // Cập nhật các thuộc tính
+                chiTietCu.setChiTietSanPham(chiTiet.getChiTietSanPham());
+                chiTietCu.setSoLuong(chiTiet.getSoLuong());
+                chiTietCu.setNgaySua(new Date());
+
+                updatedChiTietList.add(hoaDonChiTietRepository.save(chiTietCu));
+            } else {
+                throw new AppException(ErrorCode.NO_ORDER_DETAIL_FOUND);
+            }
+        }
+
+        return updatedChiTietList;
     }
 
     @Override
