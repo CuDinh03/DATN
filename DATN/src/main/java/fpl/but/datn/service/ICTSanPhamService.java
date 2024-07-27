@@ -62,4 +62,6 @@ public interface ICTSanPhamService {
     List<ChiTietSanPham> findByFilter(UUID mauSac, UUID kichThuoc, UUID danhMuc);
     Page<ChiTietSanPham> filterSanPham(FilterSanPhamRequest request, int page, int size);
 
+    ChiTietSanPham getByMKS ( UUID sanPhamId , UUID kichThuocId , UUID mauSacId);
+
 }

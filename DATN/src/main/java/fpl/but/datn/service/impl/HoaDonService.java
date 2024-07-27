@@ -9,6 +9,7 @@ import fpl.but.datn.repository.CTSanPhamRepository;
 import fpl.but.datn.repository.GioHangHoaDonRepository;
 import fpl.but.datn.repository.HoaDonChiTietRepository;
 import fpl.but.datn.repository.HoaDonRepository;
+import fpl.but.datn.service.ICTSanPhamService;
 import fpl.but.datn.service.IHoaDonService;
 import fpl.but.datn.tranferdata.TranferDatas;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,9 @@ public class HoaDonService implements IHoaDonService {
     private GioHangHoaDonRepository hoaDonGioHangRepository;
     @Autowired
     private CTSanPhamRepository ctSanPhamRepository;
+
+    @Autowired
+    private ICTSanPhamService ictSanPhamService;
 
 
     @Override
@@ -310,7 +314,7 @@ public class HoaDonService implements IHoaDonService {
         return tangTruong;
     }
 
-    public HoaDonDto updateHoaDon(List<HoaDonChiTietDto> chiTietList, HoaDon hoaDon, NguoiDung nguoiDung) {
+    public HoaDon updateHoaDon(List<HoaDonChiTietDto> chiTietList, HoaDon hoaDon, NguoiDung nguoiDung) {
         // Tìm hóa đơn cũ
         Optional<HoaDon> optionalHoaDonCu = hoaDonRepository.findById(hoaDon.getId());
         if (!optionalHoaDonCu.isPresent()) {
@@ -324,19 +328,21 @@ public class HoaDonService implements IHoaDonService {
             for (HoaDonChiTietDto hdNew : chiTietList) {
                 if (hdNew.getId().equals(hdDta.getId())) {
                     // Xử lý chi tiết sản phẩm cũ
-                    ChiTietSanPham chiTietSanPhamCu = hdDta.getChiTietSanPham();
-                    ChiTietSanPham chiTietSanPhamMoi = hdNew.getChiTietSanPham();
+                    MauSac mauCu = hdDta.getChiTietSanPham().getMauSac();
+                    MauSac mauMoi = hdNew.getChiTietSanPham().getMauSac();
 
-                    Optional<ChiTietSanPham> optionalChiTietSanPham = ctSanPhamRepository.findById(chiTietSanPhamCu.getId());
-                    if (!optionalChiTietSanPham.isPresent()) {
-                        throw new AppException(ErrorCode.NO_PRODUCT_DETAIL_FOUND);
-                    }
+                    KichThuoc kichThuocCu = hdDta.getChiTietSanPham().getKichThuoc();
+                    KichThuoc kichThuocMoi = hdNew.getChiTietSanPham().getKichThuoc();
 
-                    ChiTietSanPham chiTietSanPham = optionalChiTietSanPham.get();
-                    int soLuongCu = chiTietSanPham.getSoLuong();
-                    int soLuongThayDoi;
+                    if (mauMoi.getId().equals(mauCu.getId()) && kichThuocCu.getId().equals(kichThuocMoi.getId())) {
+                        Optional<ChiTietSanPham> optionalChiTietSanPham = ctSanPhamRepository.findById(hdDta.getChiTietSanPham().getId());
+                        if (!optionalChiTietSanPham.isPresent()) {
+                            throw new AppException(ErrorCode.NO_PRODUCT_DETAIL_FOUND);
+                        }
 
-                    if (chiTietSanPhamCu.equals(chiTietSanPhamMoi)) {
+                        ChiTietSanPham chiTietSanPham = optionalChiTietSanPham.get();
+                        int soLuongCu = chiTietSanPham.getSoLuong();
+                        int soLuongThayDoi;
                         // Cập nhật số lượng sản phẩm nếu không thay đổi chi tiết
                         if (hdNew.getSoLuong() > hdDta.getSoLuong()) {
                             soLuongThayDoi = hdNew.getSoLuong() - hdDta.getSoLuong();
@@ -352,23 +358,19 @@ public class HoaDonService implements IHoaDonService {
                         ctSanPhamRepository.save(chiTietSanPham);
                         hdNew.setNgaySua(new Date());
                         hoaDonChiTietRepository.save(TranferDatas.convertToEntity(hdNew));
+                        continue;
+                    }
 
-                    } else {
-                        // Cập nhật khi thay đổi chi tiết sản phẩm về size và màu
-                        Optional<ChiTietSanPham> optionalChiTietSanPhamN = ctSanPhamRepository.findById(chiTietSanPhamMoi.getId());
-                        if (!optionalChiTietSanPhamN.isPresent()) {
-                            throw new AppException(ErrorCode.NO_PRODUCT_DETAIL_FOUND);
-                        }
-
-                        ChiTietSanPham chiTietSanPhamN = optionalChiTietSanPhamN.get();
-                        chiTietSanPhamN.setSoLuong(chiTietSanPhamN.getSoLuong() - hdNew.getSoLuong());
-                        chiTietSanPhamN.setNgaySua(new Date());
-                        ctSanPhamRepository.save(chiTietSanPhamN);
-
-                        chiTietSanPham.setSoLuong(chiTietSanPham.getSoLuong() + hdDta.getSoLuong());
-                        chiTietSanPham.setNgaySua(new Date());
-                        ctSanPhamRepository.save(chiTietSanPham);
-
+                    if (mauMoi.getId() != mauCu.getId() || kichThuocCu.getId() != kichThuocMoi.getId()) {
+                        ChiTietSanPham chiTietSanPhamMoi = ictSanPhamService.getByMKS(hdNew.getChiTietSanPham().getSanPham().getId(), kichThuocMoi.getId(), mauMoi.getId());
+                        ChiTietSanPham chiTietSanPhamCu = ictSanPhamService.getByMKS(hdNew.getChiTietSanPham().getSanPham().getId(), kichThuocCu.getId(), mauCu.getId());
+                        chiTietSanPhamMoi.setSoLuong(chiTietSanPhamMoi.getSoLuong() - hdNew.getSoLuong());
+                        chiTietSanPhamMoi.setNgaySua(new Date());
+                        ctSanPhamRepository.save(chiTietSanPhamMoi);
+                        chiTietSanPhamCu.setSoLuong(chiTietSanPhamCu.getSoLuong() + hdDta.getSoLuong());
+                        chiTietSanPhamCu.setNgaySua(new Date());
+                        ctSanPhamRepository.save(chiTietSanPhamCu);
+                        hdNew.setChiTietSanPham(chiTietSanPhamMoi);
                         hdNew.setNgaySua(new Date());
                         hoaDonChiTietRepository.save(TranferDatas.convertToEntity(hdNew));
                     }
@@ -383,9 +385,8 @@ public class HoaDonService implements IHoaDonService {
         hoaDonCu.setTongTien(hoaDon.getTongTien());
         hoaDonCu.setTongTienGiam(hoaDon.getTongTienGiam());
 
-        hoaDonCu = hoaDonRepository.save(hoaDonCu);
-
-        return TranferDatas.convertToDto(hoaDonCu);
+        return hoaDonRepository.save(hoaDonCu);
     }
+
 
 }

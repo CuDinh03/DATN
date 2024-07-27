@@ -40,12 +40,13 @@ public class HoaDon {
     private KhachHang khachHang;
     private BigDecimal tongTien;
     private BigDecimal tongTienGiam;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS")
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS")
     private Date ngayTao;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS")
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS")
     private Date ngaySua;
+
     @ManyToOne
     private Voucher voucher;
     private String ghiChu;

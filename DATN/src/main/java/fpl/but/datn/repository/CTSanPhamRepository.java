@@ -105,4 +105,7 @@ public interface CTSanPhamRepository extends JpaRepository<ChiTietSanPham, UUID>
 
     Page<ChiTietSanPham> findAll(Specification<ChiTietSanPham> spec, Pageable pageable);
 
+    @Query("SELECT ctsp FROM ChiTietSanPham ctsp WHERE ctsp.sanPham.id = :sanPhamId AND ctsp.kichThuoc.id = :kichThuocId AND ctsp.mauSac.id = :mauSacId")
+    ChiTietSanPham getByMKS (@Param("sanPhamId") UUID sanPhamId ,@Param("kichThuocId")UUID kichThuocId , @Param("mauSacId") UUID mauSacId);
+
 }
