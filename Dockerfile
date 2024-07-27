@@ -1,9 +1,5 @@
-# Sử dụng hình ảnh OpenJDK 17 làm hình ảnh cơ sở
-FROM openjdk:17-jdk-slim AS build
-
-# Cài đặt Maven
-RUN apt-get update && \
-    apt-get install -y maven
+# Sử dụng hình ảnh Maven với JDK 17
+FROM maven:3.9.3-openjdk-17 as build
 
 # Sao chép mã nguồn vào hình ảnh
 COPY . /app
@@ -16,7 +12,7 @@ RUN mvn clean package
 FROM openjdk:17-jdk-slim
 
 # Expose cổng mà ứng dụng sẽ sử dụng
-EXPOSE 9091
+EXPOSE 8080
 
 # Sao chép file JAR từ bước build
 COPY --from=build /app/target/DATN.jar app.jar

@@ -4,6 +4,7 @@ import fpl.but.datn.dto.request.FilterSanPhamRequest;
 import fpl.but.datn.entity.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.UUID;
@@ -61,5 +62,8 @@ public interface ICTSanPhamService {
     List<ChiTietSanPham> saveListCt(List<ChiTietSanPham> list, List<HinhAnh> hinhAnhs);
     List<ChiTietSanPham> findByFilter(UUID mauSac, UUID kichThuoc, UUID danhMuc);
     Page<ChiTietSanPham> filterSanPham(FilterSanPhamRequest request, int page, int size);
+
+    ChiTietSanPham getByMKS ( UUID sanPhamId , UUID kichThuocId , UUID mauSacId);
+
 
 }
