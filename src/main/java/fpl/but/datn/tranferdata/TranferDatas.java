@@ -45,23 +45,17 @@ public class TranferDatas {
 
     public static ChucVuDto convertToDto(ChucVu entity) {
         ChucVuDto dto = new ChucVuDto();
-        if (entity.getId() != null) dto.setId(entity.getId());
-        if (entity.getMa() != null) dto.setMa(entity.getMa());
-        if (entity.getTen() != null) dto.setTen(entity.getTen());
-        if (entity.getNgayTao() != null) dto.setNgayTao(entity.getNgayTao());
-        if (entity.getNgaySua() != null) dto.setNgaySua(entity.getNgaySua());
-        if (entity.getTrangThai() != null) dto.setTrangThai(entity.getTrangThai());
+        if (entity.getName() != null) dto.setName(entity.getName());
+        if (entity.getDescription() != null) dto.setDescription(entity.getDescription());
+//        if (entity.getPermissions()!= null) dto.setPermissions(entity.getPermissions());
         return dto;
     }
 
     public static ChucVu convertToEntity(ChucVuDto dto) {
         ChucVu entity = new ChucVu();
-        if (dto.getId() != null) entity.setId(dto.getId());
-        if (dto.getMa() != null) entity.setMa(dto.getMa());
-        if (dto.getTen() != null) entity.setTen(dto.getTen());
-        if (dto.getNgayTao() != null) entity.setNgayTao(dto.getNgayTao());
-        if (dto.getNgaySua() != null) entity.setNgaySua(dto.getNgaySua());
-        if (dto.getTrangThai() != null) entity.setTrangThai(dto.getTrangThai());
+        if (dto.getName() != null) entity.setName(dto.getName());
+        if (dto.getDescription() != null) entity.setDescription(dto.getDescription());
+//        if (dto.getPermissions()!= null) entity.setPermissions(dto.getPermissions());
         return entity;
     }
 
@@ -77,18 +71,10 @@ public class TranferDatas {
         TaiKhoanDto dto = new TaiKhoanDto();
         if (entity.getId() != null) dto.setId(entity.getId());
 
-        if (entity.getMa() != null) dto.setMa(entity.getMa());
         if (entity.getTenDangNhap() != null) dto.setTenDangNhap(entity.getTenDangNhap());
 
         if (entity.getMatKhau() != null) dto.setMatKhau(entity.getMatKhau());
 
-        if (entity.getChucVu() != null) dto.setChucVu(entity.getChucVu());
-
-        if (entity.getNgayTao() != null) dto.setNgayTao(entity.getNgayTao());
-
-        if (entity.getNgaySua() != null) dto.setNgaySua(entity.getNgaySua());
-
-        if (entity.getTrangThai() != null) dto.setTrangThai(entity.getTrangThai());
 
         return dto;
     }
@@ -97,19 +83,11 @@ public class TranferDatas {
         TaiKhoan entity = new TaiKhoan();
         if (dto.getId() != null) entity.setId(dto.getId());
 
-        if (dto.getMa() != null) entity.setMa(dto.getMa());
-
         if (dto.getTenDangNhap() != null) entity.setTenDangNhap(dto.getTenDangNhap());
 
         if (dto.getMatKhau() != null) entity.setMatKhau(dto.getMatKhau());
 
-        if (dto.getChucVu() != null) entity.setChucVu(dto.getChucVu());
 
-        if (dto.getNgayTao() != null) entity.setNgayTao(dto.getNgayTao());
-
-        if (dto.getNgaySua() != null) entity.setNgaySua(dto.getNgaySua());
-
-        if (dto.getTrangThai() != null) entity.setTrangThai(dto.getTrangThai());
         return entity;
     }
 

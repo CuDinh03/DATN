@@ -1,6 +1,5 @@
 package fpl.but.datn.controller;
 
-import fpl.but.datn.dto.request.TaiKhoanDto;
 import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.entity.NguoiDung;
 import fpl.but.datn.entity.TaiKhoan;
@@ -10,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
-import java.util.UUID;
+
 
 @RestController
 @RequestMapping("/api/nguoi-dung")

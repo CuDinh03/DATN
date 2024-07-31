@@ -1,21 +1,24 @@
 package fpl.but.datn.configuration;
 
+
+import fpl.but.datn.constant.PredefinedRole;
 import fpl.but.datn.entity.ChucVu;
 import fpl.but.datn.entity.TaiKhoan;
 import fpl.but.datn.repository.ChucVuRepository;
 import fpl.but.datn.repository.TaiKhoanRepository;
-import fpl.but.datn.service.impl.ChucVuService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import lombok.experimental.NonFinal;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.Date;
+import java.util.HashSet;
 
 
 @Configuration
@@ -25,69 +28,66 @@ import java.util.Date;
 public class ApplicationInitConfig {
 
     PasswordEncoder passwordEncoder;
-    ChucVuService chucVuService;
-    ChucVuRepository chucVuRepository;
+
+    @NonFinal
+    static final String ADMIN_USER_NAME = "admin";
+
+    @NonFinal
+    static final String ADMIN_PASSWORD = "admin";
 
     @Bean
-    ApplicationRunner applicationRunner(TaiKhoanRepository repository) {
+    ApplicationRunner applicationRunner(TaiKhoanRepository userRepository, ChucVuRepository roleRepository) {
+        log.info("Initializing application.....");
         return args -> {
-            if (repository.findByTenDangNhap("admin").isEmpty()) {
-                if (chucVuRepository.findByTen("ADMIN").isEmpty()) {
+            if (userRepository.findByTenDangNhap(ADMIN_USER_NAME).isEmpty()) {
+
+                if (roleRepository.findById(PredefinedRole.ADMIN_ROLE).isEmpty()){
                     ChucVu chucVu = ChucVu.builder()
-                            .ten("ADMIN")
-                            .ma("CV01")
-                            .ngayTao(new Date())
-                            .ngaySua(new Date())
-                            .trangThai(1)
+                            .name(PredefinedRole.ADMIN_ROLE)
+                            .description("Role admin")
                             .build();
-                    chucVuRepository.save(chucVu);
+                    roleRepository.save(chucVu);
                     log.warn("ADMIN Role has been created!");
 
                 }
-                if (chucVuRepository.findByTen("CUSTOMER").isEmpty()) {
+                if (roleRepository.findById(PredefinedRole.STAFF_ROLE).isEmpty()){
                     ChucVu chucVu = ChucVu.builder()
-                            .ten("CUSTOMER")
-                            .ma("CV02")
-                            .ngayTao(new Date())
-                            .ngaySua(new Date())
-                            .trangThai(1)
+                            .name(PredefinedRole.STAFF_ROLE)
+                            .description("Role staff")
                             .build();
-                    chucVuRepository.save(chucVu);
-                    log.warn("CUSTOMER Role has been created!");
+                    roleRepository.save(chucVu);
+                    log.warn("Staff Role has been created!");
 
                 }
-                if (chucVuRepository.findByTen("STAFF").isEmpty()) {
+                if (roleRepository.findById(PredefinedRole.CUSTOMER_ROLE).isEmpty()){
                     ChucVu chucVu = ChucVu.builder()
-                            .ten("STAFF")
-                            .ma("CV03")
-                            .ngayTao(new Date())
-                            .ngaySua(new Date())
-                            .trangThai(1)
+                            .name(PredefinedRole.CUSTOMER_ROLE)
+                            .description("Role customer")
                             .build();
-                    chucVuRepository.save(chucVu);
-                    log.warn("STAFF Role has been created!");
+                    roleRepository.save(chucVu);
+                    log.warn("Customer Role has been created!");
 
                 }
+                ChucVu chucVu = roleRepository.getReferenceById("ADMIN");
 
-                ChucVu chucVu = chucVuService.getChucVuByName("ADMIN");
-                TaiKhoan taiKhoan = TaiKhoan.builder()
-                        .tenDangNhap("admin")
+
+                var roles = new HashSet<ChucVu>();
+                roles.add(chucVu);
+
+                TaiKhoan user = TaiKhoan.builder()
+                        .tenDangNhap(ADMIN_USER_NAME)
+                        .matKhau(passwordEncoder.encode(ADMIN_PASSWORD))
+                        .chucVus(roles)
                         .ma("TK01")
                         .ngayTao(new Date())
                         .ngaySua(new Date())
-                        .chucVu(chucVu)
                         .trangThai(1)
-                        .matKhau(passwordEncoder.encode("admin"))
                         .build();
 
-                repository.save(taiKhoan);
-                log.warn("admin user has been created with default password: admin, change it !! ");
+                userRepository.save(user);
+                log.warn("admin user has been created with default password: admin, please change it");
             }
+            log.info("Application initialization completed .....");
         };
-    }
-
-    @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
     }
 }

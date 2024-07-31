@@ -3,18 +3,13 @@ package fpl.but.datn.service.impl;
 import fpl.but.datn.entity.*;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
-import fpl.but.datn.repository.CTSanPhamRepository;
-import fpl.but.datn.repository.GioHangHoaDonRepository;
-import fpl.but.datn.repository.HoaDonChiTietRepository;
-import fpl.but.datn.repository.HoaDonRepository;
+import fpl.but.datn.repository.*;
 import fpl.but.datn.service.ICTSanPhamService;
 import fpl.but.datn.service.IHoaDonService;
-import jakarta.validation.constraints.Size;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -35,10 +30,12 @@ public class HoaDonService implements IHoaDonService {
     private CTSanPhamRepository ctSanPhamRepository;
     @Autowired
     private ICTSanPhamService ictSanPhamService;
+    @Autowired
+    private VoucherRepository voucherRepository;
 
 
     @Override
-    public List getAll() {
+    public List<HoaDon> getAll() {
         return hoaDonRepository.findAll();
     }
 
@@ -107,6 +104,39 @@ public class HoaDonService implements IHoaDonService {
             default:
                 return false;
         }
+    }
+
+    public void huyDonDaXuLy(HoaDon hoaDon, int trangThai){
+        List<HoaDonChiTiet> list = hoaDonChiTietRepository.findAllHoaDonChiTietByIdHoaDon(hoaDon.getId());
+        for (HoaDonChiTiet chiTiet: list){
+            Optional<ChiTietSanPham> optional = ctSanPhamRepository.findById(chiTiet.getChiTietSanPham().getId());
+            if (optional.isPresent()){
+                ChiTietSanPham chiTietSanPham = optional.get();
+                int soLuongCu = chiTietSanPham.getSoLuong();
+                chiTietSanPham.setSoLuong(soLuongCu + chiTiet.getSoLuong());
+                chiTietSanPham.setNgaySua(new Date());
+
+                ctSanPhamRepository.save(chiTietSanPham);
+                chiTiet.setNgaySua(new Date());
+                chiTiet.setTrangThai(5);
+                hoaDonChiTietRepository.save(chiTiet);
+
+
+            }
+        }
+
+        hoaDon.setTrangThai(5);
+        hoaDon.setNgaySua(new Date());
+
+        if (hoaDon.getVoucher() != null){
+            Voucher voucher = hoaDon.getVoucher();
+            int soLuong = voucher.getSoLuong();
+            voucher.setSoLuong(soLuong+1);
+            voucher.setNgaySua(new Date());
+            voucherRepository.save(voucher);
+        }
+
+        hoaDonRepository.save(hoaDon);
     }
 
     @Override

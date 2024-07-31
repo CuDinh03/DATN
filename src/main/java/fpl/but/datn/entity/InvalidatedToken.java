@@ -1,11 +1,12 @@
 package fpl.but.datn.entity;
+import java.util.Date;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-
-import java.util.Set;
 @Getter
 @Setter
 @Builder
@@ -13,14 +14,9 @@ import java.util.Set;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-public class ChucVu {
-
+public class InvalidatedToken {
     @Id
-    String name;
+    String id;
 
-    String description;
-
-    @ManyToMany
-    Set<Permission> permissions;
-
+    Date expiryTime;
 }
