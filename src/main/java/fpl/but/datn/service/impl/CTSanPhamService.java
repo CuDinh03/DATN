@@ -1,11 +1,8 @@
 package fpl.but.datn.service.impl;
 
-import fpl.but.datn.dto.request.ChiTietSanPhamDto;
 import fpl.but.datn.dto.request.FilterSanPhamRequest;
 import fpl.but.datn.entity.*;
 import fpl.but.datn.repository.CTSanPhamRepository;
-import fpl.but.datn.repository.GioHangChiTietRepository;
-import fpl.but.datn.repository.GioHangRepository;
 import fpl.but.datn.repository.HinhAnhRepository;
 import fpl.but.datn.service.ICTSanPhamService;
 import jakarta.transaction.Transactional;
@@ -13,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -281,6 +277,11 @@ public class CTSanPhamService implements ICTSanPhamService {
         Pageable pageable = PageRequest.of(page, size);
 
         return ctSanPhamRepository.findAll(spec, pageable);
+    }
+
+    @Override
+    public ChiTietSanPham getByMKS(UUID sanPhamId, UUID kichThuocId, UUID mauSacId) {
+        return ctSanPhamRepository.getByMKS(sanPhamId,kichThuocId,mauSacId);
     }
 
 

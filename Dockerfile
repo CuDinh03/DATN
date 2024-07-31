@@ -1,9 +1,5 @@
-# Sử dụng hình ảnh OpenJDK 17 làm hình ảnh cơ sở
-FROM openjdk:17-jdk-slim AS build
-
-# Cài đặt Maven
-RUN apt-get update && \
-    apt-get install -y maven
+# Sử dụng hình ảnh Maven với JDK 17
+FROM maven:3.9.3-openjdk-17 as build
 
 # Sao chép mã nguồn vào hình ảnh
 COPY . /app

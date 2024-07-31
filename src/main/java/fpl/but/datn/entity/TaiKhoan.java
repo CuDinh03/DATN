@@ -1,7 +1,6 @@
 package fpl.but.datn.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -25,13 +25,9 @@ public class TaiKhoan {
     private String ma;
     private String tenDangNhap;
     private String matKhau;
-    @ManyToOne
-    private ChucVu chucVu;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS")
-
     private Date ngayTao;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS")
-
     private Date ngaySua;
     private Integer trangThai;
+    @ManyToMany
+    private Set<ChucVu> chucVus;
 }
