@@ -26,12 +26,9 @@ public class KhachHang {
     private String email;
     private String sdt;
     private Boolean gioiTinh;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS")
     private Date ngaySinh;
     private String diaChi;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS")
     private Date ngayTao;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS")
     private Date ngaySua;
     private Integer trangThai;
 

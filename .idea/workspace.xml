@@ -5,207 +5,51 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="85360360-6e47-429b-b577-a4f16be7088d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/DatnApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/exception/AppException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/exception/ErrorCode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/exception/GlobalExceptionHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/listener/HoaDonListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/mail-xacNhan.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/fpl/but/datn/DatnApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/configuration/CustomJwtDecoder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/constant/PredefinedRole.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/controller/PermissionController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/request/IntrospectRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/request/LogoutRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/request/PermissionRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/request/RefreshRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/response/IntrospectResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/response/PermissionResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/entity/InvalidatedToken.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/entity/Permission.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/mapper/PermissionMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/mapper/RoleMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/repository/InvalidatedTokenRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/repository/PermissionRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/AuthenticationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/PermissionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/DatnApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/configuration/ApplicationInitConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/configuration/JacksonConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/configuration/JwtAuthenticationEntryPoint.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/configuration/SecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/configuration/ThymeleafConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/configuration/WebConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/controller/AuthenticationController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/controller/BaoCaoController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/controller/CTSanPhamController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/controller/ChatLieuController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/controller/ChucVuController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/controller/DanhGiaController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/controller/DanhMucController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/controller/GioHangChiTietController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/controller/GioHangController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/controller/HinhAnhController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/controller/HoTroController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/controller/HoaDonChiTietController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/controller/HoaDonController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/controller/HoaDonGioHangController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/controller/KhachHangController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/controller/KichThuocController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/controller/MauSacController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/controller/NhanVienController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/controller/PhuongThucThanhToanController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/controller/SanPhamController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/controller/ThanhToanController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/controller/ThongTinDatHangController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/controller/ThuongHieuController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/controller/UserController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/controller/VoucherController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/request/AuthenticationRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/request/BaoCaoDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/request/ChatLieuDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/request/ChiTietSanPhamDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/request/ChucVuDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/request/DangNhapDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/request/DanhGiaDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/request/DanhMucDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/request/FilterSanPhamRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/request/GioHangChiTietDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/request/GioHangDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/request/GioHangHoaDonDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/request/HinhAnhDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/request/HoTroDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/request/HoaDonChiTietDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/request/HoaDonDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/request/HoaDonSua.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/request/IMG.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/request/KhachHangDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/request/KichThuocDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/request/MauSacDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/request/NguoiDungDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/request/NhanVienDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/request/PhuongThucThanhToanDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/request/SanPhamDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/request/SaveCtspRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/request/TaiKhoanDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/request/ThanhToanDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/request/ThanhToanOnl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/request/ThongTinDatHangDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/request/ThuongHieuDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/request/VoucherDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/response/ApiResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/response/AuthenticationResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/response/BaoCaoResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/response/ChucVuResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/dto/response/TaiKhoanResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/BaoCao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/ChatLieu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/ChiTietSanPham.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/ChiTietSanPhamSpecification.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/ChucVu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/DanhGia.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/DanhMuc.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/GiaoHang.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/GioHang.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/GioHangChiTiet.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/GioHangHoaDon.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/HinhAnh.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/HoTro.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/HoaDon.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/HoaDonChiTiet.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/KhachHang.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/KichThuoc.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/MauSac.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/NguoiDung.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/PhuongThucGiaoHang.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/PhuongThucThanhToan.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/SanPham.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/TaiKhoan.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/ThanhToan.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/ThongTinDatHang.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/ThuongHieu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/entity/Voucher.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/exception/AppException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/exception/ErrorCode.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/exception/GlobalExceptionHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/listener/HoaDonListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/repository/BaoCaoRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/repository/CTSanPhamRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/repository/ChatLieuRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/repository/ChucVuRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/repository/DanhGiaRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/repository/DanhMucRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/repository/GiaoHangRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/repository/GioHangChiTietRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/repository/GioHangHoaDonRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/repository/GioHangRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/repository/HinhAnhRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/repository/HoTroRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/repository/HoaDonChiTietRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/repository/HoaDonRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/repository/KhachHangRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/repository/KichThuocRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/repository/MauSacRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/repository/NguoiDungRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/repository/PhuongThucThanhToanRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/repository/SanPhamRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/repository/TaiKhoanRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/repository/ThanhToanRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/repository/ThongTinDatHangRepo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/repository/ThuongHieuRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/repository/VoucherRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/GioHangChiTietService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/IBaoCaoService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/ICTSanPhamService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/IChatLieuService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/IChucVuService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/IDanhGiaService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/IDanhMucService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/IGiaoHangService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/IGioHangChiTietService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/IGioHangService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/IHinhAnhService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/IHoTroService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/IHoaDonChiTietService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/IHoaDonGioHangService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/IHoaDonService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/IKhachHangService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/IKichThuocService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/IMauSacService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/INguoiDungService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/IPhuongThucThanhToanService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/ISanPhamService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/IService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/ITaiKhoanService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/IThanhToanService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/IThongTinDatHangService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/IThuongHieuService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/IVoucherService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/impl/BaoCaoService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/impl/CTSanPhamService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/impl/ChatLieuService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/impl/ChucVuService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/impl/DanhGiaService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/impl/DanhMucServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/impl/EmailSenderService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/impl/GiaoHangService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/impl/GioHangChiTietService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/impl/GioHangService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/impl/HinhAnhService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/impl/HoTroService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/impl/HoaDonChiTietService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/impl/HoaDonGioHangService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/impl/HoaDonService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/impl/KhachHangService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/impl/KichThuocService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/impl/MauSacService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/impl/NguoiDungService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/impl/PhuongThucThanhToanService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/impl/SanPhamService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/impl/TaiKhoanService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/impl/ThanhToanService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/impl/ThongTinDatHangService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/impl/ThuongHieuService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/service/impl/VoucherService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/java/fpl/but/datn/tranferdata/TranferDatas.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/main/resources/templates/mail-xacNhan.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATN/src/test/java/fpl/but/datn/DatnApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/DatnApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/DatnApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/configuration/ApplicationInitConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/configuration/ApplicationInitConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/configuration/JwtAuthenticationEntryPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/configuration/JwtAuthenticationEntryPoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/configuration/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/configuration/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/configuration/WebConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/controller/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/controller/AuthenticationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/controller/ChucVuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/controller/ChucVuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/controller/HoaDonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/controller/HoaDonController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/controller/NhanVienController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/controller/NhanVienController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/request/ChucVuDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/request/ChucVuDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/request/TaiKhoanDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/request/TaiKhoanDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/response/ChucVuResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/response/ChucVuResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/entity/ChucVu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/entity/ChucVu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/entity/KhachHang.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/entity/KhachHang.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/entity/TaiKhoan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/entity/TaiKhoan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/entity/Voucher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/entity/Voucher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/repository/ChucVuRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/repository/ChucVuRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/repository/TaiKhoanRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/repository/TaiKhoanRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/IHoaDonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/IHoaDonService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/ChucVuService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/ChucVuService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/HoaDonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/HoaDonService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/TaiKhoanService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/TaiKhoanService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/tranferdata/TranferDatas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/tranferdata/TranferDatas.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -215,11 +59,17 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="JpbToolWindowState">
@@ -252,7 +102,7 @@
     "dart.analysis.tool.window.visible": "false",
     "jdk.selected.JAVA_MODULE": "17",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/maccuacu/Desktop/Nhom-DATN/DATN",
+    "last_opened_file_path": "/Users/maccuacu/Desktop/Nhom-DATN/DATN/DATN",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -313,7 +163,7 @@
       <workItem from="1721737691823" duration="36000" />
       <workItem from="1721737744709" duration="14331000" />
       <workItem from="1721823132592" duration="3000" />
-      <workItem from="1722105945276" duration="4104000" />
+      <workItem from="1722105945276" duration="4611000" />
     </task>
     <servers />
   </component>
@@ -333,13 +183,28 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/HoaDonService.java</url>
-          <line>313</line>
+          <line>343</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/HoaDonService.java</url>
-          <line>315</line>
+          <line>345</line>
           <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/fpl/but/datn/configuration/ApplicationInitConfig.java</url>
+          <line>74</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/PermissionService.java</url>
+          <line>24</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/target/generated-sources/annotations/fpl/but/datn/mapper/PermissionMapperImpl.java</url>
+          <line>19</line>
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

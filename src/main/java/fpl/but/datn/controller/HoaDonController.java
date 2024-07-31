@@ -268,13 +268,19 @@ public class HoaDonController {
             @RequestBody HoaDonDto hoaDonDto) {
         HoaDon exsitHoaDon = hoaDonService.findById(id);
         ApiResponse<HoaDon> apiResponse = new ApiResponse<>();
-
+        boolean canUpdate;
 
         if (exsitHoaDon == null) {
             throw new AppException(ErrorCode.NO_ORDER_FOUND);
         }
-        System.out.println(hoaDonDto.getGhiChu());
-        boolean canUpdate = hoaDonService.canUpdateTrangThai(exsitHoaDon.getTrangThai(), trangThai, hoaDonDto.getGhiChu());
+        if (exsitHoaDon.getTrangThai() == 2 && trangThai == 5){
+            hoaDonService.huyDonDaXuLy(TranferDatas.convertToEntity(hoaDonDto),trangThai);
+            apiResponse.setResult(hoaDonService.findById(id));
+            apiResponse.setMessage("Cập nhật thành công");
+            return apiResponse;
+        }else {
+            canUpdate  = hoaDonService.canUpdateTrangThai(exsitHoaDon.getTrangThai(), trangThai, hoaDonDto.getGhiChu());
+        }
 
         if (!canUpdate) {
             throw new AppException(ErrorCode.UPDATE_FAILED);
