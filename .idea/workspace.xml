@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="85360360-6e47-429b-b577-a4f16be7088d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +75,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Docker.Dockerfile">
+  <component name="RunManager" selected="Spring Boot.DatnApplication">
     <configuration name="All in DATN" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="DATN" />
       <option name="PACKAGE_NAME" value="" />
@@ -114,7 +113,9 @@
       <method v="2" />
     </configuration>
     <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
-      <deployment type="dockerfile" />
+      <deployment type="dockerfile">
+        <settings />
+      </deployment>
       <method v="2" />
     </configuration>
     <list>
@@ -125,8 +126,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Docker.Dockerfile" />
         <item itemvalue="Docker.Dockerfile build" />
+        <item itemvalue="Docker.Dockerfile" />
         <item itemvalue="Docker.Dockerfile build" />
         <item itemvalue="Docker.Dockerfile build" />
         <item itemvalue="Docker.Dockerfile build" />
@@ -147,11 +148,24 @@
       <workItem from="1721679378315" duration="1442000" />
       <workItem from="1721716764310" duration="2534000" />
       <workItem from="1721737146394" duration="344000" />
+      <workItem from="1722969257068" duration="611000" />
+      <workItem from="1723025092000" duration="40000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />

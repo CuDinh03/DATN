@@ -23,7 +23,7 @@ import org.springframework.web.filter.CorsFilter;
 @EnableWebSecurity
 public class SecurityConfig {
     private final String[] PUBLIC_ENDPOINTS = {
-            "api/auth/**","/api/users/check-username","/api/users/create"
+            "/api/auth/**","/api/users/check-username","/api/users/create","/api/all/sap-xep-ngay-tao"
     };
 
     @Autowired
