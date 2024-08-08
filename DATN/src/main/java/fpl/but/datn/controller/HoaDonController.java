@@ -2,14 +2,14 @@ package fpl.but.datn.controller;
 
 import fpl.but.datn.dto.request.*;
 import fpl.but.datn.dto.response.ApiResponse;
-import fpl.but.datn.entity.DanhMuc;
-import fpl.but.datn.entity.GioHang;
-import fpl.but.datn.entity.HoaDon;
-import fpl.but.datn.entity.HoaDonChiTiet;
+import fpl.but.datn.entity.*;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
+import fpl.but.datn.repository.HoaDonChiTietRepository;
+import fpl.but.datn.repository.HoaDonRepository;
 import fpl.but.datn.service.IHoaDonService;
 import fpl.but.datn.service.impl.HoaDonService;
+import fpl.but.datn.tranferdata.HoaDonBanMapper;
 import fpl.but.datn.tranferdata.TranferDatas;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +31,8 @@ public class HoaDonController {
 
     @Autowired
     private IHoaDonService hoaDonService;
+
+
 
     @GetMapping("/find-time")
     public ApiResponse<List<HoaDon>> getHoaDon(
@@ -265,16 +267,22 @@ public class HoaDonController {
     public ApiResponse<HoaDon> updateTrangThai(
             @PathVariable UUID id,
             @RequestParam Integer trangThai,
-            @RequestBody HoaDonDto hoaDonDto) {
+            @RequestBody HoaDonBanDto hoaDonDto) {
         HoaDon exsitHoaDon = hoaDonService.findById(id);
         ApiResponse<HoaDon> apiResponse = new ApiResponse<>();
-
+        boolean canUpdate;
 
         if (exsitHoaDon == null) {
             throw new AppException(ErrorCode.NO_ORDER_FOUND);
         }
-        System.out.println(hoaDonDto.getGhiChu());
-        boolean canUpdate = hoaDonService.canUpdateTrangThai(exsitHoaDon.getTrangThai(), trangThai, hoaDonDto.getGhiChu());
+        if (exsitHoaDon.getTrangThai() == 2 && trangThai == 5){
+            hoaDonService.huyDonDaXuLy(HoaDonBanMapper.INSTANCE.toEntity(hoaDonDto), trangThai);
+            apiResponse.setResult(hoaDonService.findById(id));
+            apiResponse.setMessage("Cập nhật thành công");
+            return apiResponse;
+        }else {
+            canUpdate  = hoaDonService.canUpdateTrangThai(exsitHoaDon.getTrangThai(), trangThai, hoaDonDto.getGhiChu());
+        }
 
         if (!canUpdate) {
             throw new AppException(ErrorCode.UPDATE_FAILED);
@@ -284,6 +292,7 @@ public class HoaDonController {
         apiResponse.setMessage("Cập nhật thành công");
         return apiResponse;
     }
+
 
     @GetMapping("/thongke/doanhthu/ngay")
     public ApiResponse<Map<LocalDate, BigDecimal>> thongKeDoanhThuTheoNgay() {

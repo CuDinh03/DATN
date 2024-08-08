@@ -51,6 +51,7 @@ public class HoaDon {
     private Voucher voucher;
     private String ghiChu;
     private Integer trangThai;
+
     @OneToMany(mappedBy = "hoaDon")
     @JsonManagedReference
     private List<HoaDonChiTiet> hoaDonChiTietList;

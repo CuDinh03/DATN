@@ -11,9 +11,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 @Data
-
-public class HoaDonDto {
-
+public class HoaDonBanDto {
     private UUID id;
     private String ma;
     private NguoiDung nguoiDung;
@@ -25,5 +23,5 @@ public class HoaDonDto {
     private Voucher voucher;
     private String ghiChu;
     private Integer trangThai;
-
+    private List<HoaDonChiTiet> hoaDonChiTietList;
 }
