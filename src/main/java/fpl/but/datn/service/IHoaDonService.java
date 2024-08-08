@@ -39,7 +39,7 @@ public interface IHoaDonService {
     BigDecimal tinhPhanTramTangTruongDoanhThu(int namNay);
     HoaDon yeuCauSuaHoaDon(HoaDon request, UUID id);
     boolean canUpdateTrangThai(int currentTrangThai, int newTrangThai, String ghiChu);
-    public void huyDonDaXuLy(HoaDon hoaDon, int trangThai);
+    void huyDonDaXuLy(HoaDon hoaDon, int trangThai);
 
         HoaDon updateHoaDon(List<HoaDonChiTiet> chiTietList, HoaDon hoaDon, NguoiDung nguoiDung);
 }
