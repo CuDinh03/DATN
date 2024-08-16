@@ -273,7 +273,7 @@ public class HoaDonController {
         if (exsitHoaDon == null) {
             throw new AppException(ErrorCode.NO_ORDER_FOUND);
         }
-        if (exsitHoaDon.getTrangThai() == 2 && trangThai == 5){
+        if (trangThai == 5){
             hoaDonService.huyDonDaXuLy(TranferDatas.convertToEntity(hoaDonDto),trangThai);
             apiResponse.setResult(hoaDonService.findById(id));
             apiResponse.setMessage("Cập nhật thành công");
