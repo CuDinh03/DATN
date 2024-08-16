@@ -96,6 +96,7 @@ public class CTSanPhamService implements ICTSanPhamService {
         return null;
     }
 
+
 //    @Override
 
     @Override
@@ -283,6 +284,5 @@ public class CTSanPhamService implements ICTSanPhamService {
     public ChiTietSanPham getByMKS(UUID sanPhamId, UUID kichThuocId, UUID mauSacId) {
         return ctSanPhamRepository.getByMKS(sanPhamId,kichThuocId,mauSacId);
     }
-
 
 }

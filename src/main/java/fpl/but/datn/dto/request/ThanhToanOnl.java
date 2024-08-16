@@ -19,6 +19,6 @@ public class ThanhToanOnl {
     private BigDecimal tongTienGiam;
     private Voucher voucher;
     private String diaChiGiaoHang;
-    private String note;
-    private List<GioHangChiTiet> gioHangChiTietList;
+    private String ghiChu;
+    private List<GioHangChiTietDto> gioHangChiTietList;
 }

@@ -30,11 +30,10 @@ public class MauSacService implements IMauSacService {
     @Override
     public MauSac create(MauSac request) {
         MauSac mauSac = new MauSac();
-        Random random = new Random();
 
         if (mauSacRepository.existsByMa(request.getMa()))
             throw new AppException(ErrorCode.MAUSAC_EXISTED);
-        mauSac.setMa("MS" + random.nextInt(1000));
+        mauSac.setMa(request.getMa());
         mauSac.setTen(request.getTen());
         mauSac.setNgayTao(new Date());
         mauSac.setNgaySua(new Date());

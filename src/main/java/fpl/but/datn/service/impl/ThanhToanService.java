@@ -1,4 +1,5 @@
 package fpl.but.datn.service.impl;
+import fpl.but.datn.dto.request.GioHangChiTietDto;
 import fpl.but.datn.entity.*;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
@@ -6,6 +7,7 @@ import fpl.but.datn.repository.GioHangChiTietRepository;
 import fpl.but.datn.repository.HoaDonRepository;
 import fpl.but.datn.service.IService;
 import fpl.but.datn.service.IThanhToanService;
+import fpl.but.datn.tranferdata.TranferDatas;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -135,7 +137,7 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
 
     @Transactional
     public void thanhToanSanPhamOnline(GioHang requestGh, BigDecimal tongTien, BigDecimal tongTienGiam,
-                                       Voucher voucher, String diaChiGiaoHang, String ghiChu, List<GioHangChiTiet> listGioHangCt) {
+                                       Voucher voucher, String diaChiGiaoHang, String ghiChu, List<GioHangChiTietDto> listGioHangCt) {
         System.out.println("============================");
         System.out.println(listGioHangCt);
         if (requestGh == null || requestGh.getId() == null) {
@@ -182,7 +184,7 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
         giaoHang.setTrangThai(1);
 
         giaoHangService.create(giaoHang);
-        for (GioHangChiTiet ghCt : listGioHangCt) {
+        for (GioHangChiTietDto ghCt : listGioHangCt) {
             System.out.println(ghCt.toString());
             HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
             hoaDonChiTiet.setId(UUID.randomUUID());
@@ -193,7 +195,7 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
             hoaDonChiTiet.setChiTietSanPham(ghCt.getChiTietSanPham());
             hoaDonChiTiet.setHoaDon(hoaDon2);
             hoaDonChiTiet.setTrangThai(1);
-            gioHangChiTietRepository.delete(ghCt);
+            gioHangChiTietRepository.delete(TranferDatas.convertToEntity(ghCt));
 
             this.hoaDonChiTietService.create(hoaDonChiTiet);
         }
@@ -242,7 +244,7 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
         templateModel.put("trackingUrl", "https://cudinh03.github.io/FE_DATN/customer/order-detail/" + giaoHang.getHoaDon().getId());
 
         List<Map<String, Object>> orderItems = new ArrayList<>();
-        for (GioHangChiTiet ghCt : listGioHangCt) {
+        for (GioHangChiTietDto ghCt : listGioHangCt) {
             Map<String, Object> item = new HashMap<>();
             item.put("name", ghCt.getChiTietSanPham().getSanPham().getTen() + " (" + ghCt.getChiTietSanPham().getKichThuoc().getTen() + ")");
             item.put("quantity", ghCt.getSoLuong());

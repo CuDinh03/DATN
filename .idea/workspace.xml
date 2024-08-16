@@ -6,7 +6,30 @@
   <component name="ChangeListManager">
     <list default="true" id="85360360-6e47-429b-b577-a4f16be7088d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/controller/HoaDonChiTietController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/controller/HoaDonChiTietController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/controller/HoaDonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/controller/HoaDonController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/controller/ThanhToanController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/controller/ThanhToanController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/request/GioHangChiTietDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/request/GioHangChiTietDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/request/HoaDonBanDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/request/HoaDonBanDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/request/HoaDonDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/request/HoaDonDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/request/HoaDonSua.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/request/HoaDonSua.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/request/ThanhToanOnl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/request/ThanhToanOnl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/entity/HoaDon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/entity/HoaDon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/entity/HoaDonChiTiet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/entity/HoaDonChiTiet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/repository/HoaDonChiTietRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/repository/HoaDonChiTietRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/repository/NguoiDungRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/repository/NguoiDungRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/ICTSanPhamService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/ICTSanPhamService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/IHoaDonChiTietService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/IHoaDonChiTietService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/IHoaDonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/IHoaDonService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/INguoiDungService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/INguoiDungService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/CTSanPhamService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/CTSanPhamService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/HoaDonChiTietService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/HoaDonChiTietService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/HoaDonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/HoaDonService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/MauSacService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/MauSacService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/NguoiDungService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/NguoiDungService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/ThanhToanService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/ThanhToanService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/tranferdata/HoaDonBanMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/tranferdata/HoaDonBanMapper.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +72,10 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Downloaded.Files.Path.Enabled": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
@@ -65,7 +92,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
+    "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.43103448",
     "settings.editor.selected.configurable": "preferences.lookFeel",
@@ -153,12 +180,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/HoaDonService.java</url>
-          <line>343</line>
+          <line>330</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/HoaDonService.java</url>
-          <line>345</line>
+          <line>332</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

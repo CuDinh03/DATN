@@ -2,8 +2,10 @@ package fpl.but.datn.controller;
 
 
 import fpl.but.datn.dto.request.HoaDonChiTietDto;
+import fpl.but.datn.dto.request.HoaDonDto;
 import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.entity.HinhAnh;
+import fpl.but.datn.entity.HoaDon;
 import fpl.but.datn.entity.HoaDonChiTiet;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
@@ -128,4 +130,36 @@ public class HoaDonChiTietController {
 
         return apiResponse;
     }
+
+    @PutMapping("/update/{id}")
+    ApiResponse<HoaDonChiTiet> update(@RequestBody HoaDonChiTietDto request, @PathVariable UUID id) {
+        ApiResponse<HoaDonChiTiet> apiResponse = new ApiResponse<>();
+
+        if (request != null) {
+            apiResponse.setResult(hoaDonChiTietService.update(TranferDatas.convertToEntity(request), id));
+            apiResponse.setMessage("Cập nhật thành công");
+        } else {
+            throw new AppException(ErrorCode.UPDATE_FAILED);
+        }
+        return apiResponse;
+    }
+
+
+    @PutMapping("/updateHoaDonChiTiet")
+    public ApiResponse<List<HoaDonChiTiet>> updateHoaDonChiTiet(@RequestBody List<HoaDonChiTiet> chiTietList) {
+        ApiResponse<List<HoaDonChiTiet>> apiResponse = new ApiResponse<>();
+
+        try {
+            List<HoaDonChiTiet> updatedChiTietList = hoaDonChiTietService.updateHoaDonChiTiet(chiTietList);
+            apiResponse.setMessage("Cập nhật chi tiết hóa đơn thành công");
+            apiResponse.setResult(updatedChiTietList);
+        } catch (AppException e) {
+            apiResponse.setMessage("Có lỗi xảy ra khi cập nhật chi tiết hóa đơn: " + e.getMessage());
+        } catch (Exception e) {
+            apiResponse.setMessage("Có lỗi không mong muốn xảy ra khi cập nhật chi tiết hóa đơn: " + e.getMessage());
+        }
+
+        return apiResponse;
+    }
+
 }

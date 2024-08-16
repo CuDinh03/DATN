@@ -14,4 +14,5 @@ public interface NguoiDungRepository extends JpaRepository<NguoiDung, UUID> {
 
     @Query("select nd from NguoiDung nd where nd.taiKhoan.id = :id")
     Optional<NguoiDung> findByTaiKhoanid (@Param("id") UUID id);
+
 }
