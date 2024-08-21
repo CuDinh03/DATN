@@ -38,7 +38,7 @@ public class UserController {
     ApiResponse<TaiKhoan> createAccount(@RequestBody @Valid DangNhapDto request) {
         ApiResponse<TaiKhoan> apiResponse = new ApiResponse<>();
         if (request != null)
-            apiResponse.setResult(taiKhoanService.createAccount(TranferDatas.convertToEntity(request.getTaiKhoanDto()), request.getMail()));
+            apiResponse.setResult(taiKhoanService.createAccount(TranferDatas.convertToEntity(request.getTaiKhoanDto()), request.getEmail()));
         return apiResponse;
     }
     

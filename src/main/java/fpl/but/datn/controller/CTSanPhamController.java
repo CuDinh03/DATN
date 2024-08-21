@@ -285,12 +285,12 @@ public class CTSanPhamController {
     }
 
     @PostMapping("/saveListCt")
-    public ApiResponse<List<ChiTietSanPham>> saveListCt(@RequestBody IMG imgs) {
-        ApiResponse<List<ChiTietSanPham>> apiResponse = new ApiResponse<>();
+    public ApiResponse<List<ChiTietSanPhamDto>> saveListCt(@RequestBody IMG imgs) {
+        ApiResponse<List<ChiTietSanPhamDto>> apiResponse = new ApiResponse<>();
         try {
-            List<ChiTietSanPham> savedList = ctSanPhamService.saveListCt(TranferDatas.convertListChiTietSanPhamEntity(imgs.getChiTietSanPhamDto()),TranferDatas.convertListHinhAnhToEntity(imgs.getAnhDtoListt()));
+            List<ChiTietSanPham> savedList = ctSanPhamService.saveListCt(TranferDatas.convertListChiTietSanPhamEntity(imgs.getChiTietSanPhamDto()),imgs.getAnhDtoListt());
             apiResponse.setMessage("Lưu danh sách chi tiết sản phẩm thành công");
-            apiResponse.setResult(savedList);
+            apiResponse.setResult(TranferDatas.convertListChiTietSanPhamToDto(savedList));
         } catch (Exception e) {
             apiResponse.setMessage("Có lỗi xảy ra khi lưu danh sách chi tiết sản phẩm");
             e.printStackTrace();

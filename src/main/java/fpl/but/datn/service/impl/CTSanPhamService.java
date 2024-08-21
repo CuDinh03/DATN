@@ -1,6 +1,7 @@
 package fpl.but.datn.service.impl;
 
 import fpl.but.datn.dto.request.FilterSanPhamRequest;
+import fpl.but.datn.dto.request.HinhAnhRequest;
 import fpl.but.datn.entity.*;
 import fpl.but.datn.repository.CTSanPhamRepository;
 import fpl.but.datn.repository.HinhAnhRepository;
@@ -100,7 +101,7 @@ public class CTSanPhamService implements ICTSanPhamService {
 //    @Override
 
     @Override
-    public ChiTietSanPham create(ChiTietSanPham request, List<HinhAnh> hinhAnhs) {
+    public ChiTietSanPham create(ChiTietSanPham request, List<HinhAnhRequest> hinhAnhs) {
 
 
         // Kiểm tra xem sản phẩm chi tiết đã tồn tại chưa
@@ -137,14 +138,16 @@ public class CTSanPhamService implements ICTSanPhamService {
 
             ChiTietSanPham chiTietSanPham1 = ctSanPhamRepository.save(chiTietSanPham);
 
-            for (HinhAnh hinhAnh : hinhAnhs) {
+            for (HinhAnhRequest hinhAnh : hinhAnhs) {
                 if (chiTietSanPham1.getMa().equals(hinhAnh.getMa())) {
+                    HinhAnh hinhAnh1 = new HinhAnh();
                     Random random = new Random();
-                    hinhAnh.setMa("HA" + random.nextInt(1000));
-                    hinhAnh.setId(UUID.randomUUID());
-                    hinhAnh.setChiTietSanPham(chiTietSanPham1);
-                    hinhAnh.setTrangThai(1);
-                    hinhAnhRepository.save(hinhAnh);
+                    hinhAnh1.setMa("HA" + random.nextInt(1000));
+                    hinhAnh1.setUrl(hinhAnh.getUrl());
+                    hinhAnh1.setId(UUID.randomUUID());
+                    hinhAnh1.setChiTietSanPham(chiTietSanPham1);
+                    hinhAnh1.setTrangThai(1);
+                    hinhAnhRepository.save(hinhAnh1);
                 }
             }
             Random random = new Random();
@@ -242,7 +245,7 @@ public class CTSanPhamService implements ICTSanPhamService {
     }
 
     @Override
-    public List<ChiTietSanPham> saveListCt(List<ChiTietSanPham> list, List<HinhAnh> hinhAnhs) {
+    public List<ChiTietSanPham> saveListCt(List<ChiTietSanPham> list, List<HinhAnhRequest> hinhAnhs) {
         List<ChiTietSanPham> chiTietSanPhamList = new ArrayList<>();
         for (ChiTietSanPham ct :
                 list) {
