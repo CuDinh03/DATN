@@ -5,13 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="85360360-6e47-429b-b577-a4f16be7088d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/response/MonthlySalesData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/controller/HoaDonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/controller/HoaDonController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/repository/HoaDonRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/repository/HoaDonRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/IHoaDonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/IHoaDonService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/HoaDonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/HoaDonService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/controller/CTSanPhamController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/controller/CTSanPhamController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/response/MonthlySalesData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/response/MonthlySalesData.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,6 +153,8 @@
       <workItem from="1723827771455" duration="1746000" />
       <workItem from="1724182382701" duration="12608000" />
       <workItem from="1724265873665" duration="3252000" />
+      <workItem from="1724350710780" duration="666000" />
+      <workItem from="1724523080183" duration="6458000" />
     </task>
     <servers />
   </component>

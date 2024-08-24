@@ -10,10 +10,4 @@ public class MonthlySalesData {
     private long orderCount; // Số lượng hóa đơn
     private BigDecimal totalSales; // Tổng tiền
 
-
-    public MonthlySalesData(int month, long orderCount, BigDecimal totalSales) {
-        this.month = month;
-        this.orderCount = orderCount;
-        this.totalSales = totalSales;
-    }
 }

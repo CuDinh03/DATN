@@ -103,11 +103,11 @@ public class CTSanPhamController {
     }
 
     @PutMapping("/update")
-    ChiTietSanPham update( @RequestBody ChiTietSanPhamDto chiTietSanPhamDto) {
-        if (chiTietSanPhamDto.getId() != null) {
-            return ctSanPhamService.update(TranferDatas.convertToEntity(chiTietSanPhamDto), chiTietSanPhamDto.getId());
-        }
-        return null;
+    public ApiResponse<ChiTietSanPham> update( @RequestBody ChiTietSanPhamDto chiTietSanPhamDto) {
+        ApiResponse<ChiTietSanPham> apiResponse = new ApiResponse<>();
+           apiResponse.setResult(ctSanPhamService.update(TranferDatas.convertToEntity(chiTietSanPhamDto), chiTietSanPhamDto.getId()));
+
+        return apiResponse;
     }
 
     @GetMapping("/findAllMauSacByMaCTSP/{ma}")
