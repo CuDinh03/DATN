@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,7 +17,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface CTSanPhamRepository extends JpaRepository<ChiTietSanPham, UUID> {
+public interface CTSanPhamRepository extends JpaRepository<ChiTietSanPham, UUID>, JpaSpecificationExecutor<ChiTietSanPham> {
 
     boolean existsByMa(String ma);
     @Query("SELECT ctsp FROM ChiTietSanPham ctsp ORDER BY ctsp.ngayTao DESC")
@@ -107,5 +108,25 @@ public interface CTSanPhamRepository extends JpaRepository<ChiTietSanPham, UUID>
 
     @Query("SELECT ctsp FROM ChiTietSanPham ctsp WHERE ctsp.sanPham.id = :sanPhamId AND ctsp.kichThuoc.id = :kichThuocId AND ctsp.mauSac.id = :mauSacId")
     ChiTietSanPham getByMKS (@Param("sanPhamId") UUID sanPhamId ,@Param("kichThuocId")UUID kichThuocId , @Param("mauSacId") UUID mauSacId);
+
+    @Query("SELECT c FROM ChiTietSanPham c " +
+            "LEFT JOIN c.sanPham sp " +
+            "LEFT JOIN c.thuongHieu th " +
+            "LEFT JOIN c.chatLieu cl " +
+            "LEFT JOIN c.danhMuc dm " +
+            "LEFT JOIN c.kichThuoc kt " +
+            "LEFT JOIN c.mauSac ms " +
+            "WHERE " +
+            "LOWER(c.ma) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
+            "LOWER(sp.ten) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
+            "LOWER(th.ten) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
+            "LOWER(cl.ten) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
+            "LOWER(dm.ten) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
+            "LOWER(kt.ten) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
+            "LOWER(ms.ten) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
+            "CAST(c.soLuong AS string) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
+            "CAST(c.giaNhap AS string) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
+            "CAST(c.giaBan AS string) LIKE LOWER(CONCAT('%', :keyword, '%'))")
+    Page<ChiTietSanPham> findByKeyword(@Param("keyword") String keyword, Pageable pageable);
 
 }

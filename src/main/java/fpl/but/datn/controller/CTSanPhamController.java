@@ -335,4 +335,37 @@ public class CTSanPhamController {
         return apiResponse;
     }
 
+
+    @GetMapping("/search")
+    public ApiResponse<Page<ChiTietSanPham>> search(
+            @RequestParam(defaultValue = "") String keyword,
+            Pageable pageable
+    ) {
+        ApiResponse<Page<ChiTietSanPham>> apiResponse = new ApiResponse<>();
+        try {
+            String trimmedKeyword = keyword.trim();
+            Page<ChiTietSanPham> result = ctSanPhamService.search(trimmedKeyword, pageable);
+            if (result.isEmpty()) {
+                apiResponse.setCode(1001);
+                apiResponse.setMessage("fail");
+                apiResponse.setResult(result);
+                apiResponse.setUrl("/api/chi-tiet-san-pham/search");
+                return apiResponse;
+            }
+            apiResponse.setCode(1000);
+            apiResponse.setMessage("Tìm kiếm thành công");
+            apiResponse.setResult(result);
+            apiResponse.setUrl("/api/chi-tiet-san-pham/search");
+        } catch (IllegalArgumentException e) {
+            apiResponse.setCode(1002);
+            apiResponse.setMessage("Lỗi khi xử lý UUID: " + e.getMessage());
+            apiResponse.setResult(Page.empty());
+            apiResponse.setUrl("/api/chi-tiet-san-pham/search");
+        }
+        return apiResponse;
+    }
+
+
+
+
 }

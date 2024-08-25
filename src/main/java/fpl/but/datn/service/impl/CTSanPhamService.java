@@ -184,7 +184,9 @@ public class CTSanPhamService implements ICTSanPhamService {
         Optional<ChiTietSanPham> optional = ctSanPhamRepository.findById(id);
         if (optional.isPresent()) {
             ChiTietSanPham chiTietSanPham = optional.get();
-            ctSanPhamRepository.delete(chiTietSanPham);
+            chiTietSanPham.setNgaySua(new Date());
+            chiTietSanPham.setTrangThai(0);
+            ctSanPhamRepository.save(chiTietSanPham);
             return true;
         } else {
             return false;
@@ -286,6 +288,11 @@ public class CTSanPhamService implements ICTSanPhamService {
     @Override
     public ChiTietSanPham getByMKS(UUID sanPhamId, UUID kichThuocId, UUID mauSacId) {
         return ctSanPhamRepository.getByMKS(sanPhamId,kichThuocId,mauSacId);
+    }
+
+    @Override
+    public Page<ChiTietSanPham> search(String keyword, Pageable pageable) {
+        return ctSanPhamRepository.findByKeyword(keyword, pageable);
     }
 
 }

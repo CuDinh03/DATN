@@ -67,4 +67,6 @@ public interface ICTSanPhamService {
     ChiTietSanPham getByMKS ( UUID sanPhamId , UUID kichThuocId , UUID mauSacId);
 
 
+    Page<ChiTietSanPham> search(String keyword, Pageable pageable);
+
 }
