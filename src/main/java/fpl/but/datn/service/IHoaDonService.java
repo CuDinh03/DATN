@@ -46,6 +46,9 @@ public interface IHoaDonService {
     void huyDonDaXuLy(HoaDon hoaDon, int trangThai);
 
     List<MonthlySalesData> findMonthlySalesData();
+    List<MonthlySalesData> findMonthlySalesData2();
+
+
 
 
 }

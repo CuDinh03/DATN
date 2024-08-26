@@ -44,4 +44,11 @@ public interface HoaDonRepository extends JpaRepository<HoaDon, UUID> {
             "GROUP BY MONTH(h.ngayTao) " +
             "ORDER BY MONTH(h.ngayTao)")
     List<MonthlySalesData> findMonthlySalesData1();
+
+
+    @Query("SELECT new fpl.but.datn.dto.response.MonthlySalesData(MONTH(h.ngayTao), COUNT(h.id)) " +
+            "FROM HoaDon h WHERE h.trangThai = 5 " +
+            "GROUP BY MONTH(h.ngayTao) " +
+            "ORDER BY MONTH(h.ngayTao)")
+    List<MonthlySalesData> findMonthlySalesData2();
 }

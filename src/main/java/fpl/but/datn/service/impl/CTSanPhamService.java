@@ -44,7 +44,7 @@ public class CTSanPhamService implements ICTSanPhamService {
 
     @Override
     public Page<ChiTietSanPham> getAllChiTietSanPhamPageable(Pageable pageable) {
-        return ctSanPhamRepository.findAll(pageable);
+        return ctSanPhamRepository.findAllSapXepNgayTao(pageable);
     }
 
 
@@ -166,7 +166,6 @@ public class CTSanPhamService implements ICTSanPhamService {
         ChiTietSanPham chiTietSanPhamoldValue = ctSanPhamRepository.findById(id).get();
         chiTietSanPhamoldValue.setMa(request.getMa());
         chiTietSanPhamoldValue.setSanPham(request.getSanPham());
-        chiTietSanPhamoldValue.setThuongHieu(request.getThuongHieu());
         chiTietSanPhamoldValue.setChatLieu(request.getChatLieu());
         chiTietSanPhamoldValue.setDanhMuc(request.getDanhMuc());
         chiTietSanPhamoldValue.setKichThuoc(request.getKichThuoc());
@@ -174,8 +173,6 @@ public class CTSanPhamService implements ICTSanPhamService {
         chiTietSanPhamoldValue.setSoLuong(request.getSoLuong());
         chiTietSanPhamoldValue.setGiaNhap(request.getGiaNhap());
         chiTietSanPhamoldValue.setGiaBan(request.getGiaBan());
-        chiTietSanPhamoldValue.setNgayNhap(request.getNgayNhap());
-        chiTietSanPhamoldValue.setNgayTao(request.getNgayTao());
         chiTietSanPhamoldValue.setNgaySua(new Date());
         chiTietSanPhamoldValue.setHinhAnh(request.getHinhAnh());
         return ctSanPhamRepository.save(chiTietSanPhamoldValue);

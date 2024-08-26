@@ -147,6 +147,9 @@ public class HoaDonService implements IHoaDonService {
     @Override
     public List<MonthlySalesData> findMonthlySalesData() {
         return hoaDonRepository.findMonthlySalesData1();
+    }    @Override
+    public List<MonthlySalesData> findMonthlySalesData2() {
+        return hoaDonRepository.findMonthlySalesData2();
     }
 
 
