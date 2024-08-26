@@ -18,7 +18,7 @@ public interface KhachHangRepository extends JpaRepository<KhachHang, UUID> {
     Optional<KhachHang> findByMa(String ma);
     boolean existsByMa(String ma);
 
-    @Query("SELECT kh from KhachHang kh where kh.trangThai = 1 order by kh.ngayTao DESC")
+    @Query("SELECT kh from KhachHang kh where kh.trangThai = 1 or kh.trangThai = 2 order by kh.ngayTao DESC")
     Page<KhachHang> findAllPage(Pageable pageable);
 
     @Query("select kh from KhachHang kh where kh.sdt = :sdt and kh.trangThai = 1 ")
