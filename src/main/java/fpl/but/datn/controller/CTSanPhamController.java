@@ -103,11 +103,11 @@ public class CTSanPhamController {
     }
 
     @PutMapping("/update")
-    ChiTietSanPham update( @RequestBody ChiTietSanPhamDto chiTietSanPhamDto) {
-        if (chiTietSanPhamDto.getId() != null) {
-            return ctSanPhamService.update(TranferDatas.convertToEntity(chiTietSanPhamDto), chiTietSanPhamDto.getId());
-        }
-        return null;
+    public ApiResponse<ChiTietSanPham> update( @RequestBody ChiTietSanPhamDto chiTietSanPhamDto) {
+        ApiResponse<ChiTietSanPham> apiResponse = new ApiResponse<>();
+           apiResponse.setResult(ctSanPhamService.update(TranferDatas.convertToEntity(chiTietSanPhamDto), chiTietSanPhamDto.getId()));
+
+        return apiResponse;
     }
 
     @GetMapping("/findAllMauSacByMaCTSP/{ma}")
@@ -331,6 +331,36 @@ public class CTSanPhamController {
             apiResponse.setResult(new PageImpl<>(listDto, pageable, chiTietSanPhamPage.getTotalElements()));
         } else {
             throw new AppException(ErrorCode.NO_LISTSPChiTiet_FOUND);
+        }
+        return apiResponse;
+    }
+
+
+    @GetMapping("/search")
+    public ApiResponse<Page<ChiTietSanPhamDto>> search(
+            @RequestParam(defaultValue = "") String keyword,
+            Pageable pageable
+    ) {
+        ApiResponse<Page<ChiTietSanPhamDto>> apiResponse = new ApiResponse<>();
+        try {
+            String trimmedKeyword = keyword.trim();
+            Page<ChiTietSanPhamDto> result = ctSanPhamService.search(trimmedKeyword, pageable);
+            if (result.isEmpty()) {
+                apiResponse.setCode(1001);
+                apiResponse.setMessage("fail");
+                apiResponse.setResult(result);
+                apiResponse.setUrl("/api/chi-tiet-san-pham/search");
+                return apiResponse;
+            }
+            apiResponse.setCode(1000);
+            apiResponse.setMessage("Tìm kiếm thành công");
+            apiResponse.setResult(result);
+            apiResponse.setUrl("/api/chi-tiet-san-pham/search");
+        } catch (IllegalArgumentException e) {
+            apiResponse.setCode(1002);
+            apiResponse.setMessage("Lỗi khi xử lý UUID: " + e.getMessage());
+            apiResponse.setResult(Page.empty());
+            apiResponse.setUrl("/api/chi-tiet-san-pham/search");
         }
         return apiResponse;
     }

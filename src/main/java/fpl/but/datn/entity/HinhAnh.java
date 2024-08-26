@@ -1,6 +1,7 @@
 package fpl.but.datn.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,6 +21,7 @@ public class HinhAnh {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     @ManyToOne
+    @JsonIgnore
     private ChiTietSanPham chiTietSanPham;
 
     @ManyToOne

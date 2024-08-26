@@ -1,7 +1,7 @@
 package fpl.but.datn.service.impl;
 
 import fpl.but.datn.dto.request.HoaDonChiTietDto;
-import fpl.but.datn.dto.request.HoaDonDto;
+import fpl.but.datn.dto.response.MonthlySalesData;
 import fpl.but.datn.entity.*;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
@@ -143,6 +143,12 @@ public class HoaDonService implements IHoaDonService {
 
         hoaDonRepository.save(hoaDon);
     }
+
+    @Override
+    public List<MonthlySalesData> findMonthlySalesData() {
+        return hoaDonRepository.findMonthlySalesData1();
+    }
+
 
     @Override
     public void delete(UUID id) {
