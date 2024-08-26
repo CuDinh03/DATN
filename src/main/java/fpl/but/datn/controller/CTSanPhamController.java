@@ -337,14 +337,14 @@ public class CTSanPhamController {
 
 
     @GetMapping("/search")
-    public ApiResponse<Page<ChiTietSanPham>> search(
+    public ApiResponse<Page<ChiTietSanPhamDto>> search(
             @RequestParam(defaultValue = "") String keyword,
             Pageable pageable
     ) {
-        ApiResponse<Page<ChiTietSanPham>> apiResponse = new ApiResponse<>();
+        ApiResponse<Page<ChiTietSanPhamDto>> apiResponse = new ApiResponse<>();
         try {
             String trimmedKeyword = keyword.trim();
-            Page<ChiTietSanPham> result = ctSanPhamService.search(trimmedKeyword, pageable);
+            Page<ChiTietSanPhamDto> result = ctSanPhamService.search(trimmedKeyword, pageable);
             if (result.isEmpty()) {
                 apiResponse.setCode(1001);
                 apiResponse.setMessage("fail");
@@ -364,8 +364,5 @@ public class CTSanPhamController {
         }
         return apiResponse;
     }
-
-
-
 
 }
