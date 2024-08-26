@@ -2,6 +2,7 @@ package fpl.but.datn.service.impl;
 
 import fpl.but.datn.entity.GiaoHang;
 import fpl.but.datn.repository.GiaoHangRepository;
+import fpl.but.datn.service.IGiaoHangService;
 import fpl.but.datn.service.IService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,10 +10,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class GiaoHangService implements IService<GiaoHang>{
+public class GiaoHangService implements IService<GiaoHang>, IGiaoHangService {
 
     @Autowired
     private GiaoHangRepository repository;
@@ -44,5 +46,10 @@ public class GiaoHangService implements IService<GiaoHang>{
     @Override
     public Page<GiaoHang> getAllPageable(Pageable pageable) {
         return null;
+    }
+
+    @Override
+    public GiaoHang findByHoaDon_Id(UUID hoaDonId) {
+        return repository.findByHoaDon_Id(hoaDonId);
     }
 }

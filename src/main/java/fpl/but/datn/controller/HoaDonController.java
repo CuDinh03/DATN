@@ -9,6 +9,7 @@ import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.repository.HoaDonChiTietRepository;
 import fpl.but.datn.repository.HoaDonRepository;
 import fpl.but.datn.service.IHoaDonService;
+import fpl.but.datn.service.impl.GiaoHangService;
 import fpl.but.datn.service.impl.HoaDonService;
 import fpl.but.datn.tranferdata.HoaDonBanMapper;
 import fpl.but.datn.tranferdata.TranferDatas;
@@ -32,6 +33,8 @@ public class HoaDonController {
 
     @Autowired
     private IHoaDonService hoaDonService;
+    @Autowired
+    private GiaoHangService giaoHangService;
 
 
 
@@ -422,6 +425,17 @@ public class HoaDonController {
         } catch (Exception e) {
             apiResponse.setMessage("Có lỗi không mong muốn xảy ra khi lấy thông kê:" + e.getMessage());
         }
+        return apiResponse;
+    }
+
+    @GetMapping("/hoa-don/{hoaDonId}")
+    public ApiResponse<GiaoHang> getGiaoHangByHoaDonId(@PathVariable UUID hoaDonId) {
+        ApiResponse<GiaoHang> apiResponse = new ApiResponse<>();
+
+        GiaoHang giaoHang = giaoHangService.findByHoaDon_Id(hoaDonId);
+
+        apiResponse.setCode(1000);
+        apiResponse.setResult(giaoHang);
         return apiResponse;
     }
 
