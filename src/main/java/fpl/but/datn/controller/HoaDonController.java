@@ -2,6 +2,7 @@ package fpl.but.datn.controller;
 
 import fpl.but.datn.dto.request.*;
 import fpl.but.datn.dto.response.ApiResponse;
+import fpl.but.datn.dto.response.MonthlySalesData;
 import fpl.but.datn.entity.*;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
@@ -392,6 +393,20 @@ public class HoaDonController {
         return apiResponse;
     }
 
+    @GetMapping("/monthly-sales")
+    public ApiResponse<List<MonthlySalesData>> getMonthlySalesData() {
+        ApiResponse<List<MonthlySalesData>> apiResponse = new ApiResponse<>();
 
+        try {
+            List<MonthlySalesData> list = hoaDonService.findMonthlySalesData();
+            apiResponse.setMessage("Thống kê thành công");
+            apiResponse.setResult(list);
+        } catch (AppException e) {
+            apiResponse.setMessage("Có lỗi xảy ra khi lấy thống kê:" + e.getMessage());
+        } catch (Exception e) {
+            apiResponse.setMessage("Có lỗi không mong muốn xảy ra khi lấy thông kê:" + e.getMessage());
+        }
+        return apiResponse;
+    }
 
 }

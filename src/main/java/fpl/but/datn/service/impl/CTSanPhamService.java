@@ -1,8 +1,10 @@
 package fpl.but.datn.service.impl;
 
+import fpl.but.datn.dto.request.ChiTietSanPhamDto;
 import fpl.but.datn.dto.request.FilterSanPhamRequest;
 import fpl.but.datn.dto.request.HinhAnhRequest;
 import fpl.but.datn.entity.*;
+import fpl.but.datn.mapper.ChiTietSanPhamMapper;
 import fpl.but.datn.repository.CTSanPhamRepository;
 import fpl.but.datn.repository.HinhAnhRepository;
 import fpl.but.datn.service.ICTSanPhamService;
@@ -184,7 +186,9 @@ public class CTSanPhamService implements ICTSanPhamService {
         Optional<ChiTietSanPham> optional = ctSanPhamRepository.findById(id);
         if (optional.isPresent()) {
             ChiTietSanPham chiTietSanPham = optional.get();
-            ctSanPhamRepository.delete(chiTietSanPham);
+            chiTietSanPham.setNgaySua(new Date());
+            chiTietSanPham.setTrangThai(0);
+            ctSanPhamRepository.save(chiTietSanPham);
             return true;
         } else {
             return false;
@@ -288,4 +292,12 @@ public class CTSanPhamService implements ICTSanPhamService {
         return ctSanPhamRepository.getByMKS(sanPhamId,kichThuocId,mauSacId);
     }
 
+    @Autowired
+    private ChiTietSanPhamMapper chiTietSanPhamMapper;
+
+    @Override
+    public Page<ChiTietSanPhamDto> search(String keyword, Pageable pageable) {
+        Page<ChiTietSanPham> result = ctSanPhamRepository.findByKeyword(keyword, pageable);
+        return result.map(chiTietSanPhamMapper::toDto);
+    }
 }

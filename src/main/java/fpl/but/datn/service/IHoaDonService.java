@@ -2,6 +2,7 @@ package fpl.but.datn.service;
 
 import fpl.but.datn.dto.request.HoaDonChiTietDto;
 import fpl.but.datn.dto.request.HoaDonDto;
+import fpl.but.datn.dto.response.MonthlySalesData;
 import fpl.but.datn.entity.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -43,5 +44,9 @@ public interface IHoaDonService {
 
     HoaDon updateHoaDon(List<HoaDonChiTietDto> chiTietList, HoaDon hoaDon, NguoiDung nguoiDung);
     void huyDonDaXuLy(HoaDon hoaDon, int trangThai);
+
+    List<MonthlySalesData> findMonthlySalesData();
+
+
 }
    

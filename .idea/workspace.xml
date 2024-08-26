@@ -6,6 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="85360360-6e47-429b-b577-a4f16be7088d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/response/MonthlySalesData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/dto/response/MonthlySalesData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/repository/KhachHangRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/repository/KhachHangRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/configuration/ApplicationInitConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/configuration/ApplicationInitConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/configuration/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/configuration/SecurityConfig.java" afterDir="false" />
     </list>
@@ -17,8 +20,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -51,6 +54,9 @@
   &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;Downloaded.Files.Path.Enabled&quot;: &quot;true&quot;,
+    &quot;Maven.DATN [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.DATN [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.DATN [validate].executor&quot;: &quot;Run&quot;,
     &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
     &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
     &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
@@ -60,6 +66,7 @@
     &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.DatnApplication.executor&quot;: &quot;Run&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
@@ -74,6 +81,7 @@
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.43103448&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -121,6 +129,13 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-17.0.10-corretto-17.0.10-f644763e9732-24582b8d" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -140,6 +155,16 @@
       <workItem from="1723476827597" duration="1502000" />
       <workItem from="1723827771455" duration="1746000" />
       <workItem from="1724182382701" duration="12608000" />
+      <workItem from="1724265873665" duration="3252000" />
+      <workItem from="1724350710780" duration="666000" />
+      <workItem from="1724523080183" duration="12177000" />
+      <workItem from="1724601893247" duration="2524000" />
+      <workItem from="1724610950753" duration="301000" />
+      <workItem from="1724611323981" duration="4248000" />
+      <workItem from="1724621214880" duration="3505000" />
+      <workItem from="1724601893247" duration="3918000" />
+      <workItem from="1724637032883" duration="217000" />
+      <workItem from="1724637253390" duration="1204000" />
     </task>
     <servers />
   </component>
@@ -183,14 +208,14 @@
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/fpl/but/datn/controller/CTSanPhamController.java</url>
-          <line>292</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/TaiKhoanService.java</url>
           <line>41</line>
           <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/fpl/but/datn/controller/HoaDonController.java</url>
+          <line>400</line>
+          <option name="timeStamp" value="19" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
