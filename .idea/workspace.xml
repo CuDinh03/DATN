@@ -6,11 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="85360360-6e47-429b-b577-a4f16be7088d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/controller/CTSanPhamController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/controller/CTSanPhamController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/entity/ChiTietSanPhamSpecification.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/entity/ChiTietSanPhamSpecification.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/repository/CTSanPhamRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/repository/CTSanPhamRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/ICTSanPhamService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/ICTSanPhamService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/CTSanPhamService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/CTSanPhamService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -158,7 +153,9 @@
       <workItem from="1724265873665" duration="3252000" />
       <workItem from="1724350710780" duration="666000" />
       <workItem from="1724523080183" duration="12177000" />
-      <workItem from="1724601893247" duration="2524000" />
+      <workItem from="1724601893247" duration="3918000" />
+      <workItem from="1724637032883" duration="217000" />
+      <workItem from="1724637253390" duration="1204000" />
     </task>
     <servers />
   </component>
