@@ -116,7 +116,9 @@ public interface CTSanPhamRepository extends JpaRepository<ChiTietSanPham, UUID>
             "LEFT JOIN c.danhMuc dm " +
             "LEFT JOIN c.kichThuoc kt " +
             "LEFT JOIN c.mauSac ms " +
-            "WHERE " +
+            "LEFT JOIN FETCH c.hinhAnh h " +  // Fetching images
+            "WHERE (" +
+            "COALESCE(:keyword, '') = '' OR " +
             "LOWER(c.ma) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
             "LOWER(sp.ten) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
             "LOWER(th.ten) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
@@ -126,7 +128,10 @@ public interface CTSanPhamRepository extends JpaRepository<ChiTietSanPham, UUID>
             "LOWER(ms.ten) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
             "CAST(c.soLuong AS string) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
             "CAST(c.giaNhap AS string) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
-            "CAST(c.giaBan AS string) LIKE LOWER(CONCAT('%', :keyword, '%'))")
+            "CAST(c.giaBan AS string) LIKE LOWER(CONCAT('%', :keyword, '%')))")
     Page<ChiTietSanPham> findByKeyword(@Param("keyword") String keyword, Pageable pageable);
+
+
+
 
 }

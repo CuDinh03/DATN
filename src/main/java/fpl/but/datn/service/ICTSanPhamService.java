@@ -1,5 +1,6 @@
 package fpl.but.datn.service;
 
+import fpl.but.datn.dto.request.ChiTietSanPhamDto;
 import fpl.but.datn.dto.request.FilterSanPhamRequest;
 import fpl.but.datn.dto.request.HinhAnhRequest;
 import fpl.but.datn.entity.*;
@@ -67,6 +68,6 @@ public interface ICTSanPhamService {
     ChiTietSanPham getByMKS ( UUID sanPhamId , UUID kichThuocId , UUID mauSacId);
 
 
-    Page<ChiTietSanPham> search(String keyword, Pageable pageable);
+    Page<ChiTietSanPhamDto> search(String keyword, Pageable pageable);
 
 }
