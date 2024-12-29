@@ -1,9 +1,7 @@
 package fpl.but.datn.controller;
 
-import fpl.but.datn.dto.request.ChatLieuDto;
 import fpl.but.datn.dto.request.MauSacDto;
 import fpl.but.datn.dto.response.ApiResponse;
-import fpl.but.datn.entity.ChatLieu;
 import fpl.but.datn.entity.MauSac;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
@@ -99,7 +97,7 @@ public class MauSacController {
 
     @DeleteMapping("/{id}")
     ApiResponse<Void> delete(@PathVariable String id) {
-        UUID idMauSac = null;
+        UUID idMauSac;
         if (id != null) {
             idMauSac = UUID.fromString(id);
             mauSacService.delete(idMauSac);
@@ -108,7 +106,7 @@ public class MauSacController {
 
     @DeleteMapping("/open/{id}")
     ApiResponse<Void> open(@PathVariable String id) {
-        UUID idMauSac = null;
+        UUID idMauSac;
         if (id != null) {
             idMauSac = UUID.fromString(id);
             mauSacService.open(idMauSac);
@@ -118,7 +116,7 @@ public class MauSacController {
     @GetMapping("/{id}")
     ApiResponse<MauSacDto> detail(@PathVariable String id) {
         ApiResponse<MauSacDto> apiResponse = new ApiResponse<>();
-        UUID idMauSac = null;
+        UUID idMauSac;
         if (id != null){
             idMauSac = UUID.fromString(id);
             MauSacDto dto = TranferDatas.convertToDto(mauSacService.findById(idMauSac));

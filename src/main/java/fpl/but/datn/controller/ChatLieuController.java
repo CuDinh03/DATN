@@ -1,10 +1,8 @@
 package fpl.but.datn.controller;
 
 import fpl.but.datn.dto.request.ChatLieuDto;
-import fpl.but.datn.dto.request.SanPhamDto;
 import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.entity.ChatLieu;
-import fpl.but.datn.entity.SanPham;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.service.impl.ChatLieuService;

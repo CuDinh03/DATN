@@ -5,9 +5,7 @@ import fpl.but.datn.entity.*;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.repository.HoaDonChiTietRepository;
-import fpl.but.datn.repository.HoaDonRepository;
 import fpl.but.datn.service.IHoaDonChiTietService;
-import fpl.but.datn.service.IHoaDonService;
 import fpl.but.datn.tranferdata.TranferDatas;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,10 +20,6 @@ public class HoaDonChiTietService implements IHoaDonChiTietService {
 
     @Autowired
     private HoaDonChiTietRepository hoaDonChiTietRepository;
-    @Autowired
-    private HoaDonRepository hoaDonRepository;
-    @Autowired
-    private NguoiDungService nguoiDungService;
 
     @Override
     public List getAll() {

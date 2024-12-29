@@ -3,10 +3,8 @@ package fpl.but.datn.controller;
 
 import fpl.but.datn.dto.request.ChucVuDto;
 import fpl.but.datn.dto.response.ApiResponse;
-
 import fpl.but.datn.dto.response.ChucVuResponse;
 import fpl.but.datn.service.impl.ChucVuService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,14 +1,11 @@
 package fpl.but.datn.controller;
 
 import fpl.but.datn.dto.request.KichThuocDto;
-import fpl.but.datn.dto.request.MauSacDto;
 import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.entity.KichThuoc;
-import fpl.but.datn.entity.MauSac;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.service.impl.KichThuocService;
-import fpl.but.datn.service.impl.MauSacService;
 import fpl.but.datn.tranferdata.TranferDatas;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -118,7 +115,7 @@ public class KichThuocController {
 
     @DeleteMapping("/{id}")
     ApiResponse<Void> delete(@PathVariable String id) {
-        UUID idKichThuoc = null;
+        UUID idKichThuoc;
         if (id != null) {
             idKichThuoc = UUID.fromString(id);
             kichThuocService.delete(idKichThuoc);

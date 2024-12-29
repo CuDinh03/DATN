@@ -2,14 +2,10 @@ package fpl.but.datn.controller;
 
 import fpl.but.datn.dto.request.*;
 import fpl.but.datn.dto.response.ApiResponse;
-import fpl.but.datn.entity.DanhMuc;
-import fpl.but.datn.entity.GioHang;
 import fpl.but.datn.entity.HoaDon;
-import fpl.but.datn.entity.HoaDonChiTiet;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.service.IHoaDonService;
-import fpl.but.datn.service.impl.HoaDonService;
 import fpl.but.datn.tranferdata.TranferDatas;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

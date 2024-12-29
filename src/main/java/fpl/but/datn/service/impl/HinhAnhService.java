@@ -1,6 +1,5 @@
 package fpl.but.datn.service.impl;
 
-import fpl.but.datn.entity.ChiTietSanPham;
 import fpl.but.datn.entity.HinhAnh;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;

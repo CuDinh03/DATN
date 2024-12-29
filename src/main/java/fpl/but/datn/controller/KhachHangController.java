@@ -1,12 +1,7 @@
 package fpl.but.datn.controller;
 
-import fpl.but.datn.dto.request.HoaDonDto;
 import fpl.but.datn.dto.request.KhachHangDto;
-import fpl.but.datn.dto.request.KhachHangDto;
-import fpl.but.datn.dto.request.TaiKhoanDto;
 import fpl.but.datn.dto.response.ApiResponse;
-import fpl.but.datn.entity.DanhMuc;
-import fpl.but.datn.entity.KhachHang;
 import fpl.but.datn.entity.KhachHang;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
@@ -19,13 +14,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.UUID;
-import java.util.Objects;
-import java.util.UUID;
+
 
 @RestController
 @RequestMapping("/api/khs")
@@ -146,7 +138,7 @@ public class KhachHangController {
                 apiResponse.setMessage("Lấy khách hàng thành công!");
                 apiResponse.setResult(khachHangDto);
             } else {
-//                throw new AppException(ErrorCode.COLOR_NOT_FOUND);
+                throw new AppException(ErrorCode.COLOR_NOT_FOUND);
             }
         } else {
             apiResponse.setMessage("Id không hợp lệ!");

@@ -1,17 +1,13 @@
 package fpl.but.datn.service.impl;
 
-import fpl.but.datn.dto.request.GioHangChiTietDto;
 import fpl.but.datn.entity.ChiTietSanPham;
 import fpl.but.datn.entity.GioHang;
 import fpl.but.datn.entity.GioHangChiTiet;
-import fpl.but.datn.entity.HinhAnh;
 import fpl.but.datn.repository.CTSanPhamRepository;
 import fpl.but.datn.repository.GioHangChiTietRepository;
 import fpl.but.datn.repository.GioHangRepository;
 import fpl.but.datn.service.IGioHangChiTietService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;

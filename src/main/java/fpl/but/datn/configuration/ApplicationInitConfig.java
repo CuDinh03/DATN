@@ -1,7 +1,5 @@
 package fpl.but.datn.configuration;
 
-
-
 import fpl.but.datn.constant.PredefinedRole;
 import fpl.but.datn.entity.ChucVu;
 import fpl.but.datn.entity.TaiKhoan;
@@ -13,7 +11,6 @@ import lombok.experimental.FieldDefaults;
 import lombok.experimental.NonFinal;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;

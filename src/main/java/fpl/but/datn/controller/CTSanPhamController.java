@@ -146,11 +146,17 @@ public class CTSanPhamController {
 
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable UUID id) {
-        if (ctSanPhamService.delete(id)) {
-            return ResponseEntity.ok("xoa thanh cong");
+    public ApiResponse<ChiTietSanPham> delete(@PathVariable String id) {
+        ApiResponse<ChiTietSanPham> apiResponse = new ApiResponse<>();
+        UUID uuid = null;
+        if (id != null) uuid = UUID.fromString(id);
+        if (ctSanPhamService.delete(uuid)) {
+            apiResponse.setMessage("Xoa thanh cong");
+            return apiResponse;
         } else
-            return ResponseEntity.ok("xoa that bai");
+            apiResponse.setMessage("Xoa that bai");
+
+            return apiResponse;
     }
 
     @GetMapping("/{id}")

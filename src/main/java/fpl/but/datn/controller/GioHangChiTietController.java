@@ -5,18 +5,9 @@ import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.entity.*;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
-import fpl.but.datn.service.ICTSanPhamService;
 import fpl.but.datn.service.IGioHangChiTietService;
-import fpl.but.datn.service.IGioHangService;
-import fpl.but.datn.service.impl.GioHangChiTietService;
 import fpl.but.datn.tranferdata.TranferDatas;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -27,15 +18,6 @@ import java.util.UUID;
 public class GioHangChiTietController {
     @Autowired
     private IGioHangChiTietService gioHangChiTietService;
-
-    @Autowired
-    private IGioHangService gioHangService;
-
-    @Autowired
-    private GioHangChiTietService gioHangChiTietService1;
-
-    @Autowired
-    private ICTSanPhamService ctSanPhamService;
 
     @GetMapping("/all/{id}")
     ApiResponse<List<GioHangChiTietDto>> getAllGioHangCTByIdGioHang(@PathVariable("id") UUID idGioHang){

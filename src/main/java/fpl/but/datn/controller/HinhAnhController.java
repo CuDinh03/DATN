@@ -2,13 +2,9 @@ package fpl.but.datn.controller;
 
 import fpl.but.datn.dto.request.*;
 import fpl.but.datn.dto.response.ApiResponse;
-import fpl.but.datn.entity.BaoCao;
-import fpl.but.datn.entity.ChiTietSanPham;
 import fpl.but.datn.entity.HinhAnh;
-import fpl.but.datn.entity.ThuongHieu;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
-import fpl.but.datn.service.IBaoCaoService;
 import fpl.but.datn.service.IHinhAnhService;
 import fpl.but.datn.tranferdata.TranferDatas;
 import jakarta.validation.Valid;
@@ -17,9 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.UUID;
@@ -106,7 +100,7 @@ public class HinhAnhController {
     @GetMapping("/{id}")
     ApiResponse<HinhAnhDto> detail(@PathVariable String id) {
         ApiResponse<HinhAnhDto> apiResponse = new ApiResponse<>();
-        UUID idHinhAnh = null;
+        UUID idHinhAnh;
         if (id != null){
             idHinhAnh = UUID.fromString(id);
             HinhAnhDto dto = TranferDatas.convertToDto(hinhAnhService.findById(idHinhAnh));

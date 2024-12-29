@@ -3,7 +3,6 @@ import fpl.but.datn.entity.*;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.repository.GioHangChiTietRepository;
-import fpl.but.datn.repository.HoaDonRepository;
 import fpl.but.datn.service.IService;
 import fpl.but.datn.service.IThanhToanService;
 import jakarta.mail.MessagingException;
@@ -197,39 +196,6 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
 
             this.hoaDonChiTietService.create(hoaDonChiTiet);
         }
-//        String toMail = requestGh.getKhachHang().getEmail();
-//        String subject = "Xác nhận đơn hàng thành công";
-//        String body = "Cửa hàng MT-Shirt\n" +
-//                "\n" +
-//                "Xin chào! Đơn hàng của bạn đang được chuẩn bị. Chi tiết đơn hàng của bạn như sau:\n" +
-//                "\n" +
-//                "THEO DÕI ĐƠN HÀNG [liên kết]\n" +
-//                "\n" +
-//                "TÓM TẮT ĐƠN HÀNG:\n" +
-//                "\n" +
-//                "Số đơn hàng: "+hoaDon2.getMa()+"\n" +
-//                "Ngày đặt hàng: " + giaoHang.getNgayTao() + "\n" +
-//                "Tổng số tiền: "+hoaDon2.getTongTien()+"\n" +
-//                "\n" +
-//                "ĐỊA CHỈ GIAO HÀNG: "+giaoHang.getDiaChiGiaoHang()+"\n" +
-//                "\n" +
-//                "DANH SÁCH ĐƠN HÀNG:\n" +
-//                "\n";
-//
-//            // Thêm danh sách sản phẩm
-//        body += "| Sản phẩm                | Số lượng | Giá      |\n";
-//        body += "|-------------------------|----------|----------|\n";
-//
-//        for (GioHangChiTiet ghCt : listGioHangCt) {
-//            body += "| " + ghCt.getChiTietSanPham().getSanPham().getTen() + "(" + ghCt.getChiTietSanPham().getKichThuoc().getTen()+")" + " | " +
-//                    ghCt.getSoLuong() + " | " +
-//                    ghCt.getChiTietSanPham().getGiaBan() + " |\n";
-//        }
-//
-//        body += "\nCảm ơn bạn đã mua hàng tại cửa hàng của chúng tôi!\n";
-//
-//        emailSenderService.sendMail(toMail, subject, body);
-//        this.gioHangService.update(gioHang, gioHang.getId());
 
         String toMail = requestGh.getKhachHang().getEmail();
         String subject = "Xác nhận đơn hàng thành công";
@@ -239,7 +205,7 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
         templateModel.put("orderDate", giaoHang.getNgayTao());
         templateModel.put("totalAmount", hoaDon2.getTongTien());
         templateModel.put("deliveryAddress", giaoHang.getDiaChiGiaoHang());
-        templateModel.put("trackingUrl", "https://cudinh03.github.io/FE_DATN/customer/order-detail/" + giaoHang.getHoaDon().getId());
+        templateModel.put("trackingUrl", "https://cudi nh03.github.io/FE_DATN/customer/order-detail/" + giaoHang.getHoaDon().getId());
 
         List<Map<String, Object>> orderItems = new ArrayList<>();
         for (GioHangChiTiet ghCt : listGioHangCt) {
@@ -255,7 +221,6 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
             emailSenderService.sendHtmlMail(toMail, subject, templateModel);
         } catch (MessagingException e) {
             e.printStackTrace();
-            // Xử lý lỗi gửi email
         }
 
         if (voucher != null) {

@@ -1,24 +1,12 @@
 package fpl.but.datn.controller;
 
-import fpl.but.datn.dto.request.ChiTietSanPhamDto;
-import fpl.but.datn.dto.request.DanhMucDto;
 import fpl.but.datn.dto.request.GioHangDto;
-import fpl.but.datn.dto.request.HoaDonDto;
 import fpl.but.datn.dto.response.ApiResponse;
-import fpl.but.datn.entity.ChiTietSanPham;
 import fpl.but.datn.entity.GioHang;
-import fpl.but.datn.exception.AppException;
-import fpl.but.datn.exception.ErrorCode;
-import fpl.but.datn.service.IDanhMucService;
 import fpl.but.datn.service.IGioHangService;
 import fpl.but.datn.tranferdata.TranferDatas;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -59,7 +47,7 @@ public class GioHangController {
     @GetMapping("/{id}")
     ApiResponse<GioHangDto> detail(@PathVariable String id) {
         ApiResponse<GioHangDto> apiResponse = new ApiResponse<>();
-        UUID idGioHang = null;
+        UUID idGioHang;
         if (id != null){
             idGioHang = UUID.fromString(id);
             GioHangDto dto = TranferDatas.convertToDto(gioHangService.findById(idGioHang));

@@ -1,7 +1,6 @@
 package fpl.but.datn.controller;
 
 import fpl.but.datn.dto.request.DanhGiaDto;
-import fpl.but.datn.dto.request.DanhMucDto;
 import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.entity.DanhGia;
 import fpl.but.datn.exception.AppException;

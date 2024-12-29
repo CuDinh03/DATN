@@ -57,11 +57,6 @@ public class HoaDonService implements IHoaDonService {
         hoaDon.setTrangThai(1);
         return hoaDonRepository.save(hoaDon);
     }
-
-    public HoaDon createHoaDonOnl(HoaDon request) {
-        return hoaDonRepository.save(request);
-    }
-
     @Override
     public HoaDon update(HoaDon request, UUID id) {
         HoaDon hoaDon = findById(id);

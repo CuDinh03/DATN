@@ -16,18 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class ThanhToanController {
 
     @Autowired
-    private HoaDonService hoaDonService;
-
-    @Autowired
-    private HoaDonChiTietService hoaDonChiTietService;
-
-    @Autowired
-    private GioHangService gioHangService;
-
-    @Autowired
-    private HoaDonGioHangService hoaDonGioHangService;
-
-    @Autowired
     private ThanhToanService thanhToanService;
 
     @PostMapping()

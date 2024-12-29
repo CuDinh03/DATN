@@ -1,13 +1,10 @@
 package fpl.but.datn.controller;
 
-import fpl.but.datn.dto.request.KichThuocDto;
 import fpl.but.datn.dto.request.ThuongHieuDto;
 import fpl.but.datn.dto.response.ApiResponse;
-import fpl.but.datn.entity.KichThuoc;
 import fpl.but.datn.entity.ThuongHieu;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
-import fpl.but.datn.service.impl.KichThuocService;
 import fpl.but.datn.service.impl.ThuongHieuService;
 import fpl.but.datn.tranferdata.TranferDatas;
 import jakarta.validation.Valid;

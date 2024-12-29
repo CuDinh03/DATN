@@ -1,10 +1,7 @@
 package fpl.but.datn.controller;
 
-import fpl.but.datn.dto.request.DanhMucDto;
-import fpl.but.datn.dto.request.HoaDonChiTietDto;
 import fpl.but.datn.dto.request.ThongTinDatHangDto;
 import fpl.but.datn.dto.response.ApiResponse;
-import fpl.but.datn.entity.ThongTinDatHang;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.service.IThongTinDatHangService;

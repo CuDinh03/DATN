@@ -1,10 +1,8 @@
 package fpl.but.datn.controller;
 
 import fpl.but.datn.dto.request.GioHangHoaDonDto;
-import fpl.but.datn.dto.request.HoaDonChiTietDto;
 import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.entity.GioHangHoaDon;
-import fpl.but.datn.entity.HoaDonChiTiet;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.service.IHoaDonGioHangService;
