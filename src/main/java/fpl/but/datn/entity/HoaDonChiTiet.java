@@ -7,6 +7,7 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -27,13 +28,16 @@ public class HoaDonChiTiet {
     @ManyToOne
     private ChiTietSanPham chiTietSanPham;
     private Integer soLuong;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS")
 
     private Date ngayTao;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS")
 
     private Date ngaySua;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS")
+
     private BigDecimal giaBan;
     private Integer trangThai;
+
+
 
 }

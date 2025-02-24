@@ -2,10 +2,14 @@ package fpl.but.datn.controller;
 
 import fpl.but.datn.dto.request.*;
 import fpl.but.datn.dto.response.ApiResponse;
-import fpl.but.datn.entity.HoaDon;
+
+import fpl.but.datn.dto.response.MonthlySalesData;
+import fpl.but.datn.entity.*;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.service.IHoaDonService;
+import fpl.but.datn.service.impl.GiaoHangService;
+import fpl.but.datn.tranferdata.HoaDonBanMapper;
 import fpl.but.datn.tranferdata.TranferDatas;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +31,10 @@ public class HoaDonController {
 
     @Autowired
     private IHoaDonService hoaDonService;
+    @Autowired
+    private GiaoHangService giaoHangService;
+
+
 
     @GetMapping("/find-time")
     public ApiResponse<List<HoaDon>> getHoaDon(
@@ -261,7 +269,7 @@ public class HoaDonController {
     public ApiResponse<HoaDon> updateTrangThai(
             @PathVariable UUID id,
             @RequestParam Integer trangThai,
-            @RequestBody HoaDonDto hoaDonDto) {
+            @RequestBody HoaDonBanDto hoaDonDto) {
         HoaDon exsitHoaDon = hoaDonService.findById(id);
         ApiResponse<HoaDon> apiResponse = new ApiResponse<>();
         boolean canUpdate;
@@ -269,8 +277,8 @@ public class HoaDonController {
         if (exsitHoaDon == null) {
             throw new AppException(ErrorCode.NO_ORDER_FOUND);
         }
-        if (exsitHoaDon.getTrangThai() == 2 && trangThai == 5){
-            hoaDonService.huyDonDaXuLy(TranferDatas.convertToEntity(hoaDonDto),trangThai);
+        if (trangThai == 5){
+            hoaDonService.huyDonDaXuLy(HoaDonBanMapper.INSTANCE.toEntity(hoaDonDto), trangThai);
             apiResponse.setResult(hoaDonService.findById(id));
             apiResponse.setMessage("Cập nhật thành công");
             return apiResponse;
@@ -286,6 +294,7 @@ public class HoaDonController {
         apiResponse.setMessage("Cập nhật thành công");
         return apiResponse;
     }
+
 
     @GetMapping("/thongke/doanhthu/ngay")
     public ApiResponse<Map<LocalDate, BigDecimal>> thongKeDoanhThuTheoNgay() {
@@ -373,9 +382,9 @@ public class HoaDonController {
         ApiResponse<HoaDon> apiResponse = new ApiResponse<>();
 
         try {
-            HoaDon updatedHoaDon = hoaDonService.updateHoaDon(request.getChiTietList(), request.getHoaDon(), request.getNguoiDung());
+            HoaDon updatedHoaDonDto = hoaDonService.updateHoaDon(request.getChiTietList(), request.getHoaDon(), request.getNguoiDung());
             apiResponse.setMessage("Cập nhật hoá đơn thành công");
-            apiResponse.setResult(updatedHoaDon);
+            apiResponse.setResult(updatedHoaDonDto);
         } catch (AppException e) {
             apiResponse.setMessage("Có lỗi xảy ra khi cập nhật hoá đơn:" + e.getMessage());
         } catch (Exception e) {
@@ -385,6 +394,47 @@ public class HoaDonController {
         return apiResponse;
     }
 
+    @GetMapping("/monthly-sales")
+    public ApiResponse<List<MonthlySalesData>> getMonthlySalesData() {
+        ApiResponse<List<MonthlySalesData>> apiResponse = new ApiResponse<>();
 
+        try {
+            List<MonthlySalesData> list = hoaDonService.findMonthlySalesData();
+            apiResponse.setMessage("Thống kê thành công");
+            apiResponse.setResult(list);
+        } catch (AppException e) {
+            apiResponse.setMessage("Có lỗi xảy ra khi lấy thống kê:" + e.getMessage());
+        } catch (Exception e) {
+            apiResponse.setMessage("Có lỗi không mong muốn xảy ra khi lấy thông kê:" + e.getMessage());
+        }
+        return apiResponse;
+    }
+
+    @GetMapping("/monthly-sales2")
+    public ApiResponse<List<MonthlySalesData>> getMonthlySalesData2() {
+        ApiResponse<List<MonthlySalesData>> apiResponse = new ApiResponse<>();
+
+        try {
+            List<MonthlySalesData> list = hoaDonService.findMonthlySalesData2();
+            apiResponse.setMessage("Thống kê thành công");
+            apiResponse.setResult(list);
+        } catch (AppException e) {
+            apiResponse.setMessage("Có lỗi xảy ra khi lấy thống kê:" + e.getMessage());
+        } catch (Exception e) {
+            apiResponse.setMessage("Có lỗi không mong muốn xảy ra khi lấy thông kê:" + e.getMessage());
+        }
+        return apiResponse;
+    }
+
+    @GetMapping("/hoa-don/{hoaDonId}")
+    public ApiResponse<GiaoHang> getGiaoHangByHoaDonId(@PathVariable UUID hoaDonId) {
+        ApiResponse<GiaoHang> apiResponse = new ApiResponse<>();
+
+        GiaoHang giaoHang = giaoHangService.findByHoaDon_Id(hoaDonId);
+
+        apiResponse.setCode(1000);
+        apiResponse.setResult(giaoHang);
+        return apiResponse;
+    }
 
 }

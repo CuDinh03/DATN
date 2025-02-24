@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class DangNhapDto {
     private TaiKhoanDto taiKhoanDto;
-    private String mail;
+    private String email;
 }

@@ -1,9 +1,6 @@
 package fpl.but.datn.service;
 
-import fpl.but.datn.entity.DanhMuc;
-import fpl.but.datn.entity.HoaDon;
-import fpl.but.datn.entity.NguoiDung;
-import fpl.but.datn.entity.TaiKhoan;
+import fpl.but.datn.entity.*;
 import fpl.but.datn.service.impl.NguoiDungService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,5 +19,6 @@ public interface INguoiDungService {
     NguoiDung findById(UUID id);
     Page<NguoiDung> getAllDanhMucPageable(Pageable pageable);
     Optional<NguoiDung> findByTaiKhoanid (UUID id);
+
 
 }

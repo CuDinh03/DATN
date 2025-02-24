@@ -419,35 +419,7 @@ public class TranferDatas {
 
 
     //bao cao
-    public static BaoCaoDto convertToDto(BaoCao entity){
-        BaoCaoDto dto = new BaoCaoDto();
-        if (entity.getId() != null) dto.setId(entity.getId());
-        if (entity.getMa() != null) dto.setTen(entity.getMa());
-        if (entity.getTen() != null) dto.setTen(entity.getTen());
-        if (entity.getMoTa() != null) dto.setMoTa(entity.getMoTa());
-        if (entity.getNgayTao() != null) dto.setNgayTao(entity.getNgayTao());
-        if (entity.getNgaySua() != null) dto.setNgaySua(entity.getNgaySua());
-        if (entity.getTrangThai() != null) dto.setTrangThai(entity.getTrangThai());
-        return dto;
-    }
-    public static BaoCao convertToEntity(BaoCaoDto dto){
-        BaoCao entity = new BaoCao();
-        if (dto.getId() != null) entity.setId(dto.getId());
-        if (dto.getMa() != null) entity.setMa(dto.getMa());
-        if (dto.getTen() != null) entity.setTen(dto.getTen());
-        if (dto.getMoTa() != null) entity.setMoTa(dto.getMoTa());
-        if (dto.getNgayTao() != null) entity.setNgayTao(dto.getNgayTao());
-        if (dto.getNgaySua() != null) entity.setNgaySua(dto.getNgaySua());
-        if (dto.getTrangThai() != null) entity.setTrangThai(dto.getTrangThai());
-        return entity;
-    }
-    public static List<BaoCaoDto> convertListBaoCaoToDto(List<BaoCao> entityList) {
-        List<BaoCaoDto> dtoList = new ArrayList<>();
-        for (BaoCao entity : entityList) {
-            dtoList.add(convertToDto(entity));
-        }
-        return dtoList;
-    }
+
 
     //chi tiet san pham
     public static ChiTietSanPhamDto convertToDto(ChiTietSanPham entity){

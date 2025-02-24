@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 public class HoaDonSua {
 
-    private List<HoaDonChiTiet> chiTietList;
+    private List<HoaDonChiTietDto> chiTietList;
     private HoaDon hoaDon;
     private NguoiDung nguoiDung;
 }

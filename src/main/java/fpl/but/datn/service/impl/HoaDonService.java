@@ -1,11 +1,14 @@
 package fpl.but.datn.service.impl;
 
+import fpl.but.datn.dto.request.HoaDonChiTietDto;
+import fpl.but.datn.dto.response.MonthlySalesData;
 import fpl.but.datn.entity.*;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.repository.*;
 import fpl.but.datn.service.ICTSanPhamService;
 import fpl.but.datn.service.IHoaDonService;
+import fpl.but.datn.tranferdata.TranferDatas;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,6 +35,7 @@ public class HoaDonService implements IHoaDonService {
     private ICTSanPhamService ictSanPhamService;
     @Autowired
     private VoucherRepository voucherRepository;
+
 
 
     @Override
@@ -61,6 +65,7 @@ public class HoaDonService implements IHoaDonService {
     public HoaDon update(HoaDon request, UUID id) {
         HoaDon hoaDon = findById(id);
         hoaDon.setVoucher(request.getVoucher());
+        hoaDon.setId(id);
         hoaDon.setNgaySua(new Date());
         hoaDon.setNgayTao(new Date());
         hoaDon.setTongTien(request.getTongTien());
@@ -133,6 +138,15 @@ public class HoaDonService implements IHoaDonService {
 
         hoaDonRepository.save(hoaDon);
     }
+
+    @Override
+    public List<MonthlySalesData> findMonthlySalesData() {
+        return hoaDonRepository.findMonthlySalesData1();
+    }    @Override
+    public List<MonthlySalesData> findMonthlySalesData2() {
+        return hoaDonRepository.findMonthlySalesData2();
+    }
+
 
     @Override
     public void delete(UUID id) {
@@ -335,7 +349,8 @@ public class HoaDonService implements IHoaDonService {
         return tangTruong;
     }
 
-    public HoaDon updateHoaDon(List<HoaDonChiTiet> chiTietList, HoaDon hoaDon, NguoiDung nguoiDung) {
+
+    public HoaDon updateHoaDon(List<HoaDonChiTietDto> chiTietList, HoaDon hoaDon, NguoiDung nguoiDung) {
         // Tìm hóa đơn cũ
         Optional<HoaDon> optionalHoaDonCu = hoaDonRepository.findById(hoaDon.getId());
         if (!optionalHoaDonCu.isPresent()) {
@@ -346,7 +361,7 @@ public class HoaDonService implements IHoaDonService {
         List<HoaDonChiTiet> hoaDonChiTiets = hoaDonChiTietRepository.findAllHoaDonChiTietByIdHoaDon(hoaDon.getId());
 
         for (HoaDonChiTiet hdDta : hoaDonChiTiets) {
-            for (HoaDonChiTiet hdNew : chiTietList) {
+            for (HoaDonChiTietDto hdNew : chiTietList) {
                 if (hdNew.getId().equals(hdDta.getId())) {
                     // Xử lý chi tiết sản phẩm cũ
                     MauSac mauCu = hdDta.getChiTietSanPham().getMauSac();
@@ -378,11 +393,11 @@ public class HoaDonService implements IHoaDonService {
                         chiTietSanPham.setNgaySua(new Date());
                         ctSanPhamRepository.save(chiTietSanPham);
                         hdNew.setNgaySua(new Date());
-                        hoaDonChiTietRepository.save(hdNew);
+                        hoaDonChiTietRepository.save(TranferDatas.convertToEntity(hdNew));
                         continue;
                     }
 
-                    if (mauMoi.getId().equals(mauCu.getId()) || kichThuocCu.getId().equals(kichThuocMoi.getId())) {
+                    if (mauMoi.getId() != mauCu.getId() || kichThuocCu.getId() != kichThuocMoi.getId()) {
                         ChiTietSanPham chiTietSanPhamMoi = ictSanPhamService.getByMKS(hdNew.getChiTietSanPham().getSanPham().getId(), kichThuocMoi.getId(), mauMoi.getId());
                         ChiTietSanPham chiTietSanPhamCu = ictSanPhamService.getByMKS(hdNew.getChiTietSanPham().getSanPham().getId(), kichThuocCu.getId(), mauCu.getId());
                         chiTietSanPhamMoi.setSoLuong(chiTietSanPhamMoi.getSoLuong() - hdNew.getSoLuong());
@@ -393,7 +408,7 @@ public class HoaDonService implements IHoaDonService {
                         ctSanPhamRepository.save(chiTietSanPhamCu);
                         hdNew.setChiTietSanPham(chiTietSanPhamMoi);
                         hdNew.setNgaySua(new Date());
-                        hoaDonChiTietRepository.save(hdNew);
+                        hoaDonChiTietRepository.save(TranferDatas.convertToEntity(hdNew));
                     }
                 }
             }
@@ -408,5 +423,4 @@ public class HoaDonService implements IHoaDonService {
 
         return hoaDonRepository.save(hoaDonCu);
     }
-
 }

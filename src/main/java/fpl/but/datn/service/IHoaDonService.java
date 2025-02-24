@@ -1,10 +1,10 @@
 package fpl.but.datn.service;
 
 import fpl.but.datn.dto.request.HoaDonChiTietDto;
+import fpl.but.datn.dto.response.MonthlySalesData;
 import fpl.but.datn.entity.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.query.Param;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -39,8 +39,14 @@ public interface IHoaDonService {
     BigDecimal tinhPhanTramTangTruongDoanhThu(int namNay);
     HoaDon yeuCauSuaHoaDon(HoaDon request, UUID id);
     boolean canUpdateTrangThai(int currentTrangThai, int newTrangThai, String ghiChu);
+    HoaDon updateHoaDon(List<HoaDonChiTietDto> chiTietList, HoaDon hoaDon, NguoiDung nguoiDung);
     void huyDonDaXuLy(HoaDon hoaDon, int trangThai);
 
-        HoaDon updateHoaDon(List<HoaDonChiTiet> chiTietList, HoaDon hoaDon, NguoiDung nguoiDung);
+    List<MonthlySalesData> findMonthlySalesData();
+    List<MonthlySalesData> findMonthlySalesData2();
+
+
+
+
 }
    

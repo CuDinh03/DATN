@@ -1,6 +1,8 @@
 package fpl.but.datn.service;
 
+import fpl.but.datn.dto.request.ChiTietSanPhamDto;
 import fpl.but.datn.dto.request.FilterSanPhamRequest;
+import fpl.but.datn.dto.request.HinhAnhRequest;
 import fpl.but.datn.entity.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +17,7 @@ public interface ICTSanPhamService {
 
     ChiTietSanPham create(ChiTietSanPham chiTietSanPham);
 
-    ChiTietSanPham create(ChiTietSanPham request, List<HinhAnh> hinhAnhs);
+    ChiTietSanPham create(ChiTietSanPham request, List<HinhAnhRequest> hinhAnhs);
 
     ChiTietSanPham update(ChiTietSanPham chiTietSanPham, UUID id);
 
@@ -59,11 +61,13 @@ public interface ICTSanPhamService {
     List<ChiTietSanPham> getCtsp();
     List<ChiTietSanPham> saveListCt(List<ChiTietSanPham> list);
 
-    List<ChiTietSanPham> saveListCt(List<ChiTietSanPham> list, List<HinhAnh> hinhAnhs);
+    List<ChiTietSanPham> saveListCt(List<ChiTietSanPham> list, List<HinhAnhRequest> hinhAnhs);
     List<ChiTietSanPham> findByFilter(UUID mauSac, UUID kichThuoc, UUID danhMuc);
     Page<ChiTietSanPham> filterSanPham(FilterSanPhamRequest request, int page, int size);
 
     ChiTietSanPham getByMKS ( UUID sanPhamId , UUID kichThuocId , UUID mauSacId);
 
+
+    Page<ChiTietSanPhamDto> search(String keyword, Pageable pageable);
 
 }

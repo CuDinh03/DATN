@@ -1,7 +1,7 @@
 package fpl.but.datn.repository;
 
-import fpl.but.datn.entity.DanhMuc;
-import fpl.but.datn.entity.GioHang;
+import fpl.but.datn.dto.response.MonthlySalesData;
+
 import fpl.but.datn.entity.HoaDon;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -39,5 +39,16 @@ public interface HoaDonRepository extends JpaRepository<HoaDon, UUID> {
                                                     @Param("endDate") Date endDate,
                                                     @Param("khachHangId") UUID khachHangId);
 
+    @Query("SELECT new fpl.but.datn.dto.response.MonthlySalesData(MONTH(h.ngayTao), COUNT(h.id), SUM(h.tongTien)) " +
+            "FROM HoaDon h WHERE h.trangThai = 4 " +
+            "GROUP BY MONTH(h.ngayTao) " +
+            "ORDER BY MONTH(h.ngayTao)")
+    List<MonthlySalesData> findMonthlySalesData1();
 
+
+    @Query("SELECT new fpl.but.datn.dto.response.MonthlySalesData(MONTH(h.ngayTao), COUNT(h.id)) " +
+            "FROM HoaDon h WHERE h.trangThai = 5 " +
+            "GROUP BY MONTH(h.ngayTao) " +
+            "ORDER BY MONTH(h.ngayTao)")
+    List<MonthlySalesData> findMonthlySalesData2();
 }

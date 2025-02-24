@@ -121,7 +121,7 @@ public class KhachHangController {
         if (id != null) {
             UUID idKH = id;
             KhachHang khachHang = khachHangService.updateKhachHangById(TranferDatas.convertToEntity(khachHangDto), idKH);
-            apiResponse.setMessage("Update màu sắc thành công!");
+            apiResponse.setMessage("Update  thành công!");
             apiResponse.setResult(khachHang);
             return apiResponse;
         }

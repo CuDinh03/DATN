@@ -1,5 +1,6 @@
 package fpl.but.datn.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -36,7 +37,6 @@ public class ChiTietSanPham {
     private KichThuoc kichThuoc;
     @ManyToOne
     private MauSac mauSac;
-    @JsonIgnore
     @OneToMany(mappedBy = "chiTietSanPham", fetch = FetchType.EAGER)
     private List<HinhAnh> hinhAnh;
     private Integer soLuong;

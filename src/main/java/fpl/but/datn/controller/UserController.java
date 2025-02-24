@@ -1,9 +1,6 @@
 package fpl.but.datn.controller;
 
-import fpl.but.datn.dto.request.DangNhapDto;
-import fpl.but.datn.dto.request.DanhMucDto;
-import fpl.but.datn.dto.request.KhachHangDto;
-import fpl.but.datn.dto.request.TaiKhoanDto;
+import fpl.but.datn.dto.request.*;
 import fpl.but.datn.dto.response.ApiResponse;
 import fpl.but.datn.dto.response.TaiKhoanResponse;
 import fpl.but.datn.entity.TaiKhoan;
@@ -41,7 +38,7 @@ public class UserController {
     ApiResponse<TaiKhoan> createAccount(@RequestBody @Valid DangNhapDto request) {
         ApiResponse<TaiKhoan> apiResponse = new ApiResponse<>();
         if (request != null)
-            apiResponse.setResult(taiKhoanService.createAccount(TranferDatas.convertToEntity(request.getTaiKhoanDto()), request.getMail()));
+            apiResponse.setResult(taiKhoanService.createAccount(TranferDatas.convertToEntity(request.getTaiKhoanDto()), request.getEmail()));
         return apiResponse;
     }
     
@@ -64,6 +61,8 @@ public class UserController {
 
         return apiResponse;
     }
+
+
 
 //    @GetMapping("/all/{role}")
 //    public ApiResponse<Page<TaiKhoanDto>> getAccountsByRoles(@RequestParam(defaultValue = "0") int page,
@@ -93,6 +92,7 @@ public class UserController {
         apiResponse.setResult(dto);
         return apiResponse;
     }
+
 
     @GetMapping("/myInfo")
     ApiResponse<KhachHangDto> getMyinfo() {

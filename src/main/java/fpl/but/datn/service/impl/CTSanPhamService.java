@@ -1,7 +1,10 @@
 package fpl.but.datn.service.impl;
 
+import fpl.but.datn.dto.request.ChiTietSanPhamDto;
 import fpl.but.datn.dto.request.FilterSanPhamRequest;
+import fpl.but.datn.dto.request.HinhAnhRequest;
 import fpl.but.datn.entity.*;
+import fpl.but.datn.mapper.ChiTietSanPhamMapper;
 import fpl.but.datn.repository.CTSanPhamRepository;
 import fpl.but.datn.repository.HinhAnhRepository;
 import fpl.but.datn.service.ICTSanPhamService;
@@ -41,7 +44,7 @@ public class CTSanPhamService implements ICTSanPhamService {
 
     @Override
     public Page<ChiTietSanPham> getAllChiTietSanPhamPageable(Pageable pageable) {
-        return ctSanPhamRepository.findAll(pageable);
+        return ctSanPhamRepository.findAllSapXepNgayTao(pageable);
     }
 
 
@@ -96,10 +99,11 @@ public class CTSanPhamService implements ICTSanPhamService {
         return null;
     }
 
+
 //    @Override
 
     @Override
-    public ChiTietSanPham create(ChiTietSanPham request, List<HinhAnh> hinhAnhs) {
+    public ChiTietSanPham create(ChiTietSanPham request, List<HinhAnhRequest> hinhAnhs) {
 
 
         // Kiểm tra xem sản phẩm chi tiết đã tồn tại chưa
@@ -136,14 +140,16 @@ public class CTSanPhamService implements ICTSanPhamService {
 
             ChiTietSanPham chiTietSanPham1 = ctSanPhamRepository.save(chiTietSanPham);
 
-            for (HinhAnh hinhAnh : hinhAnhs) {
+            for (HinhAnhRequest hinhAnh : hinhAnhs) {
                 if (chiTietSanPham1.getMa().equals(hinhAnh.getMa())) {
+                    HinhAnh hinhAnh1 = new HinhAnh();
                     Random random = new Random();
-                    hinhAnh.setMa("HA" + random.nextInt(1000));
-                    hinhAnh.setId(UUID.randomUUID());
-                    hinhAnh.setChiTietSanPham(chiTietSanPham1);
-                    hinhAnh.setTrangThai(1);
-                    hinhAnhRepository.save(hinhAnh);
+                    hinhAnh1.setMa("HA" + random.nextInt(1000));
+                    hinhAnh1.setUrl(hinhAnh.getUrl());
+                    hinhAnh1.setId(UUID.randomUUID());
+                    hinhAnh1.setChiTietSanPham(chiTietSanPham1);
+                    hinhAnh1.setTrangThai(1);
+                    hinhAnhRepository.save(hinhAnh1);
                 }
             }
             Random random = new Random();
@@ -160,7 +166,6 @@ public class CTSanPhamService implements ICTSanPhamService {
         ChiTietSanPham chiTietSanPhamoldValue = ctSanPhamRepository.findById(id).get();
         chiTietSanPhamoldValue.setMa(request.getMa());
         chiTietSanPhamoldValue.setSanPham(request.getSanPham());
-        chiTietSanPhamoldValue.setThuongHieu(request.getThuongHieu());
         chiTietSanPhamoldValue.setChatLieu(request.getChatLieu());
         chiTietSanPhamoldValue.setDanhMuc(request.getDanhMuc());
         chiTietSanPhamoldValue.setKichThuoc(request.getKichThuoc());
@@ -168,8 +173,6 @@ public class CTSanPhamService implements ICTSanPhamService {
         chiTietSanPhamoldValue.setSoLuong(request.getSoLuong());
         chiTietSanPhamoldValue.setGiaNhap(request.getGiaNhap());
         chiTietSanPhamoldValue.setGiaBan(request.getGiaBan());
-        chiTietSanPhamoldValue.setNgayNhap(request.getNgayNhap());
-        chiTietSanPhamoldValue.setNgayTao(request.getNgayTao());
         chiTietSanPhamoldValue.setNgaySua(new Date());
         chiTietSanPhamoldValue.setHinhAnh(request.getHinhAnh());
         return ctSanPhamRepository.save(chiTietSanPhamoldValue);
@@ -180,7 +183,9 @@ public class CTSanPhamService implements ICTSanPhamService {
         Optional<ChiTietSanPham> optional = ctSanPhamRepository.findById(id);
         if (optional.isPresent()) {
             ChiTietSanPham chiTietSanPham = optional.get();
-            ctSanPhamRepository.delete(chiTietSanPham);
+            chiTietSanPham.setNgaySua(new Date());
+            chiTietSanPham.setTrangThai(0);
+            ctSanPhamRepository.save(chiTietSanPham);
             return true;
         } else {
             return false;
@@ -241,7 +246,7 @@ public class CTSanPhamService implements ICTSanPhamService {
     }
 
     @Override
-    public List<ChiTietSanPham> saveListCt(List<ChiTietSanPham> list, List<HinhAnh> hinhAnhs) {
+    public List<ChiTietSanPham> saveListCt(List<ChiTietSanPham> list, List<HinhAnhRequest> hinhAnhs) {
         List<ChiTietSanPham> chiTietSanPhamList = new ArrayList<>();
         for (ChiTietSanPham ct :
                 list) {
@@ -284,5 +289,12 @@ public class CTSanPhamService implements ICTSanPhamService {
         return ctSanPhamRepository.getByMKS(sanPhamId,kichThuocId,mauSacId);
     }
 
+    @Autowired
+    private ChiTietSanPhamMapper chiTietSanPhamMapper;
 
+    @Override
+    public Page<ChiTietSanPhamDto> search(String keyword, Pageable pageable) {
+        Page<ChiTietSanPham> result = ctSanPhamRepository.findByKeyword(keyword, pageable);
+        return result.map(chiTietSanPhamMapper::toDto);
+    }
 }
