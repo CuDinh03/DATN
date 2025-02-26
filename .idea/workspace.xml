@@ -6,46 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="85360360-6e47-429b-b577-a4f16be7088d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-<<<<<<< HEAD
-=======
-      <change beforePath="$PROJECT_DIR$/out/production/DATN/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DATN/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/configuration/ApplicationInitConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/configuration/ApplicationInitConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/configuration/JacksonConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/configuration/JacksonConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/configuration/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/configuration/SecurityConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/controller/BaoCaoController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/controller/CTSanPhamController 2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/controller/GioHangChiTietController 2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/controller/HinhAnhController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/controller/HinhAnhController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/controller/HoaDonController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/controller/HoaDonController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/controller/KhachHangController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/controller/KhachHangController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/dto/response/MonthlySalesData 2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/dto/response/MonthlySalesData.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/dto/response/MonthlySalesData.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/entity/BaoCao$BaoCaoBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/entity/BaoCao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/entity/ChiTietSanPhamSpecification 2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/entity/KhachHang$KhachHangBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/entity/KhachHang$KhachHangBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/entity/KhachHang.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/entity/KhachHang.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/repository/BaoCaoRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/repository/CTSanPhamRepository 2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/repository/GiaoHangRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/repository/GiaoHangRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/repository/HoaDonRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/repository/HoaDonRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/repository/KhachHangRepository 2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/repository/KhachHangRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/repository/KhachHangRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/service/IBaoCaoService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/service/ICTSanPhamService 2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/service/IGiaoHangService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/service/IGiaoHangService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/service/IHoaDonService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/service/IHoaDonService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/service/impl/BaoCaoService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/service/impl/CTSanPhamService 2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/service/impl/CTSanPhamService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/service/impl/CTSanPhamService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/service/impl/GiaoHangService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/service/impl/GiaoHangService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/service/impl/GioHangChiTietService 2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/service/impl/HoaDonService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/service/impl/HoaDonService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/service/impl/ThanhToanService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/service/impl/ThanhToanService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/tranferdata/TranferDatas.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DATN/fpl/but/datn/tranferdata/TranferDatas.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
->>>>>>> main
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -205,23 +165,7 @@
       <workItem from="1724601893247" duration="3918000" />
       <workItem from="1724637032883" duration="217000" />
       <workItem from="1724637253390" duration="1204000" />
-<<<<<<< HEAD
-      <workItem from="1731342259415" duration="54000" />
-      <workItem from="1731401722028" duration="480000" />
-      <workItem from="1734102767411" duration="1332000" />
-      <workItem from="1735437255473" duration="2010000" />
-      <workItem from="1736592371238" duration="48000" />
-      <workItem from="1736593842295" duration="26000" />
-      <workItem from="1736741677008" duration="1071000" />
-=======
-      <workItem from="1738583323977" duration="613000" />
-      <workItem from="1739148575419" duration="332000" />
-      <workItem from="1739170296793" duration="1367000" />
-      <workItem from="1739337945949" duration="106000" />
-      <workItem from="1739339242265" duration="2323000" />
-      <workItem from="1740392363594" duration="211000" />
-      <workItem from="1740392586073" duration="1281000" />
->>>>>>> main
+      <workItem from="1740493579161" duration="5000" />
     </task>
     <servers />
   </component>
@@ -240,30 +184,9 @@
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-<<<<<<< HEAD
           <url>file://$PROJECT_DIR$/src/main/java/fpl/but/datn/controller/CTSanPhamController.java</url>
           <line>288</line>
           <option name="timeStamp" value="3" />
-=======
-          <url>file://$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/PermissionService.java</url>
-          <line>24</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/target/generated-sources/annotations/fpl/but/datn/mapper/PermissionMapperImpl.java</url>
-          <line>19</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/fpl/but/datn/service/impl/TaiKhoanService.java</url>
-          <line>41</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/fpl/but/datn/controller/HoaDonController.java</url>
-          <line>403</line>
-          <option name="timeStamp" value="19" />
->>>>>>> main
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
