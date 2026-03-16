@@ -31,7 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
-**/DS_Store
+**/.DS_Store
+.DS_Store
 
 ### Local config (secrets) ###
 src/main/resources/application-local.properties
