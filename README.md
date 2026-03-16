@@ -9,14 +9,14 @@ Java: 17
 
 Framework: Spring boot 3.2.x
 
-DBMS: MSSQL
+DBMS: MySQL
 
 
 # Prerequisites:
 
 Java SDK 17
 
-MSSQL
+MySQL
 
 
 # Start application:

@@ -33,3 +33,11 @@ build/
 .vscode/
 **/DS_Store
 
+### Local config (secrets) ###
+src/main/resources/application-local.properties
+src/main/resources/application-*.local.properties
+
+### Local env (secrets) ###
+.env.local
+env.local.sh
+
