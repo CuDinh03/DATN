@@ -8,7 +8,7 @@
 
 | Thành phần | Công nghệ |
 |------------|-----------|
-| Backend    | Java 17 || 21, Spring Boot 3.2.x, Maven ≥ 3.9.5 |
+| Backend    | Java 17, Spring Boot 3.2.x, Maven ≥ 3.9.5 |
 | Database   | MySQL 8.x / 9.x |
 | Frontend   | Angular 18+, Node.js (LTS khuyến nghị) |
 
@@ -16,13 +16,10 @@
 
 ## Prerequisites
 
-- **Java 17||21** (để chạy Backend)
+- **Java 17** (để chạy Backend)
 - **Maven** ≥ 3.9.5 (hoặc dùng `./mvnw` trong repo)
 - **MySQL** 8.x hoặc 9.x
 - **Node.js** 18+ và **npm** (để chạy Frontend)
-
-- Java 17 || 21
-- MySQL (8.x hoặc 9.x; project dùng driver MySQL 8)
 
 ## 1. Clone dự án
 
