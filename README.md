@@ -21,7 +21,8 @@
 - **MySQL** 8.x hoặc 9.x
 - **Node.js** 18+ và **npm** (để chạy Frontend)
 
----
+- Java 17 || 21
+- MySQL (8.x hoặc 9.x; project dùng driver MySQL 8)
 
 ## 1. Clone dự án
 
@@ -36,6 +37,10 @@ git clone https://github.com/CuDinh03/FE_DATN
 cd ../DATN
 ```
 
+2. **Cấu hình kết nối** trong `env.local.sh` (sửa cho đúng máy bạn sử dụng):
+   - `DB_URL=jdbc:mysql://localhost:3306/DATN?useUnicode=true&characterEncoding=utf8&connectionCollation=utf8mb4_unicode_ci&serverTimezone=UTC`
+   - `DB_USERNAME=root` (hoặc user MySQL của bạn)
+   - `DB_PASSWORD=<mật khẩu MySQL>`
 
 ---
 
@@ -74,7 +79,8 @@ export JWT_SIGNER_KEY="your-secret-key-at-least-32-characters-long"
 
 Nếu MySQL chạy port khác (vd 3307), đổi `3306` trong `DB_URL`.
 
-### 2.3. Chạy Backend
+Secrets (DB, mail, JWT) lấy từ env.
+Tạo file `env.local.sh` (không commit).
 
 ```bash
 # Trong thư mục Backend (DATN)
@@ -87,50 +93,12 @@ source ./env.local.sh
 
 **Chạy với profile prod:**
 
+# Lệnh chạy DATN:
+
 ```bash
-SPRING_PROFILES_ACTIVE=prod source ./env.local.sh
+cd ../DATN
+source ./env.local.sh
 ./mvnw spring-boot:run
-```
-
----
-
-## 3. Khởi động Frontend (Angular)
-
-Frontend gọi API Backend qua `http://localhost:9091/api`. Cần chạy Backend trước.
-
-### 3.1. Vào thư mục Frontend
-
-```bash
-cd <đường-dẫn-project-Frontend>
-# Ví dụ: cd ../FE_DATN  hoặc  cd ~/Desktop/FE_DATN
-```
-
-### 3.2. Cài đặt dependency
-
-```bash
-npm install
-```
-
-### 3.3. Cấu hình URL API
-
-Mở file `src/environments/environment.ts`, đảm bảo trỏ đúng Backend:
-
-```ts
-export const environment = {
-  production: false,
-  apiUrl: 'http://localhost:9091/api',
-  // ...
-};
-```
-
-Nếu Backend chạy port khác, đổi `9091` cho đúng.
-
-### 3.4. Chạy Frontend
-
-```bash
-npm start
-# hoặc
-ng serve
 ```
 
 - Ứng dụng chạy tại: **http://localhost:4200**
