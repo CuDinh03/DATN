@@ -150,6 +150,16 @@ public class HoaDonController {
         return apiResponse;
     }
 
+    /** Số đơn hàng đã bán (trạng thái hoàn thành = 4). */
+    @GetMapping("/so-don-hang")
+    public ApiResponse<Long> getSoDonHangDaBan() {
+        long soDon = hoaDonService.countByTrangThai(4);
+        ApiResponse<Long> apiResponse = new ApiResponse<>();
+        apiResponse.setMessage("Lấy số đơn hàng thành công");
+        apiResponse.setResult(soDon);
+        return apiResponse;
+    }
+
     @GetMapping("/byTrangThaiAndKhachHang")
     public ApiResponse<List<HoaDonDto>> getHoaDonsByTrangThaiAndKhachHang(
             @RequestParam Integer trangThai, @RequestParam UUID khachHangId) {

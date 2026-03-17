@@ -48,6 +48,8 @@ public interface IHoaDonService {
     List<MonthlySalesData> findMonthlySalesData();
     List<MonthlySalesData> findMonthlySalesData2();
 
+    long countByTrangThai(Integer trangThai);
+
 
 
 

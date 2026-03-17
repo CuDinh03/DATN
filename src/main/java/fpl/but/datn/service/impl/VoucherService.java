@@ -23,7 +23,8 @@ public class VoucherService implements IService<Voucher>, IVoucherService {
 
     @Override
     public Voucher getByID(UUID id) {
-        return voucherRepository.findById(id).get();
+        return voucherRepository.findById(id)
+                .orElseThrow(() -> new AppException(ErrorCode.VOUCHER_NOT_EXISTED));
     }
 
         @Override

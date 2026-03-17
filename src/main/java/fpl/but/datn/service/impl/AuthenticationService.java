@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import com.nimbusds.jose.*;
@@ -70,6 +71,7 @@ public class AuthenticationService {
         return IntrospectResponse.builder().valid(isValid).build();
     }
 
+    @Transactional(readOnly = true)
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         var taiKhoan = taiKhoanRepository.findByTenDangNhap(request.getTenDangNhap()).orElseThrow(() -> new AppException(ErrorCode.ACCOUNT_NOT_EXISTED));
 

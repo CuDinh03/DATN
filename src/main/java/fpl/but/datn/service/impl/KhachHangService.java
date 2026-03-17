@@ -30,7 +30,8 @@ public class KhachHangService implements IService<KhachHang>, IKhachHangService 
 
     @Override
     public KhachHang getByID(UUID id) {
-        return khachHangRepository.findById(id).get();
+        return khachHangRepository.findById(id)
+                .orElseThrow(() -> new AppException(ErrorCode.KHACHHANG_NOT_FOUND));
     }
 
     @Override
@@ -84,7 +85,8 @@ public class KhachHangService implements IService<KhachHang>, IKhachHangService 
 
     @Override
     public void delete(UUID id) {
-        KhachHang khachHang = this.khachHangRepository.findById(id).get();
+        KhachHang khachHang = this.khachHangRepository.findById(id)
+                .orElseThrow(() -> new AppException(ErrorCode.KHACHHANG_NOT_FOUND));
         khachHang.setTrangThai(0);
         this.khachHangRepository.saveAndFlush(khachHang);
     }
@@ -140,12 +142,14 @@ public class KhachHangService implements IService<KhachHang>, IKhachHangService 
 
     @Override
     public KhachHang getKhachHangBySdt(String sdt) {
-        return this.khachHangRepository.getKhachHangBySdt(sdt).get();
+        return this.khachHangRepository.getKhachHangBySdt(sdt)
+                .orElseThrow(() -> new AppException(ErrorCode.KHACHHANG_NOT_FOUND));
     }
 
     @Override
     public KhachHang getKhachHangByIdTaiKhoan(UUID idTaiKhoan) {
-        return khachHangRepository.getKhachHangByIdTaiKhoan(idTaiKhoan).get();
+        return khachHangRepository.getKhachHangByIdTaiKhoan(idTaiKhoan)
+                .orElseThrow(() -> new AppException(ErrorCode.KHACHHANG_NOT_FOUND));
     }
 
     @Override
@@ -228,7 +232,8 @@ public class KhachHangService implements IService<KhachHang>, IKhachHangService 
         String name = context.getAuthentication().getName();
         TaiKhoan byTenDangNhap = taiKhoanRepository.findByTenDangNhap(name).orElseThrow(() -> new AppException(ErrorCode.ACCOUNT_NOT_EXISTED));
 
-        KhachHang khachHang = khachHangRepository.getKhachHangByIdTaiKhoan(byTenDangNhap.getId()).get();
+        KhachHang khachHang = khachHangRepository.getKhachHangByIdTaiKhoan(byTenDangNhap.getId())
+                .orElseThrow(() -> new AppException(ErrorCode.KHACHHANG_NOT_FOUND));
 
         return khachHang;
     }

@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -46,9 +48,8 @@ public class HoaDonService implements IHoaDonService {
     @Override
     public HoaDon create(HoaDon request) {
         HoaDon hoaDon = new HoaDon();
-        Random random = new Random();
         hoaDon.setId(UUID.randomUUID());
-        hoaDon.setMa("HD" + random.nextInt(1000));
+        hoaDon.setMa("HD" + System.currentTimeMillis() % 1000000 + "-" + UUID.randomUUID().toString().substring(0, 4));
         hoaDon.setVoucher(request.getVoucher());
         hoaDon.setNgaySua(new Date());
         hoaDon.setNgayTao(new Date());
@@ -111,6 +112,7 @@ public class HoaDonService implements IHoaDonService {
         }
     }
 
+    @Transactional
     public void huyDonDaXuLy(HoaDon hoaDon, int trangThai){
         List<HoaDonChiTiet> list = hoaDonChiTietRepository.findAllHoaDonChiTietByIdHoaDon(hoaDon.getId());
         for (HoaDonChiTiet chiTiet: list){
@@ -181,24 +183,10 @@ public class HoaDonService implements IHoaDonService {
     }
 
     @Override
+    @Transactional
     public HoaDon updateTrangThai(UUID id, Integer trangThai, String ghiChu) {
         HoaDon hoaDon = findById(id);
-        if (hoaDon.getTrangThai() == 1) {
-            List<HoaDonChiTiet> list = hoaDonChiTietRepository.findAllHoaDonChiTietByIdHoaDon(hoaDon.getId());
-            List<ChiTietSanPham> listCt = ctSanPhamRepository.getCtspByHoaDon(hoaDon.getId());
-            for (ChiTietSanPham ctsp : listCt) {
-                for (HoaDonChiTiet hoaDonChiTiet : list) {
-                    if (ctsp.getId().equals(hoaDonChiTiet.getChiTietSanPham().getId())) {
-                        Integer soLuong = ctsp.getSoLuong();
-                        if (soLuong >= hoaDonChiTiet.getSoLuong()) {
-                            ctsp.setSoLuong(soLuong - hoaDonChiTiet.getSoLuong());
-                            ctsp.setNgaySua(new Date());
-                            ctSanPhamRepository.save(ctsp);
-                        }
-                    }
-                }
-            }
-        }
+        // Tồn kho đã được trừ khi thanh toán (thanhToanSanPham / thanhToanSanPhamOnline), không trừ lại khi đổi trạng thái
         hoaDon.setTrangThai(trangThai);
         hoaDon.setGhiChu(ghiChu);
         hoaDon.setNgaySua(new Date());
@@ -267,6 +255,11 @@ public class HoaDonService implements IHoaDonService {
                 .flatMap(hoaDon -> hoaDon.getHoaDonChiTietList().stream())
                 .mapToInt(HoaDonChiTiet::getSoLuong)
                 .sum();
+    }
+
+    @Override
+    public long countByTrangThai(Integer trangThai) {
+        return hoaDonRepository.countByTrangThai(trangThai);
     }
 
     public Map<LocalDate, BigDecimal> thongKeDoanhThuTheoNgay() {
