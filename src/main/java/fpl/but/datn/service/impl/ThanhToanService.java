@@ -3,6 +3,7 @@ import fpl.but.datn.dto.request.GioHangChiTietDto;
 import fpl.but.datn.entity.*;
 import fpl.but.datn.exception.AppException;
 import fpl.but.datn.exception.ErrorCode;
+import fpl.but.datn.repository.CTSanPhamRepository;
 import fpl.but.datn.repository.GioHangChiTietRepository;
 import fpl.but.datn.repository.HoaDonRepository;
 import fpl.but.datn.service.IService;
@@ -45,6 +46,9 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
     @Autowired
     private VoucherService voucherService;
 
+    @Autowired
+    private CTSanPhamRepository ctSanPhamRepository;
+
     @Override
     public ThanhToan getByID(UUID id) {
         return null;
@@ -76,62 +80,65 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
         return null;
     }
 
+    @Transactional
     public void thanhToanSanPham(HoaDon request,
                                  List<GioHangChiTiet> listGioHangCt) {
+        if (request == null) return;
+        HoaDon hoaDon = hoaDonService.findById(request.getId());
+        hoaDon.setTrangThai(4);
+        hoaDon.setVoucher(request.getVoucher());
+        hoaDon.setTongTienGiam(request.getTongTienGiam());
+        hoaDon.setGhiChu(request.getGhiChu());
+        hoaDon.setTongTien(request.getTongTien());
+        hoaDon.setNguoiDung(request.getNguoiDung());
+        hoaDon.setNgaySua(new Date());
+        hoaDon.setNgayTao(new Date());
+        if (request.getKhachHang() != null) {
+            hoaDon.setKhachHang(request.getKhachHang());
+        }
+        hoaDonService.update(hoaDon, hoaDon.getId());
 
-
-        if (request != null) {
-            HoaDon hoaDon = hoaDonService.findById(request.getId());
-            if (hoaDon != null) {
-                hoaDon.setTrangThai(4);
-                hoaDon.setVoucher(request.getVoucher());
-                hoaDon.setTongTienGiam(request.getTongTienGiam());
-                hoaDon.setGhiChu(request.getGhiChu());
-                hoaDon.setTongTien(request.getTongTien());
-                hoaDon.setNguoiDung(request.getNguoiDung());
-                hoaDon.setNgaySua(new Date());
-                hoaDon.setNgayTao(new Date());
-                if (request.getKhachHang() != null) {
-                    hoaDon.setKhachHang(request.getKhachHang());
-                }
-                hoaDonService.update(hoaDon, hoaDon.getId());
-                for (GioHangChiTiet ghCt : listGioHangCt) {
-                    System.out.println(ghCt);
-                    HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
-                    hoaDonChiTiet.setId(UUID.randomUUID());
-                    hoaDonChiTiet.setGiaBan(ghCt.getChiTietSanPham().getGiaBan());
-                    hoaDonChiTiet.setSoLuong(ghCt.getSoLuong());
-                    hoaDonChiTiet.setNgayTao(new Date());
-                    hoaDonChiTiet.setNgaySua(new Date());
-                    hoaDonChiTiet.setChiTietSanPham(ghCt.getChiTietSanPham());
-                    hoaDonChiTiet.setHoaDon(hoaDon);
-                    hoaDonChiTiet.setTrangThai(4);
-                    this.hoaDonChiTietService.create(hoaDonChiTiet);
-                }
-
-                List<HoaDonChiTiet> hoaDonChiTiets = this.hoaDonChiTietService.getHoaDonChiTietByIdHoaDon(hoaDon.getId());
-                for (HoaDonChiTiet hdct : hoaDonChiTiets) {
-                    hdct.setTrangThai(4);
-                    this.hoaDonChiTietService.update(hdct, hdct.getId());
-                }
-                GioHangHoaDon gioHangHoaDon = this.hoaDonGioHangService.findByIdHoaDon(hoaDon.getId());
-                GioHang gioHang = this.gioHangService.findById(gioHangHoaDon.getGioHang().getId());
-                gioHang.setTrangThai(4);
-                this.gioHangService.update(gioHang, gioHang.getId());
-
-                if (hoaDon.getVoucher() != null) {
-                    Voucher voucher = hoaDon.getVoucher();
-                    int soLuongConLai = voucher.getSoLuong() - 1;
-                    if (soLuongConLai < 0) {
-                        throw new AppException(ErrorCode.NO_VOUCHER_FOUND); // tam de vay
-                    }
-                    voucher.setSoLuong(soLuongConLai);
-                    if (soLuongConLai < 10 && soLuongConLai > 0) {
-                        System.out.println("Voucher sắp hết, chỉ còn lại " + soLuongConLai + " voucher!");
-                    }
-                    voucherService.update(voucher.getId(),voucher);
-                }
+        for (GioHangChiTiet ghCt : listGioHangCt) {
+            ChiTietSanPham ctsp = ctSanPhamRepository.findById(ghCt.getChiTietSanPham().getId())
+                    .orElseThrow(() -> new AppException(ErrorCode.NO_PRODUCT_DETAIL_FOUND));
+            int soLuongYeuCau = ghCt.getSoLuong();
+            if (ctsp.getSoLuong() < soLuongYeuCau) {
+                throw new AppException(ErrorCode.INSUFFICIENT_STOCK);
             }
+            ctsp.setSoLuong(ctsp.getSoLuong() - soLuongYeuCau);
+            ctsp.setNgaySua(new Date());
+            ctSanPhamRepository.save(ctsp);
+
+            HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
+            hoaDonChiTiet.setId(UUID.randomUUID());
+            hoaDonChiTiet.setGiaBan(ghCt.getChiTietSanPham().getGiaBan());
+            hoaDonChiTiet.setSoLuong(ghCt.getSoLuong());
+            hoaDonChiTiet.setNgayTao(new Date());
+            hoaDonChiTiet.setNgaySua(new Date());
+            hoaDonChiTiet.setChiTietSanPham(ghCt.getChiTietSanPham());
+            hoaDonChiTiet.setHoaDon(hoaDon);
+            hoaDonChiTiet.setTrangThai(4);
+            this.hoaDonChiTietService.create(hoaDonChiTiet);
+        }
+
+        List<HoaDonChiTiet> hoaDonChiTiets = this.hoaDonChiTietService.getHoaDonChiTietByIdHoaDon(hoaDon.getId());
+        for (HoaDonChiTiet hdct : hoaDonChiTiets) {
+            hdct.setTrangThai(4);
+            this.hoaDonChiTietService.update(hdct, hdct.getId());
+        }
+        GioHangHoaDon gioHangHoaDon = this.hoaDonGioHangService.findByIdHoaDon(hoaDon.getId());
+        GioHang gioHang = this.gioHangService.findById(gioHangHoaDon.getGioHang().getId());
+        gioHang.setTrangThai(4);
+        this.gioHangService.update(gioHang, gioHang.getId());
+
+        if (hoaDon.getVoucher() != null) {
+            Voucher voucher = hoaDon.getVoucher();
+            int soLuongConLai = voucher.getSoLuong() - 1;
+            if (soLuongConLai < 0) {
+                throw new AppException(ErrorCode.NO_VOUCHER_FOUND);
+            }
+            voucher.setSoLuong(soLuongConLai);
+            voucherService.update(voucher.getId(), voucher);
         }
     }
 
@@ -141,19 +148,16 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
         System.out.println("============================");
         System.out.println(listGioHangCt);
         if (requestGh == null || requestGh.getId() == null) {
-            throw new IllegalArgumentException("GioHang request is invalid");
+            throw new AppException(ErrorCode.GIO_HANG_NOT_FOUND);
         }
         if (tongTien == null || tongTienGiam == null) {
-            throw new IllegalArgumentException("TongTien or TongTienGiam is invalid");
+            throw new AppException(ErrorCode.INVALID_KEY);
         }
         if (listGioHangCt == null || listGioHangCt.isEmpty()) {
-            throw new IllegalArgumentException("ListGioHangCt is empty or null");
+            throw new AppException(ErrorCode.NO_CARTDETAIl_FOUND);
         }
 
-
-
-        GioHang gioHang = Optional.ofNullable(this.gioHangService.findById(requestGh.getId()))
-                .orElseThrow(() -> new IllegalArgumentException("GioHang not found with id: " + requestGh.getId()));
+        GioHang gioHang = this.gioHangService.findById(requestGh.getId());
         GiaoHang giaoHang = new GiaoHang();
         giaoHang.setId(UUID.randomUUID());
         giaoHang.setKhachHang(requestGh.getKhachHang());
@@ -185,7 +189,16 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
 
         giaoHangService.create(giaoHang);
         for (GioHangChiTietDto ghCt : listGioHangCt) {
-            System.out.println(ghCt.toString());
+            ChiTietSanPham ctsp = ctSanPhamRepository.findById(ghCt.getChiTietSanPham().getId())
+                    .orElseThrow(() -> new AppException(ErrorCode.NO_PRODUCT_DETAIL_FOUND));
+            int soLuongYeuCau = ghCt.getSoLuong();
+            if (ctsp.getSoLuong() < soLuongYeuCau) {
+                throw new AppException(ErrorCode.INSUFFICIENT_STOCK);
+            }
+            ctsp.setSoLuong(ctsp.getSoLuong() - soLuongYeuCau);
+            ctsp.setNgaySua(new Date());
+            ctSanPhamRepository.save(ctsp);
+
             HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
             hoaDonChiTiet.setId(UUID.randomUUID());
             hoaDonChiTiet.setGiaBan(ghCt.getChiTietSanPham().getGiaBan());
@@ -196,7 +209,6 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
             hoaDonChiTiet.setHoaDon(hoaDon2);
             hoaDonChiTiet.setTrangThai(1);
             gioHangChiTietRepository.delete(TranferDatas.convertToEntity(ghCt));
-
             this.hoaDonChiTietService.create(hoaDonChiTiet);
         }
 //        String toMail = requestGh.getKhachHang().getEmail();
@@ -265,7 +277,7 @@ public class ThanhToanService implements IThanhToanService, IService<ThanhToan> 
             voucher.setSoLuong(soLuongConLai);
             voucher.setNgaySua(new Date());
             if (soLuongConLai < 0) {
-                throw new IllegalArgumentException("Voucher đã hết số lượng");
+                throw new AppException(ErrorCode.NO_VOUCHER_FOUND);
             } else if (soLuongConLai < 10) {
                 System.out.println("Voucher sắp hết số lượng, còn lại: " + soLuongConLai);
             }

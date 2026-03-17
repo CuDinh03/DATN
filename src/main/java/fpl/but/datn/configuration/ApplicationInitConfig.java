@@ -67,7 +67,8 @@ public class ApplicationInitConfig {
                     log.warn("Customer Role has been created!");
 
                 }
-                ChucVu chucVu = roleRepository.getReferenceById("ADMIN");
+                ChucVu chucVu = roleRepository.findById(PredefinedRole.ADMIN_ROLE)
+                        .orElseThrow(() -> new IllegalStateException("ADMIN role must exist after creation"));
 
 
                 var roles = new HashSet<ChucVu>();

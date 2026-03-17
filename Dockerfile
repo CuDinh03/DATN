@@ -12,10 +12,10 @@ RUN mvn clean package
 FROM openjdk:17-jdk-slim
 
 # Expose cổng mà ứng dụng sẽ sử dụng
-EXPOSE 8080
+EXPOSE 9091
 
 # Sao chép file JAR từ bước build
-COPY --from=build /app/target/DATN.jar app.jar
+COPY --from=build /app/target/*.jar app.jar
 
 # Chạy ứng dụng
 ENTRYPOINT ["java", "-jar", "app.jar"]

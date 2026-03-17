@@ -4,6 +4,8 @@ import fpl.but.datn.dto.request.ChiTietSanPhamDto;
 import fpl.but.datn.dto.request.FilterSanPhamRequest;
 import fpl.but.datn.dto.request.HinhAnhRequest;
 import fpl.but.datn.entity.*;
+import fpl.but.datn.exception.AppException;
+import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.mapper.ChiTietSanPhamMapper;
 import fpl.but.datn.repository.CTSanPhamRepository;
 import fpl.but.datn.repository.HinhAnhRepository;
@@ -34,7 +36,13 @@ public class CTSanPhamService implements ICTSanPhamService {
 
     @Override
     public ChiTietSanPham create(ChiTietSanPham chiTietSanPham) {
-        return null;
+        if (chiTietSanPham.getSoLuong() == null) chiTietSanPham.setSoLuong(0);
+        if (chiTietSanPham.getMa() == null || chiTietSanPham.getMa().isBlank()) {
+            chiTietSanPham.setMa("CTSP" + System.currentTimeMillis() % 1000000 + "-" + UUID.randomUUID().toString().substring(0, 4));
+        }
+        chiTietSanPham.setNgayTao(chiTietSanPham.getNgayTao() != null ? chiTietSanPham.getNgayTao() : new Date());
+        chiTietSanPham.setNgaySua(new Date());
+        return ctSanPhamRepository.save(chiTietSanPham);
     }
 
     @Override
@@ -143,8 +151,7 @@ public class CTSanPhamService implements ICTSanPhamService {
             for (HinhAnhRequest hinhAnh : hinhAnhs) {
                 if (chiTietSanPham1.getMa().equals(hinhAnh.getMa())) {
                     HinhAnh hinhAnh1 = new HinhAnh();
-                    Random random = new Random();
-                    hinhAnh1.setMa("HA" + random.nextInt(1000));
+            hinhAnh1.setMa("HA" + System.currentTimeMillis() % 1000000 + "-" + UUID.randomUUID().toString().substring(0, 4));
                     hinhAnh1.setUrl(hinhAnh.getUrl());
                     hinhAnh1.setId(UUID.randomUUID());
                     hinhAnh1.setChiTietSanPham(chiTietSanPham1);
@@ -152,8 +159,7 @@ public class CTSanPhamService implements ICTSanPhamService {
                     hinhAnhRepository.save(hinhAnh1);
                 }
             }
-            Random random = new Random();
-            chiTietSanPham1.setMa("CTSP" + random.nextInt(1000));
+            chiTietSanPham1.setMa("CTSP" + System.currentTimeMillis() % 1000000 + "-" + UUID.randomUUID().toString().substring(0, 4));
             // Lưu sản phẩm chi tiết
             return ctSanPhamRepository.saveAndFlush(chiTietSanPham1);
         }
@@ -163,7 +169,8 @@ public class CTSanPhamService implements ICTSanPhamService {
     @Override
     public ChiTietSanPham update(ChiTietSanPham request, UUID id) {
 
-        ChiTietSanPham chiTietSanPhamoldValue = ctSanPhamRepository.findById(id).get();
+        ChiTietSanPham chiTietSanPhamoldValue = ctSanPhamRepository.findById(id)
+                .orElseThrow(() -> new AppException(ErrorCode.NO_LISTSPChiTiet_FOUND));
         chiTietSanPhamoldValue.setMa(request.getMa());
         chiTietSanPhamoldValue.setSanPham(request.getSanPham());
         chiTietSanPhamoldValue.setChatLieu(request.getChatLieu());
@@ -194,7 +201,8 @@ public class CTSanPhamService implements ICTSanPhamService {
 
     @Override
     public ChiTietSanPham findById(UUID id) {
-        return ctSanPhamRepository.findById(id).get();
+        return ctSanPhamRepository.findById(id)
+                .orElseThrow(() -> new AppException(ErrorCode.NO_LISTSPChiTiet_FOUND));
     }
 
 
@@ -215,8 +223,7 @@ public class CTSanPhamService implements ICTSanPhamService {
         for (MauSac ms : mauSacList) {
             for (KichThuoc kt : kichThuocList) {
                 ChiTietSanPham chiTietSanPham = new ChiTietSanPham();
-                Random random = new Random();
-                chiTietSanPham.setMa("CTSP" + random.nextInt(1000));
+                chiTietSanPham.setMa("CTSP" + System.currentTimeMillis() % 1000000 + "-" + UUID.randomUUID().toString().substring(0, 4));
                 chiTietSanPham.setChatLieu(chatLieu);
                 chiTietSanPham.setThuongHieu(thuongHieu);
                 chiTietSanPham.setDanhMuc(danhMuc);

@@ -1,6 +1,9 @@
 package fpl.but.datn.configuration;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,48 +16,55 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.CorsFilter;
 
+import lombok.RequiredArgsConstructor;
 
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
-    private final String[] PUBLIC_ENDPOINTS = {
-            "/api/auth/**", "/api/users/create", "/api/users/check-username", "/api/users/myInfo",
-            "/api/chi-tiet-san-pham/getAll","/api/chi-tiet-san-pham/all/{id}","/api/chi-tiet-san-pham/findAllMauSacByMaCTSP/{ma}",
-            "/api/chi-tiet-san-pham/findAllKichThuocByMaCTSP/{ma}", "/api/chi-tiet-san-pham/findChiTietSanPhamByMauSacAndKichThuoc/{ma}","/api/chi-tiet-san-pham/findSanPhamByKichThuoc/{ma}",
-            "/api/thanhtoan/onl", "/api/voucher/all", "/api/voucher/allVouchers", "/api/voucher/{id}",
-            "/api/hoa-don-chi-tiet/all/{id}",
-            "/api/auth/log-in", "/api/users/create", "/api/users/check-username", "/api/users/myInfo",
-            "/api/chi-tiet-san-pham/all/{id}", "/api/chi-tiet-san-pham/{id}","/api/chi-tiet-san-pham/findChiTietSanPhamByMauSacAndKichThuoc/{ma}",
-            "/api/chi-tiet-san-pham/", "/api/chi-tiet-san-pham/findSanPhamByKichThuoc/{ma}",
-            "/api/voucher/create", "/api/khs/create", "/api/danh-muc/create",
-            "/api/hoa-don-gio-hang/create", "/api/gio-hang-chi-tiet/create", "/api/thanhtoan",
-            "/api/hoa-don-chi-tiet/{id}",
-            "/api/hoa-don/{id}", "api/hoa-don/byTrangThaiAndKhachHang", "/api/hoa-don/updateTrangThai/{id}","/api/hoa-don/findHd/{ma}","/api/hoa-don/find-time",
-            "/api/danh-gia/count/{productId}", "/api/danh-gia/average/{productId}",
-            "api/hoa-don/yeuCauSuaHoaDon/{id}",
-            "api/mau-sac/getAll",
-            "api/kich-thuoc/getAll",
-            "api/danh-muc/getAll",
+    // Keep this list minimal: only endpoints required without authentication.
+    private static final String[] PUBLIC_GET_ENDPOINTS = {
+            "/api/chi-tiet-san-pham/getAll",
+            "/api/chi-tiet-san-pham/all/**",
+            "/api/chi-tiet-san-pham/findAllMauSacByMaCTSP/**",
+            "/api/chi-tiet-san-pham/findAllKichThuocByMaCTSP/**",
+            "/api/chi-tiet-san-pham/findChiTietSanPhamByMauSacAndKichThuoc/**",
+            "/api/chi-tiet-san-pham/findSanPhamByKichThuoc/**",
+            "/api/chi-tiet-san-pham/filterSanPham",
+            "/api/chi-tiet-san-pham/search",
+            "/api/chi-tiet-san-pham/*",
+            "/api/voucher/all",
+            "/api/voucher/allVouchers",
+            "/api/voucher/*",
+            "/api/danh-gia/count/*",
+            "/api/danh-gia/average/*"
+    };
+
+    private static final String[] PUBLIC_POST_ENDPOINTS = {
+            "/api/auth/**",
+            "/api/users/create",
+            "/api/users/check-username",
+            "/api/thanhtoan/onl",
             "/api/chi-tiet-san-pham/filter"
     };
 
-    @Autowired
-    private CustomJwtDecoder customJwtDecoder;
+    private final CustomJwtDecoder customJwtDecoder;
+    @Value("${app.cors.allowed-origins:*}")
+    private String allowedOrigins;
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(request -> request
-                .requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS)
-                .permitAll()
-                .requestMatchers(HttpMethod.GET, PUBLIC_ENDPOINTS)
-                .permitAll()
-                .anyRequest()
-                .authenticated());
+                .requestMatchers(HttpMethod.POST, PUBLIC_POST_ENDPOINTS).permitAll()
+                .requestMatchers(HttpMethod.GET, PUBLIC_GET_ENDPOINTS).permitAll()
+                .anyRequest().authenticated());
 
         httpSecurity.oauth2ResourceServer(oauth2 -> oauth2.jwt(jwtConfigurer -> jwtConfigurer
                         .decoder(customJwtDecoder)
@@ -68,7 +78,16 @@ public class SecurityConfig {
     public CorsFilter corsFilter() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
 
-        corsConfiguration.addAllowedOrigin("*");
+        List<String> origins = Arrays.stream(allowedOrigins.split(","))
+                .map(String::trim)
+                .filter(s -> !s.isBlank())
+                .collect(Collectors.toList());
+
+        if (origins.isEmpty() || origins.contains("*")) {
+            corsConfiguration.addAllowedOriginPattern("*");
+        } else {
+            origins.forEach(corsConfiguration::addAllowedOrigin);
+        }
         corsConfiguration.addAllowedMethod("*");
         corsConfiguration.addAllowedHeader("*");
 

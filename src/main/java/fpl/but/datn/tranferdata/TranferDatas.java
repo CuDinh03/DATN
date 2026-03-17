@@ -30,7 +30,7 @@ public class TranferDatas {
         if (dto.getNgayTao() != null) entity.setNgayTao(dto.getNgayTao());
         if (dto.getNgaySua() != null) entity.setNgaySua(dto.getNgaySua());
         if (dto.getTrangThai() != null) entity.setTrangThai(dto.getTrangThai());
-        if (dto.getCode() != null) entity.setCode(entity.getCode());
+        if (dto.getCode() != null) entity.setCode(dto.getCode());
         if (dto.getMoTa() != null) entity.setMoTa(entity.getMoTa());
         return entity;
     }
@@ -804,8 +804,9 @@ public class TranferDatas {
         return dto;
     }
 
-    public static ThongTinDatHangDto convertToEntity(ThongTinDatHangDto dto) {
-        ThongTinDatHangDto entity = new ThongTinDatHangDto();
+    /** Chuyển DTO sang Entity (tên method giữ để tương thích; trả về entity). */
+    public static ThongTinDatHang convertThongTinDatHangDtoToEntity(ThongTinDatHangDto dto) {
+        ThongTinDatHang entity = new ThongTinDatHang();
         if (dto.getId() != null) entity.setId(dto.getId());
         if (dto.getSdt() != null) entity.setSdt(dto.getSdt());
         if (dto.getTen() != null) entity.setTen(dto.getTen());

@@ -31,5 +31,27 @@ build/
 
 ### VS Code ###
 .vscode/
-**/DS_Store
+**/.DS_Store
+.DS_Store
 
+### Local config & secrets (do not commit) ###
+src/main/resources/application-local.properties
+src/main/resources/application-*-local.properties
+src/main/resources/application-local*.properties
+*.local.properties
+
+### Local env & secrets ###
+.env
+.env.local
+.env.*.local
+env.local.sh
+*.env
+*secret*
+*credentials*
+*.pem
+*.key
+*.jks
+*.p12
+
+### Docs (local, do not commit) ###
+/docs

@@ -1,5 +1,7 @@
 package fpl.but.datn.service.impl;
 import fpl.but.datn.entity.GioHang;
+import fpl.but.datn.exception.AppException;
+import fpl.but.datn.exception.ErrorCode;
 import fpl.but.datn.repository.GioHangRepository;
 import fpl.but.datn.service.IGioHangService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +53,8 @@ public class GioHangService implements IGioHangService {
     }
     @Override
     public GioHang findById(UUID id) {
-        return gioHangRepository.findById(id).get();
+        return gioHangRepository.findById(id)
+                .orElseThrow(() -> new AppException(ErrorCode.GIO_HANG_NOT_FOUND));
     }
 
     @Override

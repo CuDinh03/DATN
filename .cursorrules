@@ -1,0 +1,32 @@
+# 1. Project Overview & Stack
+- Project: Graduation Project - E-commerce Clothing Store.
+- Backend: Java 17, Spring Boot 3.2.x, Maven.
+- Database: MySQL.
+- Architecture: Layered Architecture (Controller -> Service -> Repository -> Entity).
+
+# 2. Coding Standards
+- Standard: Use Lombok (@Data, @Builder, @NoArgsConstructor, etc.) to reduce boilerplate.
+- Injection: Use Constructor Injection (via @RequiredArgsConstructor) instead of @Autowired.
+- DTOs: Always use DTOs for Request/Response. Use MapStruct or manual mapping; never expose Entities to Controller.
+- Response: Wrap all API responses in a unified `ApiResponse<T>` class.
+- Validation: Use `jakarta.validation` annotations for all RequestDTO fields.
+
+# 3. Database & Entity Rules (MySQL Specific)
+- Primary Keys: Use `@GeneratedValue(strategy = GenerationType.IDENTITY)`.
+- Column Mapping: Use `@Column(name = "snake_case_name")`.
+- String Data: Use `@Column(columnDefinition = "VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")` for Vietnamese support. 
+  (Hoặc đơn giản là đảm bảo Database/Table đã set utf8mb4).
+- Engine: Use InnoDB (mặc định của MySQL 5.7+).
+- Relationships: Use `@ManyToOne`, `@OneToMany` with `FetchType.LAZY` to optimize performance.
+- Dialect: Ensure `spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect` is used in application.properties.
+
+# 4. Specific Business Logic: Customizable Products
+- A Product can have many Attributes (Size, Color, Material).
+- Each Attribute has multiple AttributeOptions (e.g., Color: Red, Blue).
+- Pricing: Final Price = Base Price + sum(Option Price Adjustments).
+- Order Logic: Must check stock in ProductVariants before confirming order.
+
+# 5. Cursor Behavior
+- Read existing files in `src/main/java` to maintain consistent naming conventions and code style.
+- When creating a new Entity, always generate the corresponding SQL Script for MySql.
+- Use English for code (variables, methods, classes) and Vietnamese for UI messages or Javadoc if needed.

@@ -34,6 +34,8 @@ public interface HoaDonRepository extends JpaRepository<HoaDon, UUID> {
     List<HoaDon> findHoaDonByKhachHang(@Param("idKhachHang") UUID idKhachHang);
     List<HoaDon> findByNgayTaoBetween(Date startDate, Date endDate);
 
+    long countByTrangThai(Integer trangThai);
+
     @Query("SELECT h FROM HoaDon h WHERE h.ngayTao BETWEEN :startDate AND :endDate AND h.khachHang.id = :khachHangId")
     List<HoaDon> findByNgayTaoBetweenAndKhachHangId(@Param("startDate") Date startDate,
                                                     @Param("endDate") Date endDate,

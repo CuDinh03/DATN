@@ -34,7 +34,7 @@ public class HoaDonChiTietController {
             apiResponse.setMessage("Lấy danh sách hoa don thành công");
             apiResponse.setResult(dto);
         }else {
-            throw new AppException(ErrorCode.LIST_ORDER_FOUND);
+            throw new AppException(ErrorCode.LIST_ORDER_DETAIL_NOT_FOUND);
         }
         return apiResponse;
     }
@@ -71,7 +71,7 @@ public class HoaDonChiTietController {
             apiResponse.setResult(dtoList);
             return apiResponse;
         } else {
-            throw new AppException(ErrorCode.LIST_ORDER_FOUND);
+            throw new AppException(ErrorCode.LIST_ORDER_DETAIL_NOT_FOUND);
         }
     }
 
@@ -83,7 +83,7 @@ public class HoaDonChiTietController {
             apiResponse.setMessage("Lấy danh sách hoa don thành công");
             apiResponse.setResult(dto);
         }else {
-            throw new AppException(ErrorCode.LIST_ORDER_FOUND);
+            throw new AppException(ErrorCode.LIST_ORDER_DETAIL_NOT_FOUND);
         }
         return apiResponse;
     }

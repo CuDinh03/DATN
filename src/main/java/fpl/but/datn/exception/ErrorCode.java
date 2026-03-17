@@ -66,11 +66,13 @@ public enum ErrorCode {
     PTTHANHTOAN_NOT_FOUND(1057, "Phương thức thanh toán đang tìm không có", HttpStatus.NOT_FOUND),
     NO_LIST_SANPHAM_FOUND(1058, "Không tìm thấy danh sách sản phẩm nào ",HttpStatus.NOT_FOUND),
     CTSP_EXISTED(1059, "Sản phẩm chi tiết này đã tồn tại", HttpStatus.BAD_REQUEST),
-    LIST_RATING_NOT_FOUND(2001, "Không tìm thấy danh sách đánh giá nào", HttpStatus.BAD_REQUEST),
+    LIST_RATING_NOT_FOUND(2001, "Không tìm thấy danh sách đánh giá nào", HttpStatus.NOT_FOUND),
     ADD_RATING_NOT_FOUND(2002, "Thêm đánh giá thất bại", HttpStatus.BAD_REQUEST),
-    LIST_ORDER_FOUND(2003, "Không tìm thấy danh sách đánh giá nào", HttpStatus.BAD_REQUEST),
-    KH_EXISTED_MAIL( 1060,"Mail này đã được sử dụng", HttpStatus.BAD_REQUEST ),
-    DIACHI_NOT_FOUND( 2004,"Khong tim thay danh sach dia chi", HttpStatus.BAD_REQUEST );
+    LIST_ORDER_DETAIL_NOT_FOUND(2003, "Không tìm thấy danh sách chi tiết hóa đơn", HttpStatus.NOT_FOUND),
+    KH_EXISTED_MAIL(1060, "Mail này đã được sử dụng", HttpStatus.BAD_REQUEST),
+    GIO_HANG_NOT_FOUND(1061, "Không tìm thấy giỏ hàng", HttpStatus.NOT_FOUND),
+    INSUFFICIENT_STOCK(1062, "Số lượng sản phẩm không đủ so với tồn kho", HttpStatus.BAD_REQUEST),
+    DIACHI_NOT_FOUND(2004, "Khong tim thay danh sach dia chi", HttpStatus.NOT_FOUND);
 
     ErrorCode(int code, String message, HttpStatusCode httpStatusCode) {
         this.code = code;
