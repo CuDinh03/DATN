@@ -8,15 +8,15 @@
 
 | Thành phần | Công nghệ |
 |------------|-----------|
-| Backend    | Java 17, Spring Boot 3.2.x, Maven ≥ 3.9.5 |
+| Backend    | Java 17 || 21, Spring Boot 3.2.x, Maven ≥ 3.9.5 |
 | Database   | MySQL 8.x / 9.x |
-| Frontend   | Angular 18, Node.js (LTS khuyến nghị) |
+| Frontend   | Angular 18+, Node.js (LTS khuyến nghị) |
 
 ---
 
 ## Prerequisites
 
-- **Java 17** (để chạy Backend)
+- **Java 17||21** (để chạy Backend)
 - **Maven** ≥ 3.9.5 (hoặc dùng `./mvnw` trong repo)
 - **MySQL** 8.x hoặc 9.x
 - **Node.js** 18+ và **npm** (để chạy Frontend)
@@ -25,15 +25,17 @@
 
 ## 1. Clone dự án
 
-Repo này chứa **Backend** (Spring Boot). Frontend (Angular) thường nằm ở repo hoặc thư mục riêng.
+Repo này chứa **Backend** (Spring Boot). Frontend (Angular) thường nằm ở https://github.com/CuDinh03/FE_DATN
 
 ```bash
-# Clone Backend (repo hiện tại)
-git clone <url-repo-DATN> DATN
-cd DATN
+# Clone Backend
+git clone https://github.com/CuDinh03/DATN 
+# Cline Frontend
+git clone https://github.com/CuDinh03/FE_DATN
+
+cd ../DATN
 ```
 
-Nếu Frontend nằm trong repo khác hoặc thư mục khác, clone/mở thêm project FE (ví dụ: `FE_DATN` hoặc tên tương ứng).
 
 ---
 
@@ -54,7 +56,7 @@ CREATE DATABASE IF NOT EXISTS DATN
 Tạo file `env.local.sh` tại thư mục gốc của Backend (cùng cấp với `pom.xml`), **không commit** file này:
 
 ```bash
-# env.local.sh – Sửa cho đúng máy bạn
+# env.local.sh – Sửa cho đúng trên máy bạn đã clone 
 
 # MySQL
 export DB_URL="jdbc:mysql://localhost:3306/DATN?useUnicode=true&characterEncoding=utf8&connectionCollation=utf8mb4_unicode_ci&serverTimezone=UTC"
